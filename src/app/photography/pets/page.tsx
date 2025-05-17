@@ -107,11 +107,39 @@ const BookButton = styled.button`
   border-radius: ${theme.borderRadius.md};
   margin-top: auto;
   cursor: pointer;
-  transition: ${theme.transitions.default};
-  width: 100%;
+  width: 280px;
+  height: 60px;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.4s ease;
   
-  &:hover {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
     background: ${theme.colors.primary.dark};
+    z-index: -1;
+    transition: width 0.4s ease;
+  }
+
+  &:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -127,13 +155,32 @@ const HeroButton = styled(BookButton)`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: white;
+    z-index: -1;
+    transition: width 0.4s ease;
+  }
 
   &:hover {
-    background: white;
     color: black;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 37, 37, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    &:before {
+      width: 100%;
+    }
   }
 
   &:active {

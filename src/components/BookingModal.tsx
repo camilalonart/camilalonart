@@ -104,8 +104,6 @@ export default function BookingModal({ isOpen, onClose, selectedPackage }: Booki
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    // You can add email service integration here
     onClose();
   };
 
@@ -113,21 +111,20 @@ export default function BookingModal({ isOpen, onClose, selectedPackage }: Booki
     <ModalOverlay onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
-        <h2>Book a Pet Photography Session</h2>
+        <h2>Let's Create Beautiful Memories Together</h2>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <label htmlFor="package">Package</label>
+            <label htmlFor="package">Interested In</label>
             <select id="package" defaultValue={selectedPackage}>
-              <option value="at-home">At Home Sessions</option>
-              <option value="pet-people">Pet & People Moments</option>
-              <option value="outdoor">Outdoor Pawtraits</option>
-              <option value="photo-book">Custom Photo Book</option>
+              <option value="engagement">Engagement Session</option>
+              <option value="elopement">Elopement Package</option>
+              <option value="album">Wedding Album</option>
             </select>
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="name">Your Name</label>
-            <input type="text" id="name" required />
+            <label htmlFor="names">Your Names</label>
+            <input type="text" id="names" placeholder="Both partners' names" required />
           </FormGroup>
 
           <FormGroup>
@@ -141,40 +138,83 @@ export default function BookingModal({ isOpen, onClose, selectedPackage }: Booki
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="petInfo">Tell us about your pet</label>
+            <label htmlFor="eventDate">When's the Big Day?</label>
+            <input type="date" id="eventDate" required />
+          </FormGroup>
+
+          <FormGroup>
+            <label htmlFor="location">Where Are You Celebrating?</label>
             <textarea
-              id="petInfo"
-              placeholder="Name, age, breed, personality traits, any special needs..."
+              id="location"
+              placeholder="Tell us about your venue or location ideas. If you're still deciding, what type of setting are you envisioning?"
               required
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="availability">Preferred dates and times</label>
-            <textarea
-              id="availability"
-              placeholder="Please provide a few options that work best for you"
-              required
+            <label htmlFor="guestCount">Approximate Guest Count</label>
+            <input 
+              type="number" 
+              id="guestCount" 
+              placeholder="Even a rough estimate helps us plan"
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="vision">Your Vision</label>
+            <label htmlFor="style">Your Photography Style</label>
+            <select id="style">
+              <option value="">Select your preferred style</option>
+              <option value="documentary">Documentary/Photojournalistic</option>
+              <option value="traditional">Traditional/Classic</option>
+              <option value="artistic">Artistic/Editorial</option>
+              <option value="mixed">Mix of Styles</option>
+            </select>
+          </FormGroup>
+
+          <FormGroup>
+            <label htmlFor="story">Your Love Story</label>
+            <textarea
+              id="story"
+              placeholder="We'd love to hear a bit about you both! How did you meet? What makes your relationship special? Any fun details about the proposal?"
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <label htmlFor="vision">Your Wedding Vision</label>
             <textarea
               id="vision"
-              placeholder="What's your vision for the final images? Any specific shots or ideas you'd love to capture?"
+              placeholder="What's your dream for your wedding photos? Any specific moments, styles, or shots you're hoping to capture? Special traditions or unique elements you're planning?"
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="accommodations">Special Accommodations</label>
+            <label htmlFor="budget">Photography Budget Range</label>
+            <select id="budget">
+              <option value="">Select your budget range</option>
+              <option value="2000-3000">$2,000 - $3,000</option>
+              <option value="3000-4000">$3,000 - $4,000</option>
+              <option value="4000-5000">$4,000 - $5,000</option>
+              <option value="5000+">$5,000+</option>
+            </select>
+          </FormGroup>
+
+          <FormGroup>
+            <label htmlFor="timeline">Wedding Day Timeline</label>
             <textarea
-              id="accommodations"
-              placeholder="Any special requirements or considerations we should know about?"
+              id="timeline"
+              placeholder="What time does your day begin? Any specific events or traditions we should know about? First look planned?"
             />
           </FormGroup>
 
-          <SubmitButton type="submit">Request Quote</SubmitButton>
+          <FormGroup>
+            <label htmlFor="questions">Questions & Special Requests</label>
+            <textarea
+              id="questions"
+              placeholder="Any specific questions about our services? Special requests or unique elements of your day we should know about?"
+            />
+          </FormGroup>
+
+          <SubmitButton type="submit">Begin Your Journey With Us</SubmitButton>
         </Form>
       </ModalContent>
     </ModalOverlay>
