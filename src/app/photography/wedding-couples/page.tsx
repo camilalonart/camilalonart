@@ -371,33 +371,76 @@ const BookButton = styled(HeroButton)`
   }
 `;
 
+const ImageModal = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: ${theme.spacing.xl};
+  cursor: pointer;
+
+  img {
+    max-width: 95%;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: ${theme.borderRadius.md};
+  }
+`;
+
 const SectionDivider = styled.div`
   width: 100%;
-  height: 300px;
+  margin: ${theme.spacing['3xl']} 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: ${theme.spacing.md};
+  height: 400px;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    height: 300px;
+  }
+`;
+
+const DividerImage = styled.div<{ $span?: number }>`
+  grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
-  margin: ${theme.spacing['3xl']} 0;
+  cursor: pointer;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.1);
     transition: transform 0.6s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.15);
   }
 
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-column: span ${props => Math.min(props.$span || 4, 6)};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-column: span 12;
   }
 `;
 
@@ -529,10 +572,15 @@ const ValueProposition = styled.div`
 export default function WeddingCouplesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState<string>();
 
   const handleBookClick = (packageName: string) => {
     setSelectedPackage(packageName);
     setIsModalOpen(true);
+  };
+
+  const handleImageClick = (imageSrc: string) => {
+    setSelectedImage(imageSrc);
   };
 
   return (
@@ -577,12 +625,30 @@ export default function WeddingCouplesPage() {
       </Section>
 
       <SectionDivider>
-        <ProtectedImage
-          src="/images/wedding/divider-1.jpg"
-          alt="Wedding ceremony moment"
-          height="300px"
-          quality={90}
-        />
+        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-1a.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-1a.jpg"
+            alt="Wedding ceremony moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-1b.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-1b.jpg"
+            alt="Wedding details"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-1c.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-1c.jpg"
+            alt="Couple portrait"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
       </SectionDivider>
 
       <Section>
@@ -642,12 +708,30 @@ export default function WeddingCouplesPage() {
       </Section>
 
       <SectionDivider>
-        <ProtectedImage
-          src="/images/wedding/divider-2.jpg"
-          alt="Romantic couple portrait"
-          height="300px"
-          quality={90}
-        />
+        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-2a.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-2a.jpg"
+            alt="Wedding preparation"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-2b.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-2b.jpg"
+            alt="First dance"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-2c.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-2c.jpg"
+            alt="Ring exchange"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
       </SectionDivider>
 
       <Section $dark>
@@ -692,12 +776,30 @@ export default function WeddingCouplesPage() {
       </Section>
 
       <SectionDivider>
-        <ProtectedImage
-          src="/images/wedding/divider-3.jpg"
-          alt="Wedding details and rings"
-          height="300px"
-          quality={90}
-        />
+        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-3a.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-3a.jpg"
+            alt="Wedding details and rings"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-3b.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-3b.jpg"
+            alt="Wedding details and rings"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-3c.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-3c.jpg"
+            alt="Wedding details and rings"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
       </SectionDivider>
 
       <FAQSection>
@@ -736,12 +838,30 @@ export default function WeddingCouplesPage() {
       </FAQSection>
 
       <SectionDivider>
-        <ProtectedImage
-          src="/images/wedding/divider-4.jpg"
-          alt="Wedding celebration moment"
-          height="300px"
-          quality={90}
-        />
+        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-4a.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-4a.jpg"
+            alt="Wedding celebration moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-4b.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-4b.jpg"
+            alt="Wedding celebration moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-4c.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-4c.jpg"
+            alt="Wedding celebration moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
       </SectionDivider>
 
       <Section>
@@ -791,12 +911,30 @@ export default function WeddingCouplesPage() {
       </Section>
 
       <SectionDivider>
-        <ProtectedImage
-          src="/images/wedding/divider-5.jpg"
-          alt="Emotional wedding moment"
-          height="300px"
-          quality={90}
-        />
+        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-5a.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-5a.jpg"
+            alt="Emotional wedding moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-5b.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-5b.jpg"
+            alt="Emotional wedding moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-5c.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/divider-5c.jpg"
+            alt="Emotional wedding moment"
+            height="100%"
+            quality={90}
+          />
+        </DividerImage>
       </SectionDivider>
 
       <Footer>
@@ -844,11 +982,23 @@ export default function WeddingCouplesPage() {
         </div>
 
         <div className="copyright">
-          <p>© {new Date().getFullYear()} Camilo Narvaez Photography. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Camilalonart. All rights reserved.</p>
           <p>All photographs and content are protected by copyright law and may not be reproduced, distributed, 
           transmitted, displayed, or published without written permission.</p>
         </div>
       </Footer>
+
+      {selectedImage && (
+        <ImageModal onClick={() => setSelectedImage(undefined)}>
+          <ProtectedImage
+            src={selectedImage}
+            alt="Wedding moment"
+            height="95vh"
+            quality={100}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </ImageModal>
+      )}
 
       <BookingModal
         isOpen={isModalOpen}
