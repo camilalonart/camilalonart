@@ -10,141 +10,92 @@ import BookingModal from '../../../components/BookingModal';
 const PageContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
 `;
 
 const Hero = styled.section`
   position: relative;
   height: 90vh;
-  min-height: 600px;
+  min-height: 500px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+  padding: ${theme.spacing.md};
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    height: 80vh;
+    padding: ${theme.spacing.sm};
+  }
 `;
 
 const HeroImageContainer = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const HeroContent = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: ${theme.spacing['4xl']};
-  background: white;
+  z-index: 2;
+  max-width: 800px;
 
   h1 {
     margin-bottom: ${theme.spacing.xl};
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 4vw, 3rem);
     font-weight: 300;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     line-height: 1.2;
-    color: #000;
+    color: white;
   }
 
   p {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
     line-height: 1.8;
-    color: #666;
+    color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
+    margin-bottom: ${theme.spacing.xl};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']};
+    padding: ${theme.spacing.xl};
   }
-`;
 
-const ImageGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: ${theme.spacing.md};
-  padding: ${theme.spacing.xl};
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   @media (max-width: ${theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const ImageCard = styled.div`
-  position: relative;
-  border-radius: ${theme.borderRadius.lg};
-  overflow: hidden;
-  transition: ${theme.transitions.default};
-  
-  &:hover {
-    transform: scale(1.02);
-  }
-`;
-
-const Section = styled.section<{ accent?: boolean }>`
-  padding: ${theme.spacing['3xl']} ${theme.spacing['2xl']};
-  background-color: ${props =>
-    props.accent ? theme.colors.background.light : theme.colors.background.main};
-`;
-
-const ServiceCard = styled.div`
-  padding: ${theme.spacing.xl};
-  background-color: ${theme.colors.background.main};
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.md};
-  text-align: center;
-  transition: ${theme.transitions.default};
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${theme.shadows.lg};
-  }
-  
-  h3 {
-    color: ${theme.colors.primary.main};
-    margin-bottom: ${theme.spacing.md};
-  }
-
-  > p {
-    flex-grow: 1;
-    margin-bottom: ${theme.spacing.md};
-  }
-
-  em {
-    display: block;
-    margin-bottom: ${theme.spacing.md};
-    color: ${theme.colors.text.secondary};
-  }
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${theme.spacing.xl};
-  margin-top: ${theme.spacing['2xl']};
-`;
-
-const TestimonialCard = styled.div`
-  padding: ${theme.spacing.xl};
-  background-color: ${theme.colors.background.main};
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.sm};
-  
-  blockquote {
-    font-style: italic;
-    margin-bottom: ${theme.spacing.md};
-    color: ${theme.colors.text.secondary};
-  }
-  
-  cite {
-    color: ${theme.colors.primary.main};
-    font-weight: ${theme.typography.fontWeight.medium};
+    padding: ${theme.spacing.lg};
   }
 `;
 
@@ -164,13 +115,196 @@ const BookButton = styled.button`
   }
 `;
 
+const HeroButton = styled(BookButton)`
+  max-width: 300px;
+  width: 100%;
+  font-size: 1rem;
+  padding: ${theme.spacing.lg} ${theme.spacing.xl};
+  margin-top: ${theme.spacing.xl};
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: white;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 37, 37, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    max-width: 250px;
+    padding: ${theme.spacing.md} ${theme.spacing.lg};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    max-width: 200px;
+    font-size: 0.9rem;
+  }
+`;
+
+const ImageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${theme.spacing.md};
+  padding: ${theme.spacing.xl};
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: ${theme.spacing.lg};
+    gap: ${theme.spacing.sm};
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    padding: ${theme.spacing.md};
+  }
+`;
+
+const ImageCard = styled.div`
+  position: relative;
+  border-radius: ${theme.borderRadius.lg};
+  overflow: hidden;
+  transition: ${theme.transitions.default};
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
+
+const Section = styled.section<{ accent?: boolean }>`
+  padding: ${theme.spacing['3xl']} ${theme.spacing['2xl']};
+  background-color: ${props =>
+    props.accent ? '#edede9' : theme.colors.background.main};
+  width: 100%;
+  box-sizing: border-box;
+  
+  h2 {
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    font-weight: 600;
+    margin-bottom: ${theme.spacing['2xl']};
+    text-align: center;
+    color: #003566;
+  }
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: ${theme.spacing.xl};
+  margin: ${theme.spacing['2xl']} auto;
+  padding: 0 ${theme.spacing.md};
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.lg};
+    padding: 0 ${theme.spacing.sm};
+    margin: ${theme.spacing.xl} auto;
+  }
+`;
+
+const ServiceCard = styled.div`
+  padding: ${theme.spacing.xl};
+  background-color: ${theme.colors.background.main};
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.md};
+  text-align: center;
+  transition: ${theme.transitions.default};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.lg};
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${theme.shadows.lg};
+  }
+  
+  h3 {
+    color: #003566;
+    margin-bottom: ${theme.spacing.lg};
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-weight: 500;
+  }
+
+  > p {
+    flex-grow: 1;
+    margin-bottom: ${theme.spacing.md};
+  }
+
+  em {
+    display: block;
+    margin-bottom: ${theme.spacing.md};
+    color: ${theme.colors.text.secondary};
+  }
+`;
+
+const TestimonialCard = styled.div`
+  padding: ${theme.spacing.xl};
+  background-color: ${theme.colors.background.main};
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.sm};
+  width: 100%;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.lg};
+  }
+  
+  blockquote {
+    font-style: italic;
+    margin-bottom: ${theme.spacing.md};
+    color: ${theme.colors.text.secondary};
+    word-wrap: break-word;
+  }
+  
+  cite {
+    color: ${theme.colors.primary.main};
+    font-weight: ${theme.typography.fontWeight.medium};
+    display: block;
+    word-wrap: break-word;
+  }
+`;
+
 const WhyHireSection = styled.section`
   background: ${theme.colors.background.light};
-  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  padding: ${theme.spacing['4xl']} ${theme.spacing.xl};
   text-align: center;
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
 
   h2 {
-    font-size: ${theme.typography.fontSize['3xl']};
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600;
     margin-bottom: ${theme.spacing['2xl']};
     color: ${theme.colors.primary.main};
   }
@@ -179,11 +313,25 @@ const WhyHireSection = styled.section`
     max-width: 800px;
     margin: 0 auto ${theme.spacing.xl};
     line-height: 1.8;
+    padding: 0 ${theme.spacing.md};
   }
 `;
 
 const FAQSection = styled.section`
-  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  padding: ${theme.spacing['4xl']} ${theme.spacing.xl};
+  width: 100%;
+  overflow: hidden;
+  
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: ${theme.spacing['2xl']};
+    text-align: center;
+  }
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
 `;
 
 const FAQGrid = styled.div`
@@ -191,6 +339,14 @@ const FAQGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: ${theme.spacing.xl};
   margin-top: ${theme.spacing['2xl']};
+  padding: 0 ${theme.spacing.md};
+  width: 100%;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.lg};
+    padding: 0 ${theme.spacing.sm};
+  }
 `;
 
 const FAQItem = styled.div`
@@ -209,8 +365,14 @@ const FAQItem = styled.div`
 const Footer = styled.footer`
   background: ${theme.colors.background.dark};
   color: ${theme.colors.text.light};
-  padding: ${theme.spacing['3xl']} ${theme.spacing['2xl']};
+  padding: ${theme.spacing['3xl']} ${theme.spacing.xl};
   text-align: center;
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
 
   p {
     margin: ${theme.spacing.md} 0;
@@ -219,6 +381,7 @@ const Footer = styled.footer`
   a {
     color: ${theme.colors.text.light};
     text-decoration: none;
+    word-break: break-word;
     
     &:hover {
       text-decoration: underline;
@@ -240,11 +403,12 @@ export default function PetsPage() {
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
-            src="/images/pets/A7T05223.jpg"
+            src="/images/pets/A7T05223-horizontal.jpg"
             alt="Happy cat portrait"
             height="100%"
             priority
             quality={100}
+            objectFit="cover"
           />
         </HeroImageContainer>
         <HeroContent>
@@ -254,6 +418,7 @@ export default function PetsPage() {
             in beautiful, timeless portraits that celebrate the joy they bring to
             your life.
           </p>
+          <HeroButton onClick={() => handleBookClick('Pet Photography')}>Contact Us</HeroButton>
         </HeroContent>
       </Hero>
 
@@ -265,7 +430,6 @@ export default function PetsPage() {
             <p>
               Cozy, indoor portraits taken in your pet's own space. 
               Ideal for senior pets, indoor animals, or a calmer setting. 
-              We bring portable lighting and work with natural light too.
             </p>
             <p><strong>Includes:</strong> 10–15 fully edited high-resolution images</p>
             <p><strong>Add-on:</strong> A $50 flat fee to buy all unedited or lightly edited photos taken during the session</p>
@@ -288,7 +452,7 @@ export default function PetsPage() {
           </ServiceCard>
           
           <ServiceCard>
-            <h3>Outdoor Pawtraits</h3>
+            <h3>Outdoor Sessions</h3>
             <p>
               Beautiful, expressive shots of your pet exploring the outdoors. 
               Perfect for energetic pets—on-leash is recommended.
@@ -298,23 +462,6 @@ export default function PetsPage() {
             <em>Travel fees may apply for locations outside the local area</em>
             <p><strong>Starting at $200CAD</strong></p>
             <BookButton onClick={() => handleBookClick('outdoor')}>Book Session</BookButton>
-          </ServiceCard>
-
-          <ServiceCard>
-            <h3>Custom Photo Book</h3>
-            <p>
-              Transform your favorite pet portraits into a beautiful hardcover book.
-              Includes professional design, personalized messages, and premium printing.
-            </p>
-            <p><strong>Includes:</strong></p>
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: theme.spacing.lg }}>
-              <li>- 20-page hardcover photo book</li>
-              <li>- Professional layout design</li>
-              <li>- Custom text and captions</li>
-              <li>- Premium paper quality</li>
-            </ul>
-            <p><strong>Starting at $200CAD</strong></p>
-            <BookButton onClick={() => handleBookClick('photo-book')}>Order Book</BookButton>
           </ServiceCard>
         </Grid>
       </Section>
