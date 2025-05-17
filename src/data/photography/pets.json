@@ -1,0 +1,23 @@
+{
+  "id": "pets",
+  "name": "Pet Photography",
+  "description": "Capturing the personality and charm of beloved pets",
+  "images": [
+    {
+      "id": "cats-001",
+      "title": "Siberian Cat Kitten",
+      "description": "Stunning portrait of a Siberian cat kitten",
+      "imagePath": "/images/pets/A7T05223.jpg",
+      "category": "pets",
+      "tags": ["cat", "kitten", "portrait", "indoors"]
+    },
+    {
+      "id": "dogs-001",
+      "title": "Playful Golden Retriever",
+      "description": "Happy golden retriever playing in the park",
+      "imagePath": "/images/photography/pets/dogs/golden-001.jpg",
+      "category": "pets",
+      "tags": ["dogs", "golden retriever", "action", "outdoor"]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "brand-identity",
+  "name": "Brand Identity Design",
+  "description": "Comprehensive brand identity and visual design solutions",
+  "sections": [
+    {
+      "title": "Logo Design",
+      "description": "Custom logo and brand mark designs",
+      "images": [
+        {
+          "id": "logo-001",
+          "title": "Eco-friendly Brand Logo",
+          "description": "Modern logo design for sustainable products company",
+          "imagePath": "/images/creative-services/brand-identity/logos/eco-001.jpg",
+          "category": "brand-identity",
+          "tags": ["logo", "branding", "sustainable", "minimal"],
+          "date": "2024-01-05",
+          "client": "EcoLife Products",
+          "projectType": "Logo Design",
+          "technique": "Vector Illustration, Typography"
+        }
+      ]
+    },
+    {
+      "title": "Brand Guidelines",
+      "description": "Comprehensive brand identity systems",
+      "images": [
+        {
+          "id": "guidelines-001",
+          "title": "Tech Startup Brand Guide",
+          "description": "Complete brand identity system for tech startup",
+          "imagePath": "/images/creative-services/brand-identity/guidelines/tech-001.jpg",
+          "category": "brand-identity",
+          "tags": ["brand guidelines", "identity system", "tech"],
+          "date": "2023-12-01",
+          "client": "TechFlow Solutions",
+          "projectType": "Brand Identity System",
+          "technique": "Brand Strategy, Visual Design"
+        }
+      ]
+    }
+  ]
+} 

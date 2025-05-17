@@ -1,0 +1,43 @@
+{
+  "id": "ux-ui-design",
+  "name": "UX/UI Design",
+  "description": "User experience and interface design projects",
+  "sections": [
+    {
+      "title": "Mobile Apps",
+      "description": "Mobile application design projects",
+      "images": [
+        {
+          "id": "mobile-001",
+          "title": "Fitness App Design",
+          "description": "Clean and intuitive fitness tracking app interface",
+          "imagePath": "/images/creative-services/ux-ui/mobile/fitness-001.jpg",
+          "category": "ux-ui-design",
+          "tags": ["mobile", "app", "fitness", "UI"],
+          "date": "2023-11-20",
+          "client": "FitTrack App",
+          "projectType": "Mobile App Design",
+          "technique": "Figma, Prototyping"
+        }
+      ]
+    },
+    {
+      "title": "Web Design",
+      "description": "Website and web application designs",
+      "images": [
+        {
+          "id": "web-001",
+          "title": "E-commerce Platform",
+          "description": "Modern e-commerce website design",
+          "imagePath": "/images/creative-services/ux-ui/web/ecommerce-001.jpg",
+          "category": "ux-ui-design",
+          "tags": ["web", "e-commerce", "responsive", "UI"],
+          "date": "2023-12-10",
+          "client": "Fashion Boutique",
+          "projectType": "Web Design",
+          "technique": "Figma, Adobe XD"
+        }
+      ]
+    }
+  ]
+} 

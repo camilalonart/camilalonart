@@ -305,6 +305,7 @@ export default function Navigation() {
                 $active={pathname?.startsWith(item.href)}
                 onClick={() => item.items && setIsMenuOpen(false)}
               >
+                
                 {item.title}
               </NavLink>
               {item.items && (

@@ -1,0 +1,49 @@
+{
+  "id": "digital-art",
+  "name": "Digital Art",
+  "description": "Digital illustrations and creative artwork",
+  "sections": [
+    {
+      "title": "Illustrations",
+      "description": "Digital illustrations and character designs",
+      "images": [
+        {
+          "id": "illustration-001",
+          "title": "Fantasy Character",
+          "description": "Digital illustration of a fantasy character",
+          "imagePath": "/images/my-art/digital-art/illustrations/character-001.jpg",
+          "category": "digital-art",
+          "tags": ["illustration", "fantasy", "character design"],
+          "date": "2024-01-05",
+          "medium": "Digital",
+          "technique": "Digital Painting",
+          "dimensions": {
+            "width": 3000,
+            "height": 4000
+          }
+        }
+      ]
+    },
+    {
+      "title": "Concept Art",
+      "description": "Concept art for various projects",
+      "images": [
+        {
+          "id": "concept-001",
+          "title": "Futuristic City",
+          "description": "Concept art of a futuristic cityscape",
+          "imagePath": "/images/my-art/digital-art/concept/city-001.jpg",
+          "category": "digital-art",
+          "tags": ["concept art", "cityscape", "futuristic"],
+          "date": "2024-01-08",
+          "medium": "Digital",
+          "technique": "Digital Painting, 3D Integration",
+          "dimensions": {
+            "width": 4000,
+            "height": 2000
+          }
+        }
+      ]
+    }
+  ]
+} 

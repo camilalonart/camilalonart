@@ -1,0 +1,41 @@
+{
+  "id": "courses",
+  "name": "Technical Courses",
+  "description": "Educational content and technical training materials",
+  "sections": [
+    {
+      "title": "Web Development",
+      "description": "Courses on modern web development technologies",
+      "images": [
+        {
+          "id": "webdev-001",
+          "title": "Modern React Development",
+          "description": "Comprehensive course on React and modern JavaScript",
+          "imagePath": "/images/tech/courses/web/react-001.jpg",
+          "category": "courses",
+          "tags": ["react", "javascript", "web development", "education"],
+          "date": "2024-01-10",
+          "projectType": "Online Course",
+          "technique": "Video Tutorials, Interactive Exercises"
+        }
+      ]
+    },
+    {
+      "title": "UI/UX Design",
+      "description": "Design principles and practical applications",
+      "images": [
+        {
+          "id": "design-001",
+          "title": "UI Design Fundamentals",
+          "description": "Essential principles of user interface design",
+          "imagePath": "/images/tech/courses/design/ui-001.jpg",
+          "category": "courses",
+          "tags": ["ui design", "design principles", "education"],
+          "date": "2023-12-15",
+          "projectType": "Workshop Series",
+          "technique": "Live Workshops, Case Studies"
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,59 @@
+{
+  "id": "headshots",
+  "name": "Headshot Photography",
+  "description": "Professional headshots for individuals and corporate clients",
+  "sections": [
+    {
+      "title": "Corporate",
+      "description": "Professional headshots for business and corporate clients",
+      "images": [
+        {
+          "id": "corporate-001",
+          "title": "Professional Business Portrait",
+          "description": "Modern corporate headshot with natural lighting",
+          "imagePath": "/images/photography/headshots/corporate/corporate-001.jpg",
+          "category": "headshots",
+          "tags": ["corporate", "business", "professional", "indoor"],
+          "date": "2024-01-15",
+          "client": "Example Corp",
+          "projectType": "Corporate Headshots",
+          "camera": {
+            "model": "Sony A7IV",
+            "settings": {
+              "aperture": "f/2.8",
+              "shutterSpeed": "1/125",
+              "iso": 400,
+              "focalLength": "85mm"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Creative",
+      "description": "Artistic headshots for actors, musicians, and creatives",
+      "images": [
+        {
+          "id": "creative-001",
+          "title": "Artistic Portrait",
+          "description": "Dramatic lighting for actor portfolio",
+          "imagePath": "/images/photography/headshots/creative/creative-001.jpg",
+          "category": "headshots",
+          "tags": ["creative", "dramatic", "actor", "portfolio"],
+          "date": "2024-01-20",
+          "client": "Actor Portfolio",
+          "projectType": "Creative Headshots",
+          "camera": {
+            "model": "Sony A7IV",
+            "settings": {
+              "aperture": "f/1.8",
+              "shutterSpeed": "1/160",
+              "iso": 200,
+              "focalLength": "85mm"
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
