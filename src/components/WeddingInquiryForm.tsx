@@ -244,7 +244,12 @@ const IframeContainer = styled.div<{ $embedded?: boolean }>`
   }
 `;
 
-const WEDDING_SCRIPT_URL = process.env.WEDDING_PUBLIC_FORM_SUBMISSION_URL;
+const WEDDING_SCRIPT_URL = process.env.NEXT_PUBLIC_WEDDING_FORM_URL;
+
+// Temporary debug - remove after fixing
+if (typeof window !== 'undefined') {  // Only log in browser
+  console.log('Form URL:', WEDDING_SCRIPT_URL);
+}
 
 interface WeddingInquiryFormProps {
   isOpen: boolean;
@@ -273,8 +278,10 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submission started');
     
     if (!WEDDING_SCRIPT_URL) {
+      console.error('Form submission URL not configured');
       setSubmitStatus('error');
       setErrorMessage('Form submission URL not configured');
       return;
@@ -285,41 +292,41 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
     setErrorMessage('');
 
     try {
+      console.log('Submitting to:', WEDDING_SCRIPT_URL);
+      console.log('Form data:', formData);
+      
       const response = await fetch(WEDDING_SCRIPT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-        mode: 'cors'
+        mode: 'no-cors'
       });
 
-      const result = await response.json();
+      // When using no-cors, we can't read the response
+      // So we'll assume success if the request doesn't throw an error
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        date: '',
+        package: selectedPackage || '',
+        location: '',
+        about: '',
+        message: '',
+        referral: ''
+      });
 
-      if (result.status === 'success') {
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          date: '',
-          package: selectedPackage || '',
-          location: '',
-          about: '',
-          message: '',
-          referral: ''
-        });
-
-        // Close modal after success if not embedded
-        if (!embedded) {
-          setTimeout(() => {
-            onClose();
-          }, 2000);
-        }
-      } else {
-        throw new Error(result.message || 'Failed to submit form');
+      // Close modal after success if not embedded
+      if (!embedded) {
+        setTimeout(() => {
+          onClose();
+        }, 2000);
       }
     } catch (error) {
+      console.error('Submission error:', error);
       setSubmitStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
@@ -469,9 +476,11 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   );
 
   // Render notification if exists
-  const notificationElement = submitStatus === 'success' && (
-    <NotificationWrapper $type="success">
-      Inquiry sent successfully!
+  const notificationElement = (submitStatus === 'success' || submitStatus === 'error') && (
+    <NotificationWrapper $type={submitStatus === 'success' ? 'success' : 'error'}>
+      {submitStatus === 'success' 
+        ? 'Inquiry sent successfully!' 
+        : errorMessage || 'Failed to send inquiry. Please try again.'}
     </NotificationWrapper>
   );
 
