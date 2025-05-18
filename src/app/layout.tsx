@@ -1,9 +1,7 @@
 import React from 'react';
 import { Montserrat, Cormorant_Garamond } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/registry';
-import { GlobalStyles } from '../styles/globalStyles';
-import Navigation from '../components/Navigation';
-import ThemeProvider from '../components/ThemeProvider';
+import RootLayoutClient from '../components/RootLayoutClient';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -74,13 +72,12 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
       <body>
         <StyledComponentsRegistry>
-          <ThemeProvider>
-            <GlobalStyles />
-            <Navigation />
-            <main style={{ paddingTop: '80px' }}>
-              {children}
-            </main>
-          </ThemeProvider>
+          <RootLayoutClient 
+            montserratClass={montserrat.variable} 
+            cormorantClass={cormorant.variable}
+          >
+            {children}
+          </RootLayoutClient>
         </StyledComponentsRegistry>
       </body>
     </html>

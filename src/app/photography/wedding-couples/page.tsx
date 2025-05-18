@@ -20,16 +20,20 @@ const PageContainer = styled.div`
     max-width: 100vw;
     box-sizing: border-box;
   }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    overflow-x: hidden;
+  }
 `;
 
 const IntroSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
   text-align: center;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   
   p {
-    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
     line-height: 1.8;
     color: ${theme.colors.text.secondary};
     font-weight: 300;
@@ -37,7 +41,15 @@ const IntroSection = styled.section`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+    padding: ${theme.spacing['lg']} ${theme.spacing.md};
+    
+    p {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
   }
 `;
 
@@ -64,8 +76,13 @@ const Hero = styled.section`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    height: 80vh;
+    height: 70vh;
     padding: ${theme.spacing.sm};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    height: 60vh;
+    min-height: 400px;
   }
 `;
 
@@ -96,7 +113,7 @@ const HeroContent = styled.div`
   
   h1 {
     margin-bottom: ${theme.spacing.xl};
-    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 300;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -108,7 +125,7 @@ const HeroContent = styled.div`
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
-    margin-bottom: ${theme.spacing.xl};
+    margin: 0 auto ${theme.spacing.xl} auto;
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -117,6 +134,20 @@ const HeroContent = styled.div`
 
   @media (max-width: ${theme.breakpoints.sm}) {
     padding: ${theme.spacing.lg};
+    
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+    }
+    
+    h3 {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+    }
+      
+    p {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -130,9 +161,9 @@ const Section = styled.section<{ $dark?: boolean }>`
   h2 {
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: ${theme.spacing['2xl']};
+    margin-bottom: ${theme.spacing['sm']};
     text-align: center;
-    color: #003566;
+    color: #796B5F;
   }
   
   @media (max-width: ${theme.breakpoints.md}) {
@@ -160,6 +191,10 @@ const Grid = styled.div`
     padding: 0 ${theme.spacing.sm};
     margin: ${theme.spacing.xl} auto;
   }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    gap: ${theme.spacing.md};
+  }
 `;
 
 const ServiceFeature = styled.div`
@@ -186,7 +221,7 @@ const ServiceFeature = styled.div`
   }
 
   h3 {
-    color: #003566;
+    color: #796B5F;
     margin-bottom: ${theme.spacing.lg};
     font-size: clamp(1.2rem, 2.2vw, 1.8rem);
     font-weight: 500;
@@ -233,7 +268,7 @@ const PriceCard = styled.div`
   }
 
   h3 {
-    color: #003566;
+    color: #796B5F;
     margin-bottom: ${theme.spacing.lg};
     font-size: clamp(1.2rem, 2.2vw, 1.8rem);
     font-weight: 500;
@@ -350,42 +385,43 @@ const HeroButton = styled.button`
 
 const BookButton = styled.button`
   width: 100%;
-  margin: 0;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
   background: transparent;
-  border: 1px solid ${theme.colors.primary.main};
+  border: 2px solid ${theme.colors.primary.main};
   color: ${theme.colors.primary.main};
-  font-size: 0.9rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  display: block;
+  border-radius: ${theme.borderRadius.sm};
 
   &:before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: ${theme.colors.primary.main};
-    transition: transform 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
     z-index: 0;
   }
 
   span {
     position: relative;
     z-index: 1;
-    transition: color 0.4s ease;
+    transition: color 0.3s ease;
+    display: block;
   }
 
   &:hover {
     &:before {
-      transform: translateX(100%);
+      transform: translateX(0);
     }
     
     span {
@@ -395,6 +431,11 @@ const BookButton = styled.button`
 
   &:active {
     transform: scale(0.98);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    font-size: 0.9rem;
+    padding: ${theme.spacing.sm} ${theme.spacing.lg};
   }
 `;
 
@@ -427,14 +468,23 @@ const SectionDivider = styled.div`
 
   @media (max-width: ${theme.breakpoints.md}) {
     height: 300px;
+    margin: ${theme.spacing['2xl']} 0;
+    gap: ${theme.spacing.sm};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    height: 400px;
+    margin: ${theme.spacing.xl} 0;
+    display: block;
   }
 `;
 
-const DividerImage = styled.div<{ $span?: number }>`
+const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  height: 100%;
 
   img {
     width: 100%;
@@ -467,7 +517,8 @@ const DividerImage = styled.div<{ $span?: number }>`
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
-    grid-column: span 12;
+    display: ${props => (props.$isMiddle ? 'block' : 'none')};
+    height: 400px;
   }
 `;
 
@@ -482,7 +533,7 @@ const FAQSection = styled.section`
     font-weight: 600;
     margin-bottom: ${theme.spacing['2xl']};
     text-align: center;
-    color: #003566;
+    color: #796B5F;
   }
   
   @media (max-width: ${theme.breakpoints.md}) {
@@ -503,18 +554,34 @@ const FAQGrid = styled.div`
     gap: ${theme.spacing.lg};
     padding: 0 ${theme.spacing.sm};
   }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
+  }
 `;
 
 const FAQItem = styled.div`
   h3 {
-    color: #003566;
+    color: #796B5F;
     margin-bottom: ${theme.spacing.md};
-    font-size: ${theme.typography.fontSize.xl};
+    font-size: clamp(1.1rem, 2vw, ${theme.typography.fontSize.xl});
   }
 
   p {
     line-height: 1.6;
     color: ${theme.colors.text.secondary};
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    h3 {
+      font-size: 1.1rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -536,7 +603,7 @@ const Footer = styled.footer`
   .footer-section {
     h3 {
       color: white;
-      font-size: ${theme.typography.fontSize.xl};
+      font-size: clamp(1.1rem, 2vw, ${theme.typography.fontSize.xl});
       margin-bottom: ${theme.spacing.xl};
       font-weight: 500;
     }
@@ -545,6 +612,7 @@ const Footer = styled.footer`
       color: rgba(255, 255, 255, 0.8);
       line-height: 1.8;
       margin-bottom: ${theme.spacing.md};
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
     }
 
     a {
@@ -575,7 +643,35 @@ const Footer = styled.footer`
     padding-top: ${theme.spacing.xl};
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+
+    .footer-content {
+      gap: ${theme.spacing.xl};
+      padding: 0;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.xl} ${theme.spacing.md};
+
+    .footer-content {
+      gap: ${theme.spacing.lg};
+    }
+
+    .footer-section {
+      h3 {
+        margin-bottom: ${theme.spacing.lg};
+      }
+    }
+
+    .copyright {
+      margin-top: ${theme.spacing['2xl']};
+      padding-top: ${theme.spacing.lg};
+    }
   }
 `;
 
@@ -617,9 +713,17 @@ const ScrollContainer = styled.div`
 `;
 
 const ServicesSection = styled.div`
-  padding: ${theme.spacing['2xl']} 0;
-  max-width: 100vw;
-  overflow: hidden;
+  padding: ${theme.spacing['md']} 0;
+  position: relative;
+
+  .carousel-container {
+    padding: ${theme.spacing['2xl']} 0;
+  }
+
+  .react-multi-carousel-item {
+    display: flex;
+    align-items: stretch;
+  }
 `;
 
 const ServiceCard = styled.div`
@@ -627,12 +731,19 @@ const ServiceCard = styled.div`
   padding: ${theme.spacing.xl};
   box-shadow: ${theme.shadows.md};
   margin: ${theme.spacing.md};
-  height: 600px;
+  height: auto;
+  min-height: 600px;
   width: 350px;
   transition: all 0.3s ease;
   text-align: center;
   display: flex;
-  flex-direction: column;
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -640,12 +751,12 @@ const ServiceCard = styled.div`
   }
 
   h3 {
-    color: #003566;
+    color: #796B5F;
     margin-bottom: ${theme.spacing.xl};
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-weight: 500;
     text-align: center;
-    height: 60px;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -655,13 +766,13 @@ const ServiceCard = styled.div`
     margin-bottom: ${theme.spacing.lg};
     color: ${theme.colors.text.secondary};
     line-height: 1.6;
-    flex-shrink: 0;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1.5vw, 0.9rem);
     
     &.description {
-      height: 80px;
+      min-height: 80px;
       display: flex;
       align-items: center;
+      justify-content: center;
       margin-bottom: ${theme.spacing.xl};
     }
   }
@@ -672,13 +783,18 @@ const ServiceCard = styled.div`
     margin: 0;
     text-align: left;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 200px;
+    margin-bottom: ${theme.spacing.xl};
 
     li {
       padding: ${theme.spacing.sm} 0;
       padding-left: ${theme.spacing.md};
       position: relative;
       color: ${theme.colors.text.secondary};
-      font-size: 0.85rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.85rem);
 
       &::before {
         content: '✓';
@@ -690,10 +806,42 @@ const ServiceCard = styled.div`
   }
 
   .price {
-    margin: ${theme.spacing.xl} 0;
+    margin-bottom: ${theme.spacing.xl};
     font-weight: 500;
     color: ${theme.colors.primary.main};
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+  }
+
+  .button-wrapper {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    width: 300px;
+    margin: ${theme.spacing.sm};
+    padding: ${theme.spacing.lg};
+
+    h3 {
+      min-height: 50px;
+      margin-bottom: ${theme.spacing.lg};
+    }
+
+    p.description {
+      min-height: 60px;
+    }
+
+    ul {
+      min-height: 220px;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 280px;
+    
+    ul {
+      min-height: 200px;
+    }
   }
 `;
 
@@ -710,7 +858,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 640 },
-    items: 2,
+    items: 1,
     partialVisibilityGutter: 20
   },
   mobile: {
@@ -722,11 +870,22 @@ const responsive = {
 
 const CarouselStyles = styled.div`
   .carousel-container {
-    padding: 20px 0;
+    padding: ${theme.spacing['2xl']} 0;
+  }
+
+  .react-multi-carousel-track {
+    display: flex;
+    align-items: stretch;
+    padding: ${theme.spacing.md} 0;
+  }
+
+  .react-multi-carousel-item {
+    display: flex;
+    align-items: stretch;
   }
 
   .custom-dot-list-style {
-    bottom: -50px;
+    bottom: -40px;
   }
 
   .react-multi-carousel-dot button {
@@ -743,18 +902,16 @@ const CarouselStyles = styled.div`
     width: 32px;
   }
 
-  .react-multi-carousel-item {
-    padding: 1px;
-  }
-
   .react-multi-carousel-arrow {
     background: transparent;
     border: 1px solid ${theme.colors.primary.main};
     color: ${theme.colors.primary.main};
     min-width: 45px;
     min-height: 45px;
-    border-radius: 0;
+    border-radius: ${theme.borderRadius.md};
     transition: all 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
 
     &:hover {
       background: ${theme.colors.primary.main};
@@ -766,9 +923,19 @@ const CarouselStyles = styled.div`
       font-size: 1.5rem;
     }
   }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    .react-multi-carousel-arrow {
+      min-width: 35px;
+      min-height: 35px;
+      
+      &::before {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
-// Add the styled component for SEO footer
 const SEOFooter = styled.div`
   background: ${theme.colors.background.dark};
   padding: ${theme.spacing.lg} 0;
@@ -779,12 +946,12 @@ const SEOFooter = styled.div`
     margin: 0 auto;
     text-align: center;
     color: rgba(255, 255, 255, 0.4);
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1.2vw, 0.8rem);
     line-height: 1.6;
     padding: 0 ${theme.spacing.xl};
 
     h2 {
-      font-size: 0.8rem;
+      font-size: clamp(0.75rem, 1.2vw, 0.8rem);
       font-weight: normal;
       margin-bottom: ${theme.spacing.md};
       color: rgba(255, 255, 255, 0.4);
@@ -792,6 +959,196 @@ const SEOFooter = styled.div`
     }
 
     p {
+      margin-bottom: ${theme.spacing.sm};
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    .seo-content {
+      padding: 0 ${theme.spacing.lg};
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    .seo-content {
+      padding: 0 ${theme.spacing.md};
+    }
+  }
+`;
+
+const TestimonialSection = styled.section`
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  background: ${theme.colors.background.light};
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
+`;
+
+const TestimonialContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${theme.spacing['2xl']};
+  align-items: center;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.xl};
+  }
+`;
+
+const TestimonialContent = styled.div`
+  padding: ${theme.spacing.xl};
+
+  .stars {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin-bottom: ${theme.spacing.lg};
+  }
+
+  .quote {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.6;
+    color: ${theme.colors.text.primary};
+    font-weight: 300;
+    margin-bottom: ${theme.spacing.xl};
+    font-style: italic;
+  }
+
+  .author {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    color: ${theme.colors.text.secondary};
+    font-weight: 500;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.lg} 0;
+    text-align: center;
+  }
+`;
+
+const TestimonialImage = styled.div`
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.lg};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    height: 400px;
+  }
+`;
+
+const ProcessSection = styled.section`
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  background: ${theme.colors.background.main};
+
+  h2 {
+    text-align: center;
+    color: #796B5F;
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    font-weight: 600;
+    margin-bottom: ${theme.spacing['3xl']};
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
+`;
+
+const ProcessContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #B4A7A7;
+    z-index: 0;
+
+    @media (max-width: ${theme.breakpoints.md}) {
+      left: 40px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      height: auto;
+    }
+  }
+`;
+
+const ProcessSteps = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: ${theme.spacing.xl};
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing['2xl']};
+  }
+`;
+
+const ProcessStep = styled.div`
+  text-align: center;
+  position: relative;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: ${theme.spacing.xl};
+    text-align: left;
+  }
+`;
+
+const StepNumber = styled.div`
+  width: 80px;
+  height: 80px;
+  background: #796B5F;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto ${theme.spacing.lg};
+  position: relative;
+  z-index: 2;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    margin: 0;
+  }
+`;
+
+const StepContent = styled.div`
+  h3 {
+    color: #796B5F;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    margin-bottom: ${theme.spacing.md};
+    font-weight: 500;
+  }
+
+  p {
+    color: ${theme.colors.text.secondary};
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
+    line-height: 1.6;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    h3 {
       margin-bottom: ${theme.spacing.sm};
     }
   }
@@ -824,7 +1181,8 @@ export default function WeddingCouplesPage() {
           />
         </HeroImageContainer>
         <HeroContent>
-          <h3>Elopement & Couples Photography</h3>
+          <h2>Elopement & Couples</h2>
+          <h3>Photogrgaphy </h3>
           <p>Vancouver-based  photography for elopements, engagements, and ove stories.</p>
           <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
         </HeroContent>
@@ -832,9 +1190,9 @@ export default function WeddingCouplesPage() {
 
       <IntroSection>
         <p>
-          I'm a Vancouver-based photographer capturing love stories with depth and emotion. 
-          From intimate elopements on the West Coast to cozy couples sessions in the city, 
-          I'm here to preserve your most beloved moments.
+          I’m a Vancouver-based photographer capturing love stories with depth and emotion, I’m here to preserve your most meaningful moments.<br/><br/>
+          Whether it’s the intimate emotion of an elopement, the joy of an engagement, or a shared moment on an ordinary day... these are once in a lifetime memories.
+          They deserve to be captured with care and creativity, so you can relive them, share them, and pass them down for years to come.
           <br/>
           <br/>
           - Camila Londono
@@ -842,7 +1200,7 @@ export default function WeddingCouplesPage() {
       </IntroSection>
 
       <SectionDivider>
-      <DividerImage $span={4}>
+        <DividerImage $span={4}>
           <ProtectedImage
             src="/images/wedding/A7T00849.jpg"
             alt="Couple portrait"
@@ -850,7 +1208,7 @@ export default function WeddingCouplesPage() {
             quality={100}
           />
         </DividerImage>
-        <DividerImage $span={3}>
+        <DividerImage $span={3} $isMiddle>
           <ProtectedImage
             src="/images/wedding/A7T01233Crop.jpg"
             alt="Hands with rings"
@@ -861,7 +1219,7 @@ export default function WeddingCouplesPage() {
         <DividerImage $span={5}>
           <ProtectedImage
             src="/images/wedding/A7T01413.jpg"
-            alt="Copule kissing"
+            alt="Couple kissing"
             height="100%"
             quality={100}
           />
@@ -898,7 +1256,7 @@ export default function WeddingCouplesPage() {
               {
                 title: 'Engagement Session',
                 price: '$350',
-                description: "Whether it’s right after the proposal or sometime in the weeks that follow, I'll help you to capture the moment you said 'yes'.",
+                description: "Whether it's right after the proposal or sometime in the weeks that follow, I'll help you to capture the moment you said 'yes'.",
                 features: ['1.5-hour session', '30 edited, high-resolution images', 'Pre-session consultation', 'Add-on: All unedited images +$100', 'Add-on: Additional location +$100'],
                 action: 'Inquire Now',
                 package: 'Engagement'
@@ -906,7 +1264,7 @@ export default function WeddingCouplesPage() {
               {
                 title: 'Couples Sessions',
                 price: '$250',
-                description: "Whether it’s an anniversary, a weekend away, or just the way you are right now...",
+                description: "Whether it's an anniversary, a weekend away, or just the way you are right now...",
                 features: ['1-hour session - 1 location', 'Outfit change', '30 edited, high-resolution images', 'Add-on: All unedited images +$50', 'Add-on: Additional location +$100'],
                 action: 'Inquire Now',
                 package: 'Couples'
@@ -921,247 +1279,148 @@ export default function WeddingCouplesPage() {
               }
             ].map((service, index) => (
               <ServiceCard key={index}>
-                <h3>{service.title}</h3>
-                <p className="description">{service.description}</p>
-                <ul>
-                  {service.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-                <p className="price">Starting at {service.price}</p>
-                <BookButton onClick={() => handleBookClick(service.package)}>
-                  <span>{service.action}</span>
-                </BookButton>
+                <div className="card-content">
+                  <div>
+                    <h3>{service.title}</h3>
+                    <p className="description">{service.description}</p>
+                    <ul>
+                      {service.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                    <p className="price">Starting at {service.price}</p>
+                  </div>
+                  <div className="button-wrapper">
+                    <BookButton onClick={() => handleBookClick(service.package)}>
+                      <span>{service.action}</span>
+                    </BookButton>
+                  </div>
+                </div>
               </ServiceCard>
             ))}
           </Carousel>
+          <CarouselStyles />
         </ServicesSection>
       </Section>
 
       <SectionDivider>
-        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-2a.jpg')}>
+        <DividerImage $span={3} $isMiddle onClick={() => handleImageClick('/images/wedding/A7T09634.jpg')}>
           <ProtectedImage
-            src="/images/wedding/divider-2a.jpg"
-            alt="Wedding preparation"
+            src="/images/wedding/A7T09634.jpg"
+            alt="Bride and ring"
+            height="110%"
+            quality={90}
+          />
+        </DividerImage>
+        <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.jpg')}>
+          <ProtectedImage
+            src="/images/wedding/A7T09834.jpg"
+            alt="Flowers"
             height="100%"
             quality={90}
           />
         </DividerImage>
-        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-2b.jpg')}>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.jpg')}>
           <ProtectedImage
-            src="/images/wedding/divider-2b.jpg"
-            alt="First dance"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-2c.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-2c.jpg"
-            alt="Ring exchange"
-            height="100%"
+            src="/images/wedding/A7T09612.jpg"
+            alt="Bride"
+            height="110%"
             quality={90}
           />
         </DividerImage>
       </SectionDivider>
 
-      <Section $dark>
-        <h2>The Wedding Experience</h2>
-        <Grid>
-          <ServiceFeature>
-            <h3>Before Your Day</h3>
-            <ul>
-              <li>Personal consultation to understand your unique story</li>
-              <li>Customized timeline planning for optimal moments</li>
-              <li>Location scouting and lighting preparation</li>
-              <li>Vendor coordination and recommendations</li>
-              <li>Engagement session to get comfortable on camera</li>
-              <li>Detailed shot list and family photo planning</li>
-            </ul>
-          </ServiceFeature>
-          
-          <ServiceFeature>
-            <h3>During Your Celebration</h3>
-            <ul>
-              <li>Unobtrusive documentary-style coverage</li>
-              <li>Artistic direction for natural, candid moments</li>
-              <li>Professional lighting for all conditions</li>
-              <li>Multiple camera coverage for key moments</li>
-              <li>Coordination with other vendors</li>
-              <li>Backup equipment for peace of mind</li>
-            </ul>
-          </ServiceFeature>
-          
-          <ServiceFeature>
-            <h3>After Your Wedding</h3>
-            <ul>
-              <li>Professional editing with consistent style</li>
-              <li>Private online gallery within 6-8 weeks</li>
-              <li>High-resolution digital downloads</li>
-              <li>Print release and printing recommendations</li>
-              <li>Album design consultation</li>
-              <li>Archive backup of all your memories</li>
-            </ul>
-          </ServiceFeature>
-        </Grid>
-      </Section>
+      <ProcessSection>
+        <h2>Our Process</h2>
+        <ProcessContainer>
+          <ProcessSteps>
+            <ProcessStep>
+              <StepNumber>1</StepNumber>
+              <StepContent>
+                <h3>Reach Out</h3>
+                <p>Send me a message through the contact form with a few details about what you’re planning. I’ll reply with next steps</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>2</StepNumber>
+              <StepContent>
+                <h3>Plan</h3>
+                <p>We get to know you and your vision. Locations, styles, mood boards</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>3</StepNumber>
+              <StepContent>
+                <h3>Shoot</h3>
+                <p>Professional equipment. I’ll gently direct when needed, but mostly capture how things unfold naturally.</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>4</StepNumber>
+              <StepContent>
+                <h3>Edit</h3>
+                <p>High-quality post-processing</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>5</StepNumber>
+              <StepContent>
+                <h3>Deliver</h3>
+                <p>1–2 weeks, you’ll receive a private online gallery with your edited images</p>
+              </StepContent>
+            </ProcessStep>
+          </ProcessSteps>
+        </ProcessContainer>
+      </ProcessSection>
+
+      <TestimonialSection>
+        <TestimonialContainer>
+          <TestimonialContent>
+            <div className="stars">★★★★★</div>
+            <div className="quote">
+              "Every photo felt like us. You didn't just capture the day—you captured the emotion."
+            </div>
+            <div className="author">
+              — Emily & Luca (Tofino Elopement)
+            </div>
+          </TestimonialContent>
+          <TestimonialImage>
+            <ProtectedImage
+              src="/images/wedding/A7T09940.jpg"
+              alt="Emily and Luca's elopement"
+              height="100%"
+              quality={100}
+            />
+          </TestimonialImage>
+        </TestimonialContainer>
+      </TestimonialSection>
 
       <SectionDivider>
-        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-3a.jpg')}>
+        <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/divider-3a.jpg"
-            alt="Wedding details and rings"
+            src="/images/wedding/A7T00849.jpg"
+            alt="Couple portrait"
             height="100%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-3b.jpg')}>
+        <DividerImage $span={3} $isMiddle>
           <ProtectedImage
-            src="/images/wedding/divider-3b.jpg"
-            alt="Wedding details and rings"
+            src="/images/wedding/A7T01233Crop.jpg"
+            alt="Hands with rings"
             height="100%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
-        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-3c.jpg')}>
+        <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/divider-3c.jpg"
-            alt="Wedding details and rings"
+            src="/images/wedding/A7T01413.jpg"
+            alt="Couple kissing"
             height="100%"
-            quality={90}
-          />
-        </DividerImage>
-      </SectionDivider>
-
-      <FAQSection>
-        <h2>Frequently Asked Questions</h2>
-        <FAQGrid>
-          <FAQItem>
-            <h3>How far in advance should we book?</h3>
-            <p>For engagement sessions, 2-3 months in advance is recommended. For elopements, 6-12 months is ideal to ensure availability.</p>
-          </FAQItem>
-          
-          <FAQItem>
-            <h3>What is your photography style?</h3>
-            <p>My style combines documentary storytelling with artistic portraiture, focusing on genuine moments and natural interactions.</p>
-          </FAQItem>
-          
-          <FAQItem>
-            <h3>Do you travel for sessions?</h3>
-            <p>Yes! I'm available for travel throughout BC and beyond. Travel fees may apply depending on location.</p>
-          </FAQItem>
-          
-          <FAQItem>
-            <h3>What about weather?</h3>
-            <p>We'll monitor the forecast and can reschedule if needed. Sometimes overcast or light rain can create beautiful, moody photos!</p>
-          </FAQItem>
-          
-          <FAQItem>
-            <h3>When do we receive our photos?</h3>
-            <p>Engagement sessions are delivered within 3-4 weeks. Elopement photos are delivered within 6-8 weeks.</p>
-          </FAQItem>
-          
-          <FAQItem>
-            <h3>Can we order prints through you?</h3>
-            <p>Yes! I offer professional printing services through trusted labs to ensure the highest quality prints and products.</p>
-          </FAQItem>
-        </FAQGrid>
-      </FAQSection>
-
-      <Section>
-        <GalleryGrid>
-          {[
-            { src: '/images/wedding/gallery-1.jpg', span: 8 },
-            { src: '/images/wedding/gallery-2.jpg', span: 4 },
-            { src: '/images/wedding/gallery-3.jpg', span: 4 },
-            { src: '/images/wedding/gallery-4.jpg', span: 8 },
-            { src: '/images/wedding/gallery-5.jpg', span: 6 },
-            { src: '/images/wedding/gallery-6.jpg', span: 6 },
-          ].map((item, index) => (
-            <GalleryItem key={index} $span={item.span}>
-              <ProtectedImage
-                src={item.src}
-                alt={`Wedding gallery image ${index + 1}`}
-                height="400px"
-                quality={90}
-              />
-            </GalleryItem>
-          ))}
-        </GalleryGrid>
-      </Section>
-
-      <SectionDivider>
-        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-4a.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-4a.jpg"
-            alt="Wedding celebration moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-4b.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-4b.jpg"
-            alt="Wedding celebration moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-4c.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-4c.jpg"
-            alt="Wedding celebration moment"
-            height="100%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
       </SectionDivider>
-
-      <Section>
-        <h2>Get in Touch</h2>
-        <ContactForm service="Wedding & Couple Photography" />
-      </Section>
-
-      <Section>
-        <h2>Investment in Timeless Memories</h2>
-        <ValueProposition>
-          <h4>Why Professional Wedding Photography Matters</h4>
-          <p>
-            Your wedding day is filled with once-in-a-lifetime moments that deserve to be captured with 
-            artistic vision and technical excellence. These photos become family heirlooms, telling your 
-            love story for generations to come.
-          </p>
-        </ValueProposition>
-        <Grid>
-          <ServiceFeature>
-            <h3>Quality That Lasts</h3>
-            <ul>
-              <li>Professional-grade equipment</li>
-              <li>Archival-quality prints</li>
-              <li>Secure digital backups</li>
-              <li>High-resolution files</li>
-            </ul>
-          </ServiceFeature>
-          <ServiceFeature>
-            <h3>Premium Products</h3>
-            <ul>
-              <li>Fine art albums</li>
-              <li>Gallery-quality wall art</li>
-              <li>Custom photo boxes</li>
-              <li>Parent albums available</li>
-            </ul>
-          </ServiceFeature>
-          <ServiceFeature>
-            <h3>Digital Access</h3>
-            <ul>
-              <li>Online gallery sharing</li>
-              <li>High-res downloads</li>
-              <li>Mobile app access</li>
-              <li>Social media files</li>
-            </ul>
-          </ServiceFeature>
-        </Grid>
-      </Section>
 
       <SectionDivider>
         <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-5a.jpg')}>
@@ -1263,7 +1522,6 @@ export default function WeddingCouplesPage() {
             alt="Wedding moment"
             height="95vh"
             quality={100}
-            onClick={(e) => e.stopPropagation()}
           />
         </ImageModal>
       )}
@@ -1273,8 +1531,6 @@ export default function WeddingCouplesPage() {
         onClose={() => setIsModalOpen(false)}
         selectedPackage={selectedPackage}
       />
-
-      <CarouselStyles />
     </PageContainer>
   );
 } 

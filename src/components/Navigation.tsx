@@ -15,6 +15,7 @@ const Nav = styled.nav`
   box-shadow: ${theme.shadows.sm};
   z-index: 1000;
   transition: all 0.3s ease;
+  padding-top: env(safe-area-inset-top, 0);
 
   &.scrolled {
     background-color: rgba(255, 255, 255, 0.98);
@@ -30,6 +31,10 @@ const NavContent = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  }
 `;
 
 const Logo = styled(Link)`
@@ -39,6 +44,7 @@ const Logo = styled(Link)`
   color: ${theme.colors.primary.main};
   z-index: 1001;
   transition: transform 0.2s ease;
+  padding: ${theme.spacing.xs} 0;
 
   &:hover {
     transform: scale(1.05);
@@ -54,8 +60,9 @@ const MenuButton = styled.button`
   cursor: pointer;
   z-index: 1001;
   padding: ${theme.spacing.sm};
-  border-radius: ${theme.borderRadius.full};
+  border-radius: ${theme.borderRadius.lg};
   transition: all 0.2s ease;
+  margin-right: -${theme.spacing.sm}; // Offset padding for better alignment
 
   &:hover {
     background-color: ${theme.colors.background.light};
@@ -75,21 +82,22 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
 
   @media (max-width: ${theme.breakpoints.md}) {
     position: fixed;
-    top: 0;
+    top: calc(60px + env(safe-area-inset-top, 0)); // Account for header height + safe area
     left: 0;
     right: 0;
     bottom: 0;
     background-color: ${theme.colors.background.main};
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: ${theme.spacing['2xl']};
+    gap: ${theme.spacing.xl};
     opacity: ${props => props.$isOpen ? 1 : 0};
     visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
     transform: translateY(${props => props.$isOpen ? '0' : '-10px'});
     transition: all 0.3s ease;
-    padding: ${theme.spacing['2xl']};
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 
