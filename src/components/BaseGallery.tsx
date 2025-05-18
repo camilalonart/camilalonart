@@ -7,7 +7,6 @@ const GalleryContainer = styled.div`
   width: 100%;
   padding: ${theme.spacing['2xl']};
   margin-top: 60px;
-  position: relative;
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl};
@@ -125,29 +124,6 @@ const Modal = styled.div`
     }
   }
 
-  .back-button {
-    position: absolute;
-    top: ${theme.spacing.xl};
-    left: ${theme.spacing.xl};
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    padding: ${theme.spacing.md} ${theme.spacing.lg};
-    border-radius: ${theme.borderRadius.sm};
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: ${theme.spacing.sm};
-    
-    &:hover {
-      background: white;
-      color: black;
-    }
-  }
-
   .nav-button {
     position: absolute;
     top: 50%;
@@ -186,11 +162,13 @@ const Modal = styled.div`
   }
 `;
 
-interface GalleryProps {
+export interface BaseGalleryProps {
   images: { src: string; alt: string }[];
+  backLink: string;
+  backText: string;
 }
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => {
+const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const handleImageClick = (index: number) => {
@@ -217,8 +195,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
   return (
     <>
-      <BackButton href="/photography/wedding-couples">
-        Back to Wedding & Couples
+      <BackButton href={backLink}>
+        {backText}
       </BackButton>
       <GalleryContainer>
         <MasonryGrid>
@@ -254,4 +232,4 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   );
 };
 
-export default Gallery; 
+export default BaseGallery; 

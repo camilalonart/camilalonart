@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ContactForm from '../../../components/ContactForm';
 import ProtectedImage from '../../../components/ProtectedImage';
-import BookingModal from '../../../components/BookingModal';
+import WeddingInquiryForm from '../../../components/WeddingInquiryForm';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -31,7 +31,7 @@ const IntroSection = styled.section`
   margin: 0 auto;
   
   p {
-    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
     line-height: 1.8;
     color: ${theme.colors.text.secondary};
     font-weight: 300;
@@ -1186,7 +1186,7 @@ const InquirySection = styled.section`
     color: #796B5F;
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: ${theme.spacing['3xl']};
+    margin-bottom: ${theme.spacing.lg};
   }
 
   p {
@@ -1204,12 +1204,21 @@ const InquirySection = styled.section`
 `;
 
 const InquiryFormContainer = styled.div`
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   background: white;
   border-radius: ${theme.borderRadius.lg};
   box-shadow: ${theme.shadows.lg};
   overflow: hidden;
+  position: relative;
+`;
+
+const SubmitButtonWrapper = styled.div<{ $embedded?: boolean }>`
+  ${props => props.$embedded ? `
+    padding: ${theme.spacing.lg} 0;
+    background: transparent;
+    z-index: 10;
+  ` : ''}
 `;
 
 export default function WeddingCouplesPage() {
@@ -1239,8 +1248,7 @@ export default function WeddingCouplesPage() {
           />
         </HeroImageContainer>
         <HeroContent>
-          <h2>Elopement & Couples</h2>
-          <h3>Photography </h3>
+          <h2>Elopement & Couples Photography</h2>
           <p>Vancouver-based  photography for elopements, engagements, and ove stories.</p>
           <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
         </HeroContent>
@@ -1431,27 +1439,14 @@ export default function WeddingCouplesPage() {
         </ProcessContainer>
       </ProcessSection>
 
-      <TestimonialSection>
-        <TestimonialContainer>
-          <TestimonialContent>
-            <div className="stars">★★★★★</div>
-            <div className="quote">
-              "Every photo felt like us. You didn't just capture the day—you captured the emotion."
-            </div>
-            <div className="author">
-              — Emily & Luca (Tofino Elopement)
-            </div>
-          </TestimonialContent>
-          <TestimonialImage>
-            <ProtectedImage
-              src="/images/wedding/A7T09940.jpg"
-              alt="Emily and Luca's elopement"
-              height="100%"
-              quality={100}
-            />
-          </TestimonialImage>
-        </TestimonialContainer>
-      </TestimonialSection>
+      <GalleryLink>
+        <h2>View Our Gallery</h2>
+        <p>
+          Explore our complete collection of wedding, engagement, and couples photography. 
+          Each image tells a unique story of love and connection.
+        </p>
+        <a href="/photography/wedding-couples/gallery/">View Full Gallery</a>
+      </GalleryLink>
 
       <SectionDivider>
         <DividerImage $span={4}>
@@ -1480,50 +1475,36 @@ export default function WeddingCouplesPage() {
         </DividerImage>
       </SectionDivider>
 
-      <SectionDivider>
-        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-5a.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-5a.jpg"
-            alt="Emotional wedding moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-5b.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-5b.jpg"
-            alt="Emotional wedding moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-5c.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-5c.jpg"
-            alt="Emotional wedding moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-      </SectionDivider>
-
-      <GalleryLink>
-        <h2>View Our Gallery</h2>
-        <p>
-          Explore our complete collection of wedding, engagement, and couples photography. 
-          Each image tells a unique story of love and connection.
-        </p>
-        <a href="/photography/gallery">View Full Gallery</a>
-      </GalleryLink>
+      <TestimonialSection>
+        <TestimonialContainer>
+          <TestimonialContent>
+            <div className="stars">★★★★★</div>
+            <div className="quote">
+              "Every photo felt like us. You didn't just capture the day—you captured the emotion."
+            </div>
+            <div className="author">
+              — Emily & Luca (Tofino Elopement)
+            </div>
+          </TestimonialContent>
+          <TestimonialImage>
+            <ProtectedImage
+              src="/images/wedding/A7T09940.jpg"
+              alt="Emily and Luca's elopement"
+              height="100%"
+              quality={100}
+            />
+          </TestimonialImage>
+        </TestimonialContainer>
+      </TestimonialSection>
 
       <InquirySection>
-        <h2>Let's Create Something Beautiful Together</h2>
         <InquiryFormContainer>
-          <BookingModal 
+          <WeddingInquiryForm 
             isOpen={true} 
             onClose={() => {}} 
             selectedPackage={undefined}
             embedded={true}
+            useIframe={false}
           />
         </InquiryFormContainer>
       </InquirySection>
@@ -1534,30 +1515,9 @@ export default function WeddingCouplesPage() {
             <h3>Contact</h3>
             <p>Let's create something beautiful together</p>
             <ul>
-              <li><a href="mailto:contact@camilonart.com">contact@camilonart.com</a></li>
-              <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+              <li><a href="mailto:camilalonart@gmail.com">camilalonart@gmail.com</a></li>
+              <li><a href="tel:+1 672-338-9307">+1 (672) 338-9307</a></li>
               <li>Based in Vancouver, BC</li>
-              <li>Available for destination weddings</li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h3>Services</h3>
-            <ul>
-              <li><a href="#engagement">Engagement Sessions</a></li>
-              <li><a href="#wedding">Wedding Photography</a></li>
-              <li><a href="#elopement">Elopement Coverage</a></li>
-              <li><a href="#albums">Wedding Albums</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h3>Information</h3>
-            <ul>
-              <li><a href="#pricing">Investment & Pricing</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#blog">Wedding Tips</a></li>
-              <li><a href="#process">Our Process</a></li>
             </ul>
           </div>
 
@@ -1565,9 +1525,7 @@ export default function WeddingCouplesPage() {
             <h3>Follow Along</h3>
             <ul>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a></li>
               <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-              <li><a href="https://vimeo.com" target="_blank" rel="noopener noreferrer">Vimeo</a></li>
             </ul>
           </div>
         </div>
@@ -1599,18 +1557,19 @@ export default function WeddingCouplesPage() {
           <ProtectedImage
             src={selectedImage}
             alt="Wedding moment"
-            style={{ maxHeight: '95vh', width: 'auto' }}
             quality={100}
+            objectFit="contain"
           />
         </ImageModal>
       )}
 
       {isModalOpen && (
-        <BookingModal
+        <WeddingInquiryForm
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           selectedPackage={selectedPackage}
           embedded={false}
+          useIframe={false}
         />
       )}
     </PageContainer>
