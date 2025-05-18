@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -20,7 +22,9 @@ const ImageContainer = styled.div<{ height?: string }>`
   }
 `;
 
-const StyledImage = styled(Image)`
+const StyledImage = styled(Image)<{ $loaded: boolean }>`
+  opacity: ${props => props.$loaded ? 1 : 0};
+  transition: opacity 0.3s ease;
   user-select: none;
   pointer-events: none;
   -webkit-user-drag: none;
@@ -55,37 +59,48 @@ const Overlay = styled.div`
 interface ProtectedImageProps {
   src: string;
   alt: string;
-  height?: string;
+  width?: number;
+  height?: string | number;
   priority?: boolean;
   quality?: number;
   objectFit?: 'cover' | 'contain';
-  sizes?: string;
 }
 
 export default function ProtectedImage({
   src,
   alt,
-  height = '300px',
+  width,
+  height,
   priority = false,
-  quality = 85,
-  objectFit = 'cover',
-  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+  quality = 75,
+  objectFit = 'cover'
 }: ProtectedImageProps) {
-  // Add random query parameter to prevent browser caching and make URL unique
-  const uniqueSrc = `${src}?v=${Math.random().toString(36).substring(7)}`;
-  
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    // Reset states when src changes
+    setLoaded(false);
+    setError(false);
+  }, [src]);
+
+  if (error) {
+    return <div>Image not available</div>;
+  }
+
   return (
-    <ImageContainer height={height}>
+    <ImageContainer height={typeof height === 'string' ? height : undefined}>
       <StyledImage
-        src={uniqueSrc}
+        src={src}
         alt={alt}
-        fill
+        width={width || 1920}
+        height={typeof height === 'string' ? 1080 : height || 1080}
         priority={priority}
         quality={quality}
-        sizes={sizes}
         style={{ objectFit }}
-        onContextMenu={(e) => e.preventDefault()}
-        draggable={false}
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+        $loaded={loaded}
       />
       <Overlay onContextMenu={(e) => e.preventDefault()} />
     </ImageContainer>
