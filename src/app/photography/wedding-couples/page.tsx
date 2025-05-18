@@ -10,14 +10,12 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const PageContainer = styled.div`
-  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   overflow-x: hidden;
-  width: 100%;
   position: relative;
 
   * {
-    max-width: 100vw;
     box-sizing: border-box;
   }
 
@@ -112,7 +110,6 @@ const HeroContent = styled.div`
   max-width: 1000px;
   
   h1 {
-    margin-bottom: ${theme.spacing.xl};
     font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 300;
     letter-spacing: 0.2em;
@@ -141,7 +138,7 @@ const HeroContent = styled.div`
     }
     
     h3 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       letter-spacing: 0.15em;
     }
       
@@ -465,6 +462,7 @@ const SectionDivider = styled.div`
   grid-template-columns: repeat(12, 1fr);
   gap: ${theme.spacing.md};
   height: 400px;
+  padding: 0 ${theme.spacing.md};
 
   @media (max-width: ${theme.breakpoints.md}) {
     height: 300px;
@@ -483,33 +481,12 @@ const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   height: 100%;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    img {
-      transform: scale(1.1);
-    }
-
-    &::after {
-      opacity: 1;
-    }
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -1154,6 +1131,87 @@ const StepContent = styled.div`
   }
 `;
 
+const GalleryLink = styled.div`
+  text-align: center;
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  background: ${theme.colors.background.light};
+
+  h2 {
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    color: #796B5F;
+    margin-bottom: ${theme.spacing.xl};
+    font-weight: 600;
+  }
+
+  p {
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    color: ${theme.colors.text.secondary};
+    margin-bottom: ${theme.spacing['2xl']};
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    display: inline-block;
+    padding: ${theme.spacing.lg} ${theme.spacing['2xl']};
+    background: transparent;
+    border: 2px solid ${theme.colors.primary.main};
+    color: ${theme.colors.primary.main};
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: ${theme.colors.primary.main};
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+`;
+
+const InquirySection = styled.section`
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  background: ${theme.colors.background.light};
+  
+  h2 {
+    text-align: center;
+    color: #796B5F;
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    font-weight: 600;
+    margin-bottom: ${theme.spacing['3xl']};
+  }
+
+  p {
+    text-align: center;
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    color: ${theme.colors.text.secondary};
+    max-width: 800px;
+    margin: 0 auto ${theme.spacing['2xl']};
+    line-height: 1.6;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+  }
+`;
+
+const InquiryFormContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.lg};
+  overflow: hidden;
+`;
+
 export default function WeddingCouplesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>();
@@ -1182,7 +1240,7 @@ export default function WeddingCouplesPage() {
         </HeroImageContainer>
         <HeroContent>
           <h2>Elopement & Couples</h2>
-          <h3>Photogrgaphy </h3>
+          <h3>Photography </h3>
           <p>Vancouver-based  photography for elopements, engagements, and ove stories.</p>
           <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
         </HeroContent>
@@ -1190,8 +1248,8 @@ export default function WeddingCouplesPage() {
 
       <IntroSection>
         <p>
-          I’m a Vancouver-based photographer capturing love stories with depth and emotion, I’m here to preserve your most meaningful moments.<br/><br/>
-          Whether it’s the intimate emotion of an elopement, the joy of an engagement, or a shared moment on an ordinary day... these are once in a lifetime memories.
+          I'm a Vancouver-based photographer capturing love stories with depth and emotion, I'm here to preserve your most meaningful moments.<br/><br/>
+          Whether it's the intimate emotion of an elopement, the joy of an engagement, or a shared moment on an ordinary day... these are once in a lifetime memories.
           They deserve to be captured with care and creativity, so you can relive them, share them, and pass them down for years to come.
           <br/>
           <br/>
@@ -1338,7 +1396,7 @@ export default function WeddingCouplesPage() {
               <StepNumber>1</StepNumber>
               <StepContent>
                 <h3>Reach Out</h3>
-                <p>Send me a message through the contact form with a few details about what you’re planning. I’ll reply with next steps</p>
+                <p>Send me a message through the contact form with a few details about what you're planning. I'll reply with next steps</p>
               </StepContent>
             </ProcessStep>
             <ProcessStep>
@@ -1352,7 +1410,7 @@ export default function WeddingCouplesPage() {
               <StepNumber>3</StepNumber>
               <StepContent>
                 <h3>Shoot</h3>
-                <p>Professional equipment. I’ll gently direct when needed, but mostly capture how things unfold naturally.</p>
+                <p>Professional equipment. I'll gently direct when needed, but mostly capture how things unfold naturally.</p>
               </StepContent>
             </ProcessStep>
             <ProcessStep>
@@ -1366,7 +1424,7 @@ export default function WeddingCouplesPage() {
               <StepNumber>5</StepNumber>
               <StepContent>
                 <h3>Deliver</h3>
-                <p>1–2 weeks, you’ll receive a private online gallery with your edited images</p>
+                <p>1–2 weeks, you'll receive a private online gallery with your edited images</p>
               </StepContent>
             </ProcessStep>
           </ProcessSteps>
@@ -1449,6 +1507,27 @@ export default function WeddingCouplesPage() {
         </DividerImage>
       </SectionDivider>
 
+      <GalleryLink>
+        <h2>View Our Gallery</h2>
+        <p>
+          Explore our complete collection of wedding, engagement, and couples photography. 
+          Each image tells a unique story of love and connection.
+        </p>
+        <a href="/photography/gallery">View Full Gallery</a>
+      </GalleryLink>
+
+      <InquirySection>
+        <h2>Let's Create Something Beautiful Together</h2>
+        <InquiryFormContainer>
+          <BookingModal 
+            isOpen={true} 
+            onClose={() => {}} 
+            selectedPackage={undefined}
+            embedded={true}
+          />
+        </InquiryFormContainer>
+      </InquirySection>
+
       <Footer>
         <div className="footer-content">
           <div className="footer-section">
@@ -1520,17 +1599,20 @@ export default function WeddingCouplesPage() {
           <ProtectedImage
             src={selectedImage}
             alt="Wedding moment"
-            height="95vh"
+            style={{ maxHeight: '95vh', width: 'auto' }}
             quality={100}
           />
         </ImageModal>
       )}
 
-      <BookingModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        selectedPackage={selectedPackage}
-      />
+      {isModalOpen && (
+        <BookingModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedPackage={selectedPackage}
+          embedded={false}
+        />
+      )}
     </PageContainer>
   );
 } 
