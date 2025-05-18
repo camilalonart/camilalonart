@@ -1268,7 +1268,7 @@ export default function WeddingCouplesPage() {
       <SectionDivider>
         <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/A7T00849.jpg"
+            src="/images/wedding/A7T00021.jpg"
             alt="Couple portrait"
             height="100%"
             quality={100}
@@ -1284,7 +1284,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/A7T01413.jpg"
+            src="/images/wedding/A7T09955.jpg"
             alt="Couple kissing"
             height="100%"
             quality={100}
@@ -1439,6 +1439,33 @@ export default function WeddingCouplesPage() {
         </ProcessContainer>
       </ProcessSection>
 
+      <SectionDivider>
+        <DividerImage $span={4}>
+          <ProtectedImage
+            src="/images/wedding/A7T01425.jpg"
+            alt="Signing"
+            height="100%"
+            quality={100}
+          />
+        </DividerImage>
+        <DividerImage $span={3} $isMiddle>
+          <ProtectedImage
+            src="/images/wedding/A7T01396.jpg"
+            alt="Couple portrait"
+            height="100%"
+            quality={100}
+          />
+        </DividerImage>
+        <DividerImage $span={5}>
+          <ProtectedImage
+            src="/images/wedding/A7T01413-2.jpg"
+            alt="Bride and best friend"
+            height="100%"
+            quality={100}
+          />
+        </DividerImage>
+      </SectionDivider>
+
       <GalleryLink>
         <h2>View Our Gallery</h2>
         <p>
@@ -1459,16 +1486,16 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
           <ProtectedImage
-            src="/images/wedding/A7T01233Crop.jpg"
-            alt="Hands with rings"
+            src="/images/wedding/A7T00765.jpg"
+            alt="Signing"
             height="100%"
             quality={100}
           />
         </DividerImage>
         <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/A7T01413.jpg"
-            alt="Couple kissing"
+            src="/images/wedding/A7T00438.jpg"
+            alt="Bride and best friend"
             height="100%"
             quality={100}
           />
