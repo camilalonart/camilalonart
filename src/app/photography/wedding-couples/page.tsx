@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ContactForm from '../../../components/ContactForm';
 import ProtectedImage from '../../../components/ProtectedImage';
 import BookingModal from '../../../components/BookingModal';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const PageContainer = styled.div`
   max-width: 1400px;
@@ -17,6 +19,25 @@ const PageContainer = styled.div`
   * {
     max-width: 100vw;
     box-sizing: border-box;
+  }
+`;
+
+const IntroSection = styled.section`
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  
+  p {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.8;
+    color: ${theme.colors.text.secondary};
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
   }
 `;
 
@@ -327,47 +348,53 @@ const HeroButton = styled.button`
   }
 `;
 
-const BookButton = styled(HeroButton)`
-  background: ${theme.colors.primary.main};
-  border: none;
-  color: white;
-  margin-top: auto;
-  padding: ${theme.spacing.lg} ${theme.spacing.xl};
-  width: 280px;
-  height: 60px;
-  font-size: 1rem;
+const BookButton = styled.button`
+  width: 100%;
+  margin: 0;
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
+  background: transparent;
+  border: 1px solid ${theme.colors.primary.main};
+  color: ${theme.colors.primary.main};
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
-  border-radius: 30px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
 
   &:before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 0;
-    background: ${theme.colors.primary.dark};
-    transform: translate(-50%, -50%) rotate(45deg);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: ${theme.colors.primary.main};
+    transition: transform 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.4s ease;
   }
 
   &:hover {
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.15em;
-
     &:before {
-      height: 450%;
+      transform: translateX(100%);
+    }
+    
+    span {
+      color: white;
     }
   }
 
   &:active {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98);
   }
 `;
 
@@ -569,6 +596,207 @@ const ValueProposition = styled.div`
   }
 `;
 
+const ScrollContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding: ${theme.spacing.xl} ${theme.spacing.md};
+  margin: 0 -${theme.spacing.md};
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* Add some space at the end for better UX */
+  &::after {
+    content: '';
+    padding-right: ${theme.spacing.xl};
+  }
+`;
+
+const ServicesSection = styled.div`
+  padding: ${theme.spacing['2xl']} 0;
+  max-width: 100vw;
+  overflow: hidden;
+`;
+
+const ServiceCard = styled.div`
+  background: rgb(250, 245, 243);
+  padding: ${theme.spacing.xl};
+  box-shadow: ${theme.shadows.md};
+  margin: ${theme.spacing.md};
+  height: 600px;
+  width: 350px;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${theme.shadows.lg};
+  }
+
+  h3 {
+    color: #003566;
+    margin-bottom: ${theme.spacing.xl};
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p {
+    margin-bottom: ${theme.spacing.lg};
+    color: ${theme.colors.text.secondary};
+    line-height: 1.6;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    
+    &.description {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      margin-bottom: ${theme.spacing.xl};
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+
+    li {
+      padding: ${theme.spacing.sm} 0;
+      padding-left: ${theme.spacing.md};
+      position: relative;
+      color: ${theme.colors.text.secondary};
+      font-size: 0.85rem;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: ${theme.colors.accent.success};
+      }
+    }
+  }
+
+  .price {
+    margin: ${theme.spacing.xl} 0;
+    font-weight: 500;
+    color: ${theme.colors.primary.main};
+    font-size: 1rem;
+  }
+`;
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1600 },
+    items: 3,
+    partialVisibilityGutter: 40
+  },
+  desktop: {
+    breakpoint: { max: 1600, min: 1024 },
+    items: 3,
+    partialVisibilityGutter: 30
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 640 },
+    items: 2,
+    partialVisibilityGutter: 20
+  },
+  mobile: {
+    breakpoint: { max: 640, min: 0 },
+    items: 1,
+    partialVisibilityGutter: 10
+  }
+};
+
+const CarouselStyles = styled.div`
+  .carousel-container {
+    padding: 20px 0;
+  }
+
+  .custom-dot-list-style {
+    bottom: -50px;
+  }
+
+  .react-multi-carousel-dot button {
+    border: 1px solid ${theme.colors.primary.main};
+    border-radius: 0;
+    margin: 0 4px;
+    width: 24px;
+    height: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .react-multi-carousel-dot--active button {
+    background: ${theme.colors.primary.main};
+    width: 32px;
+  }
+
+  .react-multi-carousel-item {
+    padding: 1px;
+  }
+
+  .react-multi-carousel-arrow {
+    background: transparent;
+    border: 1px solid ${theme.colors.primary.main};
+    color: ${theme.colors.primary.main};
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 0;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: ${theme.colors.primary.main};
+      color: white;
+    }
+
+    &::before {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+// Add the styled component for SEO footer
+const SEOFooter = styled.div`
+  background: ${theme.colors.background.dark};
+  padding: ${theme.spacing.lg} 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  .seo-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    padding: 0 ${theme.spacing.xl};
+
+    h2 {
+      font-size: 0.8rem;
+      font-weight: normal;
+      margin-bottom: ${theme.spacing.md};
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: none;
+    }
+
+    p {
+      margin-bottom: ${theme.spacing.sm};
+    }
+  }
+`;
+
 export default function WeddingCouplesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>();
@@ -596,115 +824,118 @@ export default function WeddingCouplesPage() {
           />
         </HeroImageContainer>
         <HeroContent>
-          <h1>Wedding & Couple</h1>
-          <p>Photography</p>
-          <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Book Your Session</HeroButton>
+          <h3>Elopement & Couples Photography</h3>
+          <p>Vancouver-based  photography for elopements, engagements, and ove stories.</p>
+          <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
         </HeroContent>
       </Hero>
 
-      <Section>
-        <GalleryGrid>
-          {[
-            { src: '/images/wedding/gallery-1.jpg', span: 8 },
-            { src: '/images/wedding/gallery-2.jpg', span: 4 },
-            { src: '/images/wedding/gallery-3.jpg', span: 4 },
-            { src: '/images/wedding/gallery-4.jpg', span: 8 },
-            { src: '/images/wedding/gallery-5.jpg', span: 6 },
-            { src: '/images/wedding/gallery-6.jpg', span: 6 },
-          ].map((item, index) => (
-            <GalleryItem key={index} $span={item.span}>
-              <ProtectedImage
-                src={item.src}
-                alt={`Wedding gallery image ${index + 1}`}
-                height="400px"
-                quality={90}
-              />
-            </GalleryItem>
-          ))}
-        </GalleryGrid>
-      </Section>
+      <IntroSection>
+        <p>
+          I'm a Vancouver-based photographer capturing love stories with depth and emotion. 
+          From intimate elopements on the West Coast to cozy couples sessions in the city, 
+          I'm here to preserve your most beloved moments.
+          <br/>
+          <br/>
+          - Camila Londono
+        </p>
+      </IntroSection>
 
       <SectionDivider>
-        <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-1a.jpg')}>
+      <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/divider-1a.jpg"
-            alt="Wedding ceremony moment"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/divider-1b.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-1b.jpg"
-            alt="Wedding details"
-            height="100%"
-            quality={90}
-          />
-        </DividerImage>
-        <DividerImage $span={4} onClick={() => handleImageClick('/images/wedding/divider-1c.jpg')}>
-          <ProtectedImage
-            src="/images/wedding/divider-1c.jpg"
+            src="/images/wedding/A7T00849.jpg"
             alt="Couple portrait"
             height="100%"
-            quality={90}
+            quality={100}
+          />
+        </DividerImage>
+        <DividerImage $span={3}>
+          <ProtectedImage
+            src="/images/wedding/A7T01233Crop.jpg"
+            alt="Hands with rings"
+            height="100%"
+            quality={100}
+          />
+        </DividerImage>
+        <DividerImage $span={5}>
+          <ProtectedImage
+            src="/images/wedding/A7T01413.jpg"
+            alt="Copule kissing"
+            height="100%"
+            quality={100}
           />
         </DividerImage>
       </SectionDivider>
 
       <Section>
-        <h2>Our Services</h2>
-        <Grid>
-          <ServiceFeature>
-            <h3>Engagement Sessions</h3>
-            <p>
-              Create beautiful memories before your wedding day. Get comfortable in front of the camera
-              while we capture your love story in a relaxed, natural setting.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: theme.spacing.lg, textAlign: 'left' }}>
-              <li>• 2-hour photo session</li>
-              <li>• Multiple locations</li>
-              <li>• Outfit changes</li>
-              <li>• 50+ edited photos</li>
-              <li>• Online gallery</li>
-            </ul>
-            <p><strong>Starting at $500</strong></p>
-            <BookButton onClick={() => handleBookClick('Engagement')}>Book Engagement Session</BookButton>
-          </ServiceFeature>
-          
-          <ServiceFeature>
-            <h3>Elopements</h3>
-            <p>
-              Intimate ceremonies deserve special attention. Let us help you document your special day
-              with a focus on authentic moments and beautiful details.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: theme.spacing.lg, textAlign: 'left' }}>
-              <li>• 4-hour coverage</li>
-              <li>• Location scouting</li>
-              <li>• Timeline planning</li>
-              <li>• 100+ edited photos</li>
-              <li>• Online gallery</li>
-            </ul>
-            <p><strong>Starting at $1,500</strong></p>
-            <BookButton onClick={() => handleBookClick('Elopement')}>Plan Your Elopement</BookButton>
-          </ServiceFeature>
-          
-          <ServiceFeature>
-            <h3>Wedding Albums</h3>
-            <p>
-              Transform your wedding photos into a beautiful, handcrafted album that will tell your story
-              for generations to come.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: theme.spacing.lg, textAlign: 'left' }}>
-              <li>• Premium leather cover</li>
-              <li>• 40 pages</li>
-              <li>• Professional design</li>
-              <li>• Custom engraving</li>
-              <li>• Parent albums available</li>
-            </ul>
-            <p><strong>Starting at $800</strong></p>
-            <BookButton onClick={() => handleBookClick('Album')}>Order Album</BookButton>
-          </ServiceFeature>
-        </Grid>
+        <h2>Services</h2>
+        <ServicesSection>
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            autoPlay={false}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="transform 500ms ease-in-out"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            deviceType="desktop"
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item"
+            partialVisible={true}
+          >
+            {[
+              {
+                title: 'Elopements',
+                price: '$500',
+                description: "Every elopement deserves care and attention. I'll help you document your day in a way that feels real, relaxed, and true to you.",
+                features: ['Up to 3 hours of coverage', '30 edited photos, high-resolution', 'Pre-session consultation', 'Add-on: All unedited images +$100', 'Add-on: Extra hour of coverage +$100'],
+                action: 'Inquire Now',
+                package: 'Elopement'
+              },
+              {
+                title: 'Engagement Session',
+                price: '$350',
+                description: "Whether it’s right after the proposal or sometime in the weeks that follow, I'll help you to capture the moment you said 'yes'.",
+                features: ['1.5-hour session', '30 edited, high-resolution images', 'Pre-session consultation', 'Add-on: All unedited images +$100', 'Add-on: Additional location +$100'],
+                action: 'Inquire Now',
+                package: 'Engagement'
+              },
+              {
+                title: 'Couples Sessions',
+                price: '$250',
+                description: "Whether it’s an anniversary, a weekend away, or just the way you are right now...",
+                features: ['1-hour session - 1 location', 'Outfit change', '30 edited, high-resolution images', 'Add-on: All unedited images +$50', 'Add-on: Additional location +$100'],
+                action: 'Inquire Now',
+                package: 'Couples'
+              },
+              {
+                title: 'Photobooks',
+                price: '$250',
+                description: 'These photobooks are carefully designed to preserve your session or wedding in a beautiful, lasting format.',
+                features: ['Custom design with your favorite images','Size: 8x8in - 20 spreads (40 pages)', 'Ships within 3 weeks after final approval','Add-on: Extra spreads +$10 each'],
+                action: 'Inquire Now',
+                package: 'Photobooks'
+              }
+            ].map((service, index) => (
+              <ServiceCard key={index}>
+                <h3>{service.title}</h3>
+                <p className="description">{service.description}</p>
+                <ul>
+                  {service.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+                <p className="price">Starting at {service.price}</p>
+                <BookButton onClick={() => handleBookClick(service.package)}>
+                  <span>{service.action}</span>
+                </BookButton>
+              </ServiceCard>
+            ))}
+          </Carousel>
+        </ServicesSection>
       </Section>
 
       <SectionDivider>
@@ -836,6 +1067,28 @@ export default function WeddingCouplesPage() {
           </FAQItem>
         </FAQGrid>
       </FAQSection>
+
+      <Section>
+        <GalleryGrid>
+          {[
+            { src: '/images/wedding/gallery-1.jpg', span: 8 },
+            { src: '/images/wedding/gallery-2.jpg', span: 4 },
+            { src: '/images/wedding/gallery-3.jpg', span: 4 },
+            { src: '/images/wedding/gallery-4.jpg', span: 8 },
+            { src: '/images/wedding/gallery-5.jpg', span: 6 },
+            { src: '/images/wedding/gallery-6.jpg', span: 6 },
+          ].map((item, index) => (
+            <GalleryItem key={index} $span={item.span}>
+              <ProtectedImage
+                src={item.src}
+                alt={`Wedding gallery image ${index + 1}`}
+                height="400px"
+                quality={90}
+              />
+            </GalleryItem>
+          ))}
+        </GalleryGrid>
+      </Section>
 
       <SectionDivider>
         <DividerImage $span={5} onClick={() => handleImageClick('/images/wedding/divider-4a.jpg')}>
@@ -988,6 +1241,21 @@ export default function WeddingCouplesPage() {
         </div>
       </Footer>
 
+      <SEOFooter>
+        <div className="seo-content">
+          <h2>Vancouver Elopement Photographer | Engagement & Couples Photography in BC</h2>
+          <p>
+            Specializing in intimate elopements, engagement sessions, and couples photography 
+            throughout British Columbia. Capturing authentic moments and creating timeless 
+            memories for couples in love.
+          </p>
+          <p>
+            Serving Vancouver, Whistler, Tofino, and destinations across British Columbia and Canada.
+            Available for travel and destination sessions.
+          </p>
+        </div>
+      </SEOFooter>
+
       {selectedImage && (
         <ImageModal onClick={() => setSelectedImage(undefined)}>
           <ProtectedImage
@@ -1005,6 +1273,8 @@ export default function WeddingCouplesPage() {
         onClose={() => setIsModalOpen(false)}
         selectedPackage={selectedPackage}
       />
+
+      <CarouselStyles />
     </PageContainer>
   );
 } 
