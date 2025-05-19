@@ -1249,7 +1249,7 @@ export default function WeddingCouplesPage() {
         </HeroImageContainer>
         <HeroContent>
           <h2>Elopement & Couples Photography</h2>
-          <p>Vancouver-based  photography for elopements, engagements, and ove stories.</p>
+          <p>Vancouver-based  photography for elopements, engagements, and love stories.</p>
           <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
         </HeroContent>
       </Hero>
@@ -1375,7 +1375,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09634.jpg"
             alt="Bride and ring"
             height="110%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
         <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.jpg')}>
@@ -1383,7 +1383,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09834.jpg"
             alt="Flowers"
             height="100%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
         <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.jpg')}>
@@ -1391,7 +1391,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09612.jpg"
             alt="Bride"
             height="110%"
-            quality={90}
+            quality={100}
           />
         </DividerImage>
       </SectionDivider>

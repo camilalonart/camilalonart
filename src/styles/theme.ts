@@ -15,18 +15,25 @@ export const theme = {
       secondary: '#666666',
       light: '#FFFFFF',
       muted: 'rgba(255, 255, 255, 0.7)',
+      disabled: '#999999',
     },
     background: {
       main: '#FFFFFF',
-      light: '#F8F8F8',
+      light: '#F5F5F5',
       dark: '#1A1A1A',
       gradient: 'linear-gradient(to right, #1A1A1A, #333333)',
     },
     accent: {
-      success: '#4A6741',
-      error: '#A63A3A',
-      warning: '#C9A050',
+      success: '#4CAF50',
+      error: '#F44336',
+      warning: '#FFC107',
+      info: '#2196F3',
     },
+    border: {
+      main: '#E0E0E0',
+      light: '#F0F0F0',
+      dark: '#CCCCCC',
+    }
   },
   typography: {
     fontFamily: {

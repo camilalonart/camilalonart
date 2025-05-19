@@ -61,9 +61,11 @@ interface ProtectedImageProps {
   alt: string;
   width?: number;
   height?: string | number;
-  priority?: boolean;
   quality?: number;
+  priority?: boolean;
   objectFit?: 'cover' | 'contain';
+  fill?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function ProtectedImage({
@@ -71,9 +73,11 @@ export default function ProtectedImage({
   alt,
   width,
   height,
-  priority = false,
   quality = 75,
-  objectFit = 'cover'
+  priority = false,
+  objectFit,
+  fill,
+  style,
 }: ProtectedImageProps) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -93,14 +97,15 @@ export default function ProtectedImage({
       <StyledImage
         src={src}
         alt={alt}
-        width={width || 1920}
-        height={typeof height === 'string' ? 1080 : height || 1080}
+        width={!fill ? (width || 1920) : undefined}
+        height={!fill ? (typeof height === 'string' ? 1080 : height || 1080) : undefined}
         priority={priority}
         quality={quality}
-        style={{ objectFit }}
+        style={{ objectFit, ...style }}
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
         $loaded={loaded}
+        fill={fill}
       />
       <Overlay onContextMenu={(e) => e.preventDefault()} />
     </ImageContainer>

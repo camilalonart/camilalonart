@@ -93,10 +93,12 @@ const Message = styled.div<{ $type: 'success' | 'error' }>`
 `;
 
 interface ContactFormProps {
-  service: string;
+  type: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function ContactForm({ service }: ContactFormProps) {
+export default function ContactForm({ type, isOpen, onClose }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -143,7 +145,7 @@ export default function ContactForm({ service }: ContactFormProps) {
   return (
     <FormContainer>
       <h2>Request a Quote</h2>
-      <p>Interested in our {service} services? Let's discuss your project!</p>
+      <p>Interested in our {type} services? Let's discuss your project!</p>
       
       {status && <Message $type={status.type}>{status.message}</Message>}
       
