@@ -235,6 +235,8 @@ const ServiceCard = styled.div`
   text-align: center;
   display: flex;
   border-radius: ${theme.borderRadius.lg};
+  flex-direction: column;
+  align-items: center;
 
   .card-content {
     display: flex;
@@ -263,33 +265,26 @@ const ServiceCard = styled.div`
     transform: scaleX(0);
     transition: transform 0.3s ease;
   }
-  
-  .price {
-    font-size: 2.5rem;
-    color: rgb(169, 125, 30);
-    font-weight: 800;
-    margin-bottom: ${theme.spacing.xl};
-    
-    span {
-      font-size: 1rem;
-      color: #666;
-      font-weight: 400;
-    }
-  }
 
   h3 {
     font-size: 2rem;
     color: rgb(169, 125, 30);
     font-weight: 800;
     margin-top: ${theme.spacing.xl};
-    margin-bottom: ${theme.spacing.xl};
+    margin-bottom: ${theme.spacing.md};
     font-family: 'Poppins', sans-serif;
+  }
 
-    span {
-      font-size: 1rem;
-      color: #666;
-      font-weight: 400;
-    }
+  .price {
+    display: inline-block;
+    color: rgb(176, 126, 18);
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.3em 1em;
+    margin-bottom: ${theme.spacing.md};
+    margin-top: 0;
+    letter-spacing: 0.02em;
   }
 
   p {
@@ -297,7 +292,6 @@ const ServiceCard = styled.div`
     color: ${theme.colors.text.secondary};
     line-height: 1.6;
     font-size: clamp(0.85rem, 1.5vw, 0.9rem);
-    
     &.description {
       min-height: 80px;
       display: flex;
@@ -337,26 +331,38 @@ const ServiceCard = styled.div`
   @media (max-width: ${theme.breakpoints.md}) {
     width: 300px;
     padding: ${theme.spacing.lg};
-
+    min-height: 400px;
     h3 {
-      min-height: 50px;
-      margin-bottom: ${theme.spacing.lg};
+      min-height: 40px;
+      margin-bottom: ${theme.spacing.md};
     }
-
+    .price {
+      font-size: 1.3rem;
+      padding: 0.2em 0.7em;
+      margin-bottom: ${theme.spacing.sm};
+    }
     p.description {
-      min-height: 60px;
+      min-height: 40px;
     }
-
     ul {
-      min-height: 220px;
+      min-height: 120px;
     }
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
-    width: 280px;
-    
+    width: 100%;
+    min-height: 220px;
+    padding: ${theme.spacing.md};
+    .price {
+      font-size: 1.1rem;
+      padding: 0.15em 0.5em;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: ${theme.spacing.sm};
+    }
     ul {
-      min-height: 200px;
+      min-height: 60px;
     }
   }
 `;
@@ -372,8 +378,6 @@ const GalleryPreview = styled.div`
   text-align: center;
   background: rgb(26, 20, 15);
   border-radius: ${theme.borderRadius.lg};
-  margin-top: ${theme.spacing.xl};
-  margin-bottom: ${theme.spacing.xl};
 
   h3 {
     color: rgb(255, 222, 194);
@@ -428,6 +432,7 @@ const FooterContent = styled.div`
     font-size: 1.4rem;
     margin-bottom: ${theme.spacing.xl};
     color: rgb(169, 125, 30);
+    font-family: 'Poppins', sans-serif;
   }
 
   p, ul {
@@ -607,7 +612,7 @@ const ReviewSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
   background: rgb(26, 20, 15);
   text-align: center;
-
+  
   h2 {
     color: rgb(255, 222, 194);
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
@@ -618,15 +623,17 @@ const ReviewSection = styled.section`
 `;
 
 const ReviewContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 2fr;
   gap: ${theme.spacing.xl};
   padding: ${theme.spacing.xl} 0;
+  align-items: center;
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: ${theme.spacing.lg};
   }
 `;
 
@@ -638,17 +645,13 @@ const ReviewCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
+  box-shadow: ${theme.shadows.sm};
+  align-items: flex-start;
 
-  .review-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: ${theme.spacing.md};
-  }
-
-  .review-content {
-    flex: 1;
+  .review-stars {
+    color: #FFD700;
+    font-size: 1.3rem;
+    margin-bottom: ${theme.spacing.sm};
   }
 
   .review-text {
@@ -667,6 +670,19 @@ const ReviewCard = styled.div`
   .reviewer-pet {
     color: ${theme.colors.text.secondary};
     font-size: 0.9rem;
+  }
+`;
+
+const ReviewImage = styled.div`
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: ${theme.shadows.md};
+  margin: 0 auto;
+  @media (max-width: ${theme.breakpoints.md}) {
+    width: 120px;
+    height: 120px;
   }
 `;
 
@@ -918,8 +934,8 @@ export default function PetsPage() {
                 <div className="card-content">
                   <div>
                     <h3>{service.title}</h3>
+                    <span className="price">{service.price}</span>
                     <p className="description">{service.description}</p>
-                    <p className="price">{service.price}</p>
                     <ul>
                       {service.features.map((feature, i) => (
                         <li key={i}>{feature}</li>
@@ -1016,25 +1032,16 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02468.jpg')}>
+          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T02468.jpg"
+              src="/images/pets/A7T05223-horizontal.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
-            <ProtectedImage
-              src="/images/pets/A7T05223.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02378.jpg"
               alt="Pet portrait"
@@ -1043,7 +1050,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02378.jpg"
               alt="Pet portrait"
@@ -1056,14 +1063,36 @@ export default function PetsPage() {
       </Section>
 
       <Section>
-        <SectionTitle>Gallery</SectionTitle>
+        <SectionTitle>Our Photography Collection</SectionTitle>
         <GalleryPreview>
-          <h3>View Our Pet Photography Collection</h3>
           <p>Explore our gallery of heartwarming pet portraits, capturing the unique personalities and special moments of beloved companions.</p>
           <ViewGalleryButton href="/photography/pets/gallery">
             View Full Gallery
           </ViewGalleryButton>
         </GalleryPreview>
+      </Section>
+
+      <Section>
+        <SectionDivider>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02596.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02565.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+        </SectionDivider>
       </Section>
 
       <FAQSection>
@@ -1079,7 +1108,7 @@ export default function PetsPage() {
           </FAQItem>
           <FAQItem>
             <h3>How long does a typical session last?</h3>
-            <p>Most sessions last between 1-2 hours, depending on the package chosen. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
+            <p>Most sessions last between 1 hour. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
           </FAQItem>
           <FAQItem>
             <h3>When will I receive my photos?</h3>
@@ -1088,43 +1117,28 @@ export default function PetsPage() {
         </FAQContainer>
       </FAQSection>
 
-      <ReviewSection>
-        <h2>Happy Clients</h2>
-        <ReviewContainer>
-          <ReviewCard>
-            <div className="review-image">
-              <ProtectedImage
-                src="/images/pets/A7T05223.jpg"
-                alt="Happy dog with owner"
-                fill
-                style={{ objectFit: 'cover' }}
-                quality={100}
-              />
-            </div>
-            <div className="review-content">
-              <p className="review-text">"The photoshoot was such a fun experience! Our energetic pup was made to feel comfortable and the results are absolutely stunning. We'll treasure these photos forever."</p>
-              <p className="reviewer-name">Sarah & Max</p>
-              <p className="reviewer-pet">Golden Retriever</p>
-            </div>
-          </ReviewCard>
-          <ReviewCard>
-            <div className="review-image">
-              <ProtectedImage
-                src="/images/pets/A7T02596.jpg"
-                alt="Happy cat with owner"
-                fill
-                style={{ objectFit: 'cover' }}
-                quality={100}
-              />
-            </div>
-            <div className="review-content">
-              <p className="review-text">"I was worried my shy cat wouldn't cooperate, but the photographer was incredibly patient and captured her personality perfectly. The photos are beautiful!"</p>
-              <p className="reviewer-name">Michael & Luna</p>
-              <p className="reviewer-pet">Persian Cat</p>
-            </div>
-          </ReviewCard>
-        </ReviewContainer>
-      </ReviewSection>
+      <Section>
+        <SectionDivider>
+          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T09768.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={8} onClick={() => setSelectedImage('/images/pets/A7T09762-2.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T09762-2.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+        </SectionDivider>
+      </Section>
 
       <Section $bgColor="rgb(26, 20, 15)">
         <SectionTitle>Book Your Session</SectionTitle>
@@ -1149,8 +1163,8 @@ export default function PetsPage() {
             <h3>Contact Information</h3>
             <ul>
               <li>📍 Vancouver, BC</li>
-              <li>📱 (604) 123-4567</li>
-              <li>✉️ pets@example.com</li>
+              <li>📱 (672) 338-9307</li>
+              <li>✉️ bycamilalonart@gmail.com</li>
             </ul>
           </div>
           <div>

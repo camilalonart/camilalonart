@@ -8,7 +8,7 @@ import PetGallery from '../../../../components/PetGallery';
 const PageContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: ${theme.colors.background.main};
+  background: rgb(26, 20, 15);
 `;
 
 // You can move this to a data file later

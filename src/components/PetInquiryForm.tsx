@@ -15,7 +15,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div<{ $embedded?: boolean }>`
-  background: white;
+  background: rgb(39, 31, 25);
   border-radius: ${theme.borderRadius.lg};
   max-width: ${props => props.$embedded ? '1400px' : '800px'};
   width: 95%;
@@ -29,7 +29,7 @@ const ModalContent = styled.div<{ $embedded?: boolean }>`
   }
   
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgb(39, 31, 25);
   }
   
   &::-webkit-scrollbar-thumb {
@@ -40,10 +40,10 @@ const ModalContent = styled.div<{ $embedded?: boolean }>`
 
 const ModalHeader = styled.div`
   padding: ${theme.spacing.md};
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid rgb(176, 126, 18);
   position: sticky;
   top: 0;
-  background: white;
+  background: rgb(39, 31, 25);
   border-radius: ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 0;
   z-index: 1;
   display: flex;
@@ -52,9 +52,10 @@ const ModalHeader = styled.div`
 
   h2 {
     font-size: clamp(1.4rem, 2.6vw, 2rem);
-    color: #796B5F;
+    color:rgb(176, 126, 18);
     margin: 0;
     font-weight: 500;
+    font-family: 'Playfair Display', serif;
   }
 
   .close-button {
@@ -62,7 +63,7 @@ const ModalHeader = styled.div`
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: ${theme.colors.text.secondary};
+    color: rgb(176, 126, 18);
     padding: ${theme.spacing.xs};
     width: 40px;
     height: 40px;
@@ -73,8 +74,7 @@ const ModalHeader = styled.div`
     transition: all 0.3s ease;
     
     &:hover {
-      color: ${theme.colors.text.primary};
-      background: rgba(0, 0, 0, 0.05);
+      color: rgb(251, 227, 194);
     }
   }
 `;
@@ -111,12 +111,12 @@ const FormGroup = styled.div`
   select {
     width: 100%;
     padding: ${theme.spacing.md};
-    border: 1px solid #E5E5E5;
+    border: 1px solid rgb(176, 126, 18);
     border-radius: ${theme.borderRadius.sm};
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: white;
-    
+    background: rgb(72, 58, 47);
+    color: rgb(255, 255, 255);
     &:focus {
       outline: none;
       border-color: ${theme.colors.primary.main};
@@ -195,7 +195,7 @@ const Select = styled.select`
 const SubmitButton = styled.button`
   width: 100%;
   padding: ${theme.spacing.lg};
-  background: ${theme.colors.primary.main};
+  background:rgb(169, 125, 30);
   color: white;
   border: none;
   border-radius: ${theme.borderRadius.sm};
@@ -205,7 +205,7 @@ const SubmitButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background: ${theme.colors.primary.dark};
+    background:rgb(231, 189, 99);
     transform: translateY(-2px);
   }
   
@@ -397,17 +397,14 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
 
         <FormGroup>
           <Label htmlFor="petType">Type of Pet *</Label>
-          <Select
+          <Input
+            type="text"
             id="petType"
             required
             value={formData.petType}
             onChange={(e) => setFormData({ ...formData, petType: e.target.value })}
-          >
-            <option value="">Select pet type</option>
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="other">Other</option>
-          </Select>
+            placeholder="e.g. Dog, Cat, Rabbit, etc."
+          />
         </FormGroup>
 
         <FormGroup>
@@ -439,9 +436,9 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="preferredDate">Preferred Date</Label>
+          <Label htmlFor="preferredDate">Preferred Date & Time</Label>
           <Input
-            type="date"
+            type="datetime-local"
             id="preferredDate"
             value={formData.preferredDate}
             onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}

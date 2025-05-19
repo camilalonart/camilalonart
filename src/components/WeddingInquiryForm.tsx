@@ -391,9 +391,9 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
 
       <FormRow $embedded={embedded}>
         <FormGroup $embedded={embedded}>
-          <label htmlFor="date">Preferred Date</label>
+          <label htmlFor="date">Preferred Date & Time</label>
           <input
-            type="date"
+            type="datetime-local"
             id="date"
             value={formData.date}
             onChange={e => setFormData({...formData, date: e.target.value})}
