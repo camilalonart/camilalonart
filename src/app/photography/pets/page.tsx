@@ -13,7 +13,7 @@ import 'react-multi-carousel/lib/styles.css';
 const PageContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
-  background-color: #FFFAF5;
+  background-color:rgb(26, 20, 15);
   color: #2C3E50;
 `;
 
@@ -46,7 +46,7 @@ const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
-  height: 100%;
+  max-height: 600px;
   cursor: pointer;
 
   img {
@@ -181,67 +181,61 @@ const ServiceCardButton = styled.button`
 `;
 
 const Section = styled.section<{ $bgColor?: string }>`
-  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  padding: ${theme.spacing.xl} ${theme.spacing.lg};
   background: ${props => props.$bgColor || 'transparent'};
   position: relative;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
   }
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.h1`
   font-size: clamp(2rem, 3vw, 2.8rem);
-  color: #2C3E50;
+  color:rgb(255, 255, 255);
   text-align: center;
-  margin-bottom: ${theme.spacing['3xl']};
+  margin-bottom: ${theme.spacing.sm};
   font-weight: 700;
   position: relative;
-  
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.2em;
+
   &::after {
     content: '';
     display: block;
     width: 60px;
     height: 3px;
     background: rgb(169, 125, 30);
-    margin: ${theme.spacing.md} auto 0;
+    margin: ${theme.spacing.sm} auto 0;
   }
-`;
-
-const ServicesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${theme.spacing.xl};
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.md};
 `;
 
 const ServicesSection = styled.div`
-  padding: ${theme.spacing['md']} 0;
+  padding: ${theme.spacing.md} 0;
   position: relative;
 
   .carousel-container {
-    padding: ${theme.spacing['2xl']} 0;
+    padding: ${theme.spacing.xl} 0;
   }
 
   .react-multi-carousel-item {
-    display: flex;
-    align-items: stretch;
+    display: contents;
+    align-items: flex-start;
   }
 `;
 
 const ServiceCard = styled.div`
-  background: rgb(250, 245, 243);
+  background: white;
   padding: ${theme.spacing.xl};
   box-shadow: ${theme.shadows.md};
   margin: ${theme.spacing.md};
   height: auto;
   min-height: 600px;
-  width: 350px;
+  width: 450px;
   transition: all 0.3s ease;
   text-align: center;
   display: flex;
+  border-radius: ${theme.borderRadius.lg};
 
   .card-content {
     display: flex;
@@ -252,19 +246,51 @@ const ServiceCard = styled.div`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: ${theme.shadows.lg};
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: rgb(169, 125, 30);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .price {
+    font-size: 2.5rem;
+    color: rgb(169, 125, 30);
+    font-weight: 800;
+    margin-bottom: ${theme.spacing.xl};
+    
+    span {
+      font-size: 1rem;
+      color: #666;
+      font-weight: 400;
+    }
   }
 
   h3 {
-    color: #796B5F;
+    font-size: 2rem;
+    color: rgb(169, 125, 30);
+    font-weight: 800;
+    margin-top: ${theme.spacing.xl};
     margin-bottom: ${theme.spacing.xl};
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    font-weight: 500;
-    text-align: center;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+
+    span {
+      font-size: 1rem;
+      color: #666;
+      font-weight: 400;
+    }
   }
 
   p {
@@ -285,36 +311,23 @@ const ServiceCard = styled.div`
   ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 ${theme.spacing.xl};
     text-align: left;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    min-height: 200px;
-    margin-bottom: ${theme.spacing.xl};
 
     li {
       padding: ${theme.spacing.sm} 0;
-      padding-left: ${theme.spacing.md};
-      position: relative;
-      color: ${theme.colors.text.secondary};
-      font-size: clamp(0.8rem, 1.5vw, 0.85rem);
+      color: #2C3E50;
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
 
       &::before {
         content: '✓';
-        position: absolute;
-        left: 0;
-        color: ${theme.colors.accent.success};
+        color: rgb(169, 125, 30);
+        margin-right: ${theme.spacing.sm};
+        font-weight: bold;
       }
     }
-  }
-
-  .price {
-    margin-bottom: ${theme.spacing.xl};
-    font-weight: 500;
-    color: ${theme.colors.primary.main};
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
   }
 
   .button-wrapper {
@@ -345,103 +358,6 @@ const ServiceCard = styled.div`
     
     ul {
       min-height: 200px;
-    }
-  }
-`;
-
-const PackagesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: ${theme.spacing.xl};
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.md};
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
-    max-width: 600px;
-  }
-`;
-
-const PackageCard = styled.div`
-  background: white;
-  padding: ${theme.spacing['2xl']};
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  border-radius: ${theme.borderRadius.lg};
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: rgb(169, 125, 30);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-
-    &::before {
-      transform: scaleX(1);
-    }
-  }
-
-  h3 {
-    font-size: 1.8rem;
-    color: #2C3E50;
-    margin-bottom: ${theme.spacing.lg};
-    font-weight: 700;
-  }
-
-  .description {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: ${theme.spacing.xl};
-    font-size: 1.1rem;
-  }
-
-  .price {
-    font-size: 2.5rem;
-    color: rgb(169, 125, 30);
-    font-weight: 800;
-    margin-bottom: ${theme.spacing.xl};
-    
-    span {
-      font-size: 1rem;
-      color: #666;
-      font-weight: 400;
-    }
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 ${theme.spacing.xl};
-    text-align: left;
-
-    li {
-      padding: ${theme.spacing.sm} 0;
-      color: #2C3E50;
-      display: flex;
-      align-items: center;
-      font-size: 1.1rem;
-
-      &::before {
-        content: '✓';
-        color: rgb(169, 125, 30);
-        margin-right: ${theme.spacing.sm};
-        font-weight: bold;
-      }
     }
   }
 `;
@@ -823,30 +739,9 @@ export default function PetsPage() {
         </HeroContent>
       </Hero>
 
-      <SectionDivider>
-        <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
-          <ProtectedImage
-            src="/images/pets/A7T02596.jpg"
-            alt="Pet portrait"
-            fill
-            style={{ objectFit: 'cover' }}
-            quality={100}
-          />
-        </DividerImage>
-        <DividerImage $span={6} $isMiddle onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
-          <ProtectedImage
-            src="/images/pets/A7T02565.jpg"
-            alt="Pet portrait"
-            fill
-            style={{ objectFit: 'cover' }}
-            quality={100}
-          />
-        </DividerImage>
-      </SectionDivider>
-
       <Section>
-        <GalleryPreview>
-          <GalleryImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
+        <SectionDivider>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02596.jpg"
               alt="Pet portrait"
@@ -854,8 +749,8 @@ export default function PetsPage() {
               style={{ objectFit: 'cover' }}
               quality={100}
             />
-          </GalleryImage>
-          <GalleryImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
+          </DividerImage>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02565.jpg"
               alt="Pet portrait"
@@ -863,11 +758,11 @@ export default function PetsPage() {
               style={{ objectFit: 'cover' }}
               quality={100}
             />
-          </GalleryImage>
-        </GalleryPreview>
+          </DividerImage>
+        </SectionDivider>
       </Section>
 
-      <Section $bgColor="#f8f9fa">
+      <Section $bgColor="rgb(26, 20, 15)">
         <SectionTitle>Our Services</SectionTitle>
         <ServicesSection>
           <Carousel
@@ -948,12 +843,12 @@ export default function PetsPage() {
                   <div>
                     <h3>{service.title}</h3>
                     <p className="description">{service.description}</p>
+                    <p className="price">{service.price}</p>
                     <ul>
                       {service.features.map((feature, i) => (
                         <li key={i}>{feature}</li>
                       ))}
                     </ul>
-                    <p className="price">Starting at {service.price}</p>
                   </div>
                   <div className="button-wrapper">
                     <ServiceCardButton onClick={() => handleBookNow(service.package)}>
@@ -968,58 +863,80 @@ export default function PetsPage() {
         </ServicesSection>
       </Section>
 
-      <Section $bgColor="#f8f9fa">
-        <SectionTitle>Our Packages</SectionTitle>
-        <PackagesGrid>
-          <PackageCard>
-            <h3>The Playful Pack</h3>
-            <p className="description">Perfect for capturing your pet's energetic spirit outdoors</p>
-            <div className="price">$299 <span>/ session</span></div>
-            <ul>
-              <li>90-minute outdoor session</li>
-              <li>2-3 locations of your choice</li>
-              <li>40+ edited digital photos</li>
-              <li>Online gallery with download</li>
-              <li>Print release included</li>
-            </ul>
-            <ServiceCardButton onClick={() => handleBookNow('Playful Pack')}>
-              Book Now
-            </ServiceCardButton>
-          </PackageCard>
-
-          <PackageCard>
-            <h3>The Luxury Fur</h3>
-            <p className="description">Studio session with professional lighting and elegant backdrops</p>
-            <div className="price">$399 <span>/ session</span></div>
-            <ul>
-              <li>2-hour studio session</li>
-              <li>Multiple premium backdrops</li>
-              <li>50+ edited digital photos</li>
-              <li>Professional retouching</li>
-              <li>$100 print credit included</li>
-            </ul>
-            <ServiceCardButton onClick={() => handleBookNow('Luxury Fur')}>
-              Book Now
-            </ServiceCardButton>
-          </PackageCard>
-
-          <PackageCard>
-            <h3>The Family Paws</h3>
-            <p className="description">Include the whole family in this memorable photo session</p>
-            <div className="price">$499 <span>/ session</span></div>
-            <ul>
-              <li>3-hour mixed session</li>
-              <li>Indoor & outdoor locations</li>
-              <li>75+ edited digital photos</li>
-              <li>Premium photo album</li>
-              <li>Canvas wall art included</li>
-            </ul>
-            <ServiceCardButton onClick={() => handleBookNow('Family Paws')}>
-              Book Now
-            </ServiceCardButton>
-          </PackageCard>
-        </PackagesGrid>
+      <Section>
+        <SectionDivider>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02365.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02388.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02378.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+        </SectionDivider>
       </Section>
+
+      <ProcessSection>
+        <h2>Our Process</h2>
+        <ProcessContainer>
+          <ProcessSteps>
+            <ProcessStep>
+              <StepNumber>1</StepNumber>
+              <StepContent>
+                <h3>Initial Contact</h3>
+                <p>Fill out our inquiry form with details about your pet and your vision for the session.</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>2</StepNumber>
+              <StepContent>
+                <h3>Consultation</h3>
+                <p>We'll discuss your pet's personality, preferred locations, and any special requirements.</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>3</StepNumber>
+              <StepContent>
+                <h3>Session Prep</h3>
+                <p>We'll provide guidance on how to prepare your pet for the best possible photo experience.</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>4</StepNumber>
+              <StepContent>
+                <h3>Photo Session</h3>
+                <p>Relaxed, fun photography session tailored to your pet's comfort level and personality.</p>
+              </StepContent>
+            </ProcessStep>
+            <ProcessStep>
+              <StepNumber>5</StepNumber>
+              <StepContent>
+                <h3>Delivery</h3>
+                <p>Receive your beautifully edited photos in a private online gallery within 2-3 weeks.</p>
+              </StepContent>
+            </ProcessStep>
+          </ProcessSteps>
+        </ProcessContainer>
+      </ProcessSection>
 
       <Section>
         <SectionTitle>Gallery</SectionTitle>
@@ -1109,49 +1026,6 @@ export default function PetsPage() {
           </FAQItem>
         </FAQContainer>
       </FAQSection>
-
-      <ProcessSection>
-        <h2>Our Process</h2>
-        <ProcessContainer>
-          <ProcessSteps>
-            <ProcessStep>
-              <StepNumber>1</StepNumber>
-              <StepContent>
-                <h3>Initial Contact</h3>
-                <p>Fill out our inquiry form with details about your pet and your vision for the session.</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>2</StepNumber>
-              <StepContent>
-                <h3>Consultation</h3>
-                <p>We'll discuss your pet's personality, preferred locations, and any special requirements.</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>3</StepNumber>
-              <StepContent>
-                <h3>Session Prep</h3>
-                <p>We'll provide guidance on how to prepare your pet for the best possible photo experience.</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>4</StepNumber>
-              <StepContent>
-                <h3>Photo Session</h3>
-                <p>Relaxed, fun photography session tailored to your pet's comfort level and personality.</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>5</StepNumber>
-              <StepContent>
-                <h3>Delivery</h3>
-                <p>Receive your beautifully edited photos in a private online gallery within 2-3 weeks.</p>
-              </StepContent>
-            </ProcessStep>
-          </ProcessSteps>
-        </ProcessContainer>
-      </ProcessSection>
 
       <Footer>
         <FooterContent>
