@@ -11,6 +11,7 @@ const ModalOverlay = styled.div`
   justify-content: center;
   z-index: 1000;
   padding: ${theme.spacing.xl};
+  backdrop-filter: blur(4px);
 `;
 
 const ModalContent = styled.div<{ $embedded?: boolean }>`
@@ -45,6 +46,9 @@ const ModalHeader = styled.div`
   background: white;
   border-radius: ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 0;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h2 {
     font-size: clamp(1.4rem, 2.6vw, 2rem);
@@ -54,18 +58,23 @@ const ModalHeader = styled.div`
   }
 
   .close-button {
-    position: absolute;
-    top: ${theme.spacing.lg};
-    right: ${theme.spacing.lg};
     background: transparent;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     color: ${theme.colors.text.secondary};
     padding: ${theme.spacing.xs};
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
     
     &:hover {
       color: ${theme.colors.text.primary};
+      background: rgba(0, 0, 0, 0.05);
     }
   }
 `;
@@ -79,8 +88,54 @@ const Form = styled.form<{ $embedded?: boolean }>`
   }
 `;
 
+const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: ${theme.spacing.lg};
+  margin-bottom: ${theme.spacing.lg};
+`;
+
 const FormGroup = styled.div`
-  margin-bottom: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.lg};
+
+  label {
+    display: block;
+    margin-bottom: ${theme.spacing.sm};
+    color: white;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: ${theme.spacing.md};
+    border: 1px solid #E5E5E5;
+    border-radius: ${theme.borderRadius.sm};
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    
+    &:focus {
+      outline: none;
+      border-color: ${theme.colors.primary.main};
+      box-shadow: 0 0 0 2px ${theme.colors.primary.light};
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+  }
 `;
 
 const Label = styled.label`
@@ -294,108 +349,115 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
     </SuccessMessage>
   ) : (
     <Form $embedded={embedded} onSubmit={handleSubmit}>
-      <FormGroup>
-        <Label htmlFor="name">Your Name *</Label>
-        <Input
-          type="text"
-          id="name"
-          required
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
-      </FormGroup>
+      <FormRow>
+        <FormGroup>
+          <Label htmlFor="name">Your Name *</Label>
+          <Input
+            type="text"
+            id="name"
+            required
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="email">Email *</Label>
-        <Input
-          type="email"
-          id="email"
-          required
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        />
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="email">Email *</Label>
+          <Input
+            type="email"
+            id="email"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="phone">Phone Number</Label>
-        <Input
-          type="tel"
-          id="phone"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-        />
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="phone">Phone Number</Label>
+          <Input
+            type="tel"
+            id="phone"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          />
+        </FormGroup>
+      </FormRow>
 
-      <FormGroup>
-        <Label htmlFor="petName">Pet's Name *</Label>
-        <Input
-          type="text"
-          id="petName"
-          required
-          value={formData.petName}
-          onChange={(e) => setFormData({ ...formData, petName: e.target.value })}
-        />
-      </FormGroup>
+      <FormRow>
+        <FormGroup>
+          <Label htmlFor="petName">Pet's Name *</Label>
+          <Input
+            type="text"
+            id="petName"
+            required
+            value={formData.petName}
+            onChange={(e) => setFormData({ ...formData, petName: e.target.value })}
+          />
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="petType">Type of Pet *</Label>
-        <Select
-          id="petType"
-          required
-          value={formData.petType}
-          onChange={(e) => setFormData({ ...formData, petType: e.target.value })}
-        >
-          <option value="">Select pet type</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="other">Other</option>
-        </Select>
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="petType">Type of Pet *</Label>
+          <Select
+            id="petType"
+            required
+            value={formData.petType}
+            onChange={(e) => setFormData({ ...formData, petType: e.target.value })}
+          >
+            <option value="">Select pet type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="other">Other</option>
+          </Select>
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="petAge">Pet's Age</Label>
-        <Input
-          type="text"
-          id="petAge"
-          value={formData.petAge}
-          onChange={(e) => setFormData({ ...formData, petAge: e.target.value })}
-        />
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="petAge">Pet's Age</Label>
+          <Input
+            type="text"
+            id="petAge"
+            value={formData.petAge}
+            onChange={(e) => setFormData({ ...formData, petAge: e.target.value })}
+          />
+        </FormGroup>
+      </FormRow>
 
-      <FormGroup>
-        <Label htmlFor="package">Preferred Package *</Label>
-        <Select
-          id="package"
-          required
-          value={formData.package}
-          onChange={(e) => setFormData({ ...formData, package: e.target.value })}
-        >
-          <option value="">Select a package</option>
-          <option value="Playful Pack">The Playful Pack</option>
-          <option value="Luxury Fur">The Luxury Fur</option>
-          <option value="Family Paws">The Family Paws</option>
-        </Select>
-      </FormGroup>
+      <FormRow>
+        <FormGroup>
+          <Label htmlFor="package">Preferred Package *</Label>
+          <Select
+            id="package"
+            required
+            value={formData.package}
+            onChange={(e) => setFormData({ ...formData, package: e.target.value })}
+          >
+            <option value="">Select a package</option>
+            <option value="Indoor Studio">Indoor Studio Session</option>
+            <option value="Outdoor">Outdoor Session</option>
+            <option value="Family Outside">Family Session Outside</option>
+            <option value="Family Inside">Family Session Inside</option>
+          </Select>
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="preferredDate">Preferred Date</Label>
-        <Input
-          type="date"
-          id="preferredDate"
-          value={formData.preferredDate}
-          onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-        />
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="preferredDate">Preferred Date</Label>
+          <Input
+            type="date"
+            id="preferredDate"
+            value={formData.preferredDate}
+            onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+          />
+        </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="location">Preferred Location</Label>
-        <Input
-          type="text"
-          id="location"
-          value={formData.location}
-          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-        />
-      </FormGroup>
+        <FormGroup>
+          <Label htmlFor="location">Preferred Location</Label>
+          <Input
+            type="text"
+            id="location"
+            value={formData.location}
+            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+          />
+        </FormGroup>
+      </FormRow>
 
       <FormGroup>
         <Label htmlFor="message">Additional Information</Label>
@@ -420,11 +482,18 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   }
 
   return isOpen ? (
-    <ModalOverlay>
-      <ModalContent>
+    <ModalOverlay onClick={onClose}>
+      <ModalContent onClick={e => e.stopPropagation()}>
         <ModalHeader>
           <h2>Pet Photography Session Inquiry</h2>
-          <button className="close-button" onClick={onClose}>×</button>
+          <button 
+            className="close-button" 
+            onClick={onClose} 
+            aria-label="Close modal"
+            type="button"
+          >
+            ×
+          </button>
         </ModalHeader>
         {formContent}
       </ModalContent>

@@ -362,61 +362,51 @@ const ServiceCard = styled.div`
 `;
 
 const GalleryPreview = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: ${theme.spacing.md};
-  padding: ${theme.spacing.xl};
-  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: ${theme.spacing['4xl']} ${theme.spacing.xl};
+  max-width: 800px;
   margin: 0 auto;
-
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-template-columns: repeat(8, 1fr);
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
-
-const GalleryImage = styled.div<{ $span?: number }>`
-  grid-column: span ${props => props.$span || 3};
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  border-radius: ${theme.borderRadius.md};
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-column: span ${props => Math.min(props.$span || 3, 4)};
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    grid-column: span 2;
-  }
-`;
-
-const ViewGalleryLink = styled(Link)`
-  display: block;
   text-align: center;
-  margin-top: ${theme.spacing['2xl']};
-  color: rgb(169, 125, 30);
+  background: rgb(26, 20, 15);
+  border-radius: ${theme.borderRadius.lg};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.xl};
+
+  h3 {
+    color: rgb(255, 222, 194);
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    margin-bottom: ${theme.spacing.lg};
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  p {
+    color: white;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    margin-bottom: ${theme.spacing.xl};
+    max-width: 600px;
+  }
+`;
+
+const ViewGalleryButton = styled(Link)`
+  background: rgb(169, 125, 30);
+  color: white;
+  padding: ${theme.spacing.lg} ${theme.spacing.xl};
   font-size: 1.2rem;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: 500;
+  border-radius: ${theme.borderRadius.md};
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   &:hover {
-    color:rgb(0, 0, 0);
+    transform: translateY(-3px);
+    background: rgb(231, 189, 99);
   }
 `;
 
@@ -562,10 +552,10 @@ const FAQSection = styled.section`
 
   h2 {
     text-align: center;
-    color: rgb(169, 125, 30);
+    color: rgb(255, 222, 194);
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: ${theme.spacing.md};
+    margin-bottom: ${theme.spacing['2xl']};
     font-family: 'Poppins', sans-serif;
   }
 
@@ -575,11 +565,15 @@ const FAQSection = styled.section`
 `;
 
 const FAQContainer = styled.div`
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: ${theme.spacing.xl};
-  grid-template-columns: 3fr 3fr;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FAQItem = styled.div`
@@ -587,9 +581,15 @@ const FAQItem = styled.div`
   padding: ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.md};
   box-shadow: ${theme.shadows.sm};
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${theme.shadows.md};
+  }
 
   h3 {
-    color: #796B5F;
+    color: rgb(169, 125, 30);
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
@@ -603,13 +603,80 @@ const FAQItem = styled.div`
   }
 `;
 
+const ReviewSection = styled.section`
+  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  background: rgb(26, 20, 15);
+  text-align: center;
+
+  h2 {
+    color: rgb(255, 222, 194);
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    margin-bottom: ${theme.spacing['2xl']};
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+`;
+
+const ReviewContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${theme.spacing.xl};
+  padding: ${theme.spacing.xl} 0;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ReviewCard = styled.div`
+  background: rgb(250, 245, 243);
+  padding: ${theme.spacing.xl};
+  border-radius: ${theme.borderRadius.md};
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+
+  .review-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: ${theme.spacing.md};
+  }
+
+  .review-content {
+    flex: 1;
+  }
+
+  .review-text {
+    color: ${theme.colors.text.secondary};
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
+    line-height: 1.6;
+    margin-bottom: ${theme.spacing.md};
+  }
+
+  .reviewer-name {
+    color: rgb(169, 125, 30);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .reviewer-pet {
+    color: ${theme.colors.text.secondary};
+    font-size: 0.9rem;
+  }
+`;
+
 const ProcessSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
   background: rgb(26, 20, 15);
 
   h2 {
     text-align: center;
-    color:rgb(255, 222, 194);
+    color: rgb(255, 222, 194);
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
     margin-bottom: ${theme.spacing.lg};
@@ -633,7 +700,7 @@ const ProcessContainer = styled.div`
     left: 0;
     right: 0;
     height: 2px;
-    background:rgb(103, 80, 55);
+    background: rgb(103, 80, 55);
     z-index: 0;
 
     @media (max-width: ${theme.breakpoints.md}) {
@@ -674,7 +741,7 @@ const ProcessStep = styled.div`
 const StepNumber = styled.div`
   width: 80px;
   height: 80px;
-  background: rgb(169, 125, 30);;
+  background: rgb(169, 125, 30);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -692,7 +759,7 @@ const StepNumber = styled.div`
 
 const StepContent = styled.div`
   h3 {
-    color: rgb(169, 125, 30);;
+    color: rgb(169, 125, 30);
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
@@ -720,6 +787,11 @@ export default function PetsPage() {
   const handleBookNow = (packageName: string) => {
     setSelectedPackage(packageName);
     setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPackage(undefined);
   };
 
   return (
@@ -953,9 +1025,18 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T05223.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02378.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -974,6 +1055,17 @@ export default function PetsPage() {
         </SectionDivider>
       </Section>
 
+      <Section>
+        <SectionTitle>Gallery</SectionTitle>
+        <GalleryPreview>
+          <h3>View Our Pet Photography Collection</h3>
+          <p>Explore our gallery of heartwarming pet portraits, capturing the unique personalities and special moments of beloved companions.</p>
+          <ViewGalleryButton href="/photography/pets/gallery">
+            View Full Gallery
+          </ViewGalleryButton>
+        </GalleryPreview>
+      </Section>
+
       <FAQSection>
         <h2>Frequently Asked Questions</h2>
         <FAQContainer>
@@ -985,70 +1077,63 @@ export default function PetsPage() {
             <h3>How do you handle anxious or energetic pets?</h3>
             <p>We take a patient, relaxed approach and let your pet set the pace. We'll take breaks as needed and use positive reinforcement. For high-energy pets, we might start with action shots to help them burn off energy before moving to posed photos.</p>
           </FAQItem>
+          <FAQItem>
+            <h3>How long does a typical session last?</h3>
+            <p>Most sessions last between 1-2 hours, depending on the package chosen. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>When will I receive my photos?</h3>
+            <p>You'll receive your edited photos within 2-3 weeks after the session. We carefully select and edit each image to ensure the highest quality results.</p>
+          </FAQItem>
         </FAQContainer>
       </FAQSection>
 
-      <Section>
-        <SectionTitle>Gallery</SectionTitle>
-        <GalleryPreview>
-          <GalleryImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05223-horizontal.jpg')}>
-            <ProtectedImage
-              src="/images/pets/A7T05223-horizontal.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-          <GalleryImage $span={3} onClick={() => setSelectedImage('/images/pets/sample2.jpg')}>
-            <ProtectedImage
-              src="/images/pets/sample2.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-          <GalleryImage $span={3} onClick={() => setSelectedImage('/images/pets/sample3.jpg')}>
-            <ProtectedImage
-              src="/images/pets/sample3.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-          <GalleryImage $span={4} onClick={() => setSelectedImage('/images/pets/sample4.jpg')}>
-            <ProtectedImage
-              src="/images/pets/sample4.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-          <GalleryImage $span={4} onClick={() => setSelectedImage('/images/pets/sample5.jpg')}>
-            <ProtectedImage
-              src="/images/pets/sample5.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-          <GalleryImage $span={4}>
-            <ProtectedImage
-              src="/images/pets/sample6.jpg"
-              alt="Pet portrait"
-              fill
-              style={{ objectFit: 'cover' }}
-              quality={100}
-            />
-          </GalleryImage>
-        </GalleryPreview>
-        <ViewGalleryLink href="/photography/pets/gallery">
-          View Full Gallery →
-        </ViewGalleryLink>
+      <ReviewSection>
+        <h2>Happy Clients</h2>
+        <ReviewContainer>
+          <ReviewCard>
+            <div className="review-image">
+              <ProtectedImage
+                src="/images/pets/A7T05223.jpg"
+                alt="Happy dog with owner"
+                fill
+                style={{ objectFit: 'cover' }}
+                quality={100}
+              />
+            </div>
+            <div className="review-content">
+              <p className="review-text">"The photoshoot was such a fun experience! Our energetic pup was made to feel comfortable and the results are absolutely stunning. We'll treasure these photos forever."</p>
+              <p className="reviewer-name">Sarah & Max</p>
+              <p className="reviewer-pet">Golden Retriever</p>
+            </div>
+          </ReviewCard>
+          <ReviewCard>
+            <div className="review-image">
+              <ProtectedImage
+                src="/images/pets/A7T02596.jpg"
+                alt="Happy cat with owner"
+                fill
+                style={{ objectFit: 'cover' }}
+                quality={100}
+              />
+            </div>
+            <div className="review-content">
+              <p className="review-text">"I was worried my shy cat wouldn't cooperate, but the photographer was incredibly patient and captured her personality perfectly. The photos are beautiful!"</p>
+              <p className="reviewer-name">Michael & Luna</p>
+              <p className="reviewer-pet">Persian Cat</p>
+            </div>
+          </ReviewCard>
+        </ReviewContainer>
+      </ReviewSection>
+
+      <Section $bgColor="rgb(26, 20, 15)">
+        <SectionTitle>Book Your Session</SectionTitle>
+        <PetInquiryForm
+          isOpen={false}
+          onClose={() => {}}
+          selectedPackage={selectedPackage}
+          embedded={true}
+        />
       </Section>
 
       <Footer>
@@ -1090,7 +1175,7 @@ export default function PetsPage() {
       {isModalOpen && (
         <PetInquiryForm
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={handleCloseModal}
           selectedPackage={selectedPackage}
         />
       )}
