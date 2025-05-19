@@ -1507,10 +1507,10 @@ export default function WeddingCouplesPage() {
           <TestimonialContent>
             <div className="stars">★★★★★</div>
             <div className="quote">
-              "Every photo felt like us. You didn't just capture the day—you captured the emotion."
+              "Camila photographed our wedding, and we couldn’t be happier with the results. She captured every special moment so beautifully and naturally. Her work is heartfelt, professional, and absolutely stunning. We trust her completely and recommend her to anyone looking for timeless, meaningful photos."
             </div>
             <div className="author">
-              — Emily & Luca (Tofino Elopement)
+              — Ana & Jorge (Vancouver Elopement)
             </div>
           </TestimonialContent>
           <TestimonialImage>

@@ -46,7 +46,7 @@ const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
-  max-height: 600px;
+  max-height: 400px;
   cursor: pointer;
 
   img {
@@ -69,8 +69,7 @@ const SectionDivider = styled.section`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: ${theme.spacing.md};
-  height: 600px;
-  margin: ${theme.spacing['4xl']} 0;
+  height: 500px;
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: repeat(6, 1fr);
@@ -417,12 +416,12 @@ const ViewGalleryLink = styled(Link)`
   transition: all 0.3s ease;
 
   &:hover {
-    color: #2C3E50;
+    color:rgb(0, 0, 0);
   }
 `;
 
 const Footer = styled.footer`
-  background: #2C3E50;
+  background:rgb(26, 20, 15);
   color: white;
   padding: ${theme.spacing['4xl']} 0;
 `;
@@ -559,14 +558,15 @@ const CarouselStyles = styled.div`
 
 const FAQSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
-  background: ${theme.colors.background.main};
+  background: rgb(26, 20, 15);
 
   h2 {
     text-align: center;
-    color: #796B5F;
+    color: rgb(169, 125, 30);
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: ${theme.spacing['3xl']};
+    margin-bottom: ${theme.spacing.md};
+    font-family: 'Poppins', sans-serif;
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -579,6 +579,7 @@ const FAQContainer = styled.div`
   margin: 0 auto;
   display: grid;
   gap: ${theme.spacing.xl};
+  grid-template-columns: 3fr 3fr;
 `;
 
 const FAQItem = styled.div`
@@ -592,6 +593,7 @@ const FAQItem = styled.div`
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
+    font-family: 'Poppins', sans-serif;
   }
 
   p {
@@ -603,14 +605,14 @@ const FAQItem = styled.div`
 
 const ProcessSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
-  background: ${theme.colors.background.main};
+  background: rgb(26, 20, 15);
 
   h2 {
     text-align: center;
-    color: #796B5F;
+    color:rgb(255, 222, 194);
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: ${theme.spacing['3xl']};
+    margin-bottom: ${theme.spacing.lg};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -620,8 +622,9 @@ const ProcessSection = styled.section`
 
 const ProcessContainer = styled.div`
   max-width: 1200px;
-  margin: 0 auto;
   position: relative;
+  margin: 0 auto;
+  margin-top: ${theme.spacing.xl};
 
   &::before {
     content: '';
@@ -630,7 +633,7 @@ const ProcessContainer = styled.div`
     left: 0;
     right: 0;
     height: 2px;
-    background: #B4A7A7;
+    background:rgb(103, 80, 55);
     z-index: 0;
 
     @media (max-width: ${theme.breakpoints.md}) {
@@ -671,7 +674,7 @@ const ProcessStep = styled.div`
 const StepNumber = styled.div`
   width: 80px;
   height: 80px;
-  background: #796B5F;
+  background: rgb(169, 125, 30);;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -689,14 +692,15 @@ const StepNumber = styled.div`
 
 const StepContent = styled.div`
   h3 {
-    color: #796B5F;
+    color: rgb(169, 125, 30);;
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
+    font-family: 'Poppins', sans-serif;
   }
 
   p {
-    color: ${theme.colors.text.secondary};
+    color: white;
     font-size: clamp(0.9rem, 1.4vw, 1rem);
     line-height: 1.6;
   }
@@ -896,7 +900,7 @@ export default function PetsPage() {
       </Section>
 
       <ProcessSection>
-        <h2>Our Process</h2>
+        <SectionTitle>Our Process</SectionTitle>
         <ProcessContainer>
           <ProcessSteps>
             <ProcessStep>
@@ -937,6 +941,20 @@ export default function PetsPage() {
           </ProcessSteps>
         </ProcessContainer>
       </ProcessSection>
+
+      <FAQSection>
+        <h2>Frequently Asked Questions</h2>
+        <FAQContainer>
+          <FAQItem>
+            <h3>What should I bring to the photo session?</h3>
+            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. For studio sessions, you might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>How do you handle anxious or energetic pets?</h3>
+            <p>We take a patient, relaxed approach and let your pet set the pace. We'll take breaks as needed and use positive reinforcement. For high-energy pets, we might start with action shots to help them burn off energy before moving to posed photos.</p>
+          </FAQItem>
+        </FAQContainer>
+      </FAQSection>
 
       <Section>
         <SectionTitle>Gallery</SectionTitle>
@@ -1001,49 +1019,14 @@ export default function PetsPage() {
         </ViewGalleryLink>
       </Section>
 
-      <FAQSection>
-        <h2>Frequently Asked Questions</h2>
-        <FAQContainer>
-          <FAQItem>
-            <h3>What should I bring to the photo session?</h3>
-            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. For studio sessions, you might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>How do you handle anxious or energetic pets?</h3>
-            <p>We take a patient, relaxed approach and let your pet set the pace. We'll take breaks as needed and use positive reinforcement. For high-energy pets, we might start with action shots to help them burn off energy before moving to posed photos.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>When will I receive my photos?</h3>
-            <p>You'll receive a preview gallery within 1 week of your session, and the full edited gallery within 2-3 weeks. Rush delivery is available for an additional fee if you need the photos sooner.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>Can I purchase additional photos?</h3>
-            <p>Yes! Additional digital images can be purchased individually or as a package. We also offer professional printing services for canvas prints, albums, and other photo products.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>What happens if my pet isn't cooperating?</h3>
-            <p>Don't worry! We're experienced in working with all types of pets and personalities. If needed, we can reschedule for another day or try a different approach. Our goal is to capture your pet's authentic personality.</p>
-          </FAQItem>
-        </FAQContainer>
-      </FAQSection>
-
       <Footer>
         <FooterContent>
           <div>
             <h3>About Pet Photography</h3>
             <p>
               Specializing in capturing the unique personality and spirit of your pets through professional photography. 
-              Based in Vancouver, serving the Lower Mainland area.
+              Based in Vancouver.
             </p>
-          </div>
-          <div>
-            <h3>Quick Links</h3>
-            <ul>
-              <li><Link href="/photography/pets/gallery">Gallery</Link></li>
-              <li><Link href="#packages">Packages</Link></li>
-              <li><Link href="#services">Services</Link></li>
-              <li><Link href="#contact">Contact</Link></li>
-            </ul>
           </div>
           <div>
             <h3>Contact Information</h3>
@@ -1058,7 +1041,6 @@ export default function PetsPage() {
             <ul>
               <li><a href="#">Instagram</a></li>
               <li><a href="#">Facebook</a></li>
-              <li><a href="#">Pinterest</a></li>
             </ul>
           </div>
         </FooterContent>
