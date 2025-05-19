@@ -942,6 +942,38 @@ export default function PetsPage() {
         </ProcessContainer>
       </ProcessSection>
 
+      <Section>
+        <SectionDivider>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02468.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02468.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T05223.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T02378.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+        </SectionDivider>
+      </Section>
+
       <FAQSection>
         <h2>Frequently Asked Questions</h2>
         <FAQContainer>
