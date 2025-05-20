@@ -9,7 +9,7 @@ const GalleryContainer = styled.div`
   width: 100%;
   padding: ${theme.spacing['2xl']};
   margin-top: 60px;
-  background: rgb(26, 20, 15);
+  background: rgb(255, 255, 255);
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl};

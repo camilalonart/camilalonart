@@ -9,7 +9,7 @@ import { getWeddingImages } from '../../../../utils/imageUtils';
 const PageContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: rgb(26, 20, 15);
+  background: rgb(255, 255, 255);
 `;
 
 export default function WeddingGalleryClient() {
