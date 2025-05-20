@@ -267,7 +267,7 @@ interface PetInquiryFormProps {
   useIframe?: boolean;
 }
 
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; // Replace with your deployed Google Apps Script URL
+const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_PET_FORM_URL;
 
 const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   isOpen,
@@ -298,6 +298,12 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
     setIsSubmitting(true);
     setError(undefined);
 
+    if (!GOOGLE_SCRIPT_URL) {
+      setError('Form submission URL not configured');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -307,15 +313,31 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
         body: JSON.stringify({
           type: 'pet',
           ...formData
-        })
+        }),
+        mode: 'no-cors'
       });
 
-      const result = await response.json();
+      // When using no-cors, we can't read the response
+      // So we'll assume success if the request doesn't throw an error
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        petName: '',
+        petType: '',
+        petAge: '',
+        package: selectedPackage || '',
+        preferredDate: '',
+        location: '',
+        message: ''
+      });
 
-      if (result.status === 'success') {
-        setSubmitSuccess(true);
-      } else {
-        throw new Error(result.message || 'Failed to submit form');
+      // Close modal after success if not embedded
+      if (!embedded) {
+        setTimeout(() => {
+          onClose();
+        }, 2000);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred while submitting the form');
@@ -343,7 +365,7 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
     <SuccessMessage>
       <h3>Thank You!</h3>
       <p>
-        Your inquiry has been submitted successfully. We'll get back to you within 24-48 hours to discuss your pet photography session.
+        Your inquiry has been submitted successfully. We'll get back to you soon to discuss your pet photography session.
       </p>
       <button onClick={onClose}>Close</button>
     </SuccessMessage>
@@ -428,10 +450,9 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
             onChange={(e) => setFormData({ ...formData, package: e.target.value })}
           >
             <option value="">Select a package</option>
-            <option value="Indoor Studio">Indoor Studio Session</option>
-            <option value="Outdoor">Outdoor Session</option>
-            <option value="Family Outside">Family Session Outside</option>
-            <option value="Family Inside">Family Session Inside</option>
+            <option value="At Home Sessions">At Home Sessions</option>
+            <option value="Outdoor Session">Outdoor Session</option>
+            <option value="Pet Photobooks">Pet Photobooks</option>
           </Select>
         </FormGroup>
 

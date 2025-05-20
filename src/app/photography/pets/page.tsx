@@ -222,14 +222,20 @@ const SectionTitle = styled.h1`
 const ServicesSection = styled.div`
   padding: ${theme.spacing.md} 0;
   position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${theme.spacing.xl};
+  padding: ${theme.spacing.xl} ${theme.spacing.xl};
 
-  .carousel-container {
-    padding: ${theme.spacing.xl} 0;
+  @media (max-width: ${theme.breakpoints.lg}) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .react-multi-carousel-item {
-    display: contents;
-    align-items: flex-start;
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    padding: ${theme.spacing.lg};
   }
 `;
 
@@ -237,10 +243,9 @@ const ServiceCard = styled.div`
   background: white;
   padding: ${theme.spacing.xl};
   box-shadow: ${theme.shadows.md};
-  margin: ${theme.spacing.md};
   height: auto;
   min-height: 600px;
-  width: 450px;
+  width: 100%;
   transition: all 0.3s ease;
   text-align: center;
   display: flex;
@@ -339,9 +344,8 @@ const ServiceCard = styled.div`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    width: 300px;
-    padding: ${theme.spacing.lg};
     min-height: 400px;
+    padding: ${theme.spacing.lg};
     h3 {
       min-height: 40px;
       margin-bottom: ${theme.spacing.md};
@@ -360,7 +364,6 @@ const ServiceCard = styled.div`
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
-    width: 100%;
     min-height: 220px;
     padding: ${theme.spacing.md};
     .price {
@@ -862,101 +865,60 @@ export default function PetsPage() {
       <Section $bgColor="rgb(26, 20, 15)">
         <SectionTitle>Our Services</SectionTitle>
         <ServicesSection>
-          <Carousel
-            responsive={responsive}
-            infinite={true}
-            autoPlay={false}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="transform 500ms ease-in-out"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            deviceType="desktop"
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item"
-            partialVisible={true}
-          >
-            {[
-              {
-                title: 'Indoor Studio Session',
-                price: '$299',
-                description: 'Professional studio photography with controlled lighting and elegant backdrops.',
-                features: [
-                  '1-hour studio session',
-                  'Multiple backdrop options',
-                  '30 edited, high-resolution images',
-                  'Online gallery delivery',
-                  'Print release included'
-                ],
-                action: 'Book Now',
-                package: 'Indoor Studio'
-              },
-              {
-                title: 'Outdoor Session',
-                price: '$349',
-                description: 'Natural light photography in beautiful outdoor locations.',
-                features: [
-                  '1.5-hour outdoor session',
-                  '2 location options',
-                  '40 edited, high-resolution images',
-                  'Location recommendations',
-                  'Weather date backup'
-                ],
-                action: 'Book Now',
-                package: 'Outdoor'
-              },
-              {
-                title: 'Family Session Outside',
-                price: '$449',
-                description: 'Capture your whole family with your pets in natural settings.',
-                features: [
-                  '2-hour outdoor session',
-                  'Multiple family groupings',
-                  '50 edited, high-resolution images',
-                  'Location planning assistance',
-                  'Digital album included'
-                ],
-                action: 'Book Now',
-                package: 'Family Outside'
-              },
-              {
-                title: 'Family Session Inside',
-                price: '$399',
-                description: 'Comfortable indoor photography for your family and pets.',
-                features: [
-                  '1.5-hour studio session',
-                  'Professional lighting setup',
-                  '40 edited, high-resolution images',
-                  'Multiple backdrop options',
-                  'Digital delivery'
-                ],
-                action: 'Book Now',
-                package: 'Family Inside'
-              }
-            ].map((service, index) => (
-              <ServiceCard key={index}>
-                <div className="card-content">
-                  <div>
-                    <h3>{service.title}</h3>
-                    <span className="price">{service.price}</span>
-                    <p className="description">{service.description}</p>
-                    <ul>
-                      {service.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="button-wrapper">
-                    <ServiceCardButton onClick={() => handleBookNow(service.package)}>
-                      {service.action}
-                    </ServiceCardButton>
-                  </div>
+          {[
+            {
+              title: 'At Home Sessions',
+              price: '$200',
+              description: "This session takes place in your pet's own environment, where they're most comfortable.",
+              features: [
+                '1-hour studio session',
+                '25 Edited, high-resolution images',
+                'Option to purchase all raw unedited files +$50'
+              ],
+              action: 'Book Now',
+              package: 'At Home Sessions'
+            },
+            {
+              title: 'Outdoor Session',
+              price: '$300',
+              description: "This one's for the adventure pets! We head to a park, beach, or favorite outdoor spot to capture your pet's energy and personality in motion. Leashes are recommended, we can edit them out later for clean, natural shots.",
+              features: [
+                '1-hour outdoor session',
+                '25 edited, high-resolution images',
+                'Option to purchase all raw unedited files +$50'
+              ],
+              action: 'Book Now',
+              package: 'Outdoor Session'
+            },
+            {
+              title: 'Pet Photobooks',
+              price: '$200',
+              description: 'Turn your session into a timeless treasure with a professionally designed, printed photobook. Perfect for displaying your favorite images or gifting to loved ones.',
+              features: ['Custom design with your favorite images','Size: 8x8in - 20 spreads (40 pages)', 'Ships within 4 weeks after final approval','Add-on: Extra spreads +$10 each'],
+              action: 'Book Now',
+              package: 'Pet Photobooks'
+            }
+          ].map((service, index) => (
+            <ServiceCard key={index}>
+              <div className="card-content">
+                <div>
+                  <h3>{service.title}</h3>
+                  <span className="price">{service.price}</span>
+                  <p className="description">{service.description}</p>
+                  <ul>
+                    {service.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
                 </div>
-              </ServiceCard>
-            ))}
-          </Carousel>
-          <CarouselStyles />
+                <div className="button-wrapper">
+                  <ServiceCardButton onClick={() => handleBookNow(service.package)}>
+                    {service.action}
+                  </ServiceCardButton>
+                </div>
+              </div>
+            </ServiceCard>
+          ))}
         </ServicesSection>
       </Section>
 
@@ -1175,11 +1137,18 @@ export default function PetsPage() {
       <Section $bgColor="rgb(26, 20, 15)">
         <SectionTitle>Book Your Session</SectionTitle>
         <PetInquiryForm
-          isOpen={false}
-          onClose={() => {}}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
           selectedPackage={selectedPackage}
-          embedded={true}
+          embedded={false}
         />
+        <div style={{ marginTop: '2rem' }}>
+          <PetInquiryForm
+            isOpen={true}
+            onClose={() => {}}
+            embedded={true}
+          />
+        </div>
       </Section>
 
       <Footer>
@@ -1215,14 +1184,6 @@ export default function PetsPage() {
           onClose={() => setSelectedImage(undefined)}
           src={selectedImage}
           alt="Full size pet portrait"
-        />
-      )}
-
-      {isModalOpen && (
-        <PetInquiryForm
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          selectedPackage={selectedPackage}
         />
       )}
     </PageContainer>

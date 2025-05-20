@@ -1339,7 +1339,7 @@ export default function WeddingCouplesPage() {
                 title: 'Photobooks',
                 price: '$250',
                 description: 'These photobooks are carefully designed to preserve your session or wedding in a beautiful, lasting format.',
-                features: ['Custom design with your favorite images','Size: 8x8in - 20 spreads (40 pages)', 'Ships within 3 weeks after final approval','Add-on: Extra spreads +$10 each'],
+                features: ['Custom design with your favorite images','Size: 8x8in - 20 spreads (40 pages)', 'Ships within 4 weeks after final approval','Add-on: Extra spreads +$10 each'],
                 action: 'Inquire Now',
                 package: 'Photobooks'
               }
