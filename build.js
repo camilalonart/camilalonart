@@ -3,9 +3,9 @@ const fs = require('fs-extra');
 const path = require('path');
 
 try {
-  // Run Next.js build
+  // Run Next.js build with production environment
   console.log('Building Next.js project...');
-  execSync('next build', { stdio: 'inherit' });
+  execSync('NODE_ENV=production next build', { stdio: 'inherit' });
 
   // Copy images to output directory if it exists
   const imagesSourcePath = path.join(__dirname, 'public', 'images');
