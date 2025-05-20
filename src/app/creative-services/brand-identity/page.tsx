@@ -136,6 +136,66 @@ const DetailCard = styled.div`
   }
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: ${theme.spacing.xl};
+  margin-top: ${theme.spacing['2xl']};
+`;
+
+const ServiceCard = styled.div`
+  padding: ${theme.spacing.xl};
+  background-color: ${theme.colors.background.light};
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.md};
+  transition: ${theme.transitions.default};
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${theme.shadows.lg};
+  }
+
+  h3 {
+    color: ${theme.colors.primary.main};
+    margin-bottom: ${theme.spacing.md};
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: ${theme.spacing.md} 0;
+    
+    li {
+      padding: ${theme.spacing.xs} 0;
+      display: flex;
+      align-items: center;
+      gap: ${theme.spacing.sm};
+      
+      &::before {
+        content: '•';
+        color: ${theme.colors.primary.main};
+      }
+    }
+  }
+`;
+
+const ProcessStep = styled.div`
+  padding: ${theme.spacing.xl};
+  background-color: ${theme.colors.background.light};
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.md};
+
+  h3 {
+    color: ${theme.colors.primary.main};
+    margin-bottom: ${theme.spacing.md};
+  }
+
+  p {
+    color: ${theme.colors.text.secondary};
+    line-height: 1.6;
+  }
+`;
+
 const caseStudies = [
   {
     id: 1,
