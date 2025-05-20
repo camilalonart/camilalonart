@@ -22,7 +22,17 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     // Public configs (be careful what you expose)
-  }
+  },
+  // Ensure static files are copied to output
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig; 

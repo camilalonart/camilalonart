@@ -1,25 +1,29 @@
-const fs = require('fs');
-const path = require('path');
 const { execSync } = require('child_process');
+const fs = require('fs-extra');
+const path = require('path');
 
 try {
   // Run Next.js build
   console.log('Building Next.js project...');
   execSync('next build', { stdio: 'inherit' });
 
-  // Copy CNAME to out directory
-  const cnamePath = path.join(__dirname, 'public', 'CNAME');
-  const outPath = path.join(__dirname, 'out', 'CNAME');
+  // Copy images to output directory
+  console.log('Copying images to output directory...');
+  fs.copySync(
+    path.join(__dirname, 'public', 'images'),
+    path.join(__dirname, 'out', 'images'),
+    { overwrite: true }
+  );
 
-  if (fs.existsSync(cnamePath)) {
-    console.log('Copying CNAME file to build output...');
-    fs.copyFileSync(cnamePath, outPath);
-    console.log('CNAME file has been copied successfully.');
-  } else {
-    console.warn('Warning: CNAME file not found in public directory.');
-  }
+  // Copy CNAME file
+  console.log('Copying CNAME file...');
+  fs.copySync(
+    path.join(__dirname, 'public', 'CNAME'),
+    path.join(__dirname, 'out', 'CNAME'),
+    { overwrite: true }
+  );
 
-  console.log('Build complete!');
+  console.log('Build completed successfully!');
 } catch (error) {
   console.error('Build failed:', error.message);
   process.exit(1);
