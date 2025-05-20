@@ -160,12 +160,6 @@ const portfolioSections = [
   }
 ];
 
-export const metadata = {
-  title: 'Portfolio | Camilo Nart',
-  description: 'Professional photography and creative services portfolio showcasing wedding, wildlife, pet photography, headshots, and creative work.',
-  keywords: 'photography portfolio, creative portfolio, wedding photography, wildlife photography, pet photography, headshots',
-};
-
 export default function PortfolioPage() {
   return (
     <PageContainer>

@@ -146,7 +146,7 @@ export default function GraphicRecordingPage() {
     },
     {
       title: 'Real-time Processing',
-      description: 'Immediate visualization helps participants process and understand information as it's shared.'
+      description: 'Immediate visualization helps participants process and understand information as it\'s shared.'
     }
   ];
 

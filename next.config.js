@@ -22,17 +22,6 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     // Public configs (be careful what you expose)
-  },
-  // Ensure CNAME file is copied to the build output
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/CNAME',
-          destination: '/CNAME',
-        },
-      ],
-    };
   }
 };
 

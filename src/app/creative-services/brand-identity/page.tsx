@@ -190,12 +190,6 @@ const caseStudies = [
   }
 ];
 
-export const metadata = {
-  title: 'Brand Identity Design | Creative Services | Camilo Nart',
-  description: 'Professional brand identity design services including logo design, visual identity systems, and brand guidelines.',
-  keywords: 'brand identity, logo design, visual identity, brand guidelines, brand strategy',
-};
-
 export default function BrandIdentityPage() {
   const services = [
     {
