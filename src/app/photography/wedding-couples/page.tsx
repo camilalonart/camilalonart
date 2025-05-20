@@ -1542,7 +1542,7 @@ export default function WeddingCouplesPage() {
             <h3>Contact</h3>
             <p>Let's create something beautiful together</p>
             <ul>
-              <li><a href="mailto:camilalonart@gmail.com">camilalonart@gmail.com</a></li>
+              <li><a href="mailto:bycamilalonart@gmail.com">camilalonart@gmail.com</a></li>
               <li><a href="tel:+1 672-338-9307">+1 (672) 338-9307</a></li>
               <li>Based in Vancouver, BC</li>
             </ul>
