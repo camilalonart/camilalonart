@@ -264,7 +264,6 @@ interface PetInquiryFormProps {
   onClose: () => void;
   selectedPackage?: string;
   embedded?: boolean;
-  useIframe?: boolean;
 }
 
 const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_PET_FORM_URL;
@@ -273,8 +272,7 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   isOpen,
   onClose,
   selectedPackage,
-  embedded = false,
-  useIframe = false
+  embedded = false
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -345,21 +343,6 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       setIsSubmitting(false);
     }
   };
-
-  if (useIframe) {
-    return (
-      <iframe
-        src="YOUR_GOOGLE_FORM_URL"
-        width="100%"
-        height="100%"
-        frameBorder="0"
-        marginHeight={0}
-        marginWidth={0}
-      >
-        Loading...
-      </iframe>
-    );
-  }
 
   const formContent = submitSuccess ? (
     <SuccessMessage>

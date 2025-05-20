@@ -256,10 +256,9 @@ interface WeddingInquiryFormProps {
   onClose: () => void;
   selectedPackage?: string;
   embedded?: boolean;
-  useIframe?: boolean;
 }
 
-export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, embedded = false, useIframe = false }: WeddingInquiryFormProps) {
+export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, embedded = false }: WeddingInquiryFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -491,18 +490,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
           <ModalHeader>
             <h2>Request Information</h2>
           </ModalHeader>
-          {useIframe ? (
-            <IframeContainer $embedded={embedded}>
-              <iframe 
-                src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAXNTilpUMUtETzNCSEZFRVFPMjBEWEZCU0ExMEQ5Uy4u&embed=true"
-                frameBorder="0"
-                style={{ margin: 0 }}
-                allowFullScreen
-              />
-            </IframeContainer>
-          ) : (
-            formContent
-          )}
+          {formContent}
         </ModalContent>
         {notificationElement}
       </>
@@ -516,18 +504,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
           <h2>Request Information</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </ModalHeader>
-        {useIframe ? (
-          <IframeContainer $embedded={embedded}>
-            <iframe 
-              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAXNTilpUMUtETzNCSEZFRVFPMjBEWEZCU0ExMEQ5Uy4u&embed=true"
-              frameBorder="0"
-              style={{ margin: 0 }}
-              allowFullScreen
-            />
-          </IframeContainer>
-        ) : (
-          formContent
-        )}
+        {formContent}
       </ModalContent>
       {notificationElement}
     </ModalOverlay>

@@ -1507,7 +1507,7 @@ export default function WeddingCouplesPage() {
           <TestimonialContent>
             <div className="stars">★★★★★</div>
             <div className="quote">
-              "Camila photographed our wedding, and we couldn’t be happier with the results. She captured every special moment so beautifully and naturally. Her work is heartfelt, professional, and absolutely stunning. We trust her completely and recommend her to anyone looking for timeless, meaningful photos."
+              "Camila photographed our wedding, and we couldn't be happier with the results. She captured every special moment so beautifully and naturally. Her work is heartfelt, professional, and absolutely stunning. We trust her completely and recommend her to anyone looking for timeless, meaningful photos."
             </div>
             <div className="author">
               — Ana & Jorge (Vancouver Elopement)
@@ -1531,7 +1531,6 @@ export default function WeddingCouplesPage() {
             onClose={() => {}} 
             selectedPackage={undefined}
             embedded={true}
-            useIframe={false}
           />
         </InquiryFormContainer>
       </InquirySection>
@@ -1596,7 +1595,6 @@ export default function WeddingCouplesPage() {
           onClose={() => setIsModalOpen(false)}
           selectedPackage={selectedPackage}
           embedded={false}
-          useIframe={false}
         />
       )}
     </PageContainer>
