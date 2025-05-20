@@ -36,8 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 # Protected content
-/public/images/**/*
-!/public/images/.gitkeep
 /src/assets/images/**/*
 !/src/assets/images/.gitkeep
 
