@@ -219,36 +219,13 @@ export default function HomePage() {
       <SectionGrid>
         <Section $span={12}>
           <SectionTitle>Photography Services</SectionTitle>
-          <CardGrid $columns={4}>
-            <ClickableCard href="/photography/headshots">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage
-                      src="/images/photography/headshots.jpg"
-                      alt="Professional Headshots"
-                      priority
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>Professional Headshots</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>Professional Headshots</h3>
-                      <p>Modern, professional portraits for individuals and corporate clients in Vancouver.</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
+          <CardGrid $columns={2}>
             <ClickableCard href="/photography/pets">
               <Card>
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage
-                      src="/images/photography/pets.jpg"
+                      src="/images/pets/A7T05911.jpg"
                       alt="Pet Photography"
                       priority
                       quality={85}
@@ -271,7 +248,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage
-                      src="/images/photography/wedding.jpg"
+                      src="/images/wedding/A7T09955.jpg"
                       alt="Wedding & Couples"
                       priority
                       quality={85}
@@ -289,7 +266,30 @@ export default function HomePage() {
                 </CardInner>
               </Card>
             </ClickableCard>
-            <ClickableCard href="/photography/family-maternity">
+            <ClickableCard href="/photography/headshots" style={{ display: 'none' }}>
+              <Card>
+                <CardInner>
+                  <CardFace>
+                    <StyledSecureImage
+                      src="/images/photography/headshots.jpg"
+                      alt="Professional Headshots"
+                      priority
+                      quality={85}
+                    />
+                    <CardContent $overlay>
+                      <h3>Professional Headshots</h3>
+                    </CardContent>
+                  </CardFace>
+                  <CardFace $back>
+                    <CardContent>
+                      <h3>Professional Headshots</h3>
+                      <p>Modern, professional portraits for individuals and corporate clients in Vancouver.</p>
+                    </CardContent>
+                  </CardFace>
+                </CardInner>
+              </Card>
+            </ClickableCard>
+            <ClickableCard href="/photography/family-maternity" style={{ display: 'none' }}>
               <Card>
                 <CardInner>
                   <CardFace>
@@ -316,7 +316,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid>
+      <SectionGrid style={{ display: 'none' }}>
         <Section $span={12}>
           <SectionTitle>My Art</SectionTitle>
           <CardGrid $columns={4}>
@@ -416,7 +416,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid>
+      <SectionGrid style={{ display: 'none' }}>
         <Section $span={12}>
           <SectionTitle>Creative Services</SectionTitle>
           <CardGrid $columns={4}>
@@ -516,7 +516,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid>
+      <SectionGrid style={{ display: 'none' }}>
         <Section $span={12}>
           <SectionTitle>Tech</SectionTitle>
           <CardGrid $columns={2}>

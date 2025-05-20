@@ -587,7 +587,7 @@ const FAQContainer = styled.div`
   margin: 0 auto;
   display: grid;
   gap: ${theme.spacing.xl};
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr;
@@ -595,7 +595,7 @@ const FAQContainer = styled.div`
 `;
 
 const FAQItem = styled.div`
-  background: rgb(250, 245, 243);
+  background: rgb(72,58,47);
   padding: ${theme.spacing.xl};
   border-radius: ${theme.borderRadius.md};
   box-shadow: ${theme.shadows.sm};
@@ -610,7 +610,7 @@ const FAQItem = styled.div`
   }
 
   p {
-    color: ${theme.colors.text.secondary};
+    color: white;
     font-size: clamp(0.9rem, 1.4vw, 1rem);
     line-height: 1.6;
   }
@@ -1094,7 +1094,7 @@ export default function PetsPage() {
         <FAQContainer>
           <FAQItem>
             <h3>What should I bring to the photo session?</h3>
-            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. For studio sessions, you might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
+            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. You might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
           </FAQItem>
           <FAQItem>
             <h3>How do you handle anxious or energetic pets?</h3>
@@ -1105,8 +1105,16 @@ export default function PetsPage() {
             <p>Most sessions last between 1 hour. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
           </FAQItem>
           <FAQItem>
-            <h3>When will I receive my photos?</h3>
-            <p>You'll receive your edited photos within 2-3 weeks after the session. We carefully select and edit each image to ensure the highest quality results.</p>
+            <h3>Is there a travel fee?</h3>
+            <p>Travel within 20 miles of Vancouver downtown is included. Locations beyond that are subject to a $1/mile travel fee.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>Can my pet stay on a leash?</h3>
+            <p>Absolutely, and I actually recommend it for safety. Leashes can be edited out during post-processing.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>Can I be in the photos too?</h3>
+            <p>Yes, absolutely! You're welcome to be part of the session with your pet. Whether it's a sweet cuddle, a walk together, or a playful moment—these are often the most meaningful shots.</p>
           </FAQItem>
         </FAQContainer>
       </FAQSection>

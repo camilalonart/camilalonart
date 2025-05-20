@@ -23,7 +23,8 @@ export default function RootLayoutClient({
   const hideNavigationPaths = [
     '/photography/wedding-couples',
     '/photography/pets',
-    '/photography/wedding-couples/gallery/'
+    '/photography/wedding-couples/gallery/',
+    ''
   ];
 
   // Check if current path should hide navigation
