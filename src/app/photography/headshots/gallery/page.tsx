@@ -1,26 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../../../styles/theme';
-import BaseGallery from '../../../../components/BaseGallery';
+import { Metadata } from 'next';
+import { getMetadata } from '../../../../app/metadata';
+import HeadshotsGalleryClient from './HeadshotsGalleryClient';
 
-const PageContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background: rgb(26, 20, 15);
-`;
-
-const images = [
-  { src: '/images/headshots/sample1.jpg', alt: 'Headshot 1' },
-  { src: '/images/headshots/sample2.jpg', alt: 'Headshot 2' },
-  { src: '/images/headshots/sample3.jpg', alt: 'Headshot 3' },
-  { src: '/images/headshots/sample4.jpg', alt: 'Headshot 4' },
-  // Add more images as needed
-];
+export const metadata: Metadata = getMetadata(
+  'Professional Headshots Gallery',
+  'View our collection of professional headshots and portraits. Perfect for business professionals, actors, and anyone looking to make a strong first impression.',
+  '/photography/headshots/gallery'
+);
 
 export default function HeadshotsGalleryPage() {
-  return (
-    <PageContainer>
-      <BaseGallery images={images} />
-    </PageContainer>
-  );
+  return <HeadshotsGalleryClient />;
 } 

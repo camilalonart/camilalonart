@@ -1,30 +1,13 @@
-'use client';
+import { Metadata } from 'next';
+import { getMetadata } from '@/app/metadata';
+import PetGalleryClient from '@/app/photography/pets/gallery/PetGalleryClient';
 
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../../../styles/theme';
-import PetGallery from '../../../../components/PetGallery';
-
-const PageContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background: rgb(26, 20, 15);
-`;
-
-// You can move this to a data file later
-const images = [
-  { src: '/images/pets/A7T05223-horizontal.jpg', alt: 'Pet photo 1' },
-  { src: '/images/pets/sample2.jpg', alt: 'Pet photo 2' },
-  { src: '/images/pets/sample3.jpg', alt: 'Pet photo 3' },
-  { src: '/images/pets/sample4.jpg', alt: 'Pet photo 4' },
-  { src: '/images/pets/sample5.jpg', alt: 'Pet photo 5' },
-  // Add more images as needed
-];
+export const metadata: Metadata = getMetadata(
+  'Pet Photography Gallery',
+  'Explore our collection of beautiful pet portraits. Professional pet photography capturing the unique personality and charm of your beloved pets.',
+  '/photography/pets/gallery'
+);
 
 export default function PetGalleryPage() {
-  return (
-    <PageContainer>
-      <PetGallery images={images} />
-    </PageContainer>
-  );
+  return <PetGalleryClient />;
 } 

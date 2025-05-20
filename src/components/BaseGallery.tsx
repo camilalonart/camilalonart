@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
@@ -7,6 +9,7 @@ const GalleryContainer = styled.div`
   width: 100%;
   padding: ${theme.spacing['2xl']};
   margin-top: 60px;
+  background: rgb(26, 20, 15);
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl};
@@ -16,17 +19,19 @@ const GalleryContainer = styled.div`
 const BackButton = styled.a`
   position: fixed;
   top: ${theme.spacing.xl};
-  left: ${theme.spacing.xl};
-  background: transparent;
-  color: ${theme.colors.text.primary};
-  padding: ${theme.spacing.md} 0;
-  font-size: 0.9rem;
+  left: ${theme.spacing.sm};
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  font-size: 1rem;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${theme.spacing.xs};
   z-index: 10;
   transition: all 0.3s ease;
+  border-radius: ${theme.borderRadius.md};
+  backdrop-filter: blur(4px);
   
   &:before {
     content: '←';
@@ -35,7 +40,8 @@ const BackButton = styled.a`
   }
   
   &:hover {
-    color: ${theme.colors.primary.main};
+    background: rgba(0, 0, 0, 0.7);
+    transform: translateX(-4px);
     
     &:before {
       transform: translateX(-4px);
@@ -43,8 +49,10 @@ const BackButton = styled.a`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    top: ${theme.spacing.md};
-    left: ${theme.spacing.md};
+    top: ${theme.spacing.xs};
+    left: ${theme.spacing.xs};
+    padding: ${theme.spacing.xs} ${theme.spacing.sm};
+    font-size: 0.9rem;
   }
 `;
 

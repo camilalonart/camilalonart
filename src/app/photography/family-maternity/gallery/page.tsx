@@ -1,26 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../../../styles/theme';
-import BaseGallery from '../../../../components/BaseGallery';
+import { Metadata } from 'next';
+import { getMetadata } from '@/app/metadata';
+import FamilyMaternityGalleryClient from '@/app/photography/family-maternity/gallery/FamilyMaternityGalleryClient';
 
-const PageContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background: rgb(26, 20, 15);
-`;
-
-const images = [
-  { src: '/images/family-maternity/sample1.jpg', alt: 'Family/Maternity 1' },
-  { src: '/images/family-maternity/sample2.jpg', alt: 'Family/Maternity 2' },
-  { src: '/images/family-maternity/sample3.jpg', alt: 'Family/Maternity 3' },
-  { src: '/images/family-maternity/sample4.jpg', alt: 'Family/Maternity 4' },
-  // Add more images as needed
-];
+export const metadata: Metadata = getMetadata(
+  'Family & Maternity Photography Gallery',
+  "Discover our collection of heartwarming family portraits and beautiful maternity photography. Capturing the joy and love of your family's special moments.",
+  '/photography/family-maternity/gallery'
+);
 
 export default function FamilyMaternityGalleryPage() {
-  return (
-    <PageContainer>
-      <BaseGallery images={images} />
-    </PageContainer>
-  );
+  return <FamilyMaternityGalleryClient />;
 } 

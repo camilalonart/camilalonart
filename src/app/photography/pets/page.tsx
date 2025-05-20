@@ -22,9 +22,10 @@ const Hero = styled.section`
   height: 85vh;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
+  padding: 0 ${theme.spacing.xl};
   
   &::after {
     content: '';
@@ -39,6 +40,11 @@ const Hero = styled.section`
       rgba(0, 0, 0, 0.4) 100%
     );
     z-index: 1;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    justify-content: center;
+    padding: 0 ${theme.spacing.md};
   }
 `;
 
@@ -85,16 +91,15 @@ const SectionDivider = styled.section`
 const HeroContent = styled.div`
   position: relative;
   z-index: 2;
-  text-align: center;
+  text-align: left;
   color: white;
   max-width: 900px;
-  padding: ${theme.spacing.md};
+  margin-left: ${theme.spacing.xl};
 
   h1 {
-    margin: ${theme.spacing.xl};
+    margin-bottom: ${theme.spacing.sm};
     font-size: clamp(2rem, 2.8vw, 2.8rem);
     font-weight: 500;
-    margin-bottom: ${theme.spacing.sm};
     line-height: 1.1;
     letter-spacing: 0.1em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -104,13 +109,19 @@ const HeroContent = styled.div`
   p {
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.6;
-    margin-bottom: ${theme.spacing.md};
     font-weight: 400;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin: ${theme.spacing.xl};
+    max-width: 500px;
+    margin: ${theme.spacing.sm} 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    text-align: center;
+    margin-left: 0;
+    
+    p {
+      margin: ${theme.spacing.sm} auto;
+    }
   }
 `;
 
@@ -132,9 +143,8 @@ const HeroImageContainer = styled.div`
 `;
 
 const ActionButton = styled.button`
-  background: rgba(169, 125, 30, 0.09);
+  background: rgb(176, 126, 18);
   color: white;
-  border: 1px solid white;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   font-size: 1.2rem;
   font-weight: 600;
@@ -588,11 +598,6 @@ const FAQItem = styled.div`
   box-shadow: ${theme.shadows.sm};
   transition: all 0.3s ease;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${theme.shadows.md};
-  }
-
   h3 {
     color: rgb(169, 125, 30);
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
@@ -815,7 +820,7 @@ export default function PetsPage() {
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
-            src="/images/pets/A7T05223-horizontal.jpg"
+            src="/images/pets/A7T05648-3.jpg"
             alt="Happy dog portrait"
             fill
             style={{ objectFit: 'cover' }}
@@ -957,27 +962,36 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T02365.jpg"
+              src="/images/pets/A7T05223-horizontal.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T02388.jpg"
+              src="/images/pets/A7T05911.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05844copy.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T02378.jpg"
+              src="/images/pets/A7T05844copy.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05654.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T05654.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1032,25 +1046,25 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T05223-horizontal.jpg"
+              src="/images/pets/A7T02365.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T02378.jpg"
+              src="/images/pets/A7T02388.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02378.jpg"
               alt="Pet portrait"
@@ -1074,18 +1088,36 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
+          <DividerImage $span={3}>
             <ProtectedImage
-              src="/images/pets/A7T02596.jpg"
+              src="/images/pets/A7T02468-3.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
+          <DividerImage $span={3}>
             <ProtectedImage
-              src="/images/pets/A7T02565.jpg"
+              src="/images/pets/A7T02414-2.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3}>
+            <ProtectedImage
+              src="/images/pets/A7T02360.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3}>
+            <ProtectedImage
+              src="/images/pets/A7T02349.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
