@@ -20,8 +20,7 @@ const BackButton = styled.a`
   position: fixed;
   top: ${theme.spacing.xl};
   left: ${theme.spacing.sm};
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: black;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   font-size: 1rem;
   text-decoration: none;
@@ -40,9 +39,8 @@ const BackButton = styled.a`
   }
   
   &:hover {
-    background: rgba(0, 0, 0, 0.7);
     transform: translateX(-4px);
-    
+    color: grey;
     &:before {
       transform: translateX(-4px);
     }
