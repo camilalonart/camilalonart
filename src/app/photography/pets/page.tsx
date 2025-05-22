@@ -1173,14 +1173,7 @@ export default function PetsPage() {
             <ul>
               <li>📍 Vancouver, BC</li>
               <li>📱 (672) 338-9307</li>
-              <li>✉️ bycamilalonart@gmail.com</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Follow Us</h3>
-            <ul>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">Facebook</a></li>
+              <li><a href="mailto:bycamilalonart@gmail.com">✉️ bycamilalonart@gmail.com</a></li>
             </ul>
           </div>
         </FooterContent>

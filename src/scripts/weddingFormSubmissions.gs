@@ -111,7 +111,7 @@ function sendEmailNotification(data) {
     '',
     {
       htmlBody: getWeddingEmailTemplate(data),
-      name: 'Camilo Nart Photography',
+      name: 'Camilalonart Photography',
       replyTo: data.email,
       noReply: true
     }
