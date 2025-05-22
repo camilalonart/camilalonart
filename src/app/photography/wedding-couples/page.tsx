@@ -1565,7 +1565,7 @@ export default function WeddingCouplesPage() {
 
       <SEOFooter>
         <div className="seo-content">
-          <h2>Vancouver Elopement Photographer | Engagement & Couples Photography in BC</h2>
+          <h2>Vancouver Elopement Photographer | Engagement & Couples Photography in BC | Camilalonart</h2>
           <p>
             Specializing in intimate elopements, engagement sessions, and couples photography 
             throughout British Columbia. Capturing authentic moments and creating timeless 
