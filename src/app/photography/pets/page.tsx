@@ -850,7 +850,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')}>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')} $isMiddle>
             <ProtectedImage
               src="/images/pets/A7T02565.jpg"
               alt="Pet portrait"
@@ -868,7 +868,7 @@ export default function PetsPage() {
           {[
             {
               title: 'At Home Sessions',
-              price: '$200',
+              price: '$150',
               description: "This session takes place in your pet's own environment, where they're most comfortable.",
               features: [
                 '1-hour studio session',
@@ -880,7 +880,7 @@ export default function PetsPage() {
             },
             {
               title: 'Outdoor Session',
-              price: '$300',
+              price: '$200',
               description: "This one's for the adventure pets! We head to a park, beach, or favorite outdoor spot to capture your pet's energy and personality in motion. Leashes are recommended, we can edit them out later for clean, natural shots.",
               features: [
                 '1-hour outdoor session',
@@ -924,36 +924,36 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875.jpg')} $isMiddle>
             <ProtectedImage
-              src="/images/pets/A7T05223-horizontal.jpg"
+              src="/images/pets/gallery/A7T06875.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06520.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T05911.jpg"
+              src="/images/pets/gallery/A7T06520.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05844copy.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T05844copy.jpg"
+              src="/images/pets/gallery/A7T06575.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05654.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06679.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T05654.jpg"
+              src="/images/pets/gallery/A7T06679.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1008,6 +1008,48 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.jpg')} $isMiddle>
+            <ProtectedImage
+              src="/images/pets/A7T05911.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05654.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T05654.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+            <ProtectedImage
+              src="/images/pets/A7T05223-horizontal.jpg"
+              alt="Pet portrait"
+              fill
+              style={{ objectFit: 'cover' }}
+              quality={100}
+            />
+          </DividerImage>
+        </SectionDivider>
+      </Section>
+
+      <Section>
+        <SectionTitle>Our Photography Collection</SectionTitle>
+        <GalleryPreview>
+          <p>Explore our gallery of heartwarming pet portraits, capturing the unique personalities and special moments of beloved companions.</p>
+          <ViewGalleryButton href="/photography/pets/gallery">
+            View Full Gallery
+          </ViewGalleryButton>
+        </GalleryPreview>
+      </Section>
+
+      <Section>
+        <SectionDivider>
           <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.jpg')}>
             <ProtectedImage
               src="/images/pets/A7T02365.jpg"
@@ -1038,19 +1080,39 @@ export default function PetsPage() {
         </SectionDivider>
       </Section>
 
-      <Section>
-        <SectionTitle>Our Photography Collection</SectionTitle>
-        <GalleryPreview>
-          <p>Explore our gallery of heartwarming pet portraits, capturing the unique personalities and special moments of beloved companions.</p>
-          <ViewGalleryButton href="/photography/pets/gallery">
-            View Full Gallery
-          </ViewGalleryButton>
-        </GalleryPreview>
-      </Section>
+      <FAQSection>
+        <h2>Frequently Asked Questions</h2>
+        <FAQContainer>
+          <FAQItem>
+            <h3>What should I bring to the photo session?</h3>
+            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. You might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>How do you handle anxious or energetic pets?</h3>
+            <p>We take a patient, relaxed approach and let your pet set the pace. We'll take breaks as needed and use positive reinforcement. For high-energy pets, we might start with action shots to help them burn off energy before moving to posed photos.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>How long does a typical session last?</h3>
+            <p>Most sessions last between 1 hour. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>Is there a travel fee?</h3>
+            <p>Travel within 20 miles of Vancouver downtown is included. Locations beyond that are subject to a $1/mile travel fee.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>Can my pet stay on a leash?</h3>
+            <p>Absolutely, and I actually recommend it. Leashes can be edited out during post-processing if you prefer.</p>
+          </FAQItem>
+          <FAQItem>
+            <h3>Can I be in the photos too?</h3>
+            <p>Yes, absolutely! You're welcome to be part of the session with your pet. Whether it's a sweet cuddle, a walk together, or a playful moment—these are often the most meaningful shots.</p>
+          </FAQItem>
+        </FAQContainer>
+      </FAQSection>
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3}>
+          <DividerImage $span={3} $isMiddle>
             <ProtectedImage
               src="/images/pets/A7T02468-3.jpg"
               alt="Pet portrait"
@@ -1089,36 +1151,22 @@ export default function PetsPage() {
         </SectionDivider>
       </Section>
 
-      <FAQSection>
-        <h2>Frequently Asked Questions</h2>
-        <FAQContainer>
-          <FAQItem>
-            <h3>What should I bring to the photo session?</h3>
-            <p>Bring your pet's favorite treats, toys, and any accessories you'd like to include in the photos. You might want to bring a brush for quick touch-ups. Most importantly, bring patience and a positive attitude!</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>How do you handle anxious or energetic pets?</h3>
-            <p>We take a patient, relaxed approach and let your pet set the pace. We'll take breaks as needed and use positive reinforcement. For high-energy pets, we might start with action shots to help them burn off energy before moving to posed photos.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>How long does a typical session last?</h3>
-            <p>Most sessions last between 1 hour. This gives us plenty of time to let your pet get comfortable and capture their true personality.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>Is there a travel fee?</h3>
-            <p>Travel within 20 miles of Vancouver downtown is included. Locations beyond that are subject to a $1/mile travel fee.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>Can my pet stay on a leash?</h3>
-            <p>Absolutely, and I actually recommend it for safety. Leashes can be edited out during post-processing.</p>
-          </FAQItem>
-          <FAQItem>
-            <h3>Can I be in the photos too?</h3>
-            <p>Yes, absolutely! You're welcome to be part of the session with your pet. Whether it's a sweet cuddle, a walk together, or a playful moment—these are often the most meaningful shots.</p>
-          </FAQItem>
-        </FAQContainer>
-      </FAQSection>
-
+      <Section $bgColor="rgb(26, 20, 15)">
+        <SectionTitle>Book Your Session</SectionTitle>
+        <PetInquiryForm
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          selectedPackage={selectedPackage}
+          embedded={false}
+        />
+        <div style={{ marginTop: '2rem' }}>
+          <PetInquiryForm
+            isOpen={true}
+            onClose={() => {}}
+            embedded={true}
+          />
+        </div>
+      </Section>
       <Section>
         <SectionDivider>
           <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.jpg')}>
@@ -1140,23 +1188,6 @@ export default function PetsPage() {
             />
           </DividerImage>
         </SectionDivider>
-      </Section>
-
-      <Section $bgColor="rgb(26, 20, 15)">
-        <SectionTitle>Book Your Session</SectionTitle>
-        <PetInquiryForm
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          selectedPackage={selectedPackage}
-          embedded={false}
-        />
-        <div style={{ marginTop: '2rem' }}>
-          <PetInquiryForm
-            isOpen={true}
-            onClose={() => {}}
-            embedded={true}
-          />
-        </div>
       </Section>
 
       <Footer>

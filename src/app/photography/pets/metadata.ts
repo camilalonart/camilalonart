@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   keywords: 'pet photography, dog photography, cat photography, Vancouver pet photographer, professional pet portraits',
   openGraph: {
     type: 'website',
-    url: 'https://yourdomain.com/photography/pets',
+    url: 'https://camilalonart.com/photography/pets',
     title: 'Professional Pet Photography Services | Vancouver Pet Photographer',
     description: 'Capture your pet\'s unique personality with our professional pet photography services in Vancouver. Indoor studio and outdoor sessions available.',
     images: [
       {
-        url: 'https://yourdomain.com/images/pets/A7T05223-horizontal.jpg',
+        url: 'https://camilalonart.com/images/pets/A7T05223-horizontal.jpg',
         width: 1200,
         height: 630,
         alt: 'Professional Pet Photography Services',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Professional Pet Photography Services | Vancouver Pet Photographer',
     description: 'Capture your pet\'s unique personality with our professional pet photography services in Vancouver. Indoor studio and outdoor sessions available.',
-    images: ['https://yourdomain.com/images/pets/A7T05223-horizontal.jpg'],
+    images: ['https://camilalonart.com/images/pets/A7T05223-horizontal.jpg'],
   },
   robots: {
     index: true,

@@ -10,7 +10,7 @@ const { serverRuntimeConfig } = getConfig();
 const MAX_PAYLOAD_SIZE = 1024 * 50; // 50KB max payload
 const ALLOWED_METHODS = ['POST'];
 const REQUIRED_CONTENT_TYPE = 'application/json';
-const CORS_ORIGINS = ['https://yourdomain.com']; // Add your domains
+const CORS_ORIGINS = ['https://camilalonart.com']; // Add your domains
 
 // Rate limiting with Redis-like structure (in-memory for demo)
 const RATE_LIMIT = {
