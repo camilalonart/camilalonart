@@ -170,7 +170,7 @@ function sendEmailNotification(data, type) {
     '',
     {
       htmlBody: template,
-      name: 'Camilo Nart Photography',
+      name: 'Camilalonart Photography',
       replyTo: data.email,
       noReply: true
     }
@@ -179,11 +179,11 @@ function sendEmailNotification(data, type) {
   // Send confirmation to client
   GmailApp.sendEmail(
     data.email,
-    'Thank you for your inquiry - Camilo Nart Photography',
+    'Thank you for your inquiry - Camilalonart Photography',
     '',
     {
       htmlBody: getClientConfirmationTemplate(data, type),
-      name: 'Camilo Nart Photography',
+      name: 'Camilalonart Photography',
       noReply: true
     }
   );
@@ -236,7 +236,7 @@ function getClientConfirmationTemplate(data, type) {
       <p><strong>Package:</strong> ${data.package}</p>
       ${packageInfo}
       <p>If you have any questions in the meantime, please don't hesitate to contact us.</p>
-      <p>Best regards,<br>Camilo Nart Photography</p>
+      <p>Best regards,<br>Camilalonart Photography</p>
     </div>
   `;
 }

@@ -120,11 +120,11 @@ function sendEmailNotification(data) {
   // Send confirmation to client
   GmailApp.sendEmail(
     data.email,
-    'Thank you for your inquiry - Camilo Nart Photography',
+    'Thank you for your inquiry - Camilalonart Photography',
     '',
     {
       htmlBody: getClientConfirmationTemplate(data),
-      name: 'Camilo Nart Photography',
+      name: 'Camilalonart Photography',
       noReply: true
     }
   );
@@ -159,7 +159,7 @@ function getClientConfirmationTemplate(data) {
       <p><strong>Package:</strong> ${data.package}</p>
       ${packageInfo}
       <p>If you have any questions in the meantime, please don't hesitate to contact us.</p>
-      <p>Best regards,<br>Camilo Nart Photography</p>
+      <p>Best regards,<br>Camilalonart Photography</p>
     </div>
   `;
 }
