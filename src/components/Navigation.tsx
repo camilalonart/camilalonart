@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { theme } from '../styles/theme';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const Nav = styled.nav`
   position: fixed;
@@ -253,6 +254,7 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -270,42 +272,42 @@ export default function Navigation() {
 
   const navigation = [
     {
-      title: 'Photography Services',
+      title: t('nav.photographyServices'),
       href: '/photography',
       items: [
-        { title: 'Professional Headshots', href: '/photography/headshots' },
-        { title: 'Pet Photography', href: '/photography/pets' },
-        { title: 'Wedding & Couples', href: '/photography/wedding-couples' },
-        { title: 'Family & Maternity', href: '/photography/family-maternity' }
+        { title: t('nav.headshots'), href: '/photography/headshots' },
+        { title: t('nav.pets'), href: '/photography/pets' },
+        { title: t('nav.wedding'), href: '/photography/wedding-couples' },
+        { title: t('nav.family'), href: '/photography/family-maternity' }
       ]
     },
     {
-      title: 'My Art',
+      title: t('nav.myArt'),
       href: '/my-art',
       items: [
-        { title: 'Digital Art', href: '/my-art/digital-art' },
-        { title: 'Traditional Art', href: '/my-art/traditional-art' },
-        { title: 'Wildlife Photography', href: '/my-art/wildlife-photography' },
-        { title: 'Everyday Photography', href: '/my-art/everyday-photography' },
-        { title: 'Blog', href: '/my-art/blog' }
+        { title: t('nav.digitalArt'), href: '/my-art/digital-art' },
+        { title: t('nav.traditionalArt'), href: '/my-art/traditional-art' },
+        { title: t('nav.wildlifePhotography'), href: '/my-art/wildlife-photography' },
+        { title: t('nav.everydayPhotography'), href: '/my-art/everyday-photography' },
+        { title: t('nav.blog'), href: '/my-art/blog' }
       ]
     },
     {
-      title: 'Creative Services',
+      title: t('nav.creativeServices'),
       href: '/creative-services',
       items: [
-        { title: 'Brand Identity', href: '/creative-services/brand-identity' },
-        { title: 'Graphic Recording', href: '/creative-services/graphic-recording' },
-        { title: 'UX/UI Design', href: '/creative-services/ux-ui-design' },
-        { title: 'Art Classes', href: '/creative-services/art-classes' }
+        { title: t('nav.brandIdentity'), href: '/creative-services/brand-identity' },
+        { title: t('nav.graphicRecording'), href: '/creative-services/graphic-recording' },
+        { title: t('nav.uxUiDesign'), href: '/creative-services/ux-ui-design' },
+        { title: t('nav.artClasses'), href: '/creative-services/art-classes' }
       ]
     },
     {
-      title: 'Tech',
+      title: t('nav.tech'),
       href: '/tech',
       items: [
-        { title: 'Software Engineering', href: '/tech/engineering' },
-        { title: 'Tech Courses', href: '/tech/courses' }
+        { title: t('nav.softwareEngineering'), href: '/tech/engineering' },
+        { title: t('nav.techCourses'), href: '/tech/courses' }
       ]
     }
   ];

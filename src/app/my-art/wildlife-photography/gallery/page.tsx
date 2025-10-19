@@ -110,7 +110,7 @@ export default function WildlifeGalleryPage() {
         <PortfolioHeader>
           <Link href="/my-art/wildlife-photography" passHref legacyBehavior>
             <BackButton as="a">
-              ← Back
+              Back
             </BackButton>
           </Link>
           <h1>Wildlife Portfolio</h1>

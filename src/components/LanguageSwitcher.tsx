@@ -14,21 +14,21 @@ const LanguageButton = styled.button<{ $isOpen: boolean }>`
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: ${props => props.$isOpen ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.1)'};
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: ${props => props.$isOpen ? '#f0f0f0' : '#ffffff'};
+  border: 1px solid #e0e0e0;
   border-radius: 24px;
-  color: white;
+  color: #333;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: #f5f5f5;
+    border-color: #A97D1E;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 
   svg {

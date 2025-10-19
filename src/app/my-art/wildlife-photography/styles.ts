@@ -199,47 +199,39 @@ export const LandingTitle = styled.h1`
 export const EnterButton = styled.button`
   background: transparent;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 16px 48px;
-  font-size: 0.875rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 8px 0;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 3rem;
   transition: all 0.3s ease;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
   text-decoration: none;
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: auto;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    transition: left 0.4s ease;
-    z-index: -1;
+  &::after {
+    content: '→';
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
   }
 
   &:hover {
-    color: #000000;
-    border-color: #ffffff;
+    border-bottom-color: #ffffff;
     
-    &::before {
-      left: 0;
+    &::after {
+      transform: translateX(5px);
     }
   }
 
   @media (max-width: 768px) {
-    padding: 14px 36px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-top: 2rem;
   }
 `;
@@ -261,7 +253,6 @@ export const PortfolioPage = styled.div`
 export const PortfolioHeader = styled.div`
   max-width: 1400px;
   margin: 0 auto 80px;
-  text-align: center;
 
   h1 {
     font-size: clamp(3rem, 6vw, 5rem);
@@ -269,6 +260,7 @@ export const PortfolioHeader = styled.div`
     letter-spacing: 0.05em;
     margin: 0 0 1rem 0;
     font-family: 'Playfair Display', Georgia, serif;
+    text-align: center;
   }
 
   p {
@@ -276,26 +268,38 @@ export const PortfolioHeader = styled.div`
     font-weight: 300;
     color: #cccccc;
     margin: 0;
+    text-align: center;
   }
 `;
 
 export const BackButton = styled.button`
   background: transparent;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 30px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 0;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0.1em;
   cursor: pointer;
   margin-bottom: 3rem;
   transition: all 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
 
   &:hover {
-    border-color: #ffffff;
-    transform: translateX(-5px);
+    border-bottom-color: #ffffff;
+    
+    &::before {
+      transform: translateX(-3px);
+    }
+  }
+
+  &::before {
+    content: '←';
+    transition: transform 0.3s ease;
   }
 `;
 
