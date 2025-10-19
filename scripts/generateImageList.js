@@ -15,4 +15,5 @@ function generateImageList(dir, outputFile) {
 }
 
 generateImageList('images/pets/gallery', 'petImages.json');
-generateImageList('images/wedding/gallery', 'weddingImages.json'); 
+generateImageList('images/wedding/gallery', 'weddingImages.json');
+generateImageList('images/wildlife/gallery', 'wildlifeImages.json'); 

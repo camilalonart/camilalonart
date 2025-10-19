@@ -4,10 +4,32 @@ A modern, responsive portfolio website built with Next.js 14, TypeScript, and st
 
 ## Updating Gallery Images
 
-Whenever you add or remove images in `public/images/pets/gallery` or `public/images/wedding/gallery`, you need to regenerate the image lists for the galleries. Run the following command:
+⚠️ **IMPORTANTE:** Cada vez que agregues o elimines imágenes en las carpetas de galería, debes regenerar las listas de imágenes.
+
+### Galerías disponibles:
+- `public/images/pets/gallery` → Fotos de mascotas
+- `public/images/wedding/gallery` → Fotos de bodas
+- `public/images/wildlife/gallery` → Fotos de vida silvestre
+
+### Comando para regenerar las galerías:
+
+```sh
+npm run generate-images
+```
+
+O manualmente:
 
 ```sh
 node scripts/generateImageList.js
 ```
 
-This will update `src/data/petImages.json` and `src/data/weddingImages.json` with the current images in those folders.
+Esto actualizará automáticamente:
+- `src/data/petImages.json`
+- `src/data/weddingImages.json`
+- `src/data/wildlifeImages.json`
+
+### ¿Cuándo ejecutar este comando?
+- ✅ Después de agregar nuevas fotos a cualquier carpeta `gallery/`
+- ✅ Después de eliminar fotos de cualquier carpeta `gallery/`
+- ✅ Después de renombrar fotos en cualquier carpeta `gallery/`
+- ✅ Antes de hacer deploy a producción

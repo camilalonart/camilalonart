@@ -316,7 +316,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid style={{ display: 'none' }}>
+      <SectionGrid>
         <Section $span={12}>
           <SectionTitle>My Art</SectionTitle>
           <CardGrid $columns={4}>
@@ -383,7 +383,7 @@ export default function HomePage() {
                   <CardFace $back>
                     <CardContent>
                       <h3>Wildlife Photography</h3>
-                      <p>Capturing the beauty of nature and wildlife in British Columbia.</p>
+                      <p>Capturing the beauty of nature and wildlife.</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>

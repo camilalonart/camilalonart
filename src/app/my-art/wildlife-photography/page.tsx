@@ -1,200 +1,204 @@
 'use client';
 
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../../styles/theme';
-import ContactForm from '../../../components/ContactForm';
-import ProtectedImage from '../../../components/ProtectedImage';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import wildlifeImagesData from '../../../data/wildlifeImages.json';
+import photoDetailsData from './photoDetails.json';
+import {
+  WildlifeContainer,
+  LandingPage,
+  LandingImageContainer,
+  LandingContent,
+  LandingTitle,
+  EnterButton,
+  HamburgerMenu,
+  HamburgerButton,
+  PortfolioPage,
+  PortfolioHeader,
+  BackButton,
+  PortfolioGrid,
+  PhotoCard,
+  PhotoImageWrapper,
+  ImageModalContainer,
+  ModalOverlay,
+  ModalContent,
+  ModalImage,
+  ModalClose,
+  ModalInfo,
+} from './styles';
 
-const PageContainer = styled.div`
-  width: 100%;
-`;
+interface PhotoDetails {
+  filename: string;
+  title?: string;
+  location?: string;
+  date?: string;
+  description?: string;
+}
 
-const Hero = styled.section`
-  position: relative;
-  height: 90vh;
-  min-height: 600px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-`;
+interface WildlifePhoto {
+  id: number;
+  src: string;
+  filename: string;
+  details?: PhotoDetails;
+}
 
-const HeroOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.1)
-  );
-  z-index: 1;
-`;
+export default function WildlifePhotographyPage() {
+  const [currentView, setCurrentView] = useState<'landing' | 'portfolio'>('landing');
+  const [selectedPhoto, setSelectedPhoto] = useState<WildlifePhoto | null>(null);
+  const [wildlifePhotos, setWildlifePhotos] = useState<WildlifePhoto[]>([]);
 
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: ${theme.colors.text.light};
-  padding: ${theme.spacing['2xl']};
-  max-width: 800px;
+  useEffect(() => {
+    // Crear un mapa de detalles para búsqueda rápida
+    const detailsMap = new Map(
+      (photoDetailsData as PhotoDetails[]).map(detail => [detail.filename, detail])
+    );
 
-  h1 {
-    margin-bottom: ${theme.spacing.lg};
-    font-size: clamp(2.5rem, 5vw, 4rem);
-  }
+    // Combinar todas las fotos con sus detalles (si existen)
+    const photos: WildlifePhoto[] = wildlifeImagesData.map((src: string, index: number) => {
+      const filename = src.split('/').pop() || '';
+      const details = detailsMap.get(filename);
 
-  p {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    line-height: 1.6;
-  }
-`;
+      return {
+        id: index + 1,
+        src,
+        filename,
+        details: details || undefined,
+      };
+    });
 
-const Section = styled.section<{ $dark?: boolean }>`
-  padding: ${theme.spacing['3xl']} ${theme.spacing['2xl']};
-  background-color: ${props => 
-    props.$dark ? theme.colors.background.dark : theme.colors.background.main};
-  color: ${props =>
-    props.$dark ? theme.colors.text.light : theme.colors.text.primary};
-`;
+    setWildlifePhotos(photos);
+  }, []);
 
-const ContentWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  const handlePhotoClick = (photo: WildlifePhoto) => {
+    setSelectedPhoto(photo);
+  };
 
-  h2 {
-    text-align: center;
-    font-size: ${theme.typography.fontSize['3xl']};
-    margin-bottom: ${theme.spacing['2xl']};
-  }
-`;
+  const closeModal = () => {
+    setSelectedPhoto(null);
+  };
 
-const FeatureGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${theme.spacing.xl};
-`;
-
-const PackageCard = styled.div`
-  background: ${theme.colors.background.light};
-  padding: ${theme.spacing.xl};
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.md};
-  transition: ${theme.transitions.default};
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${theme.shadows.lg};
-  }
-
-  h3 {
-    font-size: ${theme.typography.fontSize['2xl']};
-    color: ${theme.colors.primary.main};
-    margin-bottom: ${theme.spacing.md};
-  }
-
-  p {
-    color: ${theme.colors.text.secondary};
-    margin-bottom: ${theme.spacing.lg};
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: ${theme.spacing.lg} 0;
-
-    li {
-      padding: ${theme.spacing.xs} 0;
-      padding-left: ${theme.spacing.md};
-      position: relative;
-
-      &::before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: ${theme.colors.accent.success};
-      }
-    }
-  }
-`;
-
-export default function WildlifePage() {
   return (
-    <PageContainer>
-      <Hero>
-        <HeroOverlay />
-        <ProtectedImage
-          src="/images/wildlife/hero.jpg"
-          alt="Wildlife Photography"
-          height="100%"
-          quality={90}
-          priority
-        />
-        <HeroContent>
-          <h1>Wildlife Photography</h1>
-          <p>
-            Capturing the untamed beauty of British Columbia's diverse wildlife,
-            from coastal marine life to mountain inhabitants. Professional wildlife
-            photography services based in Vancouver.
-          </p>
-        </HeroContent>
-      </Hero>
+    <WildlifeContainer>
+      {/* Back to Main Button */}
+      <HamburgerMenu>
+        <HamburgerButton 
+          as="a"
+          href="/"
+          $isOpen={false}
+          style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textDecoration: 'none',
+          }}
+        >
+          <svg 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </HamburgerButton>
+      </HamburgerMenu>
 
-      <Section>
-        <ContentWrapper>
-          <h2>Services & Expeditions</h2>
-          <FeatureGrid>
-            <PackageCard>
-              <h3>Private Expeditions</h3>
-              <p>Customized wildlife photography adventures in BC</p>
-              <ul>
-                <li>Personalized itinerary</li>
-                <li>Expert local guidance</li>
-                <li>Location scouting</li>
-                <li>Technical support</li>
-                <li>Post-processing workshop</li>
-              </ul>
-              <p>Starting at $2,500/day</p>
-            </PackageCard>
-            
-            <PackageCard>
-              <h3>Group Workshops</h3>
-              <p>Learn wildlife photography in stunning BC locations</p>
-              <ul>
-                <li>Small groups (max 6)</li>
-                <li>Multiple destinations</li>
-                <li>Equipment guidance</li>
-                <li>Field techniques</li>
-                <li>Conservation education</li>
-              </ul>
-              <p>Starting at $3,500/week</p>
-            </PackageCard>
-            
-            <PackageCard>
-              <h3>Conservation Projects</h3>
-              <p>Support local wildlife conservation through photography</p>
-              <ul>
-                <li>BC NGO collaboration</li>
-                <li>Documentary work</li>
-                <li>Research support</li>
-                <li>Publication rights</li>
-                <li>Impact reporting</li>
-              </ul>
-              <p>Custom pricing</p>
-            </PackageCard>
-          </FeatureGrid>
-        </ContentWrapper>
-      </Section>
+      {/* Landing Page - Una sola imagen con título */}
+      {currentView === 'landing' && (
+        <LandingPage>
+          <LandingImageContainer>
+            <Image
+              src="/images/wildlife/wildlife-landing.jpg"
+              alt="Wildlife Photography by Camilalonart"
+              fill
+              priority
+              quality={100}
+              style={{ objectFit: 'cover' }}
+            />
+          </LandingImageContainer>
+          <LandingContent>
+            <LandingTitle>
+              Wild<br />Life
+            </LandingTitle>
+            <EnterButton onClick={() => setCurrentView('portfolio')}>
+              View Gallery
+            </EnterButton>
+          </LandingContent>
+        </LandingPage>
+      )}
 
-      <Section $dark>
-        <ContentWrapper>
-          <ContactForm service="Wildlife Photography" />
-        </ContentWrapper>
-      </Section>
-    </PageContainer>
+      {/* Portfolio Page - Galería de proyectos */}
+      {currentView === 'portfolio' && (
+        <PortfolioPage>
+          <PortfolioHeader>
+            <BackButton onClick={() => setCurrentView('landing')}>
+              ← Back
+            </BackButton>
+            <h1>Wildlife Portfolio</h1>
+            <p>A personal collection of wildlife encounters across British Columbia</p>
+          </PortfolioHeader>
+
+          <PortfolioGrid>
+            {wildlifePhotos.map((photo) => (
+              <PhotoCard 
+                key={photo.id}
+                onClick={() => handlePhotoClick(photo)}
+              >
+                <PhotoImageWrapper>
+                  <Image
+                    src={photo.src}
+                    alt={photo.details?.title || 'Wildlife photo'}
+                    width={800}
+                    height={1200}
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </PhotoImageWrapper>
+              </PhotoCard>
+            ))}
+          </PortfolioGrid>
+        </PortfolioPage>
+      )}
+
+      {/* Modal de Imagen - Full quality, no download */}
+      {selectedPhoto && (
+        <ImageModalContainer>
+          <ModalOverlay onClick={closeModal} />
+          <ModalContent>
+            <ModalClose onClick={closeModal}>×</ModalClose>
+            <ModalImage>
+              <Image
+                src={selectedPhoto.src}
+                alt={selectedPhoto.details?.title || selectedPhoto.filename}
+                fill
+                quality={100}
+                style={{ objectFit: 'contain' }}
+                onContextMenu={(e) => e.preventDefault()} // Prevent right-click
+                draggable={false} // Prevent drag
+              />
+            </ModalImage>
+            {selectedPhoto.details && (
+              <ModalInfo>
+                <h2>{selectedPhoto.details.title || selectedPhoto.filename}</h2>
+                {(selectedPhoto.details.location || selectedPhoto.details.date) && (
+                  <p>
+                    {selectedPhoto.details.location && selectedPhoto.details.location}
+                    {selectedPhoto.details.location && selectedPhoto.details.date && ' • '}
+                    {selectedPhoto.details.date && selectedPhoto.details.date}
+                  </p>
+                )}
+                {selectedPhoto.details.description && (
+                  <p className="description">{selectedPhoto.details.description}</p>
+                )}
+              </ModalInfo>
+            )}
+          </ModalContent>
+        </ImageModalContainer>
+      )}
+    </WildlifeContainer>
   );
-} 
+}

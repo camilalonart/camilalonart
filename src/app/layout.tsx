@@ -1,5 +1,5 @@
 import React from 'react';
-import { Montserrat, Cormorant_Garamond } from 'next/font/google';
+import { Montserrat, Cormorant_Garamond, Playfair_Display } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/registry';
 import RootLayoutClient from '../components/RootLayoutClient';
 
@@ -13,6 +13,12 @@ const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-cormorant',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-playfair',
 });
 
 const navigation = [
@@ -69,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} ${playfair.variable}`}>
       <body>
         <StyledComponentsRegistry>
           <RootLayoutClient 
