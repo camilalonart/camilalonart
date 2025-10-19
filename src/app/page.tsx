@@ -371,7 +371,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage
-                      src="/images/art/wildlife.jpg"
+                      src="/images/wildlife/wildlife-landing.jpg"
                       alt="Wildlife Photography"
                       priority
                       quality={85}
