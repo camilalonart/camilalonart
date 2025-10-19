@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ContactForm from '../../../components/ContactForm';
 import SecureImage from '../../../components/SecureImage';
-import ImageModal from '../../../components/ImageModal';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -279,17 +278,11 @@ const FAQItem = styled.div`
 `;
 
 export default function HeadshotsPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState('');
-
-  const handleBookNow = (packageName: string) => {
-    setSelectedPackage(packageName);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedPackage('');
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
@@ -344,7 +337,7 @@ export default function HeadshotsPage() {
               <li>Digital delivery</li>
               <li>Print release</li>
             </ServiceCardFeatures>
-            <BookNowButton onClick={() => handleBookNow('Plain Background')}>
+            <BookNowButton onClick={scrollToContact}>
               Book Now
             </BookNowButton>
           </ServiceCard>
@@ -360,7 +353,7 @@ export default function HeadshotsPage() {
               <li>Digital delivery</li>
               <li>Print release</li>
             </ServiceCardFeatures>
-            <BookNowButton onClick={() => handleBookNow('Creative Background')}>
+            <BookNowButton onClick={scrollToContact}>
               Book Now
             </BookNowButton>
           </ServiceCard>
@@ -389,20 +382,10 @@ export default function HeadshotsPage() {
         </FAQSection>
       </Section>
 
-      <Section $bgColor="rgb(26, 20, 15)">
+      <Section $bgColor="rgb(26, 20, 15)" id="contact-section">
         <SectionTitle>Contact Us</SectionTitle>
-        <ContactForm />
+        <ContactForm service="Headshots" />
       </Section>
-
-      {isModalOpen && (
-        <ImageModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          title={`Book ${selectedPackage} Package`}
-        >
-          <ContactForm />
-        </ImageModal>
-      )}
     </PageContainer>
   );
 } 
