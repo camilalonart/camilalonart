@@ -129,17 +129,13 @@ export default function WildlifeGalleryPage() {
                 onClick={() => handlePhotoClick(photo)}
               >
                 <PhotoImageWrapper>
-                  <img
+                  <ProtectedImage
                     src={photo.src}
                     alt={photo.details?.title || 'Wildlife photo'}
-                    onContextMenu={(e) => e.preventDefault()}
-                    draggable={false}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      display: 'block',
-                      userSelect: 'none',
-                    } as React.CSSProperties}
+                    width={800}
+                    height={600}
+                    objectFit="cover"
+                    quality={85}
                   />
                 </PhotoImageWrapper>
               </PhotoCard>
