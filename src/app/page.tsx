@@ -219,7 +219,7 @@ export default function HomePage() {
       <SectionGrid>
         <Section $span={12}>
           <SectionTitle>Photography Services</SectionTitle>
-          <CardGrid $columns={2}>
+          <CardGrid $columns={4}>
             <ClickableCard href="/photography/pets">
               <Card>
                 <CardInner>
@@ -266,7 +266,7 @@ export default function HomePage() {
                 </CardInner>
               </Card>
             </ClickableCard>
-            <ClickableCard href="/photography/headshots" style={{ display: 'none' }}>
+            <ClickableCard href="/photography/headshots">
               <Card>
                 <CardInner>
                   <CardFace>
@@ -289,7 +289,7 @@ export default function HomePage() {
                 </CardInner>
               </Card>
             </ClickableCard>
-            <ClickableCard href="/photography/family-maternity" style={{ display: 'none' }}>
+            <ClickableCard href="/photography/family-maternity">
               <Card>
                 <CardInner>
                   <CardFace>
@@ -416,7 +416,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid style={{ display: 'none' }}>
+      <SectionGrid>
         <Section $span={12}>
           <SectionTitle>Creative Services</SectionTitle>
           <CardGrid $columns={4}>
@@ -516,7 +516,7 @@ export default function HomePage() {
         </Section>
       </SectionGrid>
 
-      <SectionGrid style={{ display: 'none' }}>
+      <SectionGrid>
         <Section $span={12}>
           <SectionTitle>Tech</SectionTitle>
           <CardGrid $columns={2}>
