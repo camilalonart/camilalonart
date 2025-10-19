@@ -85,7 +85,7 @@ const CardGrid = styled.div<{ $columns?: number }>`
   width: 100%;
   
   @media (max-width: ${theme.breakpoints.lg}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(${props => Math.min(props.$columns || 2, 3)}, 1fr);
     gap: ${theme.spacing.xl};
   }
   
@@ -219,7 +219,7 @@ export default function HomePage() {
       <SectionGrid>
         <Section $span={12}>
           <SectionTitle>Photography Services</SectionTitle>
-          <CardGrid $columns={4}>
+          <CardGrid $columns={5}>
             <ClickableCard href="/photography/pets">
               <Card>
                 <CardInner>
@@ -307,6 +307,29 @@ export default function HomePage() {
                     <CardContent>
                       <h3>Family & Maternity</h3>
                       <p>Capturing life's precious moments and milestones with a natural, authentic approach in Vancouver.</p>
+                    </CardContent>
+                  </CardFace>
+                </CardInner>
+              </Card>
+            </ClickableCard>
+            <ClickableCard href="/photography/eventos">
+              <Card>
+                <CardInner>
+                  <CardFace>
+                    <StyledSecureImage
+                      src="/images/photography/eventos-hero.jpg"
+                      alt="Event Photography"
+                      priority
+                      quality={85}
+                    />
+                    <CardContent $overlay>
+                      <h3>Events</h3>
+                    </CardContent>
+                  </CardFace>
+                  <CardFace $back>
+                    <CardContent>
+                      <h3>Events</h3>
+                      <p>Professional event photography capturing the energy and special moments of your celebrations in Vancouver.</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
