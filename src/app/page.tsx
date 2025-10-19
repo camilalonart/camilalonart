@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { theme } from '../styles/theme';
 import SecureImage from '../components/SecureImage';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const PageContainer = styled.div`
   max-width: 1400px;
@@ -206,19 +207,20 @@ const StyledSecureImage = styled(SecureImage)`
 `;
 
 export default function HomePage() {
+  const { t } = useTranslation();
+  
   return (
     <PageContainer>
       <Hero>
-        <h1>Camilalonart</h1>
+        <h1>{t('home.title')}</h1>
         <p>
-          Professional photographer, artist, and software engineer based in Vancouver, BC.
-          Specializing in capturing moments and creating engaging visual experiences.
+          {t('home.subtitle')}
         </p>
       </Hero>
 
       <SectionGrid>
         <Section $span={12}>
-          <SectionTitle>Photography Services</SectionTitle>
+          <SectionTitle>{t('home.photographyServices')}</SectionTitle>
           <CardGrid $columns={5}>
             <ClickableCard href="/photography/pets">
               <Card>
@@ -231,13 +233,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Pet Photography</h3>
+                      <h3>{t('home.petPhotography.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Pet Photography</h3>
-                      <p>Capturing the unique personality and spirit of your beloved pets.</p>
+                      <h3>{t('home.petPhotography.title')}</h3>
+                      <p>{t('home.petPhotography.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -254,13 +256,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Wedding & Couples</h3>
+                      <h3>{t('home.weddingCouples.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Wedding & Couples</h3>
-                      <p>Capturing timeless moments of love and connection in beautiful Vancouver settings.</p>
+                      <h3>{t('home.weddingCouples.title')}</h3>
+                      <p>{t('home.weddingCouples.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -277,13 +279,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Professional Headshots</h3>
+                      <h3>{t('home.headshots.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Professional Headshots</h3>
-                      <p>Modern, professional portraits for individuals and corporate clients in Vancouver.</p>
+                      <h3>{t('home.headshots.title')}</h3>
+                      <p>{t('home.headshots.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -300,13 +302,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Family & Maternity</h3>
+                      <h3>{t('home.familyMaternity.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Family & Maternity</h3>
-                      <p>Capturing life's precious moments and milestones with a natural, authentic approach in Vancouver.</p>
+                      <h3>{t('home.familyMaternity.title')}</h3>
+                      <p>{t('home.familyMaternity.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -323,13 +325,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Events</h3>
+                      <h3>{t('home.events.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Events</h3>
-                      <p>Professional event photography capturing the energy and special moments of your celebrations in Vancouver.</p>
+                      <h3>{t('home.events.title')}</h3>
+                      <p>{t('home.events.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -341,7 +343,7 @@ export default function HomePage() {
 
       <SectionGrid>
         <Section $span={12}>
-          <SectionTitle>My Art</SectionTitle>
+          <SectionTitle>{t('home.myArt')}</SectionTitle>
           <CardGrid $columns={4}>
             <ClickableCard href="/my-art/digital-art">
               <Card>
@@ -354,13 +356,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Digital Art</h3>
+                      <h3>{t('home.digitalArt.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Digital Art</h3>
-                      <p>Digital illustrations and artwork created with modern tools.</p>
+                      <h3>{t('home.digitalArt.title')}</h3>
+                      <p>{t('home.digitalArt.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -377,13 +379,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Traditional Art</h3>
+                      <h3>{t('home.traditionalArt.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Traditional Art</h3>
-                      <p>Original paintings and drawings using traditional mediums.</p>
+                      <h3>{t('home.traditionalArt.title')}</h3>
+                      <p>{t('home.traditionalArt.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -400,13 +402,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Wildlife Photography</h3>
+                      <h3>{t('home.wildlifePhotography.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Wildlife Photography</h3>
-                      <p>Capturing the beauty of nature and wildlife.</p>
+                      <h3>{t('home.wildlifePhotography.title')}</h3>
+                      <p>{t('home.wildlifePhotography.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -423,13 +425,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Everyday Photography</h3>
+                      <h3>{t('home.everydayPhotography.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Everyday Photography</h3>
-                      <p>Finding beauty in the ordinary moments of life through the lens.</p>
+                      <h3>{t('home.everydayPhotography.title')}</h3>
+                      <p>{t('home.everydayPhotography.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -441,7 +443,7 @@ export default function HomePage() {
 
       <SectionGrid>
         <Section $span={12}>
-          <SectionTitle>Creative Services</SectionTitle>
+          <SectionTitle>{t('home.creativeServices')}</SectionTitle>
           <CardGrid $columns={4}>
             <ClickableCard href="/creative-services/brand-identity">
               <Card>
@@ -454,13 +456,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Brand Identity</h3>
+                      <h3>{t('home.brandIdentity.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Brand Identity</h3>
-                      <p>Professional brand design and identity development services.</p>
+                      <h3>{t('home.brandIdentity.title')}</h3>
+                      <p>{t('home.brandIdentity.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -477,13 +479,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Graphic Recording</h3>
+                      <h3>{t('home.graphicRecording.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Graphic Recording</h3>
-                      <p>Visual facilitation and graphic recording for meetings and events.</p>
+                      <h3>{t('home.graphicRecording.title')}</h3>
+                      <p>{t('home.graphicRecording.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -500,13 +502,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>UX/UI Design</h3>
+                      <h3>{t('home.uxUiDesign.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>UX/UI Design</h3>
-                      <p>Creating intuitive and engaging digital experiences.</p>
+                      <h3>{t('home.uxUiDesign.title')}</h3>
+                      <p>{t('home.uxUiDesign.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -523,13 +525,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Art Classes</h3>
+                      <h3>{t('home.artClasses.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Art Classes</h3>
-                      <p>Professional art classes and workshops in Vancouver.</p>
+                      <h3>{t('home.artClasses.title')}</h3>
+                      <p>{t('home.artClasses.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -541,7 +543,7 @@ export default function HomePage() {
 
       <SectionGrid>
         <Section $span={12}>
-          <SectionTitle>Tech</SectionTitle>
+          <SectionTitle>{t('home.tech')}</SectionTitle>
           <CardGrid $columns={2}>
             <ClickableCard href="/tech/engineering">
               <Card>
@@ -554,13 +556,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Software Engineering</h3>
+                      <h3>{t('home.softwareEngineering.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Software Engineering</h3>
-                      <p>Full-stack development, cloud architecture, and scalable systems design.</p>
+                      <h3>{t('home.softwareEngineering.title')}</h3>
+                      <p>{t('home.softwareEngineering.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -577,13 +579,13 @@ export default function HomePage() {
                       quality={85}
                     />
                     <CardContent $overlay>
-                      <h3>Tech Courses</h3>
+                      <h3>{t('home.techCourses.title')}</h3>
                     </CardContent>
                   </CardFace>
                   <CardFace $back>
                     <CardContent>
-                      <h3>Tech Courses</h3>
-                      <p>Online courses and workshops on web development, cloud computing, and more.</p>
+                      <h3>{t('home.techCourses.title')}</h3>
+                      <p>{t('home.techCourses.description')}</p>
                     </CardContent>
                   </CardFace>
                 </CardInner>
@@ -594,4 +596,4 @@ export default function HomePage() {
       </SectionGrid>
     </PageContainer>
   );
-} 
+}

@@ -5,40 +5,29 @@ Esta sección es tu **portafolio artístico personal** de fotografía de vida sa
 ## 🎨 Concepto del Diseño
 
 ### Experiencia de Usuario
-1. **Landing Page** - Una sola imagen impactante con título grande
-2. **Hamburger Menu** - Navegación flotante en la esquina superior derecha
-3. **Portfolio Page** - Galería de proyectos con información de cada foto
-4. **Modal de Imagen** - Vista en calidad completa sin opción de descarga
+1. **Landing Page** (`/my-art/wildlife-photography`) - Una sola imagen impactante con título grande
+2. **Gallery Page** (`/my-art/wildlife-photography/gallery`) - Galería de proyectos con información de cada foto
+3. **Modal de Imagen** - Vista en calidad completa sin opción de descarga
 
 ### Inspiración
 Diseño basado en el template de Wix que guardaste, adaptado para mostrar tu trabajo artístico de forma elegante y minimalista.
 
 ## 📋 Características
 
-### Landing Page
+### Landing Page (`/my-art/wildlife-photography`)
 - ✨ **Una sola imagen hero** que ocupa toda la pantalla
 - 📝 **Título grande** en Playfair Display
-- 🔘 **Botón "View Portfolio"** para entrar a la galería
+- 🔘 **Botón "View Gallery"** que navega a la página de galería
 - 🎨 Efecto de overlay oscuro para legibilidad
+- 🏠 **Botón Home** en esquina superior derecha para volver al inicio
 
-### Hamburger Menu
-- 🍔 Icono flotante en esquina superior derecha
-- ⚫ Fondo semi-transparente con blur
-- 📱 Menú full-screen al hacer click
-- 🔗 Navegación a:
-  - Home (landing page)
-  - Portfolio (galería)
-  - My Art (volver a sección general)
-  - Photography Services (servicios)
-
-### Portfolio Grid
-- 🖼️ **Grid responsive** (3 columnas → 2 → 1)
-- 📸 Cada foto muestra:
-  - **Título** (ej: "Silent Guardian")
-  - **Ubicación** (ej: "Tofino, British Columbia")
-  - **Fecha** (ej: "March 2024")
+### Gallery Page (`/my-art/wildlife-photography/gallery`)
+- 🖼️ **Grid responsive con masonry layout** (3 columnas → 2 → 1)
+- 📸 Carga automática de todas las fotos desde `wildlifeImages.json`
 - ↗️ Efecto hover: la imagen se eleva y hace zoom
 - 👆 Click para abrir en modal
+- ⬅️ **Botón "Back"** para regresar al landing
+- 🏠 **Botón Home** para ir al inicio del sitio
 
 ### Modal de Imagen
 - 🖥️ **Full-screen** con fondo negro 97% opacidad
@@ -104,22 +93,30 @@ Cada foto en el array `wildlifePhotos` tiene:
 
 ## 📁 Imágenes Necesarias
 
-Coloca tus fotos en `/public/images/wildlife/`:
+Coloca tus fotos en `/public/images/wildlife/gallery/`:
 
 ### Landing
-- `hero.jpg` - Imagen principal (horizontal, 1920x1080+)
+- `wildlife-landing.jpg` - Imagen principal (horizontal, 1920x1080+)
 
-### Portfolio (12 fotos)
-- `eagle-1.jpg`, `eagle-2.jpg`
-- `bear-1.jpg`, `bear-2.jpg`
-- `whale-1.jpg`, `whale-2.jpg`
-- `deer-1.jpg`, `deer-2.jpg`
-- `owl-1.jpg`
-- `fox-1.jpg`
-- `seal-1.jpg`
-- `wolf-1.jpg`
+### Portfolio
+- Las imágenes se cargan automáticamente desde `/src/data/wildlifeImages.json`
+- Todas las fotos están en `/public/images/wildlife/gallery/`
+- No necesitas agregar manualmente cada foto al código
 
-**Nota**: Todas las fotos del portfolio son verticales (ratio 4:5)
+**Nota**: Las fotos del portfolio pueden ser verticales u horizontales, el masonry layout se adapta automáticamente
+
+## 🔄 Estructura de Archivos
+
+```
+my-art/wildlife-photography/
+├── page.tsx                    # Landing page principal
+├── gallery/
+│   ├── page.tsx               # Página de galería
+│   └── metadata.ts            # SEO metadata para galería
+├── styles.ts                  # Estilos compartidos
+├── photoDetails.json          # Detalles opcionales de fotos
+└── README.md                  # Esta documentación
+```
 
 ## 🔒 Protección de Imágenes
 
@@ -138,39 +135,47 @@ Las imágenes están protegidas contra descarga:
 
 ## ✏️ Cómo Agregar/Editar Fotos
 
-### Agregar una nueva foto:
+### Agregar nuevas fotos:
 
-1. Sube la imagen a `/public/images/wildlife/`
-2. Edita `page.tsx`, busca el array `wildlifePhotos`
-3. Agrega un nuevo objeto:
+1. Sube la imagen a `/public/images/wildlife/gallery/`
+2. Ejecuta el script para regenerar la lista:
+   ```bash
+   node scripts/generateImageList.js
+   ```
+3. Las fotos aparecerán automáticamente en la galería
 
-```typescript
+### Agregar información a una foto (opcional):
+
+1. Edita `/src/app/my-art/wildlife-photography/photoDetails.json`
+2. Agrega un objeto con el nombre del archivo:
+
+```json
 {
-  id: 13,
-  src: '/images/wildlife/nueva-foto.jpg',
-  title: 'Tu Título',
-  location: 'Ubicación, BC',
-  date: 'Mes Año',
-  description: 'Descripción de la foto'
+  "filename": "A7T01234.jpg",
+  "title": "Título artístico",
+  "location": "Ubicación, BC",
+  "date": "Mes Año",
+  "description": "Descripción breve"
 }
 ```
 
-### Editar información de una foto existente:
+### Cambiar la imagen del landing:
 
-Simplemente edita los campos `title`, `location`, `date`, o `description` en el array.
+Reemplaza `/public/images/wildlife/wildlife-landing.jpg` con tu imagen preferida
 
 ## 🎯 Diferencias vs Diseño Anterior
 
-| Aspecto | Nuevo (Artístico) | Anterior (Comercial) |
-|---------|-------------------|----------------------|
-| **Propósito** | Portafolio personal | Venta de servicios |
-| **Landing** | 1 imagen + título | Hero con descripción |
-| **Navegación** | Hamburger menu | Scroll sections |
-| **Portfolio** | Grid con metadata | Masonry gallery |
-| **Información** | Título, lugar, fecha | Captions simples |
-| **Modal** | Full quality protegido | Componente estándar |
-| **Comercial** | NO | Sí (servicios, precios) |
-| **Background** | Negro puro (#000) | Blanco (#fff) |
+| Aspecto | Nuevo (Separado) | Anterior (Estado) |
+|---------|------------------|-------------------|
+| **URLs** | 2 páginas separadas | 1 página con estados |
+| **Landing** | `/my-art/wildlife-photography` | Vista condicional |
+| **Galería** | `/my-art/wildlife-photography/gallery` | Vista condicional |
+| **Navegación** | Next.js Link (real) | setState() |
+| **Navegación Browser** | ✅ Funciona | ❌ No funciona |
+| **URLs Compartibles** | ✅ Sí | ❌ No |
+| **Imágenes** | `<img>` nativo | ProtectedImage |
+| **Performance** | ✅ Mejor | Estado innecesario |
+| **Masonry Layout** | ✅ CSS columns | CSS columns |
 
 ## 🚀 Uso
 
@@ -179,14 +184,14 @@ cd camilalonart
 npm run dev
 ```
 
-Visita: `http://localhost:3000/my-art/wildlife-photography`
-
 ### Navegación:
-1. Verás la landing page con una imagen hero
-2. Click en "View Portfolio" o usa el menú hamburger
-3. Explora la galería de fotos
-4. Click en cualquier foto para verla en grande
-5. Click fuera del modal o en × para cerrar
+1. Visita: `http://localhost:3000/my-art/wildlife-photography`
+2. Verás la landing page con imagen hero
+3. Click en "View Gallery" → navega a `/gallery`
+4. Explora la galería con masonry layout
+5. Click en cualquier foto para modal
+6. Click "← Back" para regresar al landing
+7. Click home icon para ir al inicio
 
 ## 💡 Tips
 
@@ -206,25 +211,45 @@ Si quieres más protección, considera:
 ## 📝 Personalización Rápida
 
 ### Cambiar título de landing:
-Busca en `page.tsx`:
+Edita `/my-art/wildlife-photography/page.tsx`:
 ```tsx
 <LandingTitle>
-  Wildlife<br />Photography
+  Wild<br />Life
 </LandingTitle>
 ```
 
 ### Cambiar texto del botón:
 ```tsx
-<EnterButton>
-  View Portfolio
+<EnterButton as="a">
+  View Gallery
 </EnterButton>
 ```
 
-### Cambiar título de portfolio:
+### Cambiar título de galería:
+Edita `/my-art/wildlife-photography/gallery/page.tsx`:
 ```tsx
 <h1>Wildlife Portfolio</h1>
-<p>A personal collection...</p>
+<p>A personal collection of wildlife encounters across British Columbia</p>
 ```
+
+### Cambiar colores:
+Edita `styles.ts`:
+```typescript
+background: #000000;  // Fondo negro
+color: #ffffff;       // Texto blanco
+```
+
+---
+
+## ✅ Ventajas del Nuevo Diseño
+
+1. **URLs limpias y compartibles**: Cada vista tiene su propia URL
+2. **Mejor SEO**: Cada página tiene su propio metadata
+3. **Navegación browser**: Los botones back/forward funcionan correctamente
+4. **Más simple**: No necesita gestión de estado compleja
+5. **Mejor performance**: Carga solo lo necesario por página
+6. **Masonry automático**: Las imágenes se organizan perfectamente
+7. **Protección de imágenes**: Right-click y drag deshabilitado
 
 ---
 

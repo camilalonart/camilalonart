@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "photography": "Fotografía",
+    "myArt": "Mi Arte",
+    "creativeServices": "Servicios Creativos",
+    "tech": "Tecnología",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "home": {
+    "title": "Camilalonart",
+    "subtitle": "Fotógrafa profesional, artista e ingeniera de software en Vancouver, BC. Especializada en capturar momentos y crear experiencias visuales cautivadoras.",
+    "photographyServices": "Servicios de Fotografía",
+    "myArt": "Mi Arte",
+    "creativeServices": "Servicios Creativos",
+    "tech": "Tecnología",
+    "petPhotography": {
+      "title": "Fotografía de Mascotas",
+      "description": "Capturando la personalidad única y el espíritu de tus mascotas queridas."
+    },
+    "weddingCouples": {
+      "title": "Bodas y Parejas",
+      "description": "Capturando momentos atemporales de amor y conexión en los hermosos paisajes de Vancouver."
+    },
+    "headshots": {
+      "title": "Retratos Profesionales",
+      "description": "Retratos modernos y profesionales para individuos y clientes corporativos en Vancouver."
+    },
+    "familyMaternity": {
+      "title": "Familia y Maternidad",
+      "description": "Capturando los momentos preciosos de la vida con un enfoque natural y auténtico en Vancouver."
+    },
+    "events": {
+      "title": "Eventos",
+      "description": "Fotografía profesional de eventos capturando la energía y momentos de tus ocasiones especiales."
+    },
+    "digitalArt": {
+      "title": "Arte Digital",
+      "description": "Ilustraciones digitales y obras de arte creadas con herramientas modernas."
+    },
+    "traditionalArt": {
+      "title": "Arte Tradicional",
+      "description": "Pinturas y dibujos originales usando medios tradicionales."
+    },
+    "wildlifePhotography": {
+      "title": "Fotografía de Vida Salvaje",
+      "description": "Capturando la belleza de la naturaleza y la vida silvestre."
+    },
+    "everydayPhotography": {
+      "title": "Fotografía Cotidiana",
+      "description": "Encontrando belleza en los momentos ordinarios de la vida a través del lente."
+    },
+    "brandIdentity": {
+      "title": "Identidad de Marca",
+      "description": "Servicios profesionales de diseño y desarrollo de identidad de marca."
+    },
+    "graphicRecording": {
+      "title": "Registro Gráfico",
+      "description": "Facilitación visual y registro gráfico para reuniones y eventos."
+    },
+    "uxUiDesign": {
+      "title": "Diseño UX/UI",
+      "description": "Creando experiencias digitales intuitivas y atractivas."
+    },
+    "artClasses": {
+      "title": "Clases de Arte",
+      "description": "Clases y talleres de arte profesionales en Vancouver."
+    },
+    "softwareEngineering": {
+      "title": "Ingeniería de Software",
+      "description": "Desarrollo full-stack, arquitectura en la nube y diseño de sistemas escalables."
+    },
+    "techCourses": {
+      "title": "Cursos de Tecnología",
+      "description": "Cursos en línea y talleres sobre desarrollo web, computación en la nube y más."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Camilalonart. Todos los derechos reservados.",
+    "followMe": "Sígueme",
+    "quickLinks": "Enlaces Rápidos",
+    "services": "Servicios",
+    "legal": "Legal",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio"
+  },
+  "common": {
+    "learnMore": "Conoce Más",
+    "bookNow": "Reservar Ahora",
+    "viewPortfolio": "Ver Portafolio",
+    "contactUs": "Contáctanos",
+    "getStarted": "Empezar",
+    "backToHome": "Volver al Inicio",
+    "loading": "Cargando...",
+    "error": "Error",
+    "close": "Cerrar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "sending": "Enviando..."
+  }
+}

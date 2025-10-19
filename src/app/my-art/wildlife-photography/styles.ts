@@ -163,7 +163,7 @@ export const LandingImageContainer = styled.div`
 
 export const LandingContent = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 10;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -171,6 +171,11 @@ export const LandingContent = styled.div`
   justify-content: center;
   padding: 4rem;
   margin-left: 5rem;
+  pointer-events: none;
+  
+  * {
+    pointer-events: auto;
+  }
 `;
 
 export const LandingTitle = styled.h1`
@@ -206,6 +211,10 @@ export const EnterButton = styled.button`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 
   &::before {
     content: '';
@@ -282,6 +291,7 @@ export const BackButton = styled.button`
   margin-bottom: 3rem;
   transition: all 0.3s ease;
   display: inline-block;
+  text-decoration: none;
 
   &:hover {
     border-color: #ffffff;

@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Home",
+    "photography": "Photography",
+    "myArt": "My Art",
+    "creativeServices": "Creative Services",
+    "tech": "Tech",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Camilalonart",
+    "subtitle": "Professional photographer, artist, and software engineer based in Vancouver, BC. Specializing in capturing moments and creating engaging visual experiences.",
+    "photographyServices": "Photography Services",
+    "myArt": "My Art",
+    "creativeServices": "Creative Services",
+    "tech": "Tech",
+    "petPhotography": {
+      "title": "Pet Photography",
+      "description": "Capturing the unique personality and spirit of your beloved pets."
+    },
+    "weddingCouples": {
+      "title": "Wedding & Couples",
+      "description": "Capturing timeless moments of love and connection in beautiful Vancouver settings."
+    },
+    "headshots": {
+      "title": "Professional Headshots",
+      "description": "Modern, professional portraits for individuals and corporate clients in Vancouver."
+    },
+    "familyMaternity": {
+      "title": "Family & Maternity",
+      "description": "Capturing life's precious moments and milestones with a natural, authentic approach in Vancouver."
+    },
+    "events": {
+      "title": "Events",
+      "description": "Professional event photography capturing the energy and moments of your special occasions."
+    },
+    "digitalArt": {
+      "title": "Digital Art",
+      "description": "Digital illustrations and artwork created with modern tools."
+    },
+    "traditionalArt": {
+      "title": "Traditional Art",
+      "description": "Original paintings and drawings using traditional mediums."
+    },
+    "wildlifePhotography": {
+      "title": "Wildlife Photography",
+      "description": "Capturing the beauty of nature and wildlife."
+    },
+    "everydayPhotography": {
+      "title": "Everyday Photography",
+      "description": "Finding beauty in the ordinary moments of life through the lens."
+    },
+    "brandIdentity": {
+      "title": "Brand Identity",
+      "description": "Professional brand design and identity development services."
+    },
+    "graphicRecording": {
+      "title": "Graphic Recording",
+      "description": "Visual facilitation and graphic recording for meetings and events."
+    },
+    "uxUiDesign": {
+      "title": "UX/UI Design",
+      "description": "Creating intuitive and engaging digital experiences."
+    },
+    "artClasses": {
+      "title": "Art Classes",
+      "description": "Professional art classes and workshops in Vancouver."
+    },
+    "softwareEngineering": {
+      "title": "Software Engineering",
+      "description": "Full-stack development, cloud architecture, and scalable systems design."
+    },
+    "techCourses": {
+      "title": "Tech Courses",
+      "description": "Online courses and workshops on web development, cloud computing, and more."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Camilalonart. All rights reserved.",
+    "followMe": "Follow Me",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "bookNow": "Book Now",
+    "viewPortfolio": "View Portfolio",
+    "contactUs": "Contact Us",
+    "getStarted": "Get Started",
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "sending": "Sending..."
+  }
+}

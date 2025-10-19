@@ -24,26 +24,44 @@ Para que el deployment funcione correctamente:
    - `NEXT_PUBLIC_WEDDING_FORM_URL`
    - `NEXT_PUBLIC_PET_FORM_URL`
 
-### Solución al Error 128
+### Solución al Error 128 / 403 Permission Denied
 
-Si ves el error `exit code 128` en GitHub Actions:
+Si ves el error `exit code 128` o `Permission denied` en GitHub Actions:
 
-1. **Verificar permisos del workflow**:
-   - Ve a Settings → Actions → General
-   - En "Workflow permissions", selecciona "Read and write permissions"
-   - Marca "Allow GitHub Actions to create and approve pull requests"
+**El problema**: GitHub Actions no tiene permisos para hacer push a gh-pages.
 
-2. **Verificar GitHub Pages está habilitado**:
+**La solución correcta**:
+
+1. **Configurar GitHub Pages Source**:
+   - Ve a tu repositorio en GitHub
    - Settings → Pages
-   - Source debe ser "GitHub Actions" (no Deploy from a branch)
+   - En **Source**, selecciona **"GitHub Actions"** (NO "Deploy from a branch")
+   - Esto es CRÍTICO - debe ser "GitHub Actions"
 
-3. **Limpiar y rebuild**:
+2. **Verificar Permisos del Workflow**:
+   - Settings → Actions → General
+   - Scroll a "Workflow permissions"
+   - Selecciona **"Read and write permissions"**
+   - Marca ✅ **"Allow GitHub Actions to create and approve pull requests"**
+   - Click **Save**
+
+3. **El workflow ya está configurado correctamente** para usar `actions/deploy-pages@v4`
+   - NO usa `git push` (que causa el error 403)
+   - USA el método oficial de GitHub Pages deployment
+
+4. **Hacer un nuevo push**:
    ```bash
-   npm run build
    git add .
-   git commit -m "Fix deployment"
+   git commit -m "Fix GitHub Pages deployment configuration"
    git push origin main
    ```
+
+5. **Verificar el deployment**:
+   - Ve a la pestaña "Actions" en GitHub
+   - Mira el workflow en ejecución
+   - Debe completarse exitosamente en ~2-5 minutos
+
+**IMPORTANTE**: Si GitHub Pages Source está en "Deploy from a branch", el deployment SIEMPRE fallará con error 403.
 
 ### Deployment Manual (Emergencia)
 

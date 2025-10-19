@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { theme } from '../styles/theme';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Nav = styled.nav`
   position: fixed;
@@ -34,6 +35,16 @@ const NavContent = styled.div`
 
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  }
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.lg};
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    gap: ${theme.spacing.md};
   }
 `;
 
@@ -303,9 +314,12 @@ export default function Navigation() {
     <Nav className={isScrolled ? 'scrolled' : ''}>
       <NavContent>
         <Logo href="/">Camilalonart</Logo>
-        <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? '✕' : '☰'}
-        </MenuButton>
+        <RightSection>
+          <LanguageSwitcher />
+          <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? '✕' : '☰'}
+          </MenuButton>
+        </RightSection>
         <NavLinks $isOpen={isMenuOpen}>
           {navigation.map((item) => (
             <NavItem key={item.href}>
