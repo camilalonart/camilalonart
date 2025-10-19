@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import ProtectedImage from '../../../components/ProtectedImage';
 import wildlifeImagesData from '../../../data/wildlifeImages.json';
 import photoDetailsData from './photoDetails.json';
 import {
@@ -150,12 +151,13 @@ export default function WildlifePhotographyPage() {
                 onClick={() => handlePhotoClick(photo)}
               >
                 <PhotoImageWrapper>
-                  <Image
+                  <ProtectedImage
                     src={photo.src}
                     alt={photo.details?.title || 'Wildlife photo'}
                     width={800}
                     height={1200}
-                    style={{ width: '100%', height: 'auto' }}
+                    quality={85}
+                    objectFit="cover"
                   />
                 </PhotoImageWrapper>
               </PhotoCard>
@@ -171,14 +173,12 @@ export default function WildlifePhotographyPage() {
           <ModalContent>
             <ModalClose onClick={closeModal}>×</ModalClose>
             <ModalImage>
-              <Image
+              <ProtectedImage
                 src={selectedPhoto.src}
                 alt={selectedPhoto.details?.title || selectedPhoto.filename}
                 fill
                 quality={100}
-                style={{ objectFit: 'contain' }}
-                onContextMenu={(e) => e.preventDefault()} // Prevent right-click
-                draggable={false} // Prevent drag
+                objectFit="contain"
               />
             </ModalImage>
             {selectedPhoto.details && (
