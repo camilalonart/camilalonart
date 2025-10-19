@@ -88,14 +88,6 @@ const HeroImageContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    object-position: center 40% !important;
-    transform: scale(1.05);
-  }
 `;
 
 const Section = styled.section<{ $bgColor?: string }>`
@@ -290,7 +282,7 @@ export default function HeadshotsPage() {
       <Hero>
         <HeroImageContainer>
           <SecureImage
-            src="/images/headshots/hero-1.jpg"
+            src="/images/headshots/collage.png"
             alt="Professional headshots"
             priority
             quality={90}
