@@ -8,19 +8,19 @@ import { theme } from '../styles/theme';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from '../i18n/TranslationContext';
 
-const Nav = styled.nav`
+const Nav = styled.nav<{ $isDark?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: ${theme.colors.background.main};
-  box-shadow: ${theme.shadows.sm};
+  background-color: ${props => props.$isDark ? theme.colors.background.dark : theme.colors.background.main};
+  box-shadow: ${props => props.$isDark ? 'none' : theme.shadows.sm};
   z-index: 1000;
   transition: all 0.3s ease;
   padding-top: env(safe-area-inset-top, 0);
 
   &.scrolled {
-    background-color: rgba(255, 255, 255, 0.98);
+    background-color: ${props => props.$isDark ? 'rgba(26, 26, 26, 0.95)' : 'rgba(255, 255, 255, 0.98)'};
     backdrop-filter: blur(8px);
     box-shadow: ${theme.shadows.md};
   }
@@ -49,35 +49,36 @@ const RightSection = styled.div`
   }
 `;
 
-const Logo = styled(Link)`
+const Logo = styled(Link)<{ $isDark?: boolean }>`
   font-family: ${theme.typography.fontFamily.secondary};
   font-size: ${theme.typography.fontSize.xl};
   font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.primary.main};
+  color: ${props => props.$isDark ? theme.colors.text.light : theme.colors.primary.main};
   z-index: 1001;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.3s ease;
   padding: ${theme.spacing.xs} 0;
 
   &:hover {
     transform: scale(1.05);
+    color: ${props => props.$isDark ? theme.colors.secondary.main : theme.colors.primary.main};
   }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.button<{ $isDark?: boolean }>`
   display: none;
   background: none;
   border: none;
   font-size: ${theme.typography.fontSize.xl};
-  color: ${theme.colors.primary.main};
+  color: ${props => props.$isDark ? theme.colors.text.light : theme.colors.primary.main};
   cursor: pointer;
   z-index: 1001;
   padding: ${theme.spacing.sm};
   border-radius: ${theme.borderRadius.lg};
   transition: all 0.2s ease;
-  margin-right: -${theme.spacing.sm}; // Offset padding for better alignment
+  margin-right: -${theme.spacing.sm};
 
   &:hover {
-    background-color: ${theme.colors.background.light};
+    background-color: ${props => props.$isDark ? 'rgba(255,255,255,0.1)' : theme.colors.background.light};
     transform: scale(1.1);
   }
 
@@ -88,17 +89,18 @@ const MenuButton = styled.button`
   }
 `;
 
-const NavLinks = styled.div<{ $isOpen: boolean }>`
+const NavLinks = styled.div<{ $isOpen: boolean; $isDark?: boolean }>`
   display: flex;
   gap: ${theme.spacing.xl};
+  align-items: center;
 
   @media (max-width: ${theme.breakpoints.md}) {
     position: fixed;
-    top: calc(60px + env(safe-area-inset-top, 0)); // Account for header height + safe area
+    top: calc(60px + env(safe-area-inset-top, 0));
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: ${theme.colors.background.main};
+    background-color: ${props => props.$isDark ? theme.colors.background.dark : theme.colors.background.main};
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -113,7 +115,7 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
   }
 `;
 
-const NavItem = styled.div`
+const NavItem = styled.div<{ $isDark?: boolean }>`
   position: relative;
   
   &:hover > div {
@@ -123,11 +125,14 @@ const NavItem = styled.div`
   }
 `;
 
-const NavLink = styled.button<{ $active?: boolean }>`
+const NavLink = styled.button<{ $active?: boolean; $isDark?: boolean }>`
   background: none;
   border: none;
   font-size: ${theme.typography.fontSize.base};
-  color: ${props => props.$active ? theme.colors.primary.main : theme.colors.text.primary};
+  color: ${props => {
+    if (props.$active) return props.$isDark ? theme.colors.secondary.main : theme.colors.primary.main;
+    return props.$isDark ? theme.colors.text.light : theme.colors.text.primary;
+  }};
   font-weight: ${props => props.$active ? theme.typography.fontWeight.semibold : theme.typography.fontWeight.regular};
   cursor: pointer;
   padding: ${theme.spacing.sm} ${theme.spacing.md};
@@ -142,14 +147,14 @@ const NavLink = styled.button<{ $active?: boolean }>`
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: ${theme.colors.primary.main};
+    background-color: ${props => props.$isDark ? theme.colors.secondary.main : theme.colors.primary.main};
     transition: all 0.2s ease;
     transform: translateX(-50%);
   }
 
   &:hover {
-    color: ${theme.colors.primary.main};
-    background-color: ${theme.colors.background.light};
+    color: ${props => props.$isDark ? theme.colors.secondary.main : theme.colors.primary.main};
+    background-color: ${props => props.$isDark ? 'rgba(255,255,255,0.05)' : theme.colors.background.light};
 
     &:after {
       width: calc(100% - ${theme.spacing.lg});
@@ -250,11 +255,25 @@ const DropdownLink = styled(Link)<{ $active: boolean }>`
   }
 `;
 
+const LanguageWrapper = styled.div`
+  margin-left: ${theme.spacing.md};
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    margin-left: 0;
+    margin-top: ${theme.spacing.lg};
+  }
+`;
+
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { t } = useTranslation();
+
+  // Determine if we should use dark theme based on current page
+  const isDarkPage = pathname?.startsWith('/photography/pets') || 
+                     pathname?.startsWith('/photography/wedding') ||
+                     pathname?.startsWith('/my-art/wildlife');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -313,32 +332,41 @@ export default function Navigation() {
   ];
 
   return (
-    <Nav className={isScrolled ? 'scrolled' : ''}>
+    <Nav className={isScrolled ? 'scrolled' : ''} $isDark={isDarkPage} role="navigation" aria-label="Main navigation">
       <NavContent>
-        <Logo href="/">Camilalonart</Logo>
+        <Logo href="/" $isDark={isDarkPage} aria-label="Camilalonart - Home">Camilalonart</Logo>
         <RightSection>
-          <LanguageSwitcher />
-          <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <MenuButton 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            $isDark={isDarkPage}
+            aria-expanded={isMenuOpen}
+            aria-controls="main-navigation"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          >
             {isMenuOpen ? '✕' : '☰'}
           </MenuButton>
         </RightSection>
-        <NavLinks $isOpen={isMenuOpen}>
+        <NavLinks $isOpen={isMenuOpen} $isDark={isDarkPage} id="main-navigation" role="menubar">
           {navigation.map((item) => (
-            <NavItem key={item.href}>
+            <NavItem key={item.href} role="none">
               <NavLink
                 $active={pathname?.startsWith(item.href)}
+                $isDark={isDarkPage}
                 onClick={() => item.items && setIsMenuOpen(false)}
+                role="menuitem"
+                aria-haspopup={item.items ? 'true' : undefined}
+                aria-expanded={item.items ? undefined : undefined}
               >
-                
                 {item.title}
               </NavLink>
               {item.items && (
-                <Dropdown>
+                <Dropdown role="menu" aria-label={`${item.title} submenu`}>
                   {item.items.map((subItem) => (
                     <DropdownLink
                       key={subItem.href}
                       href={subItem.href}
                       $active={pathname === subItem.href || false}
+                      role="menuitem"
                     >
                       {subItem.title}
                     </DropdownLink>
@@ -347,6 +375,9 @@ export default function Navigation() {
               )}
             </NavItem>
           ))}
+          <LanguageWrapper>
+            <LanguageSwitcher isDark={isDarkPage} />
+          </LanguageWrapper>
         </NavLinks>
       </NavContent>
     </Nav>

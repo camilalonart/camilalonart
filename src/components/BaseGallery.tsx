@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import ProtectedImage from './ProtectedImage';
+import Image from 'next/image';
+import ImageModal from './ImageModal';
 
 const GalleryContainer = styled.div`
   width: 100%;
@@ -72,6 +73,7 @@ const GalleryItem = styled.div`
   margin-bottom: ${theme.spacing.lg};
   cursor: pointer;
   transition: transform 0.3s ease;
+  position: relative;
   
   &:hover {
     transform: translateY(-5px);
@@ -85,87 +87,16 @@ const GalleryItem = styled.div`
   }
 `;
 
-const Modal = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: ${theme.spacing.xl};
-  cursor: pointer;
-
-  .modal-content {
-    position: relative;
-    max-width: 95vw;
-    max-height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  img {
-    max-width: 95vw;
-    max-height: 95vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: ${theme.borderRadius.md};
-  }
-
-  .close-button {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: ${theme.spacing.sm};
-    
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: ${theme.spacing.md};
-    
-    &.prev {
-      left: ${theme.spacing.xl};
-    }
-    
-    &.next {
-      right: ${theme.spacing.xl};
-    }
-    
-    &:hover {
-      opacity: 0.8;
-    }
-    
-    @media (max-width: ${theme.breakpoints.md}) {
-      font-size: 1.5rem;
-      padding: ${theme.spacing.sm};
-      
-      &.prev {
-        left: ${theme.spacing.sm};
-      }
-      
-      &.next {
-        right: ${theme.spacing.sm};
-      }
-    }
-  }
+const Watermark = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  pointer-events: none;
 `;
 
 export interface BaseGalleryProps {
@@ -185,15 +116,13 @@ const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText })
     setSelectedImage(null);
   };
 
-  const handlePrevious = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrevious = () => {
     if (selectedImage !== null) {
       setSelectedImage((selectedImage - 1 + images.length) % images.length);
     }
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = () => {
     if (selectedImage !== null) {
       setSelectedImage((selectedImage + 1) % images.length);
     }
@@ -208,30 +137,28 @@ const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText })
         <MasonryGrid>
           {images.map((image, index) => (
             <GalleryItem key={index} onClick={() => handleImageClick(index)}>
-              <ProtectedImage
+              <Image
                 src={image.src}
                 alt={image.alt}
+                width={800}
+                height={600}
                 quality={85}
-                objectFit="cover"
+                style={{ width: '100%', height: 'auto' }}
               />
+              <Watermark>© Camilalonart</Watermark>
             </GalleryItem>
           ))}
         </MasonryGrid>
 
         {selectedImage !== null && (
-          <Modal onClick={handleClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <button className="close-button" onClick={handleClose}>×</button>
-              <button className="nav-button prev" onClick={handlePrevious}>‹</button>
-              <ProtectedImage
-                src={images[selectedImage].src}
-                alt={images[selectedImage].alt}
-                quality={100}
-                objectFit="contain"
-              />
-              <button className="nav-button next" onClick={handleNext}>›</button>
-            </div>
-          </Modal>
+          <ImageModal
+            isOpen={selectedImage !== null}
+            onClose={handleClose}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            src={images[selectedImage].src}
+            alt={images[selectedImage].alt}
+          />
         )}
       </GalleryContainer>
     </>

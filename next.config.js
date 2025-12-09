@@ -3,7 +3,6 @@ const nextConfig = {
   output: 'export',  // Enable static exports
   images: {
     unoptimized: true, // Required for static export
-    domains: ['localhost'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,13 +14,11 @@ const nextConfig = {
     styledComponents: true,
   },
   trailingSlash: true,
-  // Add basePath if you're not using a custom domain
-  // basePath: '/portfolio-website',
+  // Expose public environment variables
   env: {
-    // Only expose public env variables here
-  },
-  publicRuntimeConfig: {
-    // Public configs (be careful what you expose)
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://camilalonart.com',
+    NEXT_PUBLIC_WEDDING_FORM_URL: process.env.NEXT_PUBLIC_WEDDING_FORM_URL || '',
+    NEXT_PUBLIC_PET_FORM_URL: process.env.NEXT_PUBLIC_PET_FORM_URL || '',
   },
   // Ensure static files are copied to output
   webpack: (config, { isServer }) => {

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Montserrat, Cormorant_Garamond, Playfair_Display } from 'next/font/google';
+import { Montserrat, Cormorant_Garamond, Playfair_Display, Poppins } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/registry';
 import RootLayoutClient from '../components/RootLayoutClient';
 import { TranslationProvider } from '../i18n/TranslationContext';
+import { baseMetadata, generateLocalBusinessSchema, generatePhotographerSchema } from '../lib/seo';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -21,6 +22,15 @@ const playfair = Playfair_Display({
   weight: ['400', '500', '600', '700'],
   variable: '--font-playfair',
 });
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+});
+
+// Use the comprehensive SEO metadata
+export const metadata = baseMetadata;
 
 const navigation = [
   {
@@ -64,11 +74,9 @@ const navigation = [
   }
 ];
 
-export const metadata = {
-  title: 'Camilalonart - Photography & Creative Services',
-  description: 'Professional photography services including weddings, elopements, portraits, wildlife, and creative services including graphic recording, illustrations, and UX/UI design.',
-  keywords: 'photography, wedding photography, elopement, portraits, wildlife photography, graphic recording, illustrations, UX/UI design',
-};
+// Generate structured data for the business
+const localBusinessSchema = generateLocalBusinessSchema();
+const photographerSchema = generatePhotographerSchema();
 
 export default function RootLayout({
   children,
@@ -76,14 +84,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} ${playfair.variable} ${poppins.variable}`}>
+      <head>
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(photographerSchema) }}
+        />
+      </head>
       <body>
         <StyledComponentsRegistry>
           <TranslationProvider>
-            <RootLayoutClient 
-              montserratClass={montserrat.variable} 
-              cormorantClass={cormorant.variable}
-            >
+            <RootLayoutClient>
               {children}
             </RootLayoutClient>
           </TranslationProvider>

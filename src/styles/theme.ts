@@ -37,8 +37,9 @@ export const theme = {
   },
   typography: {
     fontFamily: {
-      primary: "'Montserrat', sans-serif",
-      secondary: "'Cormorant Garamond', serif",
+      primary: "var(--font-montserrat), 'Montserrat', sans-serif",
+      secondary: "var(--font-cormorant), 'Cormorant Garamond', serif",
+      poppins: "var(--font-poppins), 'Poppins', sans-serif",
     },
     fontSize: {
       xs: '0.75rem',

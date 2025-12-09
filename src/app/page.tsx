@@ -226,7 +226,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/pets/A7T05911.jpg"
                       alt="Pet Photography"
                       priority
@@ -249,7 +249,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/wedding/A7T09955.jpg"
                       alt="Wedding & Couples"
                       priority
@@ -272,7 +272,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/photography/headshots.jpg"
                       alt="Professional Headshots"
                       priority
@@ -295,7 +295,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/photography/family-maternity-hero.jpg"
                       alt="Family & Maternity Photography"
                       priority
@@ -318,7 +318,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/photography/eventos-hero.jpg"
                       alt="Event Photography"
                       priority
@@ -349,7 +349,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/art/digital.jpg"
                       alt="Digital Art"
                       priority
@@ -372,7 +372,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/art/traditional.jpg"
                       alt="Traditional Art"
                       priority
@@ -395,7 +395,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/wildlife/wildlife-landing.jpg"
                       alt="Wildlife Photography"
                       priority
@@ -418,7 +418,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/art/everyday.jpg"
                       alt="Everyday Photography"
                       priority
@@ -449,7 +449,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/creative/brand-identity.jpg"
                       alt="Brand Identity"
                       priority
@@ -472,7 +472,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/creative/graphic-recording.jpg"
                       alt="Graphic Recording"
                       priority
@@ -495,7 +495,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/creative/ux-ui.jpg"
                       alt="UX/UI Design"
                       priority
@@ -518,7 +518,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/creative/art-classes.jpg"
                       alt="Art Classes"
                       priority
@@ -549,7 +549,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/tech/software-engineering.jpg"
                       alt="Software Engineering"
                       priority
@@ -572,7 +572,7 @@ export default function HomePage() {
               <Card>
                 <CardInner>
                   <CardFace>
-                    <StyledSecureImage
+                    <StyledSecureImage showWatermark={false}
                       src="/images/tech/courses.jpg"
                       alt="Tech Courses"
                       priority

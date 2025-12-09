@@ -13,7 +13,7 @@ import 'react-multi-carousel/lib/styles.css';
 const PageContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
-  background-color:rgb(26, 20, 15);
+  background-color:rgba(0, 0, 0, 1);
   color: #2C3E50;
 `;
 
@@ -103,7 +103,7 @@ const HeroContent = styled.div`
     line-height: 1.1;
     letter-spacing: 0.1em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p {
@@ -206,7 +206,7 @@ const SectionTitle = styled.h1`
   margin-bottom: ${theme.spacing.sm};
   font-weight: 700;
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${theme.typography.fontFamily.poppins};
   letter-spacing: 0.2em;
 
   &::after {
@@ -287,7 +287,7 @@ const ServiceCard = styled.div`
     font-weight: 800;
     margin-top: ${theme.spacing.xl};
     margin-bottom: ${theme.spacing.md};
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   .price {
@@ -397,7 +397,7 @@ const GalleryPreview = styled.div`
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     margin-bottom: ${theme.spacing.lg};
     font-weight: 500;
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p {
@@ -445,7 +445,7 @@ const FooterContent = styled.div`
     font-size: 1.4rem;
     margin-bottom: ${theme.spacing.xl};
     color: rgb(169, 125, 30);
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p, ul {
@@ -574,7 +574,7 @@ const FAQSection = styled.section`
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
     margin-bottom: ${theme.spacing['2xl']};
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -606,7 +606,7 @@ const FAQItem = styled.div`
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p {
@@ -626,7 +626,7 @@ const ReviewSection = styled.section`
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     margin-bottom: ${theme.spacing['2xl']};
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 `;
 
@@ -696,7 +696,7 @@ const ReviewImage = styled.div`
 
 const ProcessSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
-  background: rgb(26, 20, 15);
+  background: rgba(16, 16, 16, 1);
 
   h2 {
     text-align: center;
@@ -787,7 +787,7 @@ const StepContent = styled.div`
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p {
@@ -823,7 +823,7 @@ export default function PetsPage() {
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
-            src="/images/pets/A7T05648-3.jpg"
+            src="/images/pets/gallery/A7T06602.jpg"
             alt="Happy dog portrait"
             fill
             style={{ objectFit: 'cover' }}
@@ -862,7 +862,7 @@ export default function PetsPage() {
         </SectionDivider>
       </Section>
 
-      <Section $bgColor="rgb(26, 20, 15)">
+      <Section $bgColor="rgba(2, 1, 1, 1)">
         <SectionTitle>Our Services</SectionTitle>
         <ServicesSection>
           {[
@@ -924,39 +924,35 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875.jpg')} $isMiddle>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575-2.jpg')} $isMiddle>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06875.jpg"
+              src="/images/pets/gallery/A7T06575-2.jpg"
               alt="Pet portrait"
               fill
-              style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06520.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06581.jpg')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06520.jpg"
+              src="/images/pets/gallery/A7T06581.jpg"
               alt="Pet portrait"
               fill
-              style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875-2.jpg')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06575.jpg"
+              src="/images/pets/gallery/A7T06875-2.jpg"
               alt="Pet portrait"
               fill
-              style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06679.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06602.jpg')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06679.jpg"
+              src="/images/pets/gallery/A7T06602.jpg"
               alt="Pet portrait"
               fill
-              style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>

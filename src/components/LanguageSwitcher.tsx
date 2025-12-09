@@ -3,57 +3,36 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from '../i18n/TranslationContext';
+import { theme } from '../styles/theme';
 
 const LanguageSwitcherContainer = styled.div`
   position: relative;
   z-index: 1000;
 `;
 
-const LanguageButton = styled.button<{ $isOpen: boolean }>`
+const IconButton = styled.button<{ $isOpen: boolean; $isDark?: boolean }>`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: ${props => props.$isOpen ? '#f0f0f0' : '#ffffff'};
-  border: 1px solid #e0e0e0;
-  border-radius: 24px;
-  color: #333;
-  font-size: 14px;
-  font-weight: 500;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: ${props => props.$isOpen 
+    ? (props.$isDark ? 'rgba(255,255,255,0.1)' : theme.colors.background.light) 
+    : 'transparent'};
+  border: none;
+  border-radius: 50%;
+  color: ${props => props.$isDark ? theme.colors.text.light : theme.colors.primary.main};
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
   
   &:hover {
-    background: #f5f5f5;
-    border-color: #A97D1E;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    background: ${props => props.$isDark ? 'rgba(255,255,255,0.15)' : theme.colors.background.light};
   }
 
   svg {
-    transition: transform 0.3s ease;
-    transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
-  }
-
-  @media (max-width: 768px) {
-    padding: 6px 12px;
-    font-size: 13px;
-  }
-`;
-
-const Flag = styled.span`
-  font-size: 20px;
-  line-height: 1;
-  
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
-`;
-
-const LanguageName = styled.span`
-  @media (max-width: 480px) {
-    display: none;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -61,48 +40,47 @@ const Dropdown = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 160px;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  background: ${theme.colors.background.main};
+  border-radius: 8px;
+  box-shadow: ${theme.shadows.lg};
   opacity: ${props => props.$isOpen ? 1 : 0};
   visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
-  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
-  transition: all 0.3s ease;
+  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-8px)'};
+  transition: all 0.2s ease;
   overflow: hidden;
-  backdrop-filter: blur(10px);
+  border: 1px solid ${theme.colors.border.light};
 `;
 
 const LanguageOption = styled.button<{ $isActive: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: ${props => props.$isActive ? 'rgba(169, 125, 30, 0.1)' : 'transparent'};
+  gap: 10px;
+  padding: 10px 14px;
+  background: ${props => props.$isActive ? theme.colors.background.light : 'transparent'};
   border: none;
-  color: ${props => props.$isActive ? '#A97D1E' : '#333'};
-  font-size: 14px;
-  font-weight: ${props => props.$isActive ? '600' : '500'};
+  color: ${props => props.$isActive ? theme.colors.secondary.main : theme.colors.text.primary};
+  font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${props => props.$isActive ? '600' : '400'};
+  font-family: ${theme.typography.fontFamily.primary};
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   text-align: left;
 
   &:hover {
-    background: rgba(169, 125, 30, 0.08);
-    color: #A97D1E;
+    background: ${theme.colors.background.light};
+    color: ${theme.colors.secondary.main};
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid ${theme.colors.border.light};
   }
 `;
 
-const CheckIcon = styled.span<{ $visible: boolean }>`
-  margin-left: auto;
-  opacity: ${props => props.$visible ? 1 : 0};
-  color: #A97D1E;
+const Flag = styled.span`
   font-size: 16px;
+  line-height: 1;
 `;
 
 const languages = [
@@ -110,12 +88,23 @@ const languages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
-export default function LanguageSwitcher() {
+// Globe icon component
+const GlobeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
+interface LanguageSwitcherProps {
+  isDark?: boolean;
+}
+
+export default function LanguageSwitcher({ isDark = false }: LanguageSwitcherProps) {
   const { locale, setLocale } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -135,17 +124,15 @@ export default function LanguageSwitcher() {
 
   return (
     <LanguageSwitcherContainer ref={containerRef}>
-      <LanguageButton
+      <IconButton
         onClick={() => setIsOpen(!isOpen)}
         $isOpen={isOpen}
+        $isDark={isDark}
         aria-label="Change language"
+        title="Change language"
       >
-        <Flag>{currentLanguage.flag}</Flag>
-        <LanguageName>{currentLanguage.name}</LanguageName>
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-          <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </LanguageButton>
+        <GlobeIcon />
+      </IconButton>
 
       <Dropdown $isOpen={isOpen}>
         {languages.map(lang => (
@@ -156,7 +143,6 @@ export default function LanguageSwitcher() {
           >
             <Flag>{lang.flag}</Flag>
             <span>{lang.name}</span>
-            <CheckIcon $visible={lang.code === locale}>✓</CheckIcon>
           </LanguageOption>
         ))}
       </Dropdown>

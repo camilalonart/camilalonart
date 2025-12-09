@@ -94,21 +94,21 @@ export default function Footer() {
           <h3>About</h3>
           <p>
             Professional photographer and creative artist specializing in weddings,
-            wildlife, portraits, and commercial photography. Based in [Location],
+            wildlife, portraits, and commercial photography. Based in Vancouver, BC,
             available worldwide.
           </p>
           <SocialLinks>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/instagram.svg" alt="Instagram" width="20" height="20" />
+            <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
+              <img src="/icons/instagram.svg" alt="" width="20" height="20" />
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/facebook.svg" alt="Facebook" width="20" height="20" />
+            <a href="https://facebook.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Follow on Facebook">
+              <img src="/icons/facebook.svg" alt="" width="20" height="20" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/linkedin.svg" alt="LinkedIn" width="20" height="20" />
+            <a href="https://linkedin.com/in/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
+              <img src="/icons/linkedin.svg" alt="" width="20" height="20" />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/github.svg" alt="GitHub" width="20" height="20" />
+            <a href="https://github.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+              <img src="/icons/github.svg" alt="" width="20" height="20" />
             </a>
           </SocialLinks>
         </FooterSection>

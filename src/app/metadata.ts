@@ -1,35 +1,35 @@
 import { Metadata } from 'next';
 
 const baseMetadata: Metadata = {
-  metadataBase: new URL('https://your-domain.com'),
+  metadataBase: new URL('https://camilalonart.com'),
   title: {
-    default: 'Professional Photography Services',
-    template: '%s | Professional Photography Services'
+    default: 'Camilalonart - Photography & Creative Services',
+    template: '%s | Camilalonart'
   },
-  description: 'Professional photography services specializing in weddings, pets, family portraits, maternity, and headshots. Capturing your special moments with artistic excellence.',
-  keywords: ['photography', 'wedding photography', 'pet photography', 'family portraits', 'maternity photos', 'headshots'],
-  authors: [{ name: 'Your Name' }],
-  creator: 'Your Name',
+  description: 'Professional photography and creative services in Vancouver, BC. Specializing in weddings, pets, family portraits, headshots, graphic recording, and UX/UI design.',
+  keywords: ['photography', 'wedding photography', 'pet photography', 'family portraits', 'maternity photos', 'headshots', 'graphic recording', 'UX/UI design', 'Vancouver photographer'],
+  authors: [{ name: 'Camilalonart' }],
+  creator: 'Camilalonart',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com',
-    siteName: 'Professional Photography Services',
-    title: 'Professional Photography Services',
-    description: 'Professional photography services specializing in weddings, pets, family portraits, maternity, and headshots.',
+    url: 'https://camilalonart.com',
+    siteName: 'Camilalonart',
+    title: 'Camilalonart - Photography & Creative Services',
+    description: 'Professional photography and creative services in Vancouver, BC. Specializing in weddings, pets, family portraits, headshots, graphic recording, and UX/UI design.',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Professional Photography Services'
+        alt: 'Camilalonart - Photography & Creative Services'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Professional Photography Services',
-    description: 'Professional photography services specializing in weddings, pets, family portraits, maternity, and headshots.',
+    title: 'Camilalonart - Photography & Creative Services',
+    description: 'Professional photography and creative services in Vancouver, BC. Specializing in weddings, pets, family portraits, headshots, and more.',
     images: ['/images/og-image.jpg']
   },
   robots: {
@@ -43,9 +43,6 @@ const baseMetadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-site-verification',
-  }
 };
 
 export const getMetadata = (title: string, description: string, path: string): Metadata => ({
@@ -56,7 +53,7 @@ export const getMetadata = (title: string, description: string, path: string): M
     ...baseMetadata.openGraph,
     title,
     description,
-    url: `https://your-domain.com${path}`,
+    url: `https://camilalonart.com${path}`,
   },
   twitter: {
     ...baseMetadata.twitter,

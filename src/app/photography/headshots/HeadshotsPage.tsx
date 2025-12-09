@@ -59,7 +59,7 @@ const HeroContent = styled.div`
     line-height: 1.1;
     letter-spacing: 0.1em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.typography.fontFamily.poppins};
   }
 
   p {
@@ -107,7 +107,7 @@ const SectionTitle = styled.h2`
   margin-bottom: ${theme.spacing.sm};
   font-weight: 700;
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${theme.typography.fontFamily.poppins};
   letter-spacing: 0.2em;
 
   &::after {

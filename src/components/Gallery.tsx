@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+'use client';
+
+import React, { useState, useCallback, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
-import ProtectedImage from './ProtectedImage';
+import SecureImage from './SecureImage';
+
+const shimmer = keyframes`
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+`;
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
 
 const GalleryContainer = styled.div`
   width: 100%;
@@ -67,17 +79,33 @@ const GalleryItem = styled.div`
   margin-bottom: ${theme.spacing.lg};
   cursor: pointer;
   transition: transform 0.3s ease;
+  animation: ${fadeIn} 0.5s ease;
+  border-radius: ${theme.borderRadius.md};
+  overflow: hidden;
   
   &:hover {
     transform: translateY(-5px);
   }
   
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: ${theme.borderRadius.md};
+  &:focus-visible {
+    outline: 2px solid ${theme.colors.secondary.main};
+    outline-offset: 2px;
   }
+`;
+
+const SkeletonItem = styled.div<{ $height: number }>`
+  break-inside: avoid;
+  margin-bottom: ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.md};
+  height: ${props => props.$height}px;
+  background: linear-gradient(
+    90deg,
+    ${theme.colors.background.light} 25%,
+    ${theme.colors.border.light} 50%,
+    ${theme.colors.background.light} 75%
+  );
+  background-size: 200% 100%;
+  animation: ${shimmer} 1.5s infinite;
 `;
 
 const Modal = styled.div`
@@ -90,6 +118,7 @@ const Modal = styled.div`
   z-index: 1000;
   padding: ${theme.spacing.xl};
   cursor: pointer;
+  animation: ${fadeIn} 0.2s ease;
 
   .modal-content {
     position: relative;
@@ -98,15 +127,6 @@ const Modal = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  img {
-    max-width: 95vw;
-    max-height: 95vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: ${theme.borderRadius.md};
   }
 
   .close-button {
@@ -122,6 +142,11 @@ const Modal = styled.div`
     
     &:hover {
       opacity: 0.8;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
   }
 
@@ -152,12 +177,14 @@ const Modal = styled.div`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
     font-size: 2rem;
     cursor: pointer;
     padding: ${theme.spacing.md};
+    border-radius: ${theme.borderRadius.md};
+    transition: background 0.2s ease;
     
     &.prev {
       left: ${theme.spacing.xl};
@@ -168,7 +195,12 @@ const Modal = styled.div`
     }
     
     &:hover {
-      opacity: 0.8;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
     
     @media (max-width: ${theme.breakpoints.md}) {
@@ -186,66 +218,167 @@ const Modal = styled.div`
   }
 `;
 
-interface GalleryProps {
-  images: { src: string; alt: string }[];
+const ImageCounter = styled.div`
+  position: absolute;
+  bottom: ${theme.spacing.lg};
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: ${theme.typography.fontSize.sm};
+  background: rgba(0, 0, 0, 0.5);
+  padding: ${theme.spacing.xs} ${theme.spacing.md};
+  border-radius: ${theme.borderRadius.md};
+`;
+
+interface GalleryImage {
+  src: string;
+  alt: string;
 }
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => {
+interface GalleryProps {
+  images: GalleryImage[];
+  backUrl?: string;
+  backLabel?: string;
+  isLoading?: boolean;
+}
+
+const Gallery: React.FC<GalleryProps> = ({ 
+  images, 
+  backUrl = '/photography/wedding-couples',
+  backLabel = 'Back to Wedding & Couples',
+  isLoading = false,
+}) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const handleImageClick = (index: number) => {
+  const handleImageClick = useCallback((index: number) => {
     setSelectedImage(index);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
 
-  const handlePrevious = (e: React.MouseEvent) => {
+  const handlePrevious = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedImage !== null) {
       setSelectedImage((selectedImage - 1 + images.length) % images.length);
     }
-  };
+  }, [selectedImage, images.length]);
 
-  const handleNext = (e: React.MouseEvent) => {
+  const handleNext = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedImage !== null) {
       setSelectedImage((selectedImage + 1) % images.length);
     }
-  };
+  }, [selectedImage, images.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage === null) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          handleClose();
+          break;
+        case 'ArrowLeft':
+          setSelectedImage((selectedImage - 1 + images.length) % images.length);
+          break;
+        case 'ArrowRight':
+          setSelectedImage((selectedImage + 1) % images.length);
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, images.length, handleClose]);
+
+  // Generate random heights for skeleton items
+  const skeletonHeights = [250, 350, 300, 400, 280, 320];
+
+  if (isLoading) {
+    return (
+      <>
+        <BackButton href={backUrl} aria-label={backLabel}>
+          {backLabel}
+        </BackButton>
+        <GalleryContainer>
+          <MasonryGrid>
+            {skeletonHeights.map((height, index) => (
+              <SkeletonItem key={index} $height={height} aria-hidden="true" />
+            ))}
+          </MasonryGrid>
+        </GalleryContainer>
+      </>
+    );
+  }
 
   return (
     <>
-      <BackButton href="/photography/wedding-couples">
-        Back to Wedding & Couples
+      <BackButton href={backUrl} aria-label={backLabel}>
+        {backLabel}
       </BackButton>
       <GalleryContainer>
-        <MasonryGrid>
+        <MasonryGrid role="list" aria-label="Image gallery">
           {images.map((image, index) => (
-            <GalleryItem key={index} onClick={() => handleImageClick(index)}>
-              <ProtectedImage
+            <GalleryItem 
+              key={index} 
+              onClick={() => handleImageClick(index)}
+              onKeyDown={(e) => e.key === 'Enter' && handleImageClick(index)}
+              role="listitem"
+              tabIndex={0}
+              aria-label={`View ${image.alt}`}
+            >
+              <SecureImage
                 src={image.src}
                 alt={image.alt}
                 quality={85}
                 objectFit="cover"
+                showWatermark={false}
               />
             </GalleryItem>
           ))}
         </MasonryGrid>
 
         {selectedImage !== null && (
-          <Modal onClick={handleClose}>
+          <Modal 
+            onClick={handleClose}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image viewer"
+          >
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <button className="close-button" onClick={handleClose}>×</button>
-              <button className="nav-button prev" onClick={handlePrevious}>‹</button>
-              <ProtectedImage
+              <button 
+                className="close-button" 
+                onClick={handleClose}
+                aria-label="Close image viewer"
+              >
+                ×
+              </button>
+              <button 
+                className="nav-button prev" 
+                onClick={handlePrevious}
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+              <SecureImage
                 src={images[selectedImage].src}
                 alt={images[selectedImage].alt}
                 quality={100}
                 objectFit="contain"
               />
-              <button className="nav-button next" onClick={handleNext}>›</button>
+              <button 
+                className="nav-button next" 
+                onClick={handleNext}
+                aria-label="Next image"
+              >
+                ›
+              </button>
+              <ImageCounter>
+                {selectedImage + 1} / {images.length}
+              </ImageCounter>
             </div>
           </Modal>
         )}

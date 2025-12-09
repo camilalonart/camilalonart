@@ -1,12 +1,14 @@
+'use client';
+
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import ProtectedImage from './ProtectedImage';
+import Image from 'next/image';
 
 const ModalOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,11 +19,34 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  max-width: 95vw;
-  max-height: 95vh;
+  width: 90vw;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  img {
+    object-fit: contain;
+  }
+`;
+
+const Watermark = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
 `;
 
 const CloseButton = styled.button`
@@ -126,35 +151,34 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   return (
     <ModalOverlay onClick={onClose}>
-      <CloseButton onClick={onClose}>×</CloseButton>
+      <CloseButton onClick={onClose} aria-label="Close modal">×</CloseButton>
       {onPrevious && (
         <NavigationButton className="prev" onClick={(e) => {
           e.stopPropagation();
           onPrevious();
-        }}>
+        }} aria-label="Previous image">
           ‹
         </NavigationButton>
       )}
       <ModalContent onClick={handleContentClick}>
-        <ProtectedImage
-          src={src}
-          alt={alt}
-          quality={100}
-          objectFit="contain"
-          style={{
-            maxWidth: '95vw',
-            maxHeight: '95vh',
-            width: 'auto',
-            height: 'auto',
-            borderRadius: theme.borderRadius.md
-          }}
-        />
+        <ImageWrapper>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            quality={100}
+            sizes="90vw"
+            style={{ objectFit: 'contain' }}
+            priority
+          />
+          <Watermark>© Camilalonart</Watermark>
+        </ImageWrapper>
       </ModalContent>
       {onNext && (
         <NavigationButton className="next" onClick={(e) => {
           e.stopPropagation();
           onNext();
-        }}>
+        }} aria-label="Next image">
           ›
         </NavigationButton>
       )}

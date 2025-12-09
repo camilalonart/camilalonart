@@ -6,6 +6,7 @@ import { theme } from '../../../styles/theme';
 import ContactForm from '../../../components/ContactForm';
 import ProtectedImage from '../../../components/ProtectedImage';
 import WeddingInquiryForm from '../../../components/WeddingInquiryForm';
+import ImageModal from '../../../components/ImageModal';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -436,24 +437,7 @@ const BookButton = styled.button`
   }
 `;
 
-const ImageModal = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: ${theme.spacing.xl};
-  cursor: pointer;
-
-  img {
-    max-width: 95%;
-    max-height: 95vh;
-    object-fit: contain;
-    border-radius: ${theme.borderRadius.md};
-  }
-`;
+// Removed local ImageModal styled component - using imported ImageModal component instead
 
 const SectionDivider = styled.div`
   width: 100%;
@@ -1244,7 +1228,7 @@ export default function WeddingCouplesPage() {
             alt="Happy couple on their wedding day"
             height="100%"
             priority
-            quality={100}
+            quality={75}
           />
         </HeroImageContainer>
         <HeroContent>
@@ -1271,7 +1255,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T00021.jpg"
             alt="Couple portrait"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
@@ -1279,7 +1263,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T01233Crop.jpg"
             alt="Hands with rings"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={5}>
@@ -1287,7 +1271,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09955.jpg"
             alt="Couple kissing"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
       </SectionDivider>
@@ -1375,7 +1359,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09634.jpg"
             alt="Bride and ring"
             height="110%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.jpg')}>
@@ -1383,7 +1367,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09834.jpg"
             alt="Flowers"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.jpg')}>
@@ -1391,7 +1375,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T09612.jpg"
             alt="Bride"
             height="110%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
       </SectionDivider>
@@ -1445,7 +1429,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T01425.jpg"
             alt="Signing"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
@@ -1453,7 +1437,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T01396.jpg"
             alt="Couple portrait"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={5}>
@@ -1461,7 +1445,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T01413-2.jpg"
             alt="Bride and best friend"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
       </SectionDivider>
@@ -1481,7 +1465,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T00849.jpg"
             alt="Couple portrait"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
@@ -1489,7 +1473,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T00765.jpg"
             alt="Signing"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
         <DividerImage $span={5}>
@@ -1497,7 +1481,7 @@ export default function WeddingCouplesPage() {
             src="/images/wedding/A7T00438.jpg"
             alt="Bride and best friend"
             height="100%"
-            quality={100}
+            quality={75}
           />
         </DividerImage>
       </SectionDivider>
@@ -1518,7 +1502,7 @@ export default function WeddingCouplesPage() {
               src="/images/wedding/A7T09940.jpg"
               alt="Emily and Luca's elopement"
               height="100%"
-              quality={100}
+              quality={75}
             />
           </TestimonialImage>
         </TestimonialContainer>
@@ -1579,14 +1563,12 @@ export default function WeddingCouplesPage() {
       </SEOFooter>
 
       {selectedImage && (
-        <ImageModal onClick={() => setSelectedImage(undefined)}>
-          <ProtectedImage
-            src={selectedImage}
-            alt="Wedding moment"
-            quality={100}
-            objectFit="contain"
-          />
-        </ImageModal>
+        <ImageModal
+          isOpen={!!selectedImage}
+          onClose={() => setSelectedImage(undefined)}
+          src={selectedImage}
+          alt="Wedding moment"
+        />
       )}
 
       {isModalOpen && (

@@ -1,6 +1,16 @@
 'use client';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { theme } from '../styles/theme';
+
+const pulse = keyframes`
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+`;
 
 const LoadingContainer = styled.div`
   display: flex;
@@ -8,16 +18,16 @@ const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: ${theme.colors.background.dark};
 `;
 
 const Spinner = styled.div`
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(201, 160, 80, 0.2);
+  border-top-color: ${theme.colors.secondary.main};
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 
   @keyframes spin {
     to {
@@ -27,17 +37,20 @@ const Spinner = styled.div`
 `;
 
 const LoadingText = styled.p`
-  color: white;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  font-weight: 500;
+  color: ${theme.colors.text.muted};
+  font-size: ${theme.typography.fontSize.sm};
+  margin-top: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: ${pulse} 1.5s ease-in-out infinite;
 `;
 
 export default function Loading() {
   return (
     <LoadingContainer>
       <Spinner />
-      <LoadingText>Loading...</LoadingText>
+      <LoadingText>Loading</LoadingText>
     </LoadingContainer>
   );
 }
