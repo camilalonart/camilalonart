@@ -86,17 +86,19 @@ const Copyright = styled.div`
   opacity: 0.8;
 `;
 
-export default function Footer() {
+interface FooterProps {
+  aboutText?: string;
+}
+
+const defaultAboutText = "Professional photographer and creative artist specializing in weddings, wildlife, portraits, and commercial photography. Based in Vancouver, BC, available worldwide.";
+
+export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
   return (
     <FooterContainer>
       <FooterContent>
         <FooterSection>
           <h3>About</h3>
-          <p>
-            Professional photographer and creative artist specializing in weddings,
-            wildlife, portraits, and commercial photography. Based in Vancouver, BC,
-            available worldwide.
-          </p>
+          <p>{aboutText}</p>
         </FooterSection>
 
         <FooterSection>

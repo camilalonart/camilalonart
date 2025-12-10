@@ -778,7 +778,7 @@ export default function HeadshotsPage() {
         </FormContainer>
       </Section>
 
-      <Footer />
+      <Footer aboutText="Specializing in professional headshots for executives, actors, and LinkedIn profiles. Crafting images that convey confidence and authenticity. Based in Vancouver, BC." />
     </PageContainer>
   );
 } 

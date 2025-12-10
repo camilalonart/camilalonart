@@ -273,7 +273,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/photography/headshots.jpg"
+                      src="/images/headshots/portfolio-0.jpg"
                       alt="Professional Headshots"
                       priority
                       quality={85}
