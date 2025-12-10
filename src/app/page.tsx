@@ -6,12 +6,26 @@ import Link from 'next/link';
 import { theme } from '../styles/theme';
 import SecureImage from '../components/SecureImage';
 import { useTranslation } from '../i18n/TranslationContext';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const PageContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: clamp(${theme.spacing.lg}, 3vw, ${theme.spacing.xl});
   width: 100%;
+  position: relative;
+`;
+
+const LanguageSwitcherWrapper = styled.div`
+  position: absolute;
+  top: ${theme.spacing.lg};
+  right: ${theme.spacing.lg};
+  z-index: 100;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    top: ${theme.spacing.md};
+    right: ${theme.spacing.md};
+  }
 `;
 
 const Hero = styled.section`
@@ -211,6 +225,10 @@ export default function HomePage() {
   
   return (
     <PageContainer>
+      <LanguageSwitcherWrapper>
+        <LanguageSwitcher />
+      </LanguageSwitcherWrapper>
+      
       <Hero>
         <h1>{t('home.title')}</h1>
         <p>

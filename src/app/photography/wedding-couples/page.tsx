@@ -1188,11 +1188,11 @@ const InquirySection = styled.section`
 `;
 
 const InquiryFormContainer = styled.div`
-  max-width: 1400px;
+  max-width: 800px;
   margin: 0 auto;
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.lg};
+  background: #FDFBF9;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   position: relative;
 `;

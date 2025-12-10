@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { theme } from '../styles/theme';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const FooterContainer = styled.footer`
   background-color: ${theme.colors.background.dark};
@@ -78,12 +81,32 @@ const SocialLinks = styled.div`
 `;
 
 const Copyright = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${theme.spacing.lg};
   margin-top: ${theme.spacing['3xl']};
-  padding-top: ${theme.spacing.xl};
+  padding: ${theme.spacing.xl} ${theme.spacing['2xl']};
   border-top: 1px solid ${theme.colors.background.light};
   color: ${theme.colors.text.light};
   opacity: 0.8;
+  flex-wrap: wrap;
+`;
+
+const CopyrightText = styled.span`
+  text-align: center;
+`;
+
+const LanguageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+  color: ${theme.colors.text.light};
+  font-size: ${theme.typography.fontSize.sm};
+  
+  span {
+    opacity: 0.7;
+  }
 `;
 
 interface FooterProps {
@@ -151,7 +174,11 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
       </FooterContent>
 
       <Copyright>
-        © {new Date().getFullYear()} Camilalonart. All rights reserved.
+        <CopyrightText>© {new Date().getFullYear()} Camilalonart. All rights reserved.</CopyrightText>
+        <LanguageWrapper>
+          <span>|</span>
+          <LanguageSwitcher isDark />
+        </LanguageWrapper>
       </Copyright>
     </FooterContainer>
   );

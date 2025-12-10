@@ -1,255 +1,437 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const shimmer = keyframes`
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+`;
+
+const float = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+`;
 
 const ModalOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: ${theme.spacing.xl};
+  padding: ${theme.spacing.lg};
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
 const ModalContent = styled.div<{ $embedded?: boolean }>`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  max-width: ${props => props.$embedded ? '1400px' : '800px'};
-  width: 95%;
+  background: ${props => props.$embedded ? 'transparent' : '#FDFBF9'};
+  border-radius: ${props => props.$embedded ? '0' : '24px'};
+  max-width: ${props => props.$embedded ? '700px' : '600px'};
+  width: 100%;
+  margin: ${props => props.$embedded ? '0 auto' : '0'};
   max-height: ${props => props.$embedded ? 'none' : '90vh'};
   overflow-y: ${props => props.$embedded ? 'visible' : 'auto'};
   position: relative;
-  box-shadow: ${props => props.$embedded ? 'none' : theme.shadows.lg};
+  box-shadow: ${props => props.$embedded ? 'none' : '0 40px 80px rgba(0, 0, 0, 0.25)'};
+  animation: ${fadeIn} 0.4s ease-out;
   
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
+  &::-webkit-scrollbar { width: 0; }
 `;
 
-const ModalHeader = styled.div`
-  padding: ${theme.spacing.md};
-  border-bottom: 1px solid #E5E5E5;
-  position: sticky;
-  top: 0;
-  background: white;
-  border-radius: ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 0;
-  z-index: 1;
-
-  h2 {
-    font-size: clamp(1.4rem, 2.6vw, 2rem);
-    color: #796B5F;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  .close-button {
-    position: absolute;
-    top: ${theme.spacing.lg};
-    right: ${theme.spacing.lg};
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: ${theme.colors.text.secondary};
-    padding: ${theme.spacing.xs};
-    
-    &:hover {
-      color: ${theme.colors.text.primary};
-    }
-  }
-`;
-
-const Form = styled.form<{ $embedded?: boolean }>`
-  padding: ${props => props.$embedded ? `${theme.spacing['2xl']} ${theme.spacing['3xl']}` : theme.spacing.xl};
-  position: relative;
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.lg};
-  }
-`;
-
-const FormRow = styled.div<{ $embedded?: boolean }>`
-  display: grid;
-  grid-template-columns: ${props => props.$embedded 
-    ? 'repeat(auto-fit, minmax(200px, 1fr))'
-    : 'repeat(auto-fit, minmax(250px, 1fr))'};
-  gap: ${theme.spacing.lg};
-  margin-bottom: ${theme.spacing.lg};
-  
-  @media (min-width: ${theme.breakpoints.xl}) {
-    grid-template-columns: ${props => props.$embedded 
-      ? 'repeat(3, 1fr)'
-      : 'repeat(auto-fit, minmax(250px, 1fr))'};
-  }
-`;
-
-const FormGroup = styled.div<{ $embedded?: boolean }>`
-  margin-bottom: ${props => props.$embedded ? theme.spacing.xl : theme.spacing.lg};
-
-  label {
-    display: block;
-    margin-bottom: ${theme.spacing.sm};
-    color: ${theme.colors.text.secondary};
-    font-size: ${props => props.$embedded ? '0.95rem' : '0.9rem'};
-    letter-spacing: 0.02em;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    padding: ${theme.spacing.md};
-    border: 1px solid #E5E5E5;
-    border-radius: ${theme.borderRadius.sm};
-    font-size: ${props => props.$embedded ? '1.1rem' : '1rem'};
-    transition: all 0.3s ease;
-    background: ${props => props.$embedded ? '#FAFAFA' : 'white'};
-    
-    &:focus {
-      outline: none;
-      border-color: ${theme.colors.primary.main};
-      box-shadow: 0 0 0 2px ${theme.colors.primary.light};
-      background: white;
-    }
-  }
-
-  textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-
-  select {
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1em;
-  }
-`;
-
-const SubmitButtonWrapper = styled.div<{ $embedded?: boolean }>`
-  ${props => props.$embedded ? `
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: ${theme.spacing.lg} 0;
-    z-index: 10;
-  ` : ''}
-`;
-
-const SubmitButton = styled.button<{ $embedded?: boolean }>`
-  width: 100%;
-  max-width: ${props => props.$embedded ? '400px' : '100%'};
-  margin: ${props => props.$embedded ? '0 auto' : '0'};
-  padding: ${theme.spacing.lg};
-  background: ${theme.colors.primary.main};
-  color: white;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
   border: none;
-  border-radius: ${theme.borderRadius.sm};
-  font-size: 1.1rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #796B5F;
   transition: all 0.3s ease;
-  display: block;
+  z-index: 10;
   
   &:hover {
-    background: ${theme.colors.primary.dark};
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+  }
+`;
+
+const FormHeader = styled.div`
+  text-align: center;
+  padding: 48px 40px 32px;
+  background: linear-gradient(180deg, rgba(201, 160, 80, 0.08) 0%, transparent 100%);
+  
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #4A4039;
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.02em;
+  }
+  
+  p {
+    color: #8A7B6D;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+`;
+
+const StepIndicator = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 40px 24px;
+`;
+
+const StepDot = styled.button<{ $active: boolean; $completed: boolean }>`
+  width: ${props => props.$active ? '32px' : '10px'};
+  height: 10px;
+  border-radius: 5px;
+  border: none;
+  background: ${props => 
+    props.$completed ? '#C9A050' : 
+    props.$active ? 'linear-gradient(90deg, #C9A050, #D4B76A)' : 
+    '#E5DED6'};
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const Form = styled.form`
+  padding: 0 40px 40px;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: 0 24px 32px;
+  }
+`;
+
+const StepContent = styled.div<{ $active: boolean }>`
+  display: ${props => props.$active ? 'block' : 'none'};
+  animation: ${fadeIn} 0.4s ease-out;
+`;
+
+const StepTitle = styled.h3`
+  font-size: 1.1rem;
+  color: #C9A050;
+  font-weight: 500;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #E5DED6, transparent);
+  }
+`;
+
+const InputGroup = styled.div`
+  margin-bottom: 24px;
+  
+  label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8A7B6D;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid #E5DED6;
+  font-size: 1.1rem;
+  color: #4A4039;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  
+  &::placeholder {
+    color: #C5B9AC;
+  }
+  
+  &:focus {
+    outline: none;
+    border-bottom-color: #C9A050;
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #E5DED6;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #4A4039;
+  background: #FAFAF8;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  min-height: 120px;
+  resize: vertical;
+  
+  &::placeholder {
+    color: #C5B9AC;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #C9A050;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(201, 160, 80, 0.1);
+  }
+`;
+
+const SelectWrapper = styled.div`
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #8A7B6D;
+    pointer-events: none;
+  }
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid #E5DED6;
+  font-size: 1.1rem;
+  color: #4A4039;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  
+  &:focus {
+    outline: none;
+    border-bottom-color: #C9A050;
+  }
+  
+  option {
+    padding: 12px;
+  }
+`;
+
+const PackageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const PackageCard = styled.button<{ $selected: boolean }>`
+  padding: 20px;
+  border: 2px solid ${props => props.$selected ? '#C9A050' : '#E5DED6'};
+  border-radius: 16px;
+  background: ${props => props.$selected ? 'rgba(201, 160, 80, 0.08)' : 'white'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  
+  &:hover {
+    border-color: #C9A050;
     transform: translateY(-2px);
   }
   
-  &:active {
-    transform: translateY(0);
+  .icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4A4039;
+    margin-bottom: 4px;
+  }
+  
+  .desc {
+    font-size: 0.85rem;
+    color: #8A7B6D;
   }
 `;
 
-const HiddenForm = styled.iframe`
-  display: none;
+const TwoColumn = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const NotificationWrapper = styled.div<{ $type: 'success' | 'error' }>`
-  position: fixed;
-  top: ${theme.spacing.xl};
-  right: ${theme.spacing.xl};
-  padding: ${theme.spacing.lg} ${theme.spacing.xl};
-  background: ${props => props.$type === 'success' ? '#4CAF50' : '#f44336'};
-  color: white;
-  border-radius: ${theme.borderRadius.sm};
-  box-shadow: ${theme.shadows.md};
-  z-index: 1100;
-  animation: slideIn 0.3s ease;
-  max-width: 400px;
+const ButtonRow = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+`;
 
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
+const Button = styled.button<{ $primary?: boolean; $loading?: boolean }>`
+  flex: 1;
+  padding: 18px 32px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  ${props => props.$primary ? `
+    background: linear-gradient(135deg, #4A4039 0%, #3A3229 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 20px rgba(74, 64, 57, 0.3);
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(74, 64, 57, 0.4);
     }
-    to {
-      transform: translateX(0);
-      opacity: 1;
+  ` : `
+    background: transparent;
+    color: #8A7B6D;
+    border: 1px solid #E5DED6;
+    
+    &:hover:not(:disabled) {
+      border-color: #C9A050;
+      color: #C9A050;
     }
+  `}
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    top: ${theme.spacing.md};
-    right: ${theme.spacing.md};
-    left: ${theme.spacing.md};
-  }
+  
+  ${props => props.$loading && `
+    background: linear-gradient(90deg, #C9A050 0%, #D4B76A 50%, #C9A050 100%);
+    background-size: 200% 100%;
+    animation: ${shimmer} 1.5s infinite;
+  `}
 `;
 
-const LoadingSpinner = styled.div`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: ${theme.spacing.md};
+const Spinner = styled.div`
+  width: 18px;
+  height: 18px;
   border: 2px solid rgba(255,255,255,0.3);
   border-radius: 50%;
   border-top-color: white;
   animation: spin 0.8s linear infinite;
-
+  
   @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
   }
 `;
 
-const IframeContainer = styled.div<{ $embedded?: boolean }>`
-  width: 100%;
-  height: ${props => props.$embedded ? '800px' : '600px'};
-  padding: ${theme.spacing.xl};
-
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    max-width: 100%;
-    max-height: 100vh;
+const SuccessContent = styled.div`
+  text-align: center;
+  padding: 60px 40px;
+  animation: ${fadeIn} 0.5s ease-out;
+  
+  .icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #C9A050, #D4B76A);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 2rem;
+    color: white;
+    animation: ${float} 2s ease-in-out infinite;
   }
+  
+  h3 {
+    font-size: 1.8rem;
+    color: #4A4039;
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+  
+  p {
+    color: #8A7B6D;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto 32px;
+  }
+`;
 
+const Notification = styled.div<{ $type: 'success' | 'error' }>`
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 16px 24px;
+  background: ${props => props.$type === 'success' ? '#4CAF50' : '#E53935'};
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  z-index: 1100;
+  animation: ${fadeIn} 0.4s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.lg};
-    height: ${props => props.$embedded ? '700px' : '500px'};
+    left: 24px;
+    right: 24px;
   }
 `;
 
 const WEDDING_SCRIPT_URL = process.env.NEXT_PUBLIC_WEDDING_FORM_URL;
 
-// Temporary debug - remove after fixing
-if (typeof window !== 'undefined') {  // Only log in browser
-  console.log('Form URL:', WEDDING_SCRIPT_URL);
-}
+const packages = [
+  { id: 'Elopement', name: 'Elopement', icon: '💍', desc: 'Intimate ceremony' },
+  { id: 'Engagement', name: 'Engagement', icon: '💑', desc: 'Celebrate your love' },
+  { id: 'Couples', name: 'Couples', icon: '❤️', desc: 'Portrait session' },
+  { id: 'Photobooks', name: 'Photobooks', icon: '📖', desc: 'Custom albums' },
+];
 
 interface WeddingInquiryFormProps {
   isOpen: boolean;
@@ -259,6 +441,7 @@ interface WeddingInquiryFormProps {
 }
 
 export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, embedded = false }: WeddingInquiryFormProps) {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -275,12 +458,20 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const totalSteps = 3;
+
+  const handleNext = () => {
+    if (step < totalSteps) setStep(step + 1);
+  };
+
+  const handlePrev = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submission started');
     
     if (!WEDDING_SCRIPT_URL) {
-      console.error('Form submission URL not configured');
       setSubmitStatus('error');
       setErrorMessage('Form submission URL not configured');
       return;
@@ -288,225 +479,234 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    setErrorMessage('');
 
     try {
-      console.log('Submitting to:', WEDDING_SCRIPT_URL);
-      console.log('Form data:', formData);
-      
-      const response = await fetch(WEDDING_SCRIPT_URL, {
+      await fetch(WEDDING_SCRIPT_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
         mode: 'no-cors'
       });
 
-      // When using no-cors, we can't read the response
-      // So we'll assume success if the request doesn't throw an error
       setSubmitStatus('success');
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        package: selectedPackage || '',
-        location: '',
-        about: '',
-        message: '',
-        referral: ''
+        name: '', email: '', phone: '', date: '',
+        package: selectedPackage || '', location: '',
+        about: '', message: '', referral: ''
       });
 
-      // Close modal after success if not embedded
       if (!embedded) {
-        setTimeout(() => {
-          onClose();
-        }, 2000);
+        setTimeout(() => onClose(), 3000);
       }
     } catch (error) {
-      console.error('Submission error:', error);
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Auto-hide notifications after 5 seconds
   useEffect(() => {
     if (submitStatus === 'success' || submitStatus === 'error') {
-      const timer = setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
+      const timer = setTimeout(() => setSubmitStatus('idle'), 5000);
       return () => clearTimeout(timer);
     }
   }, [submitStatus]);
 
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   if (!isOpen) return null;
 
-  const formContent = (
-    <Form onSubmit={handleSubmit} $embedded={embedded}>
-      <FormRow $embedded={embedded}>
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="name">Full Name *</label>
-          <input
+  const successContent = (
+    <SuccessContent>
+      <div className="icon">✓</div>
+      <h3>Thank You</h3>
+      <p>Your inquiry has been received. We'll be in touch within 24-48 hours to discuss your special day.</p>
+      <Button $primary onClick={onClose}>Close</Button>
+    </SuccessContent>
+  );
+
+  const formContent = submitStatus === 'success' ? successContent : (
+    <Form onSubmit={handleSubmit}>
+      <StepContent $active={step === 1}>
+        <StepTitle>Your Details</StepTitle>
+        <InputGroup>
+          <label>Full Name *</label>
+          <Input
             type="text"
-            id="name"
+            placeholder="Enter your name"
             required
             value={formData.name}
             onChange={e => setFormData({...formData, name: e.target.value})}
           />
-        </FormGroup>
-        
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="email">Email Address *</label>
-          <input
-            type="email"
-            id="email"
+        </InputGroup>
+        <TwoColumn>
+          <InputGroup>
+            <label>Email *</label>
+            <Input
+              type="email"
+              placeholder="your@email.com"
+              required
+              value={formData.email}
+              onChange={e => setFormData({...formData, email: e.target.value})}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label>Phone</label>
+            <Input
+              type="tel"
+              placeholder="(123) 456-7890"
+              value={formData.phone}
+              onChange={e => setFormData({...formData, phone: e.target.value})}
+            />
+          </InputGroup>
+        </TwoColumn>
+      </StepContent>
+
+      <StepContent $active={step === 2}>
+        <StepTitle>Session Details</StepTitle>
+        <InputGroup>
+          <label>Choose a Package *</label>
+        </InputGroup>
+        <PackageGrid>
+          {packages.map(pkg => (
+            <PackageCard
+              key={pkg.id}
+              type="button"
+              $selected={formData.package === pkg.id}
+              onClick={() => setFormData({...formData, package: pkg.id})}
+            >
+              <div className="icon">{pkg.icon}</div>
+              <div className="name">{pkg.name}</div>
+              <div className="desc">{pkg.desc}</div>
+            </PackageCard>
+          ))}
+        </PackageGrid>
+        <TwoColumn>
+          <InputGroup>
+            <label>Preferred Date</label>
+            <Input
+              type="date"
+              value={formData.date}
+              onChange={e => setFormData({...formData, date: e.target.value})}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label>Location</label>
+            <Input
+              type="text"
+              placeholder="City or venue"
+              value={formData.location}
+              onChange={e => setFormData({...formData, location: e.target.value})}
+            />
+          </InputGroup>
+        </TwoColumn>
+      </StepContent>
+
+      <StepContent $active={step === 3}>
+        <StepTitle>Tell Us More</StepTitle>
+        <InputGroup>
+          <label>Your Vision *</label>
+          <TextArea
+            placeholder="Share your ideas, style preferences, and what you're looking for..."
             required
-            value={formData.email}
-            onChange={e => setFormData({...formData, email: e.target.value})}
+            value={formData.message}
+            onChange={e => setFormData({...formData, message: e.target.value})}
           />
-        </FormGroup>
-
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="phone">Phone Number *</label>
-          <input
-            type="tel"
-            id="phone"
-            required
-            value={formData.phone}
-            onChange={e => setFormData({...formData, phone: e.target.value})}
+        </InputGroup>
+        <InputGroup>
+          <label>About You (Optional)</label>
+          <TextArea
+            placeholder="Tell us a bit about yourselves and your story..."
+            value={formData.about}
+            onChange={e => setFormData({...formData, about: e.target.value})}
           />
-        </FormGroup>
-      </FormRow>
+        </InputGroup>
+        <InputGroup>
+          <label>How did you find us?</label>
+          <SelectWrapper>
+            <Select
+              value={formData.referral}
+              onChange={e => setFormData({...formData, referral: e.target.value})}
+            >
+              <option value="">Select an option</option>
+              <option value="Google">Google</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Friend">Friend Referral</option>
+              <option value="Other">Other</option>
+            </Select>
+          </SelectWrapper>
+        </InputGroup>
+      </StepContent>
 
-      <FormRow $embedded={embedded}>
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="date">Preferred Date & Time</label>
-          <input
-            type="datetime-local"
-            id="date"
-            value={formData.date}
-            onChange={e => setFormData({...formData, date: e.target.value})}
-          />
-        </FormGroup>
-        
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="package">Package of Interest *</label>
-          <select
-            id="package"
-            required
-            value={formData.package}
-            onChange={e => setFormData({...formData, package: e.target.value})}
-          >
-            <option value="">Select a package</option>
-            <option value="Elopement">Elopement</option>
-            <option value="Engagement">Engagement Session</option>
-            <option value="Couples">Couples Session</option>
-            <option value="Photobooks">Photobooks</option>
-          </select>
-        </FormGroup>
-        
-        <FormGroup $embedded={embedded}>
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="location"
-            placeholder="City, venue, or general area"
-            value={formData.location}
-            onChange={e => setFormData({...formData, location: e.target.value})}
-          />
-        </FormGroup>
-      </FormRow>
-
-      <FormGroup $embedded={embedded}>
-        <label htmlFor="message">Tell us about your vision *</label>
-        <textarea
-          id="message"
-          required
-          placeholder="Share your ideas, questions, or any specific details about what you're looking for..."
-          value={formData.message}
-          onChange={e => setFormData({...formData, message: e.target.value})}
-        />
-      </FormGroup>
-
-      <FormGroup $embedded={embedded}>
-        <label htmlFor="aboutYou">Tell us about you</label>
-        <textarea
-          id="aboutYou"
-          placeholder="Share a bit about yourselves"
-          value={formData.about}
-          onChange={e => setFormData({...formData, about: e.target.value})}
-        />
-      </FormGroup>
-
-      <FormGroup $embedded={embedded}>
-        <label htmlFor="referral">How did you hear about us?</label>
-        <input
-          type="text"
-          id="referral"
-          placeholder="Google, Instagram, friend referral, etc."
-          value={formData.referral}
-          onChange={e => setFormData({...formData, referral: e.target.value})}
-        />
-      </FormGroup>
-
-      <SubmitButtonWrapper $embedded={embedded}>
-        <SubmitButton type="submit" disabled={isSubmitting} $embedded={embedded}>
-          {isSubmitting ? (
-            <>
-              Sending...
-              <LoadingSpinner />
-            </>
-          ) : (
-            'Send Inquiry'
-          )}
-        </SubmitButton>
-      </SubmitButtonWrapper>
+      <ButtonRow>
+        {step > 1 && (
+          <Button type="button" onClick={handlePrev}>
+            ← Back
+          </Button>
+        )}
+        {step < totalSteps ? (
+          <Button type="button" $primary onClick={handleNext}>
+            Continue →
+          </Button>
+        ) : (
+          <Button type="submit" $primary disabled={isSubmitting} $loading={isSubmitting}>
+            {isSubmitting ? <><Spinner /> Sending...</> : 'Send Inquiry'}
+          </Button>
+        )}
+      </ButtonRow>
     </Form>
   );
 
-  // Render notification if exists
-  const notificationElement = (submitStatus === 'success' || submitStatus === 'error') && (
-    <NotificationWrapper $type={submitStatus === 'success' ? 'success' : 'error'}>
-      {submitStatus === 'success' 
-        ? 'Inquiry sent successfully!' 
-        : errorMessage || 'Failed to send inquiry. Please try again.'}
-    </NotificationWrapper>
+  const notification = (submitStatus === 'success' || submitStatus === 'error') && (
+    <Notification $type={submitStatus}>
+      {submitStatus === 'success' ? '✓ Sent successfully!' : errorMessage || 'Failed to send. Please try again.'}
+    </Notification>
   );
 
   if (embedded) {
     return (
-      <>
-        <ModalContent $embedded={true}>
-          <ModalHeader>
-            <h2>Request Information</h2>
-          </ModalHeader>
-          {formContent}
-        </ModalContent>
-        {notificationElement}
-      </>
+      <ModalContent $embedded>
+        <FormHeader>
+          <h2>Let's Create Magic</h2>
+          <p>Tell us about your special day</p>
+        </FormHeader>
+        <StepIndicator>
+          {[1, 2, 3].map(s => (
+            <StepDot
+              key={s}
+              $active={s === step}
+              $completed={s < step}
+              onClick={() => setStep(s)}
+            />
+          ))}
+        </StepIndicator>
+        {formContent}
+        {notification}
+      </ModalContent>
     );
   }
 
   return (
-    <ModalOverlay onClick={handleOverlayClick}>
+    <ModalOverlay onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <h2>Request Information</h2>
-          <button className="close-button" onClick={onClose}>×</button>
-        </ModalHeader>
+        <CloseButton onClick={onClose}>×</CloseButton>
+        <FormHeader>
+          <h2>Let's Create Magic</h2>
+          <p>Tell us about your special day</p>
+        </FormHeader>
+        <StepIndicator>
+          {[1, 2, 3].map(s => (
+            <StepDot
+              key={s}
+              $active={s === step}
+              $completed={s < step}
+              onClick={() => setStep(s)}
+            />
+          ))}
+        </StepIndicator>
         {formContent}
+        {notification}
       </ModalContent>
-      {notificationElement}
     </ModalOverlay>
   );
-} 
+}
