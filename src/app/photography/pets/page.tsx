@@ -1022,9 +1022,9 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05223.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T09275-2.jpg')}>
             <ProtectedImage
-              src="/images/pets/A7T05223-horizontal.jpg"
+              src="/images/pets/gallery/A7T09275-2.jpg"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}

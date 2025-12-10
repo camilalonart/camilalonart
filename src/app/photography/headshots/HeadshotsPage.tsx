@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
-import ContactForm from '../../../components/ContactForm';
 import SecureImage from '../../../components/SecureImage';
+import Footer from '../../../components/Footer';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -269,11 +269,260 @@ const FAQItem = styled.div`
   }
 `;
 
+// Headshots Inquiry Form Styles
+const FormContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+  padding: ${theme.spacing.xl};
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 248, 245, 0.98) 100%);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+`;
+
+const FormHeader = styled.div`
+  text-align: center;
+  margin-bottom: ${theme.spacing.xl};
+  
+  h3 {
+    font-size: 1.8rem;
+    color: rgb(44, 62, 80);
+    margin-bottom: ${theme.spacing.sm};
+    font-family: ${theme.typography.fontFamily.poppins};
+  }
+  
+  p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.lg};
+`;
+
+const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${theme.spacing.md};
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.xs};
+`;
+
+const Label = styled.label`
+  font-weight: 500;
+  color: rgb(44, 62, 80);
+  font-size: 0.95rem;
+  
+  span {
+    color: rgb(169, 125, 30);
+  }
+`;
+
+const Input = styled.input`
+  padding: ${theme.spacing.md};
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  
+  &:focus {
+    outline: none;
+    border-color: rgb(169, 125, 30);
+    box-shadow: 0 0 0 3px rgba(169, 125, 30, 0.15);
+  }
+  
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+const Select = styled.select`
+  padding: ${theme.spacing.md};
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  
+  &:focus {
+    outline: none;
+    border-color: rgb(169, 125, 30);
+    box-shadow: 0 0 0 3px rgba(169, 125, 30, 0.15);
+  }
+`;
+
+const TextArea = styled.textarea`
+  padding: ${theme.spacing.md};
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+  
+  &:focus {
+    outline: none;
+    border-color: rgb(169, 125, 30);
+    box-shadow: 0 0 0 3px rgba(169, 125, 30, 0.15);
+  }
+  
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+const SubmitButton = styled.button<{ $isSubmitting?: boolean }>`
+  padding: ${theme.spacing.lg} ${theme.spacing.xl};
+  background: ${props => props.$isSubmitting ? '#ccc' : 'linear-gradient(135deg, rgb(176, 126, 18) 0%, rgb(169, 125, 30) 100%)'};
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: ${props => props.$isSubmitting ? 'not-allowed' : 'pointer'};
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${theme.spacing.sm};
+  
+  &:hover {
+    transform: ${props => props.$isSubmitting ? 'none' : 'translateY(-2px)'};
+    box-shadow: ${props => props.$isSubmitting ? 'none' : '0 10px 30px rgba(169, 125, 30, 0.4)'};
+  }
+`;
+
+const StatusMessage = styled.div<{ $type: 'success' | 'error' }>`
+  padding: ${theme.spacing.md};
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  background: ${({ $type }) => $type === 'success' 
+    ? 'linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.15) 100%)' 
+    : 'linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.15) 100%)'};
+  color: ${({ $type }) => $type === 'success' ? '#27ae60' : '#c0392b'};
+  border: 1px solid ${({ $type }) => $type === 'success' ? 'rgba(46, 204, 113, 0.3)' : 'rgba(231, 76, 60, 0.3)'};
+`;
+
+const PackageOption = styled.label<{ $selected: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.md};
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  border: 2px solid ${props => props.$selected ? 'rgb(169, 125, 30)' : '#e0e0e0'};
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: ${props => props.$selected ? 'rgba(169, 125, 30, 0.08)' : 'white'};
+  
+  &:hover {
+    border-color: rgb(169, 125, 30);
+  }
+  
+  input {
+    accent-color: rgb(169, 125, 30);
+    width: 18px;
+    height: 18px;
+  }
+  
+  span {
+    font-weight: 500;
+    color: rgb(44, 62, 80);
+  }
+  
+  small {
+    color: rgb(169, 125, 30);
+    font-weight: 600;
+    margin-left: auto;
+  }
+`;
+
+const PackageSelector = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+`;
+
 export default function HeadshotsPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    package: 'plain',
+    preferredDate: '',
+    preferredTime: '',
+    purpose: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact-section');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      // Simulate API call - replace with actual endpoint
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setStatus({
+        type: 'success',
+        message: '🎉 Thank you for your inquiry! We\'ll get back to you within 24 hours to confirm your session.',
+      });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        package: 'plain',
+        preferredDate: '',
+        preferredTime: '',
+        purpose: '',
+        message: '',
+      });
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or contact us directly.',
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -282,7 +531,7 @@ export default function HeadshotsPage() {
       <Hero>
         <HeroImageContainer>
           <SecureImage
-            src="/images/headshots/collage.png"
+            src="/images/headshots/collagecopy.png"
             alt="Professional headshots"
             priority
             quality={90}
@@ -300,7 +549,7 @@ export default function HeadshotsPage() {
       <Section>
         <SectionTitle>Portfolio</SectionTitle>
         <PortfolioGrid>
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <PortfolioItem key={i}>
               <SecureImage
                 src={`/images/headshots/portfolio-${i}.jpg`}
@@ -320,7 +569,7 @@ export default function HeadshotsPage() {
         <ServicesSection>
           <ServiceCard>
             <ServiceCardTitle>Plain Background</ServiceCardTitle>
-            <ServiceCardPrice>$299</ServiceCardPrice>
+            <ServiceCardPrice>$300</ServiceCardPrice>
             <ServiceCardFeatures>
               <li>30-minute session</li>
               <li>5 final edited images</li>
@@ -336,7 +585,7 @@ export default function HeadshotsPage() {
 
           <ServiceCard>
             <ServiceCardTitle>Creative Background</ServiceCardTitle>
-            <ServiceCardPrice>$249</ServiceCardPrice>
+            <ServiceCardPrice>$200</ServiceCardPrice>
             <ServiceCardFeatures>
               <li>30-minute session</li>
               <li>5 final edited images</li>
@@ -375,9 +624,161 @@ export default function HeadshotsPage() {
       </Section>
 
       <Section $bgColor="rgb(26, 20, 15)" id="contact-section">
-        <SectionTitle>Contact Us</SectionTitle>
-        <ContactForm service="Headshots" />
+        <FormContainer>
+          <FormHeader>
+            <h3>Schedule Your Headshot Session</h3>
+            <p>Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
+          </FormHeader>
+
+          {status && <StatusMessage $type={status.type}>{status.message}</StatusMessage>}
+
+          <Form onSubmit={handleSubmit}>
+            <FormRow>
+              <FormGroup>
+                <Label>Full Name <span>*</span></Label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="John Doe"
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Email <span>*</span></Label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="john@example.com"
+                  required
+                />
+              </FormGroup>
+            </FormRow>
+
+            <FormRow>
+              <FormGroup>
+                <Label>Phone Number <span>*</span></Label>
+                <Input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="(672) 338 - 9307"
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Company / Organization</Label>
+                <Input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Your company name"
+                />
+              </FormGroup>
+            </FormRow>
+
+            <FormGroup>
+              <Label>Select Package <span>*</span></Label>
+              <PackageSelector>
+                <PackageOption $selected={formData.package === 'plain'}>
+                  <input
+                    type="radio"
+                    name="package"
+                    value="plain"
+                    checked={formData.package === 'plain'}
+                    onChange={handleChange}
+                  />
+                  <span>Plain Background</span>
+                  <small>$300</small>
+                </PackageOption>
+                <PackageOption $selected={formData.package === 'creative'}>
+                  <input
+                    type="radio"
+                    name="package"
+                    value="creative"
+                    checked={formData.package === 'creative'}
+                    onChange={handleChange}
+                  />
+                  <span>Creative Background</span>
+                  <small>$200</small>
+                </PackageOption>
+              </PackageSelector>
+            </FormGroup>
+
+            <FormRow>
+              <FormGroup>
+                <Label>Preferred Date <span>*</span></Label>
+                <Input
+                  type="date"
+                  name="preferredDate"
+                  value={formData.preferredDate}
+                  onChange={handleChange}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Preferred Time</Label>
+                <Select
+                  name="preferredTime"
+                  value={formData.preferredTime}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a time slot</option>
+                  <option value="morning">Morning (9am - 12pm)</option>
+                  <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                  <option value="evening">Evening (4pm - 7pm)</option>
+                </Select>
+              </FormGroup>
+            </FormRow>
+
+            <FormGroup>
+              <Label>What will these headshots be used for?</Label>
+              <Select
+                name="purpose"
+                value={formData.purpose}
+                onChange={handleChange}
+              >
+                <option value="">Select purpose</option>
+                <option value="linkedin">LinkedIn Profile</option>
+                <option value="corporate">Corporate Website</option>
+                <option value="acting">Acting / Modeling Portfolio</option>
+                <option value="business">Business Cards / Marketing</option>
+                <option value="personal">Personal Branding</option>
+                <option value="other">Other</option>
+              </Select>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Additional Details or Questions</Label>
+              <TextArea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Tell us about any specific requirements, outfit preferences, or questions you may have..."
+              />
+            </FormGroup>
+
+            <SubmitButton type="submit" $isSubmitting={isSubmitting} disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <span>Book My Session</span>
+                </>
+              )}
+            </SubmitButton>
+          </Form>
+        </FormContainer>
       </Section>
+
+      <Footer />
     </PageContainer>
   );
 } 

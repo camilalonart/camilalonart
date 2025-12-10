@@ -97,20 +97,6 @@ export default function Footer() {
             wildlife, portraits, and commercial photography. Based in Vancouver, BC,
             available worldwide.
           </p>
-          <SocialLinks>
-            <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
-              <img src="/icons/instagram.svg" alt="" width="20" height="20" />
-            </a>
-            <a href="https://facebook.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Follow on Facebook">
-              <img src="/icons/facebook.svg" alt="" width="20" height="20" />
-            </a>
-            <a href="https://linkedin.com/in/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
-              <img src="/icons/linkedin.svg" alt="" width="20" height="20" />
-            </a>
-            <a href="https://github.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
-              <img src="/icons/github.svg" alt="" width="20" height="20" />
-            </a>
-          </SocialLinks>
         </FooterSection>
 
         <FooterSection>
@@ -155,8 +141,8 @@ export default function Footer() {
         <FooterSection>
           <h3>Contact</h3>
           <ul>
-            <li>Email: contact@camilonart.com</li>
-            <li>Phone: +1 (555) 123-4567</li>
+            <li>Email: bycamilalonart@gmail.com</li>
+            <li>Phone: +1 (672) 338 - 9307</li>
             <li>Location: Vancouver, BC, Canada</li>
           </ul>
         </FooterSection>
