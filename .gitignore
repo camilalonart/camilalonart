@@ -38,6 +38,7 @@ next-env.d.ts
 # Protected content
 /public/images/**/*
 !/public/images/.gitkeep
+!/public/images/headshots/**
 /src/assets/images/**/*
 !/src/assets/images/.gitkeep
 
