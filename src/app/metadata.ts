@@ -4,7 +4,7 @@ const baseMetadata: Metadata = {
   metadataBase: new URL('https://camilalonart.com'),
   title: {
     default: 'Camilalonart - Photography & Creative Services',
-    template: '%s | Camilalonart'
+    template: '%s - Camilalonart'
   },
   description: 'Professional photography and creative services in Vancouver, BC. Specializing in weddings, pets, family portraits, headshots, graphic recording, and UX/UI design.',
   keywords: ['photography', 'wedding photography', 'pet photography', 'family portraits', 'maternity photos', 'headshots', 'graphic recording', 'UX/UI design', 'Vancouver photographer'],
