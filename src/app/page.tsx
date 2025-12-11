@@ -245,7 +245,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/pets/A7T05911.jpg"
+                      src="/images/pets/A7T05911-2copy.jpg"
                       alt="Pet Photography"
                       priority
                       quality={85}
@@ -268,7 +268,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/wedding/A7T09955.jpg"
+                      src="/images/wedding/A7T01396copy.jpg"
                       alt="Wedding & Couples"
                       priority
                       quality={85}
@@ -291,7 +291,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/portfolio-0.jpg"
+                      src="/images/headshots/portfolio-0copy.jpg"
                       alt="Professional Headshots"
                       priority
                       quality={85}
@@ -314,7 +314,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/photography/family-maternity-hero.jpg"
+                      src="/images/family/baby/A7T02053-2copy.jpg"
                       alt="Family & Maternity Photography"
                       priority
                       quality={85}
