@@ -39,6 +39,7 @@ next-env.d.ts
 /public/images/**/*
 !/public/images/.gitkeep
 !/public/images/headshots/**
+!/public/images/family/**
 /src/assets/images/**/*
 !/src/assets/images/.gitkeep
 
