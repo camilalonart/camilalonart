@@ -51,6 +51,8 @@ const HeroContent = styled.div`
   color: white;
   max-width: 900px;
   margin-left: ${theme.spacing.xl};
+  background-color: rgba(219, 162, 40, 0.59);
+  padding: ${theme.spacing.lg};
 
   h1 {
     margin-bottom: ${theme.spacing.sm};
@@ -78,6 +80,88 @@ const HeroContent = styled.div`
     p {
       margin: ${theme.spacing.sm} auto;
     }
+  }
+`;
+
+const HeroButton = styled.button`
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: ${theme.spacing.md};
+  border-radius: 10px;
+  border: none;
+  
+  &:hover {
+    background: rgba(59, 50, 30, 1);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+`;
+
+const ModalOverlay = styled.div<{ $isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: ${theme.spacing.md};
+  overflow-y: auto;
+`;
+
+const ModalContent = styled.div`
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: rgb(44, 62, 80);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: rotate(90deg);
   }
 `;
 
@@ -466,6 +550,7 @@ const PackageSelector = styled.div`
 `;
 
 export default function HeadshotsPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -516,6 +601,12 @@ export default function HeadshotsPage() {
         purpose: '',
         message: '',
       });
+      
+      // Close modal after success (with delay to show message)
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setStatus(null);
+      }, 3000);
     } catch (error) {
       setStatus({
         type: 'error',
@@ -543,6 +634,9 @@ export default function HeadshotsPage() {
             Elevate your professional presence with meticulously crafted headshots
             that embody confidence, authenticity, and sophistication.
           </p>
+          <HeroButton onClick={() => setIsModalOpen(true)}>
+            Book My Session
+          </HeroButton>
         </HeroContent>
       </Hero>
 
@@ -778,7 +872,166 @@ export default function HeadshotsPage() {
         </FormContainer>
       </Section>
 
-      <Footer aboutText="Specializing in professional headshots for executives, actors, and LinkedIn profiles. Crafting images that convey confidence and authenticity. Based in Vancouver, BC." />
+      <Footer aboutText="Specializing in professional headshots. Crafting images that convey confidence and authenticity. Based in Vancouver, BC." />
+
+      {/* Modal with Form */}
+      <ModalOverlay $isOpen={isModalOpen} onClick={() => setIsModalOpen(false)}>
+        <ModalContent onClick={(e) => e.stopPropagation()}>
+          <FormContainer>
+            <CloseButton onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
+            <FormHeader>
+              <h3>Schedule Your Headshot Session</h3>
+              <p>Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
+            </FormHeader>
+
+            {status && <StatusMessage $type={status.type}>{status.message}</StatusMessage>}
+
+            <Form onSubmit={handleSubmit}>
+              <FormRow>
+                <FormGroup>
+                  <Label>Full Name <span>*</span></Label>
+                  <Input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label>Email <span>*</span></Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                    required
+                  />
+                </FormGroup>
+              </FormRow>
+
+              <FormRow>
+                <FormGroup>
+                  <Label>Phone Number <span>*</span></Label>
+                  <Input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="(672) 338 - 9307"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label>Company / Organization</Label>
+                  <Input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder="Your company name"
+                  />
+                </FormGroup>
+              </FormRow>
+
+              <FormGroup>
+                <Label>Select Package <span>*</span></Label>
+                <PackageSelector>
+                  <PackageOption $selected={formData.package === 'plain'}>
+                    <input
+                      type="radio"
+                      name="package"
+                      value="plain"
+                      checked={formData.package === 'plain'}
+                      onChange={handleChange}
+                    />
+                    <span>Plain Background</span>
+                    <small>$300</small>
+                  </PackageOption>
+                  <PackageOption $selected={formData.package === 'creative'}>
+                    <input
+                      type="radio"
+                      name="package"
+                      value="creative"
+                      checked={formData.package === 'creative'}
+                      onChange={handleChange}
+                    />
+                    <span>Creative Background</span>
+                    <small>$200</small>
+                  </PackageOption>
+                </PackageSelector>
+              </FormGroup>
+
+              <FormRow>
+                <FormGroup>
+                  <Label>Preferred Date <span>*</span></Label>
+                  <Input
+                    type="date"
+                    name="preferredDate"
+                    value={formData.preferredDate}
+                    onChange={handleChange}
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label>Preferred Time</Label>
+                  <Select
+                    name="preferredTime"
+                    value={formData.preferredTime}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select a time slot</option>
+                    <option value="morning">Morning (9am - 12pm)</option>
+                    <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                    <option value="evening">Evening (4pm - 7pm)</option>
+                  </Select>
+                </FormGroup>
+              </FormRow>
+
+              <FormGroup>
+                <Label>What will these headshots be used for?</Label>
+                <Select
+                  name="purpose"
+                  value={formData.purpose}
+                  onChange={handleChange}
+                >
+                  <option value="">Select purpose</option>
+                  <option value="linkedin">LinkedIn Profile</option>
+                  <option value="corporate">Corporate Website</option>
+                  <option value="acting">Acting / Modeling Portfolio</option>
+                  <option value="business">Business Cards / Marketing</option>
+                  <option value="personal">Personal Branding</option>
+                  <option value="other">Other</option>
+                </Select>
+              </FormGroup>
+
+              <FormGroup>
+                <Label>Additional Details or Questions</Label>
+                <TextArea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell us about any specific requirements, outfit preferences, or questions you may have..."
+                />
+              </FormGroup>
+
+              <SubmitButton type="submit" $isSubmitting={isSubmitting} disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Book My Session</span>
+                  </>
+                )}
+              </SubmitButton>
+            </Form>
+          </FormContainer>
+        </ModalContent>
+      </ModalOverlay>
     </PageContainer>
   );
 } 
