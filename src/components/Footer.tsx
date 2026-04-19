@@ -75,7 +75,7 @@ const SocialLinks = styled.div`
     transition: ${theme.transitions.default};
     font-size: 0.7rem;
     text-decoration: none;
-    color: ${theme.colors.text.dark};
+    color: ${theme.colors.text.primary};
 
     &:hover {
       background-color: ${theme.colors.primary.main};
