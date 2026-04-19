@@ -1,4 +1,4 @@
-import ArtPortfolio from '../../components/art/ArtPortfolio';
+import ArtHome from '@/components/art/ArtHome';
 
 export const metadata = {
   title: 'Camila Londoño — Painter',
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function ArtPage() {
-  return <ArtPortfolio />;
+  return <ArtHome />;
 }
