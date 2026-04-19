@@ -48,6 +48,14 @@ next-env.d.ts
 !/public/images/traditionalArt/
 !/public/images/.gitkeep
 /src/assets/images/**/*
+
+# Large non-web binary files
+*.wav
+*.mp3
+*.m4a
+*.key
+*.mov
+*.mp4
 !/src/assets/images/.gitkeep
 
 # IDE

@@ -334,7 +334,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/photography/eventos-hero.jpg"
+                      src="/images/wedding/A7T01396copy.webp"
                       alt="Event Photography"
                       quality={85}
                     />
@@ -364,7 +364,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/art/digital.jpg"
+                      src="/images/art/traditionalArt/composition-rich-palette.webp"
                       alt="Digital Art"
                       quality={85}
                     />
@@ -386,7 +386,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/art/traditional.jpg"
+                      src="/images/art/traditionalArt/autumn-harvest.webp"
                       alt="Traditional Art"
                       quality={85}
                     />
@@ -430,7 +430,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/art/everyday.jpg"
+                      src="/images/everyday/A7T02673.webp"
                       alt="Everyday Photography"
                       quality={85}
                     />
@@ -460,7 +460,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/creative/brand-identity.jpg"
+                      src="/images/art/artClasses/botanical-study.webp"
                       alt="Brand Identity"
                       quality={85}
                     />
@@ -482,7 +482,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/creative/graphic-recording.jpg"
+                      src="/images/art/artClasses/sketchbook-exploration.webp"
                       alt="Graphic Recording"
                       quality={85}
                     />
@@ -504,7 +504,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/creative/ux-ui.jpg"
+                      src="/images/headshots/portfolio-0copy.webp"
                       alt="UX/UI Design"
                       quality={85}
                     />
@@ -526,7 +526,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/creative/art-classes.jpg"
+                      src="/images/art/artClasses/watercolor-workshop.webp"
                       alt="Art Classes"
                       quality={85}
                     />
@@ -556,7 +556,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/tech/software-engineering.jpg"
+                      src="/images/headshots/A7T03675.webp"
                       alt="Software Engineering"
                       quality={85}
                     />
@@ -578,7 +578,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/tech/courses.jpg"
+                      src="/images/headshots/A7T01710.webp"
                       alt="Tech Courses"
                       quality={85}
                     />

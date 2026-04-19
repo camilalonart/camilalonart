@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-images": "node scripts/generateImageList.js"
+    "generate-images": "node scripts/generateImageList.js",
+    "webp-check": "node scripts/convert-to-webp.js",
+    "webp-convert": "node scripts/convert-to-webp.js --convert",
+    "webp-cleanup-check": "node scripts/webp-cleanup.js",
+    "webp-cleanup": "node scripts/webp-cleanup.js --delete",
+    "refs-check": "node scripts/update-image-refs.js",
+    "refs-update": "node scripts/update-image-refs.js --update"
   },
   "keywords": [],
   "author": "",

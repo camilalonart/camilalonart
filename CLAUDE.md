@@ -5,36 +5,98 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+# Dev
 npm run dev              # Dev server at localhost:3000
-npm run build            # Production build → /out directory
+npm run build            # Production build → /out
 npm run lint             # ESLint
-npm run generate-images  # Regenerate gallery JSON from /public/images/*/gallery/ directories
+
+# Images (run in this order when adding new photos)
+npm run webp-convert          # Convert JPG/PNG → WebP (skips already converted)
+npm run webp-cleanup          # Delete original JPGs where .webp exists
+npm run generate-images       # Regenerate gallery JSON (pets/wedding/wildlife only)
+npm run refs-update           # Update .jpg references in source code to .webp
+
+# Each has a dry-run preview variant: webp-check, webp-cleanup-check, refs-check
 ```
 
-**Deployment** is automated via GitHub Actions (`.github/workflows/deploy.yml`). Manual deploy: `bash deploy.sh` (builds and pushes `/out` to `gh-pages` branch via git subtree).
+**Deployment** is automated via GitHub Actions (`.github/workflows/deploy.yml`). Manual: `bash deploy.sh`.
+
+---
+
+## Vision
+
+`camilalonart.com` is a hub that links to distinct sub-experiences, each with its own visual identity. The homepage is a portal — each section is a different aesthetic world. Each section page defines its own local palette constants; do not apply the global `theme` uniformly.
+
+## Per-section design identity
+
+| Section | Palette | Typography | Feel |
+|---|---|---|---|
+| Baby/Family/Maternity | Sage green + warm cream | Cormorant, light | Soft, nurturing |
+| Weddings/Couples | Burgundy + champagne | Cormorant, wide spacing | Romantic, timeless |
+| Headshots | Charcoal + white | Montserrat | Sharp, professional |
+| Pets | Terracotta + sand | Poppins | Warm, playful |
+| Traditional Art | `#080808` + gold `#C8A87A` | Cormorant, thin | Museum/gallery |
+| Tech | Dark slate + indigo | Montserrat + monospace | Precise, technical |
+
+---
 
 ## Architecture
 
-**Next.js 14 App Router** with TypeScript, Styled Components, and static export (`output: 'export'` in `next.config.js`). Hosted on GitHub Pages at camilalonart.com.
+**Next.js 14 App Router**, TypeScript, Styled Components, static export (`output: 'export'`). GitHub Pages at camilalonart.com.
 
-### Pages (`src/app`)
-Three main sections:
-- `/photography/*` — Client session galleries (pets, wedding, family, headshots)
-- `/my-art/*` — Personal work (wildlife, digital art, traditional art, everyday photography, blog)
-- `/creative-services/*` — Services offered (art classes, brand identity, graphic recording, UX/UI)
+### Routes (`src/app`)
+- `/` — Hub homepage
+- `/art/` — Traditional art portfolio (standalone painter site) — also at `/my-art/traditional-art/`
+- `/photography/*` — Client galleries: pets, wedding-couples, family-maternity, headshots
+- `/my-art/*` — Personal work: wildlife, digital-art, traditional-art, everyday-photography, blog
+- `/creative-services/*` — Brand identity, graphic recording, UX/UI, art classes
+- `/tech/*` — Engineering, courses
+
+### Traditional Art Portfolio (`/art`)
+The main painter portfolio — a fully standalone site with its own nav, hero, and footer. Accessible at two URLs:
+- `src/app/art/page.tsx` → `camilalonart.com/art/`
+- `src/app/my-art/traditional-art/page.tsx` → `camilalonart.com/my-art/traditional-art/`
+
+Both render `src/components/art/ArtPortfolio.tsx`. Data lives in `src/data/artPortfolio.ts` — edit this file to add/edit paintings and collections. Structure:
+- `collections[]` — named series (e.g. "Silencio 2023–2024"), each with `paintings[]`
+- `otherProjects[]` — works outside the main collections
+- `about` — bio paragraphs + 2 Instagram URLs (`@camilalonart`, `@camilonart`)
+
+Each painting has: `id`, `title`, `materials`, `size`, `year`, `images[]` (1+ photos), optional `thoughts` (artist statement shown in modal).
+
+The lightbox modal always shows `@camilalonart` watermark. Keyboard: ← → to navigate collection, ESC to close.
+
+### Section layouts
+Sections with dark backgrounds have their own `layout.tsx` (server component, inline `style` wrapper) to prevent white flash. Examples: `src/app/art/layout.tsx`, `src/app/my-art/traditional-art/layout.tsx`.
+
+### Fonts (3 — do not add more)
+Loaded in `src/app/layout.tsx` with `display: 'swap'`:
+- `--font-cormorant` — Cormorant Garamond (art, photography sections)
+- `--font-montserrat` — Montserrat (UI text, headshots, tech)
+- `--font-poppins` — Poppins (body copy, pets, creative services)
+
+### Images
+Images live in `public/images/`. Format is **WebP** — never commit raw JPGs to the repo (too large). Keep originals on an external drive.
+
+- `SecureImage` (`src/components/SecureImage.tsx`) — use for all images. Adds shimmer skeleton, right-click/drag block, optional watermark.
+- Only one `priority` image per page (the LCP — first above-fold image).
+- Gallery JSON files (`src/data/petImages.json`, `weddingImages.json`, `wildlifeImages.json`) are auto-generated by `npm run generate-images` from files in `public/images/[type]/gallery/`.
+- Traditional art images are referenced manually in `src/data/artPortfolio.ts`.
+- **Do not add Cloudinary** — decision is in-repo WebP.
+
+Image protection: watermark + right-click/drag block (implemented). True download prevention is impossible on a static host.
 
 ### Gallery System
-Galleries are **JSON-driven**: image lists live in `src/data/*.json` (e.g., `petImages.json`, `weddingImages.json`). These are regenerated from files in `public/images/[type]/gallery/` by running `npm run generate-images`. After adding new images to the public folder, always regenerate the JSON. Core components: `BaseGallery.tsx` → `Gallery.tsx` / `ImageGallery.tsx`, with `ProtectedImage.tsx` for image optimization via Cloudinary (`next-cloudinary`).
+`BaseGallery.tsx` → `Gallery.tsx` / `ImageGallery.tsx`, all using `SecureImage`.
 
-### Internationalization (EN/ES)
-- Context provider: `src/i18n/TranslationContext.tsx` — wraps the app in `src/app/layout.tsx`
-- Translation strings: `src/i18n/locales/en.json` and `es.json`
-- Usage in components: `const { t } = useTranslation()` then `t('key')`
-- Language persists in localStorage; defaults to Spanish if browser language is ES
-- **Known limitation**: language switching forces a full page reload for translation sync
+### i18n (EN/ES)
+- Provider: `src/i18n/TranslationContext.tsx`
+- Strings: `src/i18n/locales/en.json` and `es.json`
+- Usage: `const { t } = useTranslation()` → `t('key')`
+- Defaults to Spanish if browser language is ES. Known issue: language switch forces full page reload.
 
 ### Forms & API
-`/api/submit-wedding-inquiry/` is the only API route — handles form submissions via Google APIs (`googleapis` package). Credentials come from environment variables configured in `next.config.js`.
+`/api/submit-wedding-inquiry/` — Google APIs form submission. Credentials via env vars in `next.config.js`.
 
-### Path Aliases
-`@/*` maps to `src/*` (configured in `tsconfig.json`).
+### Path aliases
+`@/*` → `src/*` (tsconfig.json).
