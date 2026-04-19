@@ -872,9 +872,7 @@ export default function ArtPortfolio() {
     });
   }, []);
 
-  const heroImage =
-    data.collections[0]?.paintings[0]?.images[0] ??
-    '/images/traditional-art/autumn.jpg';
+  const heroImage = '/images/art/traditionalArt/Carrying Home/We.webp';
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -945,6 +943,25 @@ export default function ArtPortfolio() {
         </SelectedWorksGrid>
       </Section>
 
+      {/* ── Other projects ── */}
+      <Section id="other-work">
+        <SectionEyebrow>Explore</SectionEyebrow>
+        <ProjectsButtonGroup>
+          <ProjectsButton href="/art/collections">
+            <p>Current</p>
+            <h3>Collections</h3>
+          </ProjectsButton>
+          <ProjectsButton href="/art/early-first-paintings">
+            <p>Archival</p>
+            <h3>Early First Paintings</h3>
+          </ProjectsButton>
+          <ProjectsButton href="/art/collaborations">
+            <p>Creative</p>
+            <h3>Collaborations</h3>
+          </ProjectsButton>
+        </ProjectsButtonGroup>
+      </Section>
+
       {/* ── Collections ── */}
       <div id="collections">
         {sortedCollections.map((col: Collection, i: number) => (
@@ -976,22 +993,6 @@ export default function ArtPortfolio() {
           </Section>
         ))}
       </div>
-
-      {/* ── Other projects ── */}
-      <Section id="other-work">
-        <SectionEyebrow>Explore</SectionEyebrow>
-        <SectionTitle>More Works</SectionTitle>
-        <ProjectsButtonGroup>
-          <ProjectsButton href="/art/early-first-paintings">
-            <p>Archival</p>
-            <h3>Early First Paintings</h3>
-          </ProjectsButton>
-          <ProjectsButton href="/art/collaborations">
-            <p>Creative</p>
-            <h3>Collaborations</h3>
-          </ProjectsButton>
-        </ProjectsButtonGroup>
-      </Section>
 
       {/* ── About ── */}
       <AboutSection id="about">

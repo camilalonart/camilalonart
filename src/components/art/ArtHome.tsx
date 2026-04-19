@@ -449,7 +449,7 @@ export default function ArtHome() {
       <Hero>
         <HeroImgWrap>
           <Image
-            src={heroImage}
+            src="/images/art/traditionalArt/Carrying Home/We.webp"
             alt="Featured artwork by Camila Londoño"
             fill
             priority
