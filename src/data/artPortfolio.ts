@@ -16,10 +16,21 @@ export interface Collection {
   paintings: Painting[];
 }
 
+export interface Collaboration {
+  id: string;
+  title: string;
+  type: 'instagram-post' | 'book-cover' | 'album-art' | string;
+  image?: string;
+  externalUrl?: string;
+  year?: number;
+  materials?: string;
+}
+
 export interface ArtPortfolioData {
   collections: Collection[];
-  otherProjects: Painting[];
-  selectedWorks: Array<{ image: string; id: string }>;
+  earlyFirstPaintings: Painting[];
+  collaborations: Collaboration[];
+  selectedWorks: Array<{ image: string; id: string; collectionId: string; paintingId: string }>;
   about: {
     bio: string[];
     instagram1Url: string;
@@ -666,27 +677,28 @@ const data: ArtPortfolioData = {
     },
   ],
 
-  otherProjects: [],
+  earlyFirstPaintings: [],
+  collaborations: [],
 
   selectedWorks: [
-    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1" },
-    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2" },
-    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TakeMeBackTo2016.webp", id: "sh-11" },
-    { image: "/images/art/traditionalArt/The essential is invisible (Red)/TheFirstOneIActuallyLiked.webp", id: "sh-12" },
-    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3" },
-    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4" },
-    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5" },
-    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14" },
-    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp", id: "sh-10" },
-    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp", id: "sh-9" },
-    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13" },
-    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/EngineeringEpistemology.webp", id: "sh-15" },
-    { image: "/images/art/traditionalArt/Perspective/WhyNot.webp", id: "sh-16" },
-    { image: "/images/art/traditionalArt/Yellow/DontGo.webp", id: "sh-17" },
-    { image: "/images/art/traditionalArt/Dear Inner Child/Creative.webp", id: "sh-3" },
-    { image: "/images/art/traditionalArt/Dear Inner Child/Loyal.webp", id: "sh-5" },
-    { image: "/images/art/traditionalArt/Pandemic Lockdown/AtravesDeMiVentana.webp", id: "sh-7" },
-    { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8" }
+    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2", collectionId: "carrying-home", paintingId: "carrying-home-02" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TakeMeBackTo2016.webp", id: "sh-11", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-01" },
+    { image: "/images/art/traditionalArt/The essential is invisible (Red)/TheFirstOneIActuallyLiked.webp", id: "sh-12", collectionId: "the-essential-is-invisible", paintingId: "the-essential-is-invisible-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3", collectionId: "carrying-home", paintingId: "carrying-home-03" },
+    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4", collectionId: "carrying-home", paintingId: "carrying-home-04" },
+    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5", collectionId: "carrying-home", paintingId: "carrying-home-05" },
+    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14", collectionId: "fuego-interior", paintingId: "fuego-interior-02" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp", id: "sh-10", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-02" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp", id: "sh-9", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-03" },
+    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13", collectionId: "fuego-interior", paintingId: "fuego-interior-01" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/EngineeringEpistemology.webp", id: "sh-15", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-04" },
+    { image: "/images/art/traditionalArt/Perspective/WhyNot.webp", id: "sh-16", collectionId: "perspective", paintingId: "perspective-01" },
+    { image: "/images/art/traditionalArt/Yellow/DontGo.webp", id: "sh-17", collectionId: "yellow", paintingId: "yellow-01" },
+    { image: "/images/art/traditionalArt/Dear Inner Child/Creative.webp", id: "sh-18", collectionId: "dear-inner-child", paintingId: "dear-inner-child-03" },
+    { image: "/images/art/traditionalArt/Dear Inner Child/Loyal.webp", id: "sh-19", collectionId: "dear-inner-child", paintingId: "dear-inner-child-05" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/AtravesDeMiVentana.webp", id: "sh-7", collectionId: "pandemic-lockdown", paintingId: "pandemic-lockdown-01" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8", collectionId: "pandemic-lockdown", paintingId: "pandemic-lockdown-02" }
   ]
 };
 

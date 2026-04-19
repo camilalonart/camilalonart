@@ -201,6 +201,23 @@ const SectionTitle = styled.h2`
   margin: 0 0 0.75rem;
 `;
 
+const CollectionTitleLink = styled(Link)`
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${C.text};
+  line-height: 1;
+  margin: 0 0 0.75rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: ${C.gold};
+  }
+`;
+
 const SectionMeta = styled.p`
   font-family: var(--font-montserrat), sans-serif;
   font-size: 0.6rem;
@@ -642,13 +659,17 @@ const IgLink = styled.a`
   font-size: 0.62rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: ${C.gold};
+  color: #333333;
   text-decoration: none;
-  border: 1px solid ${C.border};
+  border: 1px solid #999999;
   padding: 0.6rem 1.1rem;
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
 
-  &:hover { border-color: ${C.gold}; color: ${C.goldLight}; }
+  &:hover {
+    border-color: #333333;
+    color: ${C.text};
+    background-color: rgba(0,0,0,0.05);
+  }
 `;
 
 const IgIcon = () => (
@@ -665,6 +686,51 @@ const ProjectsGrid = styled.div`
   column-gap: 3px;
 
   @media (max-width: 500px) { columns: 2; }
+`;
+
+const ProjectsButtonGroup = styled.div`
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+
+  @media (max-width: 600px) {
+    gap: 1rem;
+  }
+`;
+
+const ProjectsButton = styled.button`
+  flex: 1;
+  min-width: 200px;
+  padding: 2rem;
+  border: 1px solid ${C.border};
+  background: transparent;
+  color: ${C.text};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+
+  &:hover {
+    border-color: ${C.gold};
+    background: rgba(200, 168, 122, 0.05);
+  }
+
+  p {
+    margin: 0;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: ${C.muted};
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin: 0.5rem 0 0;
+    color: ${C.text};
+  }
 `;
 
 // ─── Selected Works ───────────────────────────────────────────────────────────
@@ -868,7 +934,7 @@ export default function ArtPortfolio() {
         {sortedCollections.map((col: Collection, i: number) => (
           <Section key={col.id}>
             <SectionEyebrow>Collection {String(i + 1).padStart(2, '0')}</SectionEyebrow>
-            <SectionTitle>{col.name}</SectionTitle>
+            <CollectionTitleLink href={`/art/${col.id}`}>{col.name}</CollectionTitleLink>
             <SectionMeta>{col.period}</SectionMeta>
             {col.description && <SectionDesc>{col.description}</SectionDesc>}
             <CollectionGrid>
@@ -896,39 +962,26 @@ export default function ArtPortfolio() {
       </div>
 
       {/* ── Other projects ── */}
-      <Section id="other-work">
-        <SectionEyebrow>Works</SectionEyebrow>
-        <SectionTitle>Other Projects</SectionTitle>
-        <SectionDesc>
-          Pieces that exist outside the main collections — experiments, commissions, and studies.
-        </SectionDesc>
-        <ProjectsGrid>
-          {data.otherProjects.map(p => (
-            <PaintingCard
-              key={p.id}
-              onClick={() => openPainting(p, data.otherProjects)}
-              role="button"
-              tabIndex={0}
-              aria-label={`Open ${p.title}, ${p.year}`}
-              onKeyDown={e => e.key === 'Enter' && openPainting(p, data.otherProjects)}
-            >
-              <PaintingImgWrap>
-                <img
-                  src={p.images[0]}
-                  alt={`${p.title} — ${p.materials}`}
-                  loading="lazy"
-                  draggable={false}
-                  onContextMenu={e => e.preventDefault()}
-                />
-                <CardOverlay>
-                  <CardTitle>{p.title}</CardTitle>
-                  <CardMeta>{p.year} · {p.materials}</CardMeta>
-                </CardOverlay>
-              </PaintingImgWrap>
-            </PaintingCard>
-          ))}
-        </ProjectsGrid>
-      </Section>
+      {(data.earlyFirstPaintings.length > 0 || data.collaborations.length > 0) && (
+        <Section id="other-work">
+          <SectionEyebrow>Explore</SectionEyebrow>
+          <SectionTitle>More Works</SectionTitle>
+          <ProjectsButtonGroup>
+            {data.earlyFirstPaintings.length > 0 && (
+              <ProjectsButton>
+                <p>Archival</p>
+                <h3>Early First Paintings</h3>
+              </ProjectsButton>
+            )}
+            {data.collaborations.length > 0 && (
+              <ProjectsButton>
+                <p>Creative</p>
+                <h3>Collaborations</h3>
+              </ProjectsButton>
+            )}
+          </ProjectsButtonGroup>
+        </Section>
+      )}
 
       {/* ── About ── */}
       <AboutSection id="about">
