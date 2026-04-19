@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
+import Link from 'next/link';
 import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
@@ -234,12 +235,14 @@ const CollectionGrid = styled.div`
   gap: 2rem;
 `;
 
-const CollectionCard = styled.article`
+const CollectionCard = styled(Link)`
   position: relative;
   cursor: pointer;
   overflow: hidden;
   aspect-ratio: 3/4;
   background: ${C.surface};
+  display: block;
+  text-decoration: none;
 
   img {
     width: 100%;
@@ -674,13 +677,15 @@ const SelectedWorksGrid = styled.div`
   @media (max-width: 500px) { columns: 2 100px; }
 `;
 
-const SelectedWorkCard = styled.article`
+const SelectedWorkCard = styled(Link)`
   break-inside: avoid;
   margin-bottom: 2px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
   aspect-ratio: auto;
+  display: block;
+  text-decoration: none;
 
   img {
     display: block;
@@ -842,7 +847,10 @@ export default function ArtPortfolio() {
       <Section>
         <SelectedWorksGrid>
           {data.selectedWorks.map(work => (
-            <SelectedWorkCard key={work.id}>
+            <SelectedWorkCard
+              key={work.id}
+              href={`/art/${work.collectionId}/${work.paintingId}`}
+            >
               <img
                 src={work.image}
                 alt="Selected work"
@@ -867,11 +875,8 @@ export default function ArtPortfolio() {
               {col.paintings.map(p => (
                 <CollectionCard
                   key={p.id}
-                  onClick={() => openPainting(p, col.paintings)}
-                  role="button"
-                  tabIndex={0}
+                  href={`/art/${col.id}/${p.id}`}
                   aria-label={`Open ${p.title}, ${p.year}`}
-                  onKeyDown={e => e.key === 'Enter' && openPainting(p, col.paintings)}
                 >
                   <img
                     src={p.images[0]}

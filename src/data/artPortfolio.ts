@@ -19,7 +19,7 @@ export interface Collection {
 export interface ArtPortfolioData {
   collections: Collection[];
   otherProjects: Painting[];
-  selectedWorks: Array<{ image: string; id: string }>;
+  selectedWorks: Array<{ image: string; id: string; collectionId: string; paintingId: string }>;
   about: {
     bio: string[];
     instagram1Url: string;
@@ -457,45 +457,13 @@ const data: ArtPortfolioData = {
         "A narrative series documenting a journey through landscape and memory. Drawings and paintings that ask what it means to begin again.",
       paintings: [
         {
-          id: "start-over-01",
-          title: "Viaje a Canada - Part 1",
-          materials: "Watercolor and graphite",
-          size: "56 × 76 cm",
-          year: 2022,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Part 1.webp"],
-        },
-        {
-          id: "start-over-02",
-          title: "Viaje a Canada - Part 2",
-          materials: "Mixed media on paper",
-          size: "56 × 76 cm",
-          year: 2022,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Part 2.webp"],
-        },
-        {
-          id: "start-over-03",
-          title: "Viaje a Canada - Part 6",
-          materials: "Watercolor",
-          size: "56 × 76 cm",
-          year: 2022,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Part 6.webp"],
-        },
-        {
           id: "start-over-04",
-          title: "Viaje a Canada - Drawing",
-          materials: "Graphite on paper",
+          title: "Viaje a Canada",
+          materials: "Digital drawing",
           size: "50 × 70 cm",
           year: 2023,
           images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
-        },
-        {
-          id: "start-over-05",
-          title: "Viaje a Canada - Drawing Detail",
-          materials: "Graphite and ink",
-          size: "A4",
-          year: 2023,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo Detalle.webp"],
-        },
+        }
       ],
     },
     {
@@ -710,15 +678,21 @@ const data: ArtPortfolioData = {
   otherProjects: [],
 
   selectedWorks: [
-    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1" },
-    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2" },
-    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3" },
-    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4" },
-    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5" },
-    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13" },
-    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14" },
-    { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8" }
-  ],
+    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2", collectionId: "carrying-home", paintingId: "carrying-home-02" },
+    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3", collectionId: "carrying-home", paintingId: "carrying-home-03" },
+    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4", collectionId: "carrying-home", paintingId: "carrying-home-04" },
+    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5", collectionId: "carrying-home", paintingId: "carrying-home-05" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp", id: "sh-6", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06893 copy.webp", id: "sh-7", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06900 copy.webp", id: "sh-8", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 2 copy.webp", id: "sh-9", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 copy 2.webp", id: "sh-10", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp", id: "sh-11", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp", id: "sh-12", collectionId: "carrying-home", paintingId: "carrying-home-01" },
+    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13", collectionId: "fuego-interior", paintingId: "fuego-interior-01" },
+    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14", collectionId: "fuego-interior", paintingId: "fuego-interior-02" },
+  ]
 };
 
 // Collections order — modify this array to change display order
