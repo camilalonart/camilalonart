@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import { visibleSections, hiddenSections } from '../config/sections';
+import { visibleSections } from '../config/sections';
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -131,32 +131,6 @@ const Card = styled(Link)`
   }
 `;
 
-const DisabledCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: ${theme.spacing.xl};
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.md};
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  cursor: default;
-  opacity: 0.7;
-  pointer-events: none;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.lg};
-  }
-`;
-
-const CardIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: ${theme.spacing.md};
-  line-height: 1;
-`;
-
 const CardTitle = styled.h3`
   font-size: clamp(${theme.typography.fontSize.lg}, 2vw, ${theme.typography.fontSize.xl});
   color: ${theme.colors.primary.main};
@@ -185,41 +159,34 @@ const Tag = styled.span`
   display: inline-block;
   font-size: 0.75rem;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  background: ${theme.colors.primary.light};
-  color: ${theme.colors.primary.main};
+  background: ${theme.colors.primary.main};
+  color: white;
   border-radius: ${theme.borderRadius.sm};
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 500;
 `;
 
-const HiddenNote = styled.div`
-  padding: ${theme.spacing.lg};
-  background: linear-gradient(135deg, rgba(212, 166, 130, 0.1) 0%, rgba(212, 166, 130, 0.05) 100%);
-  border-left: 4px solid ${theme.colors.primary.main};
-  border-radius: ${theme.borderRadius.md};
-  margin-top: ${theme.spacing.lg};
-
-  p {
-    margin: 0;
-    color: ${theme.colors.text.secondary};
-    font-size: ${theme.typography.fontSize.sm};
-    line-height: 1.6;
-  }
-
-  strong {
-    color: ${theme.colors.primary.main};
-  }
-`;
-
 export default function HomePage() {
   const { t } = useTranslation();
 
+  const getTranslationKey = (id: string): string => {
+    const keyMap: Record<string, string> = {
+      wedding: 'home.weddingCouples',
+      pets: 'home.petPhotography',
+      headshots: 'home.headshots',
+      family: 'home.familyMaternity',
+      wildlife: 'home.wildlifePhotography',
+      'traditional-art': 'home.traditionalArt',
+    };
+    return keyMap[id] || '';
+  };
+
   const getCategoryLabel = (category: string) => {
     const labels: Record<string, string> = {
-      photography: 'Photography',
-      art: 'Art',
-      services: 'Services',
+      photography: t('nav.photographyServices'),
+      art: t('nav.myArt'),
+      services: t('nav.creativeServices'),
       other: 'Other',
     };
     return labels[category] || category;
@@ -240,56 +207,23 @@ export default function HomePage() {
       </Hero>
 
       <ContentWrapper>
-        {/* Visible Sections */}
-        <SectionHeader>
-          <h2>Explore My Work</h2>
-          <Divider style={{ margin: `${theme.spacing.md} auto ${theme.spacing.lg}` }} />
-          <p>Featured projects and services currently available</p>
-        </SectionHeader>
-
         <Grid>
-          {visibleSections.map((section) => (
-            <Card key={section.id} href={section.href}>
-              <CardIcon>{section.icon}</CardIcon>
-              <CardTitle>{section.title}</CardTitle>
-              <CardDescription>{section.description}</CardDescription>
-              <TagSection>
-                <Tag>{getCategoryLabel(section.category)}</Tag>
-              </TagSection>
-            </Card>
-          ))}
+          {visibleSections.map((section) => {
+            const translationKey = getTranslationKey(section.id);
+            const title = translationKey ? t(`${translationKey}.title`) : section.title;
+            const description = translationKey ? t(`${translationKey}.description`) : section.description;
+
+            return (
+              <Card key={section.id} href={section.href}>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>{description}</CardDescription>
+                <TagSection>
+                  <Tag>{getCategoryLabel(section.category)}</Tag>
+                </TagSection>
+              </Card>
+            );
+          })}
         </Grid>
-
-        {/* Hidden Sections */}
-        {hiddenSections.length > 0 && (
-          <>
-            <SectionHeader>
-              <h2>Coming Soon</h2>
-              <Divider style={{ margin: `${theme.spacing.md} auto ${theme.spacing.lg}` }} />
-              <p>Upcoming projects and services in development</p>
-            </SectionHeader>
-
-            <Grid>
-              {hiddenSections.map((section) => (
-                <DisabledCard key={section.id}>
-                  <CardIcon>{section.icon}</CardIcon>
-                  <CardTitle>{section.title}</CardTitle>
-                  <CardDescription>{section.description}</CardDescription>
-                  <TagSection>
-                    <Tag style={{ opacity: 0.6 }}>Coming Soon</Tag>
-                  </TagSection>
-                </DisabledCard>
-              ))}
-            </Grid>
-
-            <HiddenNote>
-              <p>
-                <strong>💡 Note:</strong> These sections are being developed and will be publicly available soon.
-                Check back later for updates!
-              </p>
-            </HiddenNote>
-          </>
-        )}
       </ContentWrapper>
     </PageContainer>
   );

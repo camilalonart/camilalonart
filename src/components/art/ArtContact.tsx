@@ -5,13 +5,13 @@ import styled from 'styled-components';
 import ArtNav from './ArtNav';
 
 const C: Record<string, string> = {
-  bg: '#080808',
-  surface: '#101010',
-  border: '#1E1E1E',
+  bg: '#F5F3F0',
+  surface: '#FFFFFF',
+  border: '#E5DDD8',
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
-  text: '#F0EDE8',
-  muted: '#6E6B65',
+  text: '#2C2C2C',
+  muted: '#8B8B8B',
 };
 
 const Site = styled.div`
@@ -24,22 +24,21 @@ const Site = styled.div`
 `;
 
 const Content = styled.main`
-  padding-top: 64px;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 4vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 5vw, 5rem);
 `;
 
 const FormContainer = styled.div`
   width: 100%;
   max-width: 600px;
-  background: rgba(16, 16, 16, 0.5);
+  background: ${C.surface};
   border: 1px solid ${C.border};
   padding: clamp(2.5rem, 5vw, 4rem);
   border-radius: 2px;
-  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 `;
 
 const PageHeader = styled.div`
