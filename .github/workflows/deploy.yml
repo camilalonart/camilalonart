@@ -20,8 +20,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_WEDDING_FORM_URL: ${{ secrets.NEXT_PUBLIC_WEDDING_FORM_URL }}
-      NEXT_PUBLIC_PET_FORM_URL: ${{ secrets.NEXT_PUBLIC_PET_FORM_URL }}
+      NEXT_PUBLIC_WEDDING_FORM_URL: ${{ secrets.NEXT_PUBLIC_WEDDING_FORM_URL || '' }}
+      NEXT_PUBLIC_PET_FORM_URL: ${{ secrets.NEXT_PUBLIC_PET_FORM_URL || '' }}
+      NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID || '' }}
+      NEXT_PUBLIC_FORMSPREE_WEDDINGS_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_WEDDINGS_ID || 'xbdqyvqj' }}
+      NEXT_PUBLIC_FORMSPREE_BABY_FAMILY_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_BABY_FAMILY_ID || 'xeevkbvp' }}
+      NEXT_PUBLIC_FORMSPREE_HEADSHOTS_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_HEADSHOTS_ID || 'xpqkrgkn' }}
+      NEXT_PUBLIC_FORMSPREE_PETS_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_PETS_ID || 'xvzdrjdj' }}
 
     steps:
       - name: Checkout
@@ -30,7 +35,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
 
       - name: Setup Pages

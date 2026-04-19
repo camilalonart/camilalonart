@@ -163,8 +163,18 @@ const Message = styled.div<{ $type: 'success' | 'error' }>`
 `;
 
 interface ContactFormProps {
-  service: string;
+  service: 'weddings' | 'baby-family' | 'headshots' | 'pets';
 }
+
+const getFormspreeId = (service: string): string => {
+  const ids: Record<string, string> = {
+    weddings: process.env.NEXT_PUBLIC_FORMSPREE_WEDDINGS_ID || '',
+    'baby-family': process.env.NEXT_PUBLIC_FORMSPREE_BABY_FAMILY_ID || '',
+    headshots: process.env.NEXT_PUBLIC_FORMSPREE_HEADSHOTS_ID || '',
+    pets: process.env.NEXT_PUBLIC_FORMSPREE_PETS_ID || '',
+  };
+  return ids[service] || '';
+};
 
 export default function ContactForm({ service }: ContactFormProps) {
   const [formData, setFormData] = useState({
@@ -179,24 +189,52 @@ export default function ContactForm({ service }: ContactFormProps) {
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const formspreeId = getFormspreeId(service);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formspreeId) {
+      setStatus({
+        type: 'error',
+        message: 'Form is not configured. Please contact the administrator.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send the form data to your backend
-      // For now, we'll simulate an API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      setStatus({
-        type: 'success',
-        message: 'Thank you for your message! I will get back to you as soon as possible.',
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
       });
-      setFormData({ name: '', email: '', phone: '', message: '' });
+
+      if (response.ok) {
+        setStatus({
+          type: 'success',
+          message: 'Thank you for your message! I will get back to you as soon as possible.',
+        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setTimeout(() => setStatus(null), 5000);
+      } else {
+        setStatus({
+          type: 'error',
+          message: 'Something went wrong. Please try again later.',
+        });
+      }
     } catch (error) {
       setStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again later.',
+        message: 'Failed to send message. Please try again.',
       });
     } finally {
       setIsSubmitting(false);
