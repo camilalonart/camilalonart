@@ -731,18 +731,19 @@ const data: ArtPortfolioData = {
 export const COLLECTIONS_ORDER = [
   'carrying-home',
   'fuego-interior',
-  'dear-inner-child',
-  'magic',
   'the-essential-is-invisible',
+  'dear-inner-child',
+  'pandemic-lockdown',
+  'magic',
   'siempre-vuelvo',
   'in-your-eyes',
-  'yellow',
-  'start-over',
   'perspective',
   'pandemic-lockdown',
   'mis-raices',
   'blanco-y-negro',
   'red-doodles',
+  'yellow',
+  'start-over'
 ];
 
 export default data;
