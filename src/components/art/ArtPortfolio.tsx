@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
-import data, { type Collection, type Painting } from '../../data/artPortfolio';
+import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -227,6 +227,34 @@ const PaintingGrid = styled.div`
   @media (max-width: 500px) { columns: 1; }
 `;
 
+// ─── Collection grid (with always-visible titles) ──────────────────────────────
+const CollectionGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+`;
+
+const CollectionCard = styled.article`
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: ${C.surface};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  &:hover img { transform: scale(1.05); }
+`;
+
 const PaintingCard = styled.article`
   break-inside: avoid;
   margin-bottom: 3px;
@@ -256,11 +284,22 @@ const PaintingImgWrap = styled.div`
 
 const CardOverlay = styled.div.attrs({ className: 'card-overlay' })`
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 3rem 1.25rem 1.25rem;
-  background: linear-gradient(to top, rgba(4,4,4,0.93) 50%, transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent);
+  pointer-events: none;
+`;
+
+const CollectionCardOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
   pointer-events: none;
 `;
 
@@ -271,6 +310,16 @@ const CardTitle = styled.h3`
   color: ${C.text};
   margin: 0 0 0.2rem;
   text-transform: none;
+`;
+
+const CollectionCardTitle = styled.h3`
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: ${C.text};
+  margin: 0;
+  text-transform: none;
+  text-align: left;
 `;
 
 const CardMeta = styled.p`
@@ -559,10 +608,18 @@ const BioP = styled.p`
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-weight: 300;
   line-height: 1.9;
-  color: ${C.muted};
+  color: #333333;
   margin: 0 0 1.25rem;
 
-  &:first-child { color: ${C.text}; font-style: italic; }
+  &:first-child { color: #080808; font-style: italic; }
+`;
+
+const AboutEyebrow = styled(SectionEyebrow)`
+  color: #666666;
+`;
+
+const AboutTitle = styled(SectionTitle)`
+  color: #080808;
 `;
 
 const InstagramLinks = styled.div`
@@ -734,6 +791,12 @@ export default function ArtPortfolio() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const sortedCollections = [...data.collections].sort((a, b) => {
+    const aIndex = COLLECTIONS_ORDER.indexOf(a.id);
+    const bIndex = COLLECTIONS_ORDER.indexOf(b.id);
+    return aIndex - bIndex;
+  });
+
   return (
     <Site>
       {/* ── Nav ── */}
@@ -791,15 +854,15 @@ export default function ArtPortfolio() {
 
       {/* ── Collections ── */}
       <div id="collections">
-        {data.collections.map((col: Collection, i: number) => (
+        {sortedCollections.map((col: Collection, i: number) => (
           <Section key={col.id}>
             <SectionEyebrow>Collection {String(i + 1).padStart(2, '0')}</SectionEyebrow>
             <SectionTitle>{col.name}</SectionTitle>
             <SectionMeta>{col.period}</SectionMeta>
-            <SectionDesc>{col.description}</SectionDesc>
-            <PaintingGrid>
+            {col.description && <SectionDesc>{col.description}</SectionDesc>}
+            <CollectionGrid>
               {col.paintings.map(p => (
-                <PaintingCard
+                <CollectionCard
                   key={p.id}
                   onClick={() => openPainting(p, col.paintings)}
                   role="button"
@@ -807,22 +870,19 @@ export default function ArtPortfolio() {
                   aria-label={`Open ${p.title}, ${p.year}`}
                   onKeyDown={e => e.key === 'Enter' && openPainting(p, col.paintings)}
                 >
-                  <PaintingImgWrap>
-                    <img
-                      src={p.images[0]}
-                      alt={`${p.title} — ${p.materials}`}
-                      loading="lazy"
-                      draggable={false}
-                      onContextMenu={e => e.preventDefault()}
-                    />
-                    <CardOverlay>
-                      <CardTitle>{p.title}</CardTitle>
-                      <CardMeta>{p.year} · {p.materials}</CardMeta>
-                    </CardOverlay>
-                  </PaintingImgWrap>
-                </PaintingCard>
+                  <img
+                    src={p.images[0]}
+                    alt={`${p.title} — ${p.materials}`}
+                    loading="lazy"
+                    draggable={false}
+                    onContextMenu={e => e.preventDefault()}
+                  />
+                  <CollectionCardOverlay>
+                    <CollectionCardTitle>{p.title}</CollectionCardTitle>
+                  </CollectionCardOverlay>
+                </CollectionCard>
               ))}
-            </PaintingGrid>
+            </CollectionGrid>
           </Section>
         ))}
       </div>
@@ -863,8 +923,9 @@ export default function ArtPortfolio() {
       </Section>
 
       {/* ── About ── */}
-      <Section id="about">
-        <SectionEyebrow>The Artist</SectionEyebrow>
+      <AboutSection id="about">
+        <AboutEyebrow>The Artist</AboutEyebrow>
+        <AboutTitle>About</AboutTitle>
         <AboutGrid>
           {data.about.photoSrc && (
             <AboutPhoto>
@@ -902,7 +963,7 @@ export default function ArtPortfolio() {
             </InstagramLinks>
           </AboutText>
         </AboutGrid>
-      </Section>
+      </AboutSection>
 
       {/* ── Footer ── */}
       <Footer>
