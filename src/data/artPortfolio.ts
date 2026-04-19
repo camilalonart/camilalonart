@@ -715,15 +715,9 @@ const data: ArtPortfolioData = {
     { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3" },
     { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4" },
     { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp", id: "sh-6" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06893 copy.webp", id: "sh-7" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06900 copy.webp", id: "sh-8" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 2 copy.webp", id: "sh-9" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 copy 2.webp", id: "sh-10" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp", id: "sh-11" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp", id: "sh-12" },
     { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13" },
     { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8" }
   ],
 };
 

@@ -1,4 +1,4 @@
-import ArtHome from '@/components/art/ArtHome';
+import ArtPortfolio from '@/components/art/ArtPortfolio';
 
 export const metadata = {
   title: 'Traditional Art — Camila Londoño',
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function TraditionalArtPage() {
-  return <ArtHome />;
+  return <ArtPortfolio />;
 }
