@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArtNav from './ArtNav';
 
-const C = {
+const C: Record<string, string> = {
   bg: '#080808',
   surface: '#101010',
   border: '#1E1E1E',
