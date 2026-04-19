@@ -666,30 +666,33 @@ const ProjectsGrid = styled.div`
 
 // ─── Selected Works ───────────────────────────────────────────────────────────
 const SelectedWorksGrid = styled.div`
-  columns: 3 240px;
-  column-gap: 3px;
+  columns: 5 150px;
+  column-gap: 2px;
 
-  @media (max-width: 500px) { columns: 2; }
+  @media (max-width: 1200px) { columns: 4 140px; }
+  @media (max-width: 768px) { columns: 3 120px; }
+  @media (max-width: 500px) { columns: 2 100px; }
 `;
 
 const SelectedWorkCard = styled.article`
   break-inside: avoid;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  aspect-ratio: auto;
 
   img {
     display: block;
     width: 100%;
     height: auto;
-    transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
     user-select: none;
     pointer-events: none;
     -webkit-user-drag: none;
   }
 
-  &:hover img { transform: scale(1.03); }
+  &:hover img { transform: scale(1.08); }
 `;
 
 // ─── Footer ──────────────────────────────────────────────────────────────────
