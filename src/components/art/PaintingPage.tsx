@@ -238,6 +238,44 @@ const ThoughtsText = styled.p`
   margin: 0;
 `;
 
+// ─── Details Collage ───────────────────────────────────────────────
+const DetailsSection = styled.section`
+  padding: clamp(2rem, 4vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid ${C.border};
+`;
+
+const DetailsLabel = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: ${C.gold};
+  margin: 0 0 1.5rem;
+`;
+
+const DetailsGrid = styled.div`
+  columns: 3 180px;
+  column-gap: 1rem;
+  break-inside: avoid;
+
+  @media (max-width: 1024px) { columns: 2 150px; }
+  @media (max-width: 600px) { columns: 1; }
+`;
+
+const DetailImage = styled.img`
+  width: 100%;
+  margin-bottom: 1rem;
+  display: block;
+  break-inside: avoid;
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 // ─── Navigation ────────────────────────────────────────────────────
 const NavBar = styled.div`
   display: flex;
@@ -394,6 +432,25 @@ export default function PaintingPage({
             )}
           </InfoSection>
         </MainGrid>
+
+        {/* Details Collage */}
+        {painting.additionalImages && painting.additionalImages.length > 0 && (
+          <DetailsSection>
+            <DetailsLabel>Details</DetailsLabel>
+            <DetailsGrid>
+              {painting.additionalImages.map((src, i) => (
+                <DetailImage
+                  key={i}
+                  src={src}
+                  alt={`Detail ${i + 1}`}
+                  loading="lazy"
+                  draggable={false}
+                  onContextMenu={e => e.preventDefault()}
+                />
+              ))}
+            </DetailsGrid>
+          </DetailsSection>
+        )}
 
         {/* Navigation */}
         <NavBar>

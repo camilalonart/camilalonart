@@ -96,6 +96,7 @@ export default function ArtNav() {
       <NavLinks>
         <NavLink href="/art/">Collections</NavLink>
         <NavLink href="/art/about/">About</NavLink>
+        <NavLink href="/art/contact/">Contact</NavLink>
       </NavLinks>
     </Nav>
   );

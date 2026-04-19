@@ -84,6 +84,19 @@ const NavLink = styled.a`
   &:hover { color: ${C.gold}; }
 `;
 
+const NavLinkComponent = styled(Link)`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover { color: ${C.gold}; }
+`;
+
 // ─── Hero ────────────────────────────────────────────────────────────────────
 const Hero = styled.section`
   position: relative;
@@ -699,7 +712,7 @@ const ProjectsButtonGroup = styled.div`
   }
 `;
 
-const ProjectsButton = styled.button`
+const ProjectsButton = styled(Link)`
   flex: 1;
   min-width: 200px;
   padding: 2rem;
@@ -709,6 +722,8 @@ const ProjectsButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: left;
+  text-decoration: none;
+  display: block;
 
   &:hover {
     border-color: ${C.gold};
@@ -879,8 +894,8 @@ export default function ArtPortfolio() {
           Camila <span>Londoño</span>
         </NavLogo>
         <NavLinks>
-          <NavLink onClick={() => scrollTo('collections')}>Collections</NavLink>
-          <NavLink onClick={() => scrollTo('other-work')}>Other Work</NavLink>
+          <NavLinkComponent href="/art/collections">Collections</NavLinkComponent>
+          <NavLinkComponent href="/art/early-first-paintings">Other Work</NavLinkComponent>
           <NavLink onClick={() => scrollTo('about')}>About</NavLink>
         </NavLinks>
       </Nav>
@@ -963,26 +978,20 @@ export default function ArtPortfolio() {
       </div>
 
       {/* ── Other projects ── */}
-      {(data.earlyFirstPaintings.length > 0 || data.collaborations.length > 0) && (
-        <Section id="other-work">
-          <SectionEyebrow>Explore</SectionEyebrow>
-          <SectionTitle>More Works</SectionTitle>
-          <ProjectsButtonGroup>
-            {data.earlyFirstPaintings.length > 0 && (
-              <ProjectsButton>
-                <p>Archival</p>
-                <h3>Early First Paintings</h3>
-              </ProjectsButton>
-            )}
-            {data.collaborations.length > 0 && (
-              <ProjectsButton>
-                <p>Creative</p>
-                <h3>Collaborations</h3>
-              </ProjectsButton>
-            )}
-          </ProjectsButtonGroup>
-        </Section>
-      )}
+      <Section id="other-work">
+        <SectionEyebrow>Explore</SectionEyebrow>
+        <SectionTitle>More Works</SectionTitle>
+        <ProjectsButtonGroup>
+          <ProjectsButton href="/art/early-first-paintings">
+            <p>Archival</p>
+            <h3>Early First Paintings</h3>
+          </ProjectsButton>
+          <ProjectsButton href="/art/collaborations">
+            <p>Creative</p>
+            <h3>Collaborations</h3>
+          </ProjectsButton>
+        </ProjectsButtonGroup>
+      </Section>
 
       {/* ── About ── */}
       <AboutSection id="about">
