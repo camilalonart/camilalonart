@@ -19,7 +19,7 @@ export interface Collection {
 export interface ArtPortfolioData {
   collections: Collection[];
   otherProjects: Painting[];
-  selectedWorks: Array<{ image: string; id: string; collectionId: string; paintingId: string }>;
+  selectedWorks: Array<{ image: string; id: string }>;
   about: {
     bio: string[];
     instagram1Url: string;
@@ -163,14 +163,6 @@ const data: ArtPortfolioData = {
         "Finding wonder in ordinary spaces.",
       paintings: [
         {
-          id: "start-over-04",
-          title: "Viaje a Canada",
-          materials: "Digital drawing",
-          size: "50 × 70 cm",
-          year: 2023,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
-        },
-        {
           id: "magic-01",
           title: "Luthier",
           materials: "Oil on canvas",
@@ -212,6 +204,14 @@ const data: ArtPortfolioData = {
           year: 2023,
           images: ["/images/art/traditionalArt/Magic/FirstTimes.webp"],
         },
+        {
+          id: "magic-06",
+          title: "Viaje a Canada",
+          materials: "Digital",
+          size: "50 × 70 cm",
+          year: 2023,
+          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
+        }
       ],
     },
     {
@@ -660,8 +660,8 @@ const data: ArtPortfolioData = {
           materials: "",
           size: "",
           year: 2024,
-          images: ["/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp"]
-        }
+          images: ["/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp"],
+        },
       ],
     },
   ],
@@ -669,20 +669,24 @@ const data: ArtPortfolioData = {
   otherProjects: [],
 
   selectedWorks: [
-    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2", collectionId: "carrying-home", paintingId: "carrying-home-02" },
-    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3", collectionId: "carrying-home", paintingId: "carrying-home-03" },
-    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4", collectionId: "carrying-home", paintingId: "carrying-home-04" },
-    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5", collectionId: "carrying-home", paintingId: "carrying-home-05" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp", id: "sh-6", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06893 copy.webp", id: "sh-7", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06900 copy.webp", id: "sh-8", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 2 copy.webp", id: "sh-9", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 copy 2.webp", id: "sh-10", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp", id: "sh-11", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp", id: "sh-12", collectionId: "carrying-home", paintingId: "carrying-home-01" },
-    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13", collectionId: "fuego-interior", paintingId: "fuego-interior-01" },
-    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14", collectionId: "fuego-interior", paintingId: "fuego-interior-02" },
+    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1" },
+    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TakeMeBackTo2016.webp", id: "sh-11" },
+    { image: "/images/art/traditionalArt/The essential is invisible (Red)/TheFirstOneIActuallyLiked.webp", id: "sh-12" },
+    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3" },
+    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4" },
+    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5" },
+    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp", id: "sh-10" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp", id: "sh-9" },
+    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13" },
+    { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/EngineeringEpistemology.webp", id: "sh-15" },
+    { image: "/images/art/traditionalArt/Perspective/WhyNot.webp", id: "sh-16" },
+    { image: "/images/art/traditionalArt/Yellow/DontGo.webp", id: "sh-17" },
+    { image: "/images/art/traditionalArt/Dear Inner Child/Creative.webp", id: "sh-3" },
+    { image: "/images/art/traditionalArt/Dear Inner Child/Loyal.webp", id: "sh-5" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/AtravesDeMiVentana.webp", id: "sh-7" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8" }
   ]
 };
 
