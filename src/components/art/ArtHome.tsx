@@ -95,7 +95,7 @@ const HeroTagline = styled.p`
   font-size: clamp(1rem, 2vw, 1.3rem);
   font-style: italic;
   font-weight: 300;
-  color: rgba(240, 237, 232, 0.7);
+  color: rgba(224, 224, 223);
   letter-spacing: 0.04em;
   margin: 0;
 `;
