@@ -33,7 +33,7 @@ export interface ArtPortfolioData {
 const data: ArtPortfolioData = {
   about: {
     bio: [
-      "Camilalonart is a multidisciplinary artist and engineer whose work is rooted in storytelling through everyday moments. She is drawn to what often goes unnoticed: shifting light, subtle gestures, and fleeting instants that quietly hold emotion and meaning. Her practice is focused on painting, working across different materials, from oil paint and watercolors to chalk.",
+      "Camilalonart is a Colombian multidisciplinary artist and engineer whose work is rooted in storytelling through everyday moments. She is drawn to what often goes unnoticed: shifting light, subtle gestures, and fleeting instants that quietly hold emotion and meaning. Her practice is focused on painting, working across different materials, from oil paint and watercolors to chalk.",
       "As an artist who moved to Canada, she carries a deep appreciation for this place while holding onto fragments of where she comes from. That in-between space informs how she observes, remembers, and creates. One of the themes she explores in her work is migration and the inner journey of self-discovery, reflecting on identity, belonging, and transformation",
       "With a background in engineering, she brings a quiet sense of structure into her intuitive process, exploring the space where the logical and the emotional coexist.",
       "For her, making art is also a practice of presence, a way of slowing down and noticing the small details that turn ordinary moments into something quietly meaningful."

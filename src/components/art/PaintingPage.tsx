@@ -108,16 +108,18 @@ const MainImage = styled.img`
 
 const Watermark = styled.div`
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 0.8rem;
+  right: 0.8rem;
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   letter-spacing: 0.2em;
-  color: rgba(200, 168, 122, 0.8);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 0.3rem 0.6rem;
+  color: rgba(200, 168, 122, 0.9);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.4rem 0.7rem;
   pointer-events: none;
   user-select: none;
+  white-space: nowrap;
+  z-index: 10;
 `;
 
 const ThumbnailRow = styled.div`
