@@ -602,6 +602,34 @@ const ProjectsGrid = styled.div`
   @media (max-width: 500px) { columns: 2; }
 `;
 
+// ─── Selected Works ───────────────────────────────────────────────────────────
+const SelectedWorksGrid = styled.div`
+  columns: 3 240px;
+  column-gap: 3px;
+
+  @media (max-width: 500px) { columns: 2; }
+`;
+
+const SelectedWorkCard = styled.article`
+  break-inside: avoid;
+  margin-bottom: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  &:hover img { transform: scale(1.03); }
+`;
+
 // ─── Footer ──────────────────────────────────────────────────────────────────
 const Footer = styled.footer`
   border-top: 1px solid ${C.border};
@@ -738,6 +766,23 @@ export default function ArtPortfolio() {
           <span>Scroll</span>
         </ScrollCue>
       </Hero>
+
+      {/* ── Selected Works ── */}
+      <Section>
+        <SelectedWorksGrid>
+          {data.selectedWorks.map(work => (
+            <SelectedWorkCard key={work.id}>
+              <img
+                src={work.image}
+                alt="Selected work"
+                loading="lazy"
+                draggable={false}
+                onContextMenu={e => e.preventDefault()}
+              />
+            </SelectedWorkCard>
+          ))}
+        </SelectedWorksGrid>
+      </Section>
 
       {/* ── Collections ── */}
       <div id="collections">

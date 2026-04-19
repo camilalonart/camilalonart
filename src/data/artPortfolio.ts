@@ -19,6 +19,7 @@ export interface Collection {
 export interface ArtPortfolioData {
   collections: Collection[];
   otherProjects: Painting[];
+  selectedWorks: Array<{ image: string; id: string }>;
   about: {
     bio: string[];
     instagram1Url: string;
@@ -32,15 +33,16 @@ export interface ArtPortfolioData {
 const data: ArtPortfolioData = {
   about: {
     bio: [
-      "Camila Londoño is a Colombian painter and multidisciplinary artist whose work explores the intersection of memory, nature, and the human experience.",
-      "Working across oil, watercolor, and mixed media, each piece is a meditation — a search for stillness within the visible world. Her collections emerge from specific seasons of life, travel, and observation.",
-      "Based between Colombia and the United States, Camila divides her practice between the studio and the field, finding subjects in landscapes, people, and the overlooked textures of daily life.",
+      "Camilalonart is a multidisciplinary artist and engineer whose work is rooted in storytelling through everyday moments. She is drawn to what often goes unnoticed: shifting light, subtle gestures, and fleeting instants that quietly hold emotion and meaning. Her practice is focused on painting, working across different materials, from oil paint and watercolors to chalk.",
+      "As an artist who moved to Canada, she carries a deep appreciation for this place while holding onto fragments of where she comes from. That in-between space informs how she observes, remembers, and creates. One of the themes she explores in her work is migration and the inner journey of self-discovery, reflecting on identity, belonging, and transformation",
+      "With a background in engineering, she brings a quiet sense of structure into her intuitive process, exploring the space where the logical and the emotional coexist.",
+      "For her, making art is also a practice of presence, a way of slowing down and noticing the small details that turn ordinary moments into something quietly meaningful."
     ],
     instagram1Url: "https://www.instagram.com/camilalonart",
     instagram1Handle: "@camilalonart",
     instagram2Url: "https://www.instagram.com/camilonart",
     instagram2Handle: "@camilonart",
-    photoSrc: "/images/traditional-art/artist-portrait.jpg",
+    photoSrc: "/images/aboutTheArtist/TraditionalArt1.webp",
   },
 
   collections: [
@@ -49,7 +51,7 @@ const data: ArtPortfolioData = {
       name: "Carrying Home",
       period: "2024",
       description:
-        "A meditation on displacement, belonging, and the weight of what we carry with us. These works explore the space between leaving and arriving, between home and journey.",
+        "A meditation on displacement and belonging. These works explore the space between leaving and arriving, between home and journey.",
       paintings: [
         {
           id: "carrying-home-01",
@@ -158,7 +160,7 @@ const data: ArtPortfolioData = {
       name: "Magic",
       period: "2023–2024",
       description:
-        "Where realism meets reverie. These works capture moments that feel suspended between the possible and the impossible, finding wonder in ordinary spaces.",
+        "Finding wonder in ordinary spaces.",
       paintings: [
         {
           id: "magic-01",
@@ -209,7 +211,7 @@ const data: ArtPortfolioData = {
       name: "The Essential is Invisible (Red)",
       period: "2022–2023",
       description:
-        "A suite of works exploring emotional intensity, complexity, and the hidden depths beneath surface appearances. Red as both passion and sorrow.",
+        "A suite of works exploring emotional intensity, complexity, and the hidden depths beneath surface appearances. The red doodles are the stories we carry within, the feelings that shape us but often go unseen.",
       paintings: [
         {
           id: "essential-01",
@@ -298,7 +300,7 @@ const data: ArtPortfolioData = {
       name: "Siempre vuelvo a esta versión de mi",
       period: "2023",
       description:
-        "An exploration of identity, duality, and the versions of ourselves we return to again and again. A dialogue with persistence and change.",
+        "Paintings made when I was 17, feeling on top of the world, feeling everything was fine, and finding excitment in everything. Naive and romantic Camila, I always come back to you, to the way you see the world, to the way you feel. These paintings are a love letter to that version of myself, and a reminder that we carry all our versions within us.",
       paintings: [
         {
           id: "siempre-01",
@@ -357,7 +359,7 @@ const data: ArtPortfolioData = {
       name: "In Your Eyes",
       period: "2023",
       description:
-        "Portraiture as a meditation on connection. Each face is a map of what we find when we truly look at another person.",
+        "They say the eyes are the window to the soul. These paintings explore the stories we carry in our gaze, the way we see ourselves and others, and the emotions that flicker behind our eyes.",
       paintings: [
         {
           id: "in-your-eyes-01",
@@ -403,7 +405,7 @@ const data: ArtPortfolioData = {
       name: "Yellow",
       period: "2022–2023",
       description:
-        "A celebration of warmth, hope, and the transformative power of light. These works embrace joy as a form of resistance.",
+        "I love yellow. Painting over this color always felt like as if the drawing was there but hidden, waiting for me to reveal it. These works are studies I did as a teen, and I always come back to the way I experienced art back then. Drawing thousands of art pieces, obsessed with the process of making.",
       paintings: [
         {
           id: "yellow-01",
@@ -501,7 +503,7 @@ const data: ArtPortfolioData = {
       name: "Perspective",
       period: "2022–2023",
       description:
-        "Small studies on the nature of point of view. Each painting asks: whose perspective am I seeing? What changes when we shift our vantage point?",
+        "Geometry and not taking it too seriously. An exploration of perspective as a way to play with space, form, and the way we see the world.",
       paintings: [
         {
           id: "perspective-01",
@@ -583,7 +585,7 @@ const data: ArtPortfolioData = {
       name: "Mis Raíces",
       period: "2021–2022",
       description:
-        "A return to origins. Works celebrating family, landscape, and the birds that inhabit the mountains of Colombia.",
+        "A return to origins. Works celebrating family, landscape, coffee, and the birds that inhabit the mountains of Colombia.",
       paintings: [
         {
           id: "mis-raices-01",
@@ -706,6 +708,23 @@ const data: ArtPortfolioData = {
   ],
 
   otherProjects: [],
+
+  selectedWorks: [
+    { image: "/images/art/traditionalArt/Carrying Home/CarryingHome.webp", id: "sh-1" },
+    { image: "/images/art/traditionalArt/Carrying Home/InTransit.webp", id: "sh-2" },
+    { image: "/images/art/traditionalArt/Carrying Home/Moving.webp", id: "sh-3" },
+    { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4" },
+    { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp", id: "sh-6" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06893 copy.webp", id: "sh-7" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06900 copy.webp", id: "sh-8" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 2 copy.webp", id: "sh-9" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/A7T06901 copy 2.webp", id: "sh-10" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp", id: "sh-11" },
+    { image: "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp", id: "sh-12" },
+    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13" },
+    { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14" },
+  ],
 };
 
 export default data;
