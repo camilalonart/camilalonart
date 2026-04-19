@@ -2,12 +2,10 @@
 const nextConfig = {
   output: 'export',  // Enable static exports
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true, // Required for static export — replace with Cloudinary once cloud name is set
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
   compiler: {

@@ -50,7 +50,7 @@ export default function WildlifePhotographyPage() {
       <LandingPage>
         <LandingImageContainer>
           <Image
-            src="/images/wildlife/wildlife-landing.jpg"
+            src="/images/wildlife/wildlife-landing.webp"
             alt="Wildlife Photography by Camilalonart"
             fill
             priority

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 // Site-wide constants
 export const SITE_CONFIG = {
   name: 'Camilalonart',
-  url: 'https://camilalonart.com',
+  url: 'https://www.camilalonart.com',
   locale: 'en_CA',
   alternateLocale: 'es',
   location: {

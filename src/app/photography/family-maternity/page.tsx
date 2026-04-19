@@ -1217,7 +1217,7 @@ export default function FamilyMaternityPage() {
       <Hero>
         <HeroImageSide>
           <ProtectedImage
-            src="/images/family/baby/A7T03164.jpg"
+            src="/images/family/baby/A7T03164.webp"
             alt="Beautiful maternity and family moment"
             fill
             style={{ objectFit: 'cover' }}
@@ -1251,27 +1251,27 @@ export default function FamilyMaternityPage() {
       </IntroSection>
 
       <ImageDivider>
-        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02053-2.jpg')}>
+        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02053-2.webp')}>
           <ProtectedImage
-            src="/images/family/baby/A7T02053-2.jpg"
+            src="/images/family/baby/A7T02053-2.webp"
             alt="Family portrait"
             fill
             style={{ objectFit: 'cover' }}
             quality={90}
           />
         </DividerImage>
-        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02669-2.jpg')}>
+        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02669-2.webp')}>
           <ProtectedImage
-            src="/images/family/baby/A7T02669-2.jpg"
+            src="/images/family/baby/A7T02669-2.webp"
             alt="Baby photography"
             fill
             style={{ objectFit: 'cover' }}
             quality={90}
           />
         </DividerImage>
-        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02099-2.jpg')}>
+        <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02099-2.webp')}>
           <ProtectedImage
-            src="/images/family/baby/A7T02099-2.jpg"
+            src="/images/family/baby/A7T02099-2.webp"
             alt="Baby photography"
             fill
             style={{ objectFit: 'cover' }}
@@ -1282,11 +1282,11 @@ export default function FamilyMaternityPage() {
 
       <ServicesSection>
         <ServicesImageSide 
-          onClick={() => setSelectedImage('/images/family/baby/A7T02606copy.jpg')}
+          onClick={() => setSelectedImage('/images/family/baby/A7T02606copy.webp')}
           style={{ padding: '8rem', background: '#F5EDE8' }}
         >
           <ProtectedImage
-            src="/images/family/baby/A7T02606copy.jpg"
+            src="/images/family/baby/A7T02606copy.webp"
             alt="Family photography session"
             fill
             style={{ objectFit: 'contain' }}
@@ -1346,54 +1346,54 @@ export default function FamilyMaternityPage() {
           Browse through our gallery of family moments, each one unique and filled with love.
         </SectionSubtitle>
         <GalleryGrid>
-          <GalleryImage $span="span 2" onClick={() => setSelectedImage('/images/family/baby/A7T02791-2.jpg')}>
+          <GalleryImage $span="span 2" onClick={() => setSelectedImage('/images/family/baby/A7T02791-2.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T02791-2.jpg"
+              src="/images/family/baby/A7T02791-2.webp"
               alt="Family moment"
               fill
               style={{ objectFit: 'cover' }}
               quality={85}
             />
           </GalleryImage>
-          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T03261.jpg')}>
+          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T03261.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T03261.jpg"
+              src="/images/family/baby/A7T03261.webp"
               alt="Baby portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={85}
             />
           </GalleryImage>
-          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T02760-3.jpg')}>
+          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T02760-3.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T02760-3.jpg"
+              src="/images/family/baby/A7T02760-3.webp"
               alt="Maternity photo"
               fill
               style={{ objectFit: 'cover' }}
               quality={85}
             />
           </GalleryImage>
-          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T03180copy.jpg')}>
+          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T03180copy.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T03180copy.jpg"
+              src="/images/family/baby/A7T03180copy.webp"
               alt="Newborn session"
               fill
               style={{ objectFit: 'cover' }}
               quality={85}
             />
           </GalleryImage>
-          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T02513-2.jpg')}>
+          <GalleryImage onClick={() => setSelectedImage('/images/family/baby/A7T02513-2.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T02513-2.jpg"
+              src="/images/family/baby/A7T02513-2.webp"
               alt="Family portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={85}
             />
           </GalleryImage>
-          <GalleryImage $span="span 2" onClick={() => setSelectedImage('/images/family/baby/A7T02747-2.jpg')}>
+          <GalleryImage $span="span 2" onClick={() => setSelectedImage('/images/family/baby/A7T02747-2.webp')}>
             <ProtectedImage
-              src="/images/family/baby/A7T02747-2.jpg"
+              src="/images/family/baby/A7T02747-2.webp"
               alt="Baby milestone"
               fill
               style={{ objectFit: 'cover' }}

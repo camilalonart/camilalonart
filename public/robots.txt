@@ -1,11 +1,11 @@
 # Robots.txt for camilalonart.com
-# https://camilalonart.com
+# https://www.camilalonart.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://camilalonart.com/sitemap.xml
+Sitemap: https://www.camilalonart.com/sitemap.xml
 
 # Disallow admin and API routes
 Disallow: /api/

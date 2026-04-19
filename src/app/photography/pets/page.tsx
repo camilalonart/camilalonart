@@ -823,7 +823,7 @@ export default function PetsPage() {
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
-            src="/images/pets/gallery/A7T06602.jpg"
+            src="/images/pets/gallery/A7T06602.webp"
             alt="Happy dog portrait"
             fill
             style={{ objectFit: 'cover' }}
@@ -841,18 +841,18 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.jpg')}>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T02596.jpg"
+              src="/images/pets/A7T02596.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.jpg')} $isMiddle>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.webp')} $isMiddle>
             <ProtectedImage
-              src="/images/pets/A7T02565.jpg"
+              src="/images/pets/A7T02565.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -924,33 +924,33 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575-2.jpg')} $isMiddle>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575-2.webp')} $isMiddle>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06575-2.jpg"
+              src="/images/pets/gallery/A7T06575-2.webp"
               alt="Pet portrait"
               fill
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06581.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06581.webp')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06581.jpg"
+              src="/images/pets/gallery/A7T06581.webp"
               alt="Pet portrait"
               fill
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875-2.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875-2.webp')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06875-2.jpg"
+              src="/images/pets/gallery/A7T06875-2.webp"
               alt="Pet portrait"
               fill
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06602.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06602.webp')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T06602.jpg"
+              src="/images/pets/gallery/A7T06602.webp"
               alt="Pet portrait"
               fill
               quality={100}
@@ -1004,27 +1004,27 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.jpg')} $isMiddle>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.webp')} $isMiddle>
             <ProtectedImage
-              src="/images/pets/A7T05911.jpg"
+              src="/images/pets/A7T05911.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05654.jpg')}>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05654.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T05654.jpg"
+              src="/images/pets/A7T05654.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T09275-2.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T09275-2.webp')}>
             <ProtectedImage
-              src="/images/pets/gallery/A7T09275-2.jpg"
+              src="/images/pets/gallery/A7T09275-2.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1046,27 +1046,27 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T02365.jpg"
+              src="/images/pets/A7T02365.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.jpg')}>
+          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T02388.jpg"
+              src="/images/pets/A7T02388.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.jpg')}>
+          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T02378.jpg"
+              src="/images/pets/A7T02378.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1110,7 +1110,7 @@ export default function PetsPage() {
         <SectionDivider>
           <DividerImage $span={3} $isMiddle>
             <ProtectedImage
-              src="/images/pets/A7T02468-3.jpg"
+              src="/images/pets/A7T02468-3.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1119,7 +1119,7 @@ export default function PetsPage() {
           </DividerImage>
           <DividerImage $span={3}>
             <ProtectedImage
-              src="/images/pets/A7T02414-2.jpg"
+              src="/images/pets/A7T02414-2.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1128,7 +1128,7 @@ export default function PetsPage() {
           </DividerImage>
           <DividerImage $span={3}>
             <ProtectedImage
-              src="/images/pets/A7T02360.jpg"
+              src="/images/pets/A7T02360.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1137,7 +1137,7 @@ export default function PetsPage() {
           </DividerImage>
           <DividerImage $span={3}>
             <ProtectedImage
-              src="/images/pets/A7T02349.jpg"
+              src="/images/pets/A7T02349.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
@@ -1165,18 +1165,18 @@ export default function PetsPage() {
       </Section>
       <Section>
         <SectionDivider>
-          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.jpg')}>
+          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T09768.jpg"
+              src="/images/pets/A7T09768.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={8} onClick={() => setSelectedImage('/images/pets/A7T09762-2.jpg')}>
+          <DividerImage $span={8} onClick={() => setSelectedImage('/images/pets/A7T09762-2.webp')}>
             <ProtectedImage
-              src="/images/pets/A7T09762-2.jpg"
+              src="/images/pets/A7T09762-2.webp"
               alt="Pet portrait"
               fill
               style={{ objectFit: 'cover' }}

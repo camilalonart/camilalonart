@@ -622,7 +622,7 @@ export default function HeadshotsPage() {
       <Hero>
         <HeroImageContainer>
           <SecureImage
-            src="/images/headshots/collagecopy.png"
+            src="/images/headshots/collagecopy.webp"
             alt="Professional headshots"
             priority
             quality={90}

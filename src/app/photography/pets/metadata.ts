@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: 'en_CA',
     images: [
       {
-        url: `${SITE_CONFIG.url}/images/pets/A7T05223-horizontal.jpg`,
+        url: `${SITE_CONFIG.url}/images/pets/A7T05223-horizontal.webp`,
         width: 1200,
         height: 630,
         alt: 'Vancouver Pet Photography - Dog Portrait',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pet Photographer Vancouver BC | Camilalonart',
     description: 'Professional pet photography in Vancouver. Capture your furry friend\'s personality with stunning portraits!',
-    images: [`${SITE_CONFIG.url}/images/pets/A7T05223-horizontal.jpg`],
+    images: [`${SITE_CONFIG.url}/images/pets/A7T05223-horizontal.webp`],
   },
   robots: {
     index: true,

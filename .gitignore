@@ -35,11 +35,18 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Protected content
-/public/images/**/*
+# Protected content - allow specific image folders
+!/public/images/
+/public/images/*
+!/public/images/headshots/
+!/public/images/family/
+!/public/images/pets/
+!/public/images/wedding/
+!/public/images/wildlife/
+!/public/images/artClasses/
+!/public/images/everyday/
+!/public/images/traditionalArt/
 !/public/images/.gitkeep
-!/public/images/headshots/**
-!/public/images/family/**
 /src/assets/images/**/*
 !/src/assets/images/.gitkeep
 

@@ -245,7 +245,7 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/pets/A7T05911-2copy.jpg"
+                      src="/images/pets/A7T05911-2copy.webp"
                       alt="Pet Photography"
                       priority
                       quality={85}
@@ -268,9 +268,8 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/wedding/A7T01396copy.jpg"
+                      src="/images/wedding/A7T01396copy.webp"
                       alt="Wedding & Couples"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -291,9 +290,8 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/portfolio-0copy.jpg"
+                      src="/images/headshots/portfolio-0copy.webp"
                       alt="Professional Headshots"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -314,9 +312,8 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/family/baby/A7T02053-2copy.jpg"
+                      src="/images/family/baby/A7T02053-2copy.webp"
                       alt="Family & Maternity Photography"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -339,7 +336,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/photography/eventos-hero.jpg"
                       alt="Event Photography"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -370,7 +366,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/art/digital.jpg"
                       alt="Digital Art"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -393,7 +388,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/art/traditional.jpg"
                       alt="Traditional Art"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -414,9 +408,8 @@ export default function HomePage() {
                 <CardInner>
                   <CardFace>
                     <StyledSecureImage showWatermark={false}
-                      src="/images/wildlife/wildlife-landing.jpg"
+                      src="/images/wildlife/wildlife-landing.webp"
                       alt="Wildlife Photography"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -439,7 +432,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/art/everyday.jpg"
                       alt="Everyday Photography"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -470,7 +462,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/creative/brand-identity.jpg"
                       alt="Brand Identity"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -493,7 +484,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/creative/graphic-recording.jpg"
                       alt="Graphic Recording"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -516,7 +506,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/creative/ux-ui.jpg"
                       alt="UX/UI Design"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -539,7 +528,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/creative/art-classes.jpg"
                       alt="Art Classes"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -570,7 +558,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/tech/software-engineering.jpg"
                       alt="Software Engineering"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>
@@ -593,7 +580,6 @@ export default function HomePage() {
                     <StyledSecureImage showWatermark={false}
                       src="/images/tech/courses.jpg"
                       alt="Tech Courses"
-                      priority
                       quality={85}
                     />
                     <CardContent $overlay>

@@ -1224,7 +1224,7 @@ export default function WeddingCouplesPage() {
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
-            src="/images/wedding/A7T09955-2.jpg"
+            src="/images/wedding/A7T09955-2.webp"
             alt="Happy couple on their wedding day"
             height="100%"
             priority
@@ -1252,7 +1252,7 @@ export default function WeddingCouplesPage() {
       <SectionDivider>
         <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/A7T00021.jpg"
+            src="/images/wedding/A7T00021.webp"
             alt="Couple portrait"
             height="100%"
             quality={75}
@@ -1260,7 +1260,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
           <ProtectedImage
-            src="/images/wedding/A7T01233Crop.jpg"
+            src="/images/wedding/A7T01233Crop.webp"
             alt="Hands with rings"
             height="100%"
             quality={75}
@@ -1268,7 +1268,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/A7T09955.jpg"
+            src="/images/wedding/A7T09955.webp"
             alt="Couple kissing"
             height="100%"
             quality={75}
@@ -1354,25 +1354,25 @@ export default function WeddingCouplesPage() {
       </Section>
 
       <SectionDivider>
-        <DividerImage $span={3} $isMiddle onClick={() => handleImageClick('/images/wedding/A7T09634.jpg')}>
+        <DividerImage $span={3} $isMiddle onClick={() => handleImageClick('/images/wedding/A7T09634.webp')}>
           <ProtectedImage
-            src="/images/wedding/A7T09634.jpg"
+            src="/images/wedding/A7T09634.webp"
             alt="Bride and ring"
             height="110%"
             quality={75}
           />
         </DividerImage>
-        <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.jpg')}>
+        <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.webp')}>
           <ProtectedImage
-            src="/images/wedding/A7T09834.jpg"
+            src="/images/wedding/A7T09834.webp"
             alt="Flowers"
             height="100%"
             quality={75}
           />
         </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.jpg')}>
+        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.webp')}>
           <ProtectedImage
-            src="/images/wedding/A7T09612.jpg"
+            src="/images/wedding/A7T09612.webp"
             alt="Bride"
             height="110%"
             quality={75}
@@ -1426,7 +1426,7 @@ export default function WeddingCouplesPage() {
       <SectionDivider>
         <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/A7T01425.jpg"
+            src="/images/wedding/A7T01425.webp"
             alt="Signing"
             height="100%"
             quality={75}
@@ -1434,7 +1434,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
           <ProtectedImage
-            src="/images/wedding/A7T01396.jpg"
+            src="/images/wedding/A7T01396.webp"
             alt="Couple portrait"
             height="100%"
             quality={75}
@@ -1442,7 +1442,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/A7T01413-2.jpg"
+            src="/images/wedding/A7T01413-2.webp"
             alt="Bride and best friend"
             height="100%"
             quality={75}
@@ -1462,7 +1462,7 @@ export default function WeddingCouplesPage() {
       <SectionDivider>
         <DividerImage $span={4}>
           <ProtectedImage
-            src="/images/wedding/A7T00849.jpg"
+            src="/images/wedding/A7T00849.webp"
             alt="Couple portrait"
             height="100%"
             quality={75}
@@ -1470,7 +1470,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={3} $isMiddle>
           <ProtectedImage
-            src="/images/wedding/A7T00765.jpg"
+            src="/images/wedding/A7T00765.webp"
             alt="Signing"
             height="100%"
             quality={75}
@@ -1478,7 +1478,7 @@ export default function WeddingCouplesPage() {
         </DividerImage>
         <DividerImage $span={5}>
           <ProtectedImage
-            src="/images/wedding/A7T00438.jpg"
+            src="/images/wedding/A7T00438.webp"
             alt="Bride and best friend"
             height="100%"
             quality={75}
@@ -1499,7 +1499,7 @@ export default function WeddingCouplesPage() {
           </TestimonialContent>
           <TestimonialImage>
             <ProtectedImage
-              src="/images/wedding/A7T09940.jpg"
+              src="/images/wedding/A7T09940.webp"
               alt="Emily and Luca's elopement"
               height="100%"
               quality={75}
