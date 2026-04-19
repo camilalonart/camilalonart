@@ -431,9 +431,7 @@ const FooterGold = styled.span`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function ArtHome() {
-  const heroImage =
-    data.collections[0]?.paintings[0]?.images[0] ??
-    '/images/art/traditionalArt/Carrying Home/We.webp';
+  const heroImage = '/images/art/traditionalArt/Carrying Home/Moving.webp';
 
   // Featured paintings: first painting from first 3 collections
   const featured = data.collections.slice(0, 3).map(col => ({
@@ -449,7 +447,7 @@ export default function ArtHome() {
       <Hero>
         <HeroImgWrap>
           <Image
-            src="/images/art/traditionalArt/Carrying Home/We.webp"
+            src={heroImage}
             alt="Featured artwork by Camila Londoño"
             fill
             priority
