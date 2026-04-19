@@ -1,8 +1,8 @@
 import ArtAbout from '@/components/art/ArtAbout';
 
 export const metadata = {
-  title: 'About — Camila Londoño',
-  description: 'Learn more about Camila Londoño, painter working in oil, watercolor, and mixed media.',
+  title: 'About — CamilaLonart',
+  description: 'Learn more about CamilaLonart, a Colombian artist based in Vancouver, BC.',
 };
 
 export default function AboutPage() {

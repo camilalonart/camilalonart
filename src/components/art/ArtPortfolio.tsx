@@ -899,9 +899,10 @@ export default function ArtPortfolio() {
         </HeroImgWrap>
         <HeroBg />
         <HeroContent>
-          <ArtistName>Camila Londoño</ArtistName>
+          <ArtistName>CamilaLonart</ArtistName>
           <HeroRule />
-          <HeroTagline>Painter · Oil, Watercolor & Mixed Media</HeroTagline>
+          <HeroTagline>Fine Artist</HeroTagline>
+          <br/>
         </HeroContent>
         <ScrollCue aria-hidden="true">
           <ScrollLine />

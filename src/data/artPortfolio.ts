@@ -6,6 +6,7 @@ export interface Painting {
   year: number;
   images: string[];
   thoughts?: string;
+  additionalImages?: string[];
 }
 
 export interface Collection {
