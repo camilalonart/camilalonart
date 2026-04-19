@@ -43,9 +43,11 @@ next-env.d.ts
 !/public/images/pets/
 !/public/images/wedding/
 !/public/images/wildlife/
+!/public/images/art/
 !/public/images/artClasses/
 !/public/images/everyday/
 !/public/images/traditionalArt/
+!/public/images/aboutTheArtist/
 !/public/images/.gitkeep
 /src/assets/images/**/*
 
