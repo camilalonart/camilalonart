@@ -679,6 +679,30 @@ const data: ArtPortfolioData = {
         },
       ],
     },
+    {
+      id: "fuego-interior",
+      name: "Fuego Interior",
+      period: "2024",
+      description: "",
+      paintings: [
+        {
+          id: "fuego-interior-01",
+          title: "Fuego Interior",
+          materials: "",
+          size: "",
+          year: 2024,
+          images: ["/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp"],
+        },
+        {
+          id: "fuego-interior-02",
+          title: "The Inner Tide",
+          materials: "",
+          size: "",
+          year: 2024,
+          images: ["/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp"],
+        },
+      ],
+    },
   ],
 
   otherProjects: [],
