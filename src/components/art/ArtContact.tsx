@@ -9,6 +9,7 @@ const C = {
   surface: '#101010',
   border: '#1E1E1E',
   gold: '#C8A87A',
+  goldLight: '#E5D4B3',
   text: '#F0EDE8',
   muted: '#6E6B65',
 };
