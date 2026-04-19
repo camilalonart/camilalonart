@@ -5,6 +5,7 @@ import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
+import ContactForm from '../ContactForm';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -43,12 +44,23 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
-  height: 64px;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  height: auto;
+  min-height: 64px;
   transition: background 0.4s ease, border-color 0.4s ease;
-  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.96)' : 'transparent'};
+  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.98)' : 'transparent'};
   border-bottom: 1px solid ${p => p.$scrolled ? C.border : 'transparent'};
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @media (max-width: 900px) {
+    padding: 0 clamp(0.75rem, 3vw, 2rem);
+  }
+
+  @media (max-width: 600px) {
+    padding: 0.5rem clamp(0.75rem, 3vw, 1.5rem);
+  }
 `;
 
 const NavLogo = styled.a`
@@ -59,16 +71,30 @@ const NavLogo = styled.a`
   text-decoration: none;
   cursor: pointer;
   font-weight: 300;
+  transition: color 0.2s;
+  flex-shrink: 0;
 
-  span { color: ${C.gold}; }
+  &:focus-visible {
+    outline: 2px solid ${C.gold};
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    color: ${C.gold};
+  }
+
+  span { color: ${C.text}; }
 `;
 
 const NavLinks = styled.div`
   display: flex;
   gap: 2.5rem;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 
-  @media (max-width: 600px) { gap: 1.2rem; }
+  @media (max-width: 900px) { gap: 1.5rem; }
+  @media (max-width: 600px) { gap: 1rem; font-size: 0.55rem; }
 `;
 
 const NavLink = styled.a`
@@ -76,10 +102,15 @@ const NavLink = styled.a`
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.text};
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
+
+  &:focus-visible { 
+    outline: 2px solid ${C.gold};
+    outline-offset: 2px;
+  }
 
   &:hover { color: ${C.gold}; }
 `;
@@ -89,10 +120,15 @@ const NavLinkComponent = styled(Link)`
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.text};
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
+
+  &:focus-visible { 
+    outline: 2px solid ${C.gold};
+    outline-offset: 2px;
+  }
 
   &:hover { color: ${C.gold}; }
 `;
@@ -805,6 +841,37 @@ const FooterGold = styled.span`
   color: ${C.gold};
 `;
 
+// ─── Contact Section ────────────────────────────────────────────────────────
+const ContactSection = styled(Section)`
+  background: ${C.surface};
+  border-top: 1px solid ${C.border};
+`;
+
+const ContactContent = styled.div`
+  max-width: 700px;
+`;
+
+const ContactTitle = styled(SectionTitle)``;
+
+const ContactDescription = styled.p`
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: ${C.muted};
+  margin: 1.5rem 0 2.5rem;
+`;
+
+const ContactFormWrapper = styled.div`
+  background: ${C.bg};
+  padding: 2rem;
+  border: 1px solid ${C.border};
+  border-radius: 4px;
+
+  @media (max-width: 600px) {
+    padding: 1.5rem;
+  }
+`;
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface ModalState {
   painting: Painting;
@@ -888,13 +955,50 @@ export default function ArtPortfolio() {
     <Site>
       {/* ── Nav ── */}
       <Nav $scrolled={scrolled} role="navigation" aria-label="Site navigation">
-        <NavLogo onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <NavLogo 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          aria-label="Camila Londoño - Go to home"
+        >
           Camila <span>Londoño</span>
         </NavLogo>
         <NavLinks>
           <NavLinkComponent href="/art/collections">Collections</NavLinkComponent>
-          <NavLinkComponent href="/art/early-first-paintings">Other Work</NavLinkComponent>
-          <NavLink onClick={() => scrollTo('about')}>About</NavLink>
+          <NavLinkComponent href="/art/all-paintings">All Paintings</NavLinkComponent>
+          <NavLinkComponent href="/art/early-first-paintings">Archival Works</NavLinkComponent>
+          <NavLinkComponent href="/art/collaborations">Collaborations</NavLinkComponent>
+          <NavLink 
+            onClick={() => scrollTo('about')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                scrollTo('about');
+              }
+            }}
+            aria-label="Scroll to about section"
+          >
+            About
+          </NavLink>
+          <NavLink 
+            onClick={() => scrollTo('contact-section')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                scrollTo('contact-section');
+              }
+            }}
+            aria-label="Scroll to contact section"
+          >
+            Contact
+          </NavLink>
         </NavLinks>
       </Nav>
 
@@ -1036,6 +1140,20 @@ export default function ArtPortfolio() {
           </AboutText>
         </AboutGrid>
       </AboutSection>
+
+      {/* ── Contact ── */}
+      <ContactSection id="contact-section" role="region" aria-label="Contact Camila">
+        <ContactContent>
+          <SectionEyebrow>Get In Touch</SectionEyebrow>
+          <ContactTitle>Contact</ContactTitle>
+          <ContactDescription>
+            Interested in commissioning a painting, collaboration, or just want to chat? Feel free to reach out. I'll get back to you as soon as possible.
+          </ContactDescription>
+          <ContactFormWrapper role="form" aria-label="Contact form">
+            <ContactForm service="art-inquiry" />
+          </ContactFormWrapper>
+        </ContactContent>
+      </ContactSection>
 
       {/* ── Footer ── */}
       <Footer>

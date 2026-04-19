@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 const baseMetadata: Metadata = {
-  metadataBase: new URL('https://www.camilalonart.com'),
+  metadataBase: new URL('https://camilalonart.com'),
   title: {
     default: 'Camilalonart - Photography & Creative Services',
     template: '%s - Camilalonart'
@@ -13,7 +13,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://www.camilalonart.com',
+    url: 'https://camilalonart.com',
     siteName: 'Camilalonart',
     title: 'Camilalonart - Photography & Creative Services',
     description: 'Professional photography and creative services in Vancouver, BC. Specializing in weddings, pets, family portraits, headshots, graphic recording, and UX/UI design.',
