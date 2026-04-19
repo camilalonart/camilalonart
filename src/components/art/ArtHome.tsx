@@ -433,7 +433,7 @@ const FooterGold = styled.span`
 export default function ArtHome() {
   const heroImage =
     data.collections[0]?.paintings[0]?.images[0] ??
-    '/images/art/traditionalArt/Carrying Home/InTransit.webp';
+    '/images/art/traditionalArt/Carrying Home/We.webp';
 
   // Featured paintings: first painting from first 3 collections
   const featured = data.collections.slice(0, 3).map(col => ({
@@ -459,9 +459,9 @@ export default function ArtHome() {
         </HeroImgWrap>
         <HeroBg />
         <HeroContent>
-          <ArtistName>Camila Londoño</ArtistName>
+          <ArtistName>CamilaLonart</ArtistName>
           <HeroRule />
-          <HeroTagline>Painter · Oil, Watercolor & Mixed Media</HeroTagline>
+          <HeroTagline>Artist</HeroTagline>
         </HeroContent>
         <ScrollCue aria-hidden="true">
           <ScrollLine />

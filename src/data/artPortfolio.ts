@@ -163,6 +163,14 @@ const data: ArtPortfolioData = {
         "Finding wonder in ordinary spaces.",
       paintings: [
         {
+          id: "start-over-04",
+          title: "Viaje a Canada",
+          materials: "Digital drawing",
+          size: "50 × 70 cm",
+          year: 2023,
+          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
+        },
+        {
           id: "magic-01",
           title: "Luthier",
           materials: "Oil on canvas",
@@ -450,23 +458,6 @@ const data: ArtPortfolioData = {
       ],
     },
     {
-      id: "start-over",
-      name: "Start Over",
-      period: "2022–2023",
-      description:
-        "A narrative series documenting a journey through landscape and memory. Drawings and paintings that ask what it means to begin again.",
-      paintings: [
-        {
-          id: "start-over-04",
-          title: "Viaje a Canada",
-          materials: "Digital drawing",
-          size: "50 × 70 cm",
-          year: 2023,
-          images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
-        }
-      ],
-    },
-    {
       id: "perspective",
       name: "Perspective",
       period: "2022–2023",
@@ -669,8 +660,8 @@ const data: ArtPortfolioData = {
           materials: "",
           size: "",
           year: 2024,
-          images: ["/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp"],
-        },
+          images: ["/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp"]
+        }
       ],
     },
   ],
@@ -710,8 +701,7 @@ export const COLLECTIONS_ORDER = [
   'mis-raices',
   'blanco-y-negro',
   'red-doodles',
-  'yellow',
-  'start-over'
+  'yellow'
 ];
 
 export default data;
