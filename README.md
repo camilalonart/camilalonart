@@ -5,6 +5,89 @@ Alojado en GitHub Pages en [camilalonart.com](https://www.camilalonart.com).
 
 ---
 
+## Gestionar secciones en la página principal
+
+La página principal (`/`) muestra dos listas: **Secciones visibles** (completadas) y **Secciones escondidas** (en desarrollo).
+
+**Secciones visibles actuales:**
+- Wedding & Couples Photography
+- Pet Photography  
+- Professional Headshots
+- Family & Maternity Photography
+- Wildlife Photography
+- Traditional Art
+
+**Secciones escondidas actuales:**
+- Digital Art
+- Brand Identity
+- Graphic Recording
+- UX/UI Design
+- Tech & Engineering
+
+### Cambiar una sección de escondida a visible
+
+1. Abre `src/config/sections.ts`
+2. Encuentra la sección en `hiddenSections[]`
+3. Córtala y pégala en `visibleSections[]`
+
+**Antes:**
+```typescript
+export const hiddenSections: Section[] = [
+  {
+    id: 'digital-art',
+    title: 'Digital Art',
+    description: 'Digital illustrations and designs',
+    href: '/my-art/digital-art',
+    icon: '🖼️',
+    category: 'art',
+  },
+  // ... más
+];
+```
+
+**Después:**
+```typescript
+export const visibleSections: Section[] = [
+  // ... secciones existentes
+  {
+    id: 'digital-art',
+    title: 'Digital Art',
+    description: 'Digital illustrations and designs',
+    href: '/my-art/digital-art',
+    icon: '🖼️',
+    category: 'art',
+  },
+];
+```
+
+4. Guarda, commit y push:
+```bash
+git add src/config/sections.ts
+git commit -m "Move Digital Art to visible sections"
+git push
+```
+
+### Agregar una sección completamente nueva
+
+1. Edita `src/config/sections.ts`
+2. Agrega a `visibleSections` o `hiddenSections`:
+
+```typescript
+{
+  id: 'my-new-section',           // ID único, sin espacios
+  title: 'My New Section',         // Nombre visible
+  description: 'Brief description of the section',
+  href: '/path/to/page',          // Ruta en src/app/
+  icon: '🎨',                     // Emoji que represente la sección
+  category: 'art|photography|services|other',
+},
+```
+
+3. **Importante:** Asegúrate que la página exista en `src/app/` en la ruta especificada
+4. Commit y push
+
+---
+
 ## Agregar nuevas fotos
 
 ### Fotos de sesiones fotográficas (pets, bodas, familia, headshots, wildlife)

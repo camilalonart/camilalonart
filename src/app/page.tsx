@@ -4,24 +4,21 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { theme } from '../styles/theme';
-import SecureImage from '../components/SecureImage';
 import { useTranslation } from '../i18n/TranslationContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { visibleSections, hiddenSections } from '../config/sections';
 
 const PageContainer = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: clamp(${theme.spacing.lg}, 3vw, ${theme.spacing.xl});
-  width: 100%;
-  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, ${theme.colors.background.main} 0%, ${theme.colors.background.light} 100%);
 `;
 
 const LanguageSwitcherWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: ${theme.spacing.lg};
   right: ${theme.spacing.lg};
   z-index: 100;
-  
+
   @media (max-width: ${theme.breakpoints.md}) {
     top: ${theme.spacing.md};
     right: ${theme.spacing.md};
@@ -29,575 +26,271 @@ const LanguageSwitcherWrapper = styled.div`
 `;
 
 const Hero = styled.section`
+  padding: clamp(${theme.spacing['3xl']}, 8vw, ${theme.spacing['4xl']}) ${theme.spacing['2xl']};
   text-align: center;
-  margin-bottom: ${theme.spacing['3xl']};
-  padding: clamp(${theme.spacing.xl}, 5vw, ${theme.spacing['3xl']}) 0;
-  
+  background: linear-gradient(180deg, rgba(122, 107, 95, 0.1) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(122, 107, 95, 0.1);
+
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: clamp(${theme.spacing.lg}, 3vw, ${theme.spacing.xl});
-    background: linear-gradient(120deg, ${theme.colors.primary.main}, ${theme.colors.secondary.main});
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin-bottom: ${theme.spacing.md};
+    color: ${theme.colors.primary.main};
+    letter-spacing: 0.05em;
+    font-weight: 300;
   }
-  
+
   p {
     font-size: clamp(${theme.typography.fontSize.lg}, 2vw, ${theme.typography.fontSize.xl});
     color: ${theme.colors.text.secondary};
-    max-width: min(800px, 90%);
+    max-width: min(700px, 90%);
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.8;
+    font-weight: 300;
   }
-`;
 
-const SectionGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: clamp(${theme.spacing.lg}, 3vw, ${theme.spacing.xl});
-  margin-bottom: ${theme.spacing['3xl']};
-  width: 100%;
-  
-  @media (max-width: ${theme.breakpoints.lg}) {
-    gap: ${theme.spacing.lg};
-    padding: 0 ${theme.spacing.md};
-  }
-  
   @media (max-width: ${theme.breakpoints.md}) {
-    gap: ${theme.spacing.md};
-    padding: 0;
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
   }
 `;
 
-const Section = styled.section<{ $span?: number }>`
-  grid-column: span ${props => props.$span || 4};
-  width: 100%;
-  
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-column: span ${props => Math.min(props.$span || 4, 12)};
-  }
-  
+const Divider = styled.div`
+  width: 60px;
+  height: 3px;
+  background: ${theme.colors.primary.main};
+  margin: ${theme.spacing.lg} auto;
+  border-radius: 2px;
+`;
+
+const ContentWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(${theme.spacing['3xl']}, 5vw, ${theme.spacing['4xl']}) clamp(${theme.spacing.lg}, 3vw, ${theme.spacing['2xl']});
+
   @media (max-width: ${theme.breakpoints.md}) {
-    grid-column: span 12;
-    margin-bottom: ${theme.spacing.xl};
+    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
   }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: clamp(${theme.typography.fontSize.xl}, 3vw, ${theme.typography.fontSize['2xl']});
-  margin-bottom: clamp(${theme.spacing.lg}, 4vw, ${theme.spacing.xl});
-  color: ${theme.colors.primary.main};
+const SectionHeader = styled.div`
   text-align: center;
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    margin-bottom: ${theme.spacing.lg};
+  margin-bottom: clamp(${theme.spacing['2xl']}, 4vw, ${theme.spacing['3xl']});
+
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: ${theme.colors.primary.main};
+    margin-bottom: ${theme.spacing.md};
+    font-weight: 400;
+  }
+
+  p {
+    color: ${theme.colors.text.secondary};
+    font-size: clamp(${theme.typography.fontSize.base}, 1.5vw, ${theme.typography.fontSize.lg});
+    max-width: 600px;
+    margin: 0 auto;
   }
 `;
 
-const CardGrid = styled.div<{ $columns?: number }>`
+const Grid = styled.div<{ $columns?: number }>`
   display: grid;
-  grid-template-columns: repeat(${props => props.$columns || 2}, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${theme.spacing.xl};
-  width: 100%;
-  
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-template-columns: repeat(${props => Math.min(props.$columns || 2, 3)}, 1fr);
-    gap: ${theme.spacing.xl};
-  }
-  
+  margin-bottom: clamp(${theme.spacing['3xl']}, 5vw, ${theme.spacing['4xl']});
+
   @media (max-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: ${theme.spacing.lg};
   }
-  
+
   @media (max-width: ${theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
     gap: ${theme.spacing.md};
   }
 `;
 
-const Card = styled.div`
-  position: relative;
-  height: clamp(300px, 50vh, 450px);
-  perspective: 1000px;
+const Card = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  padding: ${theme.spacing.xl};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.md};
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
   cursor: pointer;
-  width: 100%;
 
-  @media (max-width: ${theme.breakpoints.lg}) {
-    height: clamp(320px, 45vh, 400px);
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: ${theme.shadows.lg};
+    border-color: ${theme.colors.primary.main};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    height: clamp(300px, 40vh, 380px);
-  }
-
-  @media (max-width: ${theme.breakpoints.sm}) {
-    height: 300px;
-  }
-
-  &:hover .card-inner {
-    transform: rotateY(180deg);
+    padding: ${theme.spacing.lg};
   }
 `;
 
-const CardInner = styled.div.attrs({ className: 'card-inner' })`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const CardFace = styled.div<{ $back?: boolean }>`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: ${theme.borderRadius.lg};
-  overflow: hidden;
-  background: ${theme.colors.background.light};
-  box-shadow: ${theme.shadows.md};
-  transform: ${props => props.$back ? 'rotateY(180deg)' : 'none'};
-`;
-
-const CardContent = styled.div<{ $overlay?: boolean }>`
-  position: absolute;
-  inset: 0;
-  padding: clamp(${theme.spacing.lg}, 4vw, ${theme.spacing.xl});
+const DisabledCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: ${props => props.$overlay ? 'flex-end' : 'center'};
-  align-items: center;
-  text-align: center;
-  background: ${props => props.$overlay ? 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3))' : 'none'};
-  color: ${props => props.$overlay ? theme.colors.text.light : theme.colors.text.primary};
-
-  h3 {
-    font-size: clamp(${theme.typography.fontSize.lg}, 2.5vw, ${theme.typography.fontSize.xl});
-    margin-bottom: ${theme.spacing.md};
-    font-weight: ${theme.typography.fontWeight.medium};
-  }
-
-  p {
-    font-size: clamp(${theme.typography.fontSize.base}, 1.5vw, ${theme.typography.fontSize.lg});
-    line-height: 1.6;
-    max-width: 90%;
-    margin: 0 auto;
-    
-    @media (max-width: ${theme.breakpoints.lg}) {
-      font-size: clamp(${theme.typography.fontSize.base}, 2vw, ${theme.typography.fontSize.lg});
-      max-width: 95%;
-    }
-
-    @media (max-width: ${theme.breakpoints.sm}) {
-      max-width: 100%;
-    }
-  }
-`;
-
-const CardLink = styled(Link)`
-  display: inline-block;
-  margin-top: ${theme.spacing.lg};
-  padding: ${theme.spacing.sm} ${theme.spacing.lg};
-  background: ${theme.colors.primary.main};
-  color: ${theme.colors.text.light};
-  border-radius: ${theme.borderRadius.md};
-  transition: ${theme.transitions.default};
-
-  &:hover {
-    background: ${theme.colors.primary.dark};
-    transform: translateY(-2px);
-  }
-`;
-
-const ClickableCard = styled(Link)`
+  padding: ${theme.spacing.xl};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.md};
   text-decoration: none;
   color: inherit;
-  display: block;
-  height: 100%;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: default;
+  opacity: 0.7;
+  pointer-events: none;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.lg};
+  }
 `;
 
-const StyledSecureImage = styled(SecureImage)`
-  object-fit: cover;
+const CardIcon = styled.div`
+  font-size: 3rem;
+  margin-bottom: ${theme.spacing.md};
+  line-height: 1;
+`;
+
+const CardTitle = styled.h3`
+  font-size: clamp(${theme.typography.fontSize.lg}, 2vw, ${theme.typography.fontSize.xl});
+  color: ${theme.colors.primary.main};
+  margin-bottom: ${theme.spacing.sm};
+  font-weight: 500;
+`;
+
+const CardDescription = styled.p`
+  font-size: ${theme.typography.fontSize.base};
+  color: ${theme.colors.text.secondary};
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+`;
+
+const TagSection = styled.div`
+  margin-top: ${theme.spacing.lg};
+  padding-top: ${theme.spacing.md};
+  border-top: 1px solid rgba(122, 107, 95, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${theme.spacing.sm};
+`;
+
+const Tag = styled.span`
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  background: ${theme.colors.primary.light};
+  color: ${theme.colors.primary.main};
+  border-radius: ${theme.borderRadius.sm};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+`;
+
+const HiddenNote = styled.div`
+  padding: ${theme.spacing.lg};
+  background: linear-gradient(135deg, rgba(212, 166, 130, 0.1) 0%, rgba(212, 166, 130, 0.05) 100%);
+  border-left: 4px solid ${theme.colors.primary.main};
+  border-radius: ${theme.borderRadius.md};
+  margin-top: ${theme.spacing.lg};
+
+  p {
+    margin: 0;
+    color: ${theme.colors.text.secondary};
+    font-size: ${theme.typography.fontSize.sm};
+    line-height: 1.6;
+  }
+
+  strong {
+    color: ${theme.colors.primary.main};
+  }
 `;
 
 export default function HomePage() {
   const { t } = useTranslation();
-  
+
+  const getCategoryLabel = (category: string) => {
+    const labels: Record<string, string> = {
+      photography: 'Photography',
+      art: 'Art',
+      services: 'Services',
+      other: 'Other',
+    };
+    return labels[category] || category;
+  };
+
   return (
     <PageContainer>
       <LanguageSwitcherWrapper>
         <LanguageSwitcher />
       </LanguageSwitcherWrapper>
-      
+
       <Hero>
-        <h1>{t('home.title')}</h1>
+        <h1>Camila Londoño</h1>
+        <Divider />
         <p>
-          {t('home.subtitle')}
+          Photographer, Artist & Creative Director. Capturing moments, creating beauty, and telling visual stories across photography, traditional art, and design.
         </p>
       </Hero>
 
-      <SectionGrid>
-        <Section $span={12}>
-          <SectionTitle>{t('home.photographyServices')}</SectionTitle>
-          <CardGrid $columns={5}>
-            <ClickableCard href="/photography/pets">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/pets/A7T05911-2copy.webp"
-                      alt="Pet Photography"
-                      priority
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.petPhotography.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.petPhotography.title')}</h3>
-                      <p>{t('home.petPhotography.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/photography/wedding-couples">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/wedding/A7T01396copy.webp"
-                      alt="Wedding & Couples"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.weddingCouples.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.weddingCouples.title')}</h3>
-                      <p>{t('home.weddingCouples.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/photography/headshots">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/portfolio-0copy.webp"
-                      alt="Professional Headshots"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.headshots.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.headshots.title')}</h3>
-                      <p>{t('home.headshots.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/photography/family-maternity">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/family/baby/A7T02053-2copy.webp"
-                      alt="Family & Maternity Photography"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.familyMaternity.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.familyMaternity.title')}</h3>
-                      <p>{t('home.familyMaternity.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/photography/eventos">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/wedding/A7T01396copy.webp"
-                      alt="Event Photography"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.events.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.events.title')}</h3>
-                      <p>{t('home.events.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-          </CardGrid>
-        </Section>
-      </SectionGrid>
+      <ContentWrapper>
+        {/* Visible Sections */}
+        <SectionHeader>
+          <h2>Explore My Work</h2>
+          <Divider style={{ margin: `${theme.spacing.md} auto ${theme.spacing.lg}` }} />
+          <p>Featured projects and services currently available</p>
+        </SectionHeader>
 
-      <SectionGrid>
-        <Section $span={12}>
-          <SectionTitle>{t('home.myArt')}</SectionTitle>
-          <CardGrid $columns={4}>
-            <ClickableCard href="/my-art/digital-art">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/art/traditionalArt/composition-rich-palette.webp"
-                      alt="Digital Art"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.digitalArt.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.digitalArt.title')}</h3>
-                      <p>{t('home.digitalArt.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/my-art/traditional-art">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/art/traditionalArt/autumn-harvest.webp"
-                      alt="Traditional Art"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.traditionalArt.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.traditionalArt.title')}</h3>
-                      <p>{t('home.traditionalArt.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/my-art/wildlife-photography">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/wildlife/wildlife-landing.webp"
-                      alt="Wildlife Photography"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.wildlifePhotography.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.wildlifePhotography.title')}</h3>
-                      <p>{t('home.wildlifePhotography.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/my-art/everyday-photography">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/everyday/A7T02673.webp"
-                      alt="Everyday Photography"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.everydayPhotography.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.everydayPhotography.title')}</h3>
-                      <p>{t('home.everydayPhotography.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-          </CardGrid>
-        </Section>
-      </SectionGrid>
+        <Grid>
+          {visibleSections.map((section) => (
+            <Card key={section.id} href={section.href}>
+              <CardIcon>{section.icon}</CardIcon>
+              <CardTitle>{section.title}</CardTitle>
+              <CardDescription>{section.description}</CardDescription>
+              <TagSection>
+                <Tag>{getCategoryLabel(section.category)}</Tag>
+              </TagSection>
+            </Card>
+          ))}
+        </Grid>
 
-      <SectionGrid>
-        <Section $span={12}>
-          <SectionTitle>{t('home.creativeServices')}</SectionTitle>
-          <CardGrid $columns={4}>
-            <ClickableCard href="/creative-services/brand-identity">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/art/artClasses/botanical-study.webp"
-                      alt="Brand Identity"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.brandIdentity.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.brandIdentity.title')}</h3>
-                      <p>{t('home.brandIdentity.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/creative-services/graphic-recording">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/art/artClasses/sketchbook-exploration.webp"
-                      alt="Graphic Recording"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.graphicRecording.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.graphicRecording.title')}</h3>
-                      <p>{t('home.graphicRecording.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/creative-services/ux-ui-design">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/portfolio-0copy.webp"
-                      alt="UX/UI Design"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.uxUiDesign.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.uxUiDesign.title')}</h3>
-                      <p>{t('home.uxUiDesign.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/creative-services/art-classes">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/art/artClasses/watercolor-workshop.webp"
-                      alt="Art Classes"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.artClasses.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.artClasses.title')}</h3>
-                      <p>{t('home.artClasses.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-          </CardGrid>
-        </Section>
-      </SectionGrid>
+        {/* Hidden Sections */}
+        {hiddenSections.length > 0 && (
+          <>
+            <SectionHeader>
+              <h2>Coming Soon</h2>
+              <Divider style={{ margin: `${theme.spacing.md} auto ${theme.spacing.lg}` }} />
+              <p>Upcoming projects and services in development</p>
+            </SectionHeader>
 
-      <SectionGrid>
-        <Section $span={12}>
-          <SectionTitle>{t('home.tech')}</SectionTitle>
-          <CardGrid $columns={2}>
-            <ClickableCard href="/tech/engineering">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/A7T03675.webp"
-                      alt="Software Engineering"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.softwareEngineering.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.softwareEngineering.title')}</h3>
-                      <p>{t('home.softwareEngineering.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-            <ClickableCard href="/tech/courses">
-              <Card>
-                <CardInner>
-                  <CardFace>
-                    <StyledSecureImage showWatermark={false}
-                      src="/images/headshots/A7T01710.webp"
-                      alt="Tech Courses"
-                      quality={85}
-                    />
-                    <CardContent $overlay>
-                      <h3>{t('home.techCourses.title')}</h3>
-                    </CardContent>
-                  </CardFace>
-                  <CardFace $back>
-                    <CardContent>
-                      <h3>{t('home.techCourses.title')}</h3>
-                      <p>{t('home.techCourses.description')}</p>
-                    </CardContent>
-                  </CardFace>
-                </CardInner>
-              </Card>
-            </ClickableCard>
-          </CardGrid>
-        </Section>
-      </SectionGrid>
+            <Grid>
+              {hiddenSections.map((section) => (
+                <DisabledCard key={section.id}>
+                  <CardIcon>{section.icon}</CardIcon>
+                  <CardTitle>{section.title}</CardTitle>
+                  <CardDescription>{section.description}</CardDescription>
+                  <TagSection>
+                    <Tag style={{ opacity: 0.6 }}>Coming Soon</Tag>
+                  </TagSection>
+                </DisabledCard>
+              ))}
+            </Grid>
+
+            <HiddenNote>
+              <p>
+                <strong>💡 Note:</strong> These sections are being developed and will be publicly available soon.
+                Check back later for updates!
+              </p>
+            </HiddenNote>
+          </>
+        )}
+      </ContentWrapper>
     </PageContainer>
   );
 }

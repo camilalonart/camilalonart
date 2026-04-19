@@ -163,7 +163,7 @@ const Message = styled.div<{ $type: 'success' | 'error' }>`
 `;
 
 interface ContactFormProps {
-  service: 'weddings' | 'baby-family' | 'headshots' | 'pets';
+  service: string;
 }
 
 const getFormspreeId = (service: string): string => {
@@ -173,7 +173,7 @@ const getFormspreeId = (service: string): string => {
     headshots: process.env.NEXT_PUBLIC_FORMSPREE_HEADSHOTS_ID || '',
     pets: process.env.NEXT_PUBLIC_FORMSPREE_PETS_ID || '',
   };
-  return ids[service] || '';
+  return ids[service] || process.env.NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID || '';
 };
 
 export default function ContactForm({ service }: ContactFormProps) {

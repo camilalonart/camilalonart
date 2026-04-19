@@ -7,7 +7,7 @@ import styled, { keyframes, css } from 'styled-components';
 import data from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 
-const C = {
+const C: Record<string, string> = {
   bg: '#080808',
   surface: '#101010',
   border: '#1E1E1E',
