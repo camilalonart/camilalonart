@@ -1144,8 +1144,8 @@ export default function ArtPortfolio() {
       {/* ── Contact ── */}
       <ContactSection id="contact-section" role="region" aria-label="Contact Camila">
         <ContactContent>
-          <SectionEyebrow>Get In Touch</SectionEyebrow>
-          <ContactTitle>Contact</ContactTitle>
+          <SectionEyebrow>Contact</SectionEyebrow>
+          <ContactTitle>Get in Touch</ContactTitle>
           <ContactDescription>
             Interested in commissioning a painting, collaboration, or just want to chat? Feel free to reach out. I'll get back to you as soon as possible.
           </ContactDescription>

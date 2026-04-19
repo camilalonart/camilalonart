@@ -54,13 +54,25 @@ const Dot = styled.div`
   background: ${C.gold};
 `;
 
-const NavLinks = styled.div`
+const NavLinks = styled.div<{ $isOpen: boolean }>`
   display: flex;
   gap: 2.5rem;
   align-items: center;
 
-  @media (max-width: 600px) {
-    gap: 1.2rem;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(8, 8, 8, 0.98);
+    border-bottom: 1px solid ${C.border};
+    backdrop-filter: blur(12px);
+    max-height: ${p => p.$isOpen ? '300px' : '0'};
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: ${p => p.$isOpen ? '1rem 0' : '0'};
   }
 `;
 
@@ -77,10 +89,57 @@ const NavLink = styled(Link)`
   &:hover {
     color: ${C.gold};
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 0.75rem clamp(1.5rem, 4vw, 4rem);
+    width: 100%;
+
+    &:hover {
+      background: rgba(200, 168, 122, 0.05);
+    }
+  }
+`;
+
+const HamburgerBtn = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: ${C.text};
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 201;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  span {
+    width: 20px;
+    height: 2px;
+    background: ${C.text};
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  &[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translateY(10px);
+  }
+
+  &[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-10px);
+  }
 `;
 
 export default function ArtNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -90,13 +149,24 @@ export default function ArtNav() {
 
   return (
     <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
-      <NavLogo href="/art/" title="Back to art home">
+      <NavLogo href="/art/" title="Back to art home" onClick={() => setMobileMenuOpen(false)}>
         Camila <span>Londoño</span> <Dot />
       </NavLogo>
-      <NavLinks>
-        <NavLink href="/art/">Collections</NavLink>
-        <NavLink href="/art/about/">About</NavLink>
-        <NavLink href="/art/contact/">Contact</NavLink>
+      <HamburgerBtn
+        aria-expanded={mobileMenuOpen}
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle navigation menu"
+      >
+        <span />
+        <span />
+        <span />
+      </HamburgerBtn>
+      <NavLinks $isOpen={mobileMenuOpen}>
+        <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>Collections</NavLink>
+        <NavLink href="/art/about/" onClick={() => setMobileMenuOpen(false)}>About</NavLink>
+        <NavLink href="/art/contact/" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink>
+        <NavLink href="/art/collaborations/" onClick={() => setMobileMenuOpen(false)}>Collaborations</NavLink>
+        <NavLink href="/art/early-first-paintings/" onClick={() => setMobileMenuOpen(false)}>Archival Works</NavLink>
       </NavLinks>
     </Nav>
   );

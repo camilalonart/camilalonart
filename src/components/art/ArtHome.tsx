@@ -75,13 +75,19 @@ const HeroContent = styled.div`
 `;
 
 const ArtistName = styled.h1`
-  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-size: clamp(2rem, 8vw, 9rem);
   font-weight: 300;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${C.text};
   line-height: 0.9;
   margin: 0 0 1.2rem;
+  word-break: break-word;
+  padding: 0 1rem;
+
+  @media (max-width: 480px) {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
 `;
 
 const HeroRule = styled.div`
@@ -187,6 +193,13 @@ const FeaturedCard = styled(Link)`
   color: inherit;
   background: ${C.surface};
   aspect-ratio: 3/4;
+  border: 1px solid ${C.border};
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${C.gold};
+    box-shadow: 0 8px 32px rgba(200, 168, 122, 0.15);
+  }
 
   @media (max-width: 1024px) {
     aspect-ratio: 4/5;
@@ -216,16 +229,16 @@ const FeaturedImgWrap = styled.div`
 const FeaturedOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(4, 4, 4, 0.95) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  background: linear-gradient(to top, rgba(4, 4, 4, 0.98) 0%, rgba(4, 4, 4, 0.6) 50%, transparent 100%);
+  opacity: 1;
+  transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 2rem;
 
   ${FeaturedCard}:hover & {
-    opacity: 1;
+    background: linear-gradient(to top, rgba(4, 4, 4, 1) 0%, rgba(4, 4, 4, 0.7) 50%, transparent 100%);
   }
 
   ${FeaturedCard}:hover ${FeaturedImgWrap} img {
@@ -274,6 +287,13 @@ const CollectionCard = styled(Link)`
   color: inherit;
   aspect-ratio: 4/5;
   background: ${C.surface};
+  border: 1px solid ${C.border};
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${C.gold};
+    box-shadow: 0 8px 32px rgba(200, 168, 122, 0.15);
+  }
 `;
 
 const CollectionImgWrap = styled.div`
@@ -291,16 +311,16 @@ const CollectionImgWrap = styled.div`
 const CollectionOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(4, 4, 4, 0.95) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  background: linear-gradient(to top, rgba(4, 4, 4, 0.98) 0%, rgba(4, 4, 4, 0.6) 50%, transparent 100%);
+  opacity: 1;
+  transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 2rem;
 
   ${CollectionCard}:hover & {
-    opacity: 1;
+    background: linear-gradient(to top, rgba(4, 4, 4, 1) 0%, rgba(4, 4, 4, 0.7) 50%, transparent 100%);
   }
 
   ${CollectionCard}:hover ${CollectionImgWrap} img {
@@ -333,6 +353,7 @@ const CollectionDesc = styled.p`
   margin: 0;
   opacity: 0;
   transition: opacity 0.4s ease;
+  margin-top: 0.5rem;
 
   ${CollectionCard}:hover & {
     opacity: 1;
@@ -402,17 +423,18 @@ const ReadMoreLink = styled(Link)`
 
 // ─── Footer ────────────────────────────────────────────────────────
 const Footer = styled.footer`
+  background: #ffffff;
   border-top: 1px solid ${C.border};
-  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
 
   @media (max-width: 600px) {
-    flex-direction: column;
-    text-align: center;
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 5rem);
   }
 `;
 
@@ -421,12 +443,34 @@ const FooterText = styled.p`
   font-size: 0.55rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: #1a1a1a;
   margin: 0;
 `;
 
 const FooterGold = styled.span`
   color: ${C.gold};
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  a {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: ${C.gold};
+    }
+  }
 `;
 
 // ─── Component ─────────────────────────────────────────────────────
@@ -557,11 +601,21 @@ export default function ArtHome() {
       {/* Footer */}
       <Footer>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. All rights reserved.
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. All artwork and images are copyrighted and protected. Reproduction without permission is prohibited.
         </FooterText>
-        <FooterText>
-          <FooterGold>@camilalonart</FooterGold>
-        </FooterText>
+        <SocialLinks>
+          <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">
+            <FooterGold>@camilalonart</FooterGold>
+          </a>
+          <span style={{ color: '#1a1a1a' }}>•</span>
+          <a href="https://instagram.com/camilonart" target="_blank" rel="noopener noreferrer">
+            <FooterGold>@camilonart</FooterGold>
+          </a>
+          <span style={{ color: '#1a1a1a' }}>•</span>
+          <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer">
+            <FooterGold>Behance</FooterGold>
+          </a>
+        </SocialLinks>
       </Footer>
     </Site>
   );

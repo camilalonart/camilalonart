@@ -62,7 +62,8 @@ const SocialLinks = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
   margin-top: ${theme.spacing.lg};
-  
+  flex-wrap: wrap;
+
   a {
     width: 40px;
     height: 40px;
@@ -72,10 +73,14 @@ const SocialLinks = styled.div`
     align-items: center;
     justify-content: center;
     transition: ${theme.transitions.default};
-    
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: ${theme.colors.text.dark};
+
     &:hover {
       background-color: ${theme.colors.primary.main};
       transform: translateY(-3px);
+      color: white;
     }
   }
 `;
@@ -170,11 +175,16 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
             <li>Phone: +1 (672) 338 - 9307</li>
             <li>Location: Vancouver, BC, Canada</li>
           </ul>
+          <SocialLinks>
+            <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" title="Instagram @camilalonart">📷</a>
+            <a href="https://instagram.com/camilonart" target="_blank" rel="noopener noreferrer" title="Instagram @camilonart">📸</a>
+            <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer" title="Behance Portfolio">🎨</a>
+          </SocialLinks>
         </FooterSection>
       </FooterContent>
 
       <Copyright>
-        <CopyrightText>© {new Date().getFullYear()} Camilalonart. All rights reserved.</CopyrightText>
+        <CopyrightText>© {new Date().getFullYear()} Camilalonart. All artwork and images © {new Date().getFullYear()} Camila Londoño. All rights reserved. Reproduction without permission is prohibited.</CopyrightText>
         <LanguageWrapper>
           <span>|</span>
           <LanguageSwitcher isDark />

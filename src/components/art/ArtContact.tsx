@@ -28,12 +28,17 @@ const Content = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(2rem, 4vw, 4rem) clamp(1.5rem, 5vw, 5rem);
 `;
 
 const FormContainer = styled.div`
   width: 100%;
   max-width: 600px;
+  background: rgba(16, 16, 16, 0.5);
+  border: 1px solid ${C.border};
+  padding: clamp(2.5rem, 5vw, 4rem);
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
 `;
 
 const PageHeader = styled.div`
@@ -138,25 +143,33 @@ const Textarea = styled.textarea`
 `;
 
 const SubmitBtn = styled.button`
-  padding: 1rem 2rem;
-  background: transparent;
-  border: 1px solid ${C.border};
-  color: ${C.text};
+  padding: 1.2rem 2.5rem;
+  background: ${C.gold};
+  border: 1px solid ${C.gold};
+  color: ${C.bg};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  font-weight: 600;
 
   &:hover:not(:disabled) {
-    border-color: ${C.gold};
-    background: rgba(200, 168, 122, 0.05);
+    background: ${C.goldLight};
+    border-color: ${C.goldLight};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(200, 168, 122, 0.2);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 `;

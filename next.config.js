@@ -17,6 +17,7 @@ const nextConfig = {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://camilalonart.com',
     NEXT_PUBLIC_WEDDING_FORM_URL: process.env.NEXT_PUBLIC_WEDDING_FORM_URL || '',
     NEXT_PUBLIC_PET_FORM_URL: process.env.NEXT_PUBLIC_PET_FORM_URL || '',
+    NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID: process.env.NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID || '',
   },
   // Ensure static files are copied to output
   webpack: (config, { isServer }) => {
