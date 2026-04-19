@@ -528,6 +528,11 @@ const CloseBtn = styled.button`
 `;
 
 // ─── About ───────────────────────────────────────────────────────────────────
+const AboutSection = styled(Section)`
+  background: rgb(230, 230, 228);
+  color: #080808;
+`;
+
 const AboutGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -860,7 +865,6 @@ export default function ArtPortfolio() {
       {/* ── About ── */}
       <Section id="about">
         <SectionEyebrow>The Artist</SectionEyebrow>
-        <SectionTitle>About</SectionTitle>
         <AboutGrid>
           {data.about.photoSrc && (
             <AboutPhoto>
