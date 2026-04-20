@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
+import { useTranslation } from '../i18n/TranslationContext';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C: Record<string, string> = {
@@ -177,6 +178,7 @@ const getFormspreeId = (service: string): string => {
 };
 
 export default function ContactForm({ service }: ContactFormProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -197,7 +199,7 @@ export default function ContactForm({ service }: ContactFormProps) {
     if (!formspreeId) {
       setStatus({
         type: 'error',
-        message: 'Form is not configured. Please contact the administrator.',
+        message: t('art.contact.notConfigured'),
       });
       return;
     }
@@ -221,20 +223,20 @@ export default function ContactForm({ service }: ContactFormProps) {
       if (response.ok) {
         setStatus({
           type: 'success',
-          message: 'Thank you for your message! I will get back to you as soon as possible.',
+          message: t('forms.success'),
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
         setTimeout(() => setStatus(null), 5000);
       } else {
         setStatus({
           type: 'error',
-          message: 'Something went wrong. Please try again later.',
+          message: t('forms.error'),
         });
       }
     } catch (error) {
       setStatus({
         type: 'error',
-        message: 'Failed to send message. Please try again.',
+        message: t('forms.failed'),
       });
     } finally {
       setIsSubmitting(false);
@@ -254,7 +256,7 @@ export default function ContactForm({ service }: ContactFormProps) {
 
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="contact-name">Full Name</Label>
+          <Label htmlFor="contact-name">{t('forms.fullName')}</Label>
           <Input
             type="text"
             id="contact-name"
@@ -268,7 +270,7 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-email">Email Address</Label>
+          <Label htmlFor="contact-email">{t('forms.email')}</Label>
           <Input
             type="email"
             id="contact-email"
@@ -282,7 +284,7 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-phone">Phone (Optional)</Label>
+          <Label htmlFor="contact-phone">{t('forms.phone')}</Label>
           <Input
             type="tel"
             id="contact-phone"
@@ -295,7 +297,7 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-message">Message</Label>
+          <Label htmlFor="contact-message">{t('forms.message')}</Label>
           <TextArea
             id="contact-message"
             name="message"
@@ -303,13 +305,13 @@ export default function ContactForm({ service }: ContactFormProps) {
             onChange={handleChange}
             required
             aria-required="true"
-            placeholder="Tell me about your project or inquiry..."
+            placeholder={t('forms.message')}
             disabled={isSubmitting}
           />
         </FormGroup>
 
         <SubmitButton type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? t('forms.submitting') : t('forms.submit')}
         </SubmitButton>
       </Form>
     </FormContainer>

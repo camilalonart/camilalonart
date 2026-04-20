@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArtNav from './ArtNav';
+import { useTranslation } from '@/i18n/TranslationContext';
 
 const C: Record<string, string> = {
   bg: '#F5F3F0',
@@ -193,6 +194,7 @@ interface FormData {
 }
 
 export default function ArtContact() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -215,7 +217,7 @@ export default function ArtContact() {
 
     if (!FORMSPREE_ID) {
       setStatus('error');
-      setStatusMessage('Form is not configured. Please contact the administrator.');
+      setStatusMessage(t('art.contact.notConfigured'));
       return;
     }
 
@@ -237,16 +239,16 @@ export default function ArtContact() {
 
       if (response.ok) {
         setStatus('success');
-        setStatusMessage('Thank you for reaching out! I will get back to you soon.');
+        setStatusMessage(t('art.contact.successMessage'));
         setFormData({ name: '', email: '', inquiryType: 'general', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
-        setStatusMessage('Something went wrong. Please try again later.');
+        setStatusMessage(t('art.contact.errorMessage'));
       }
     } catch (error) {
       setStatus('error');
-      setStatusMessage('Failed to send message. Please try again.');
+      setStatusMessage(t('art.contact.failedMessage'));
     }
   };
 
@@ -256,8 +258,8 @@ export default function ArtContact() {
       <Content>
         <FormContainer>
           <PageHeader>
-            <h1>Get in Touch</h1>
-            <p>Have a question or inquiry? I'd love to hear from you.</p>
+            <h1>{t('art.contact.heading')}</h1>
+            <p>{t('art.contact.description')}</p>
           </PageHeader>
 
           {status !== 'idle' && (
@@ -268,12 +270,12 @@ export default function ArtContact() {
 
           <Form onSubmit={handleSubmit}>
             <FormGroup>
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name">{t('art.contact.name')} *</Label>
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Your name"
+                placeholder={t('forms.fullName')}
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -281,12 +283,12 @@ export default function ArtContact() {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">{t('art.contact.email')} *</Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="your@email.com"
+                placeholder={t('forms.email')}
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -294,7 +296,7 @@ export default function ArtContact() {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="inquiryType">Inquiry Type *</Label>
+              <Label htmlFor="inquiryType">{t('art.contact.inquiryType')} *</Label>
               <Select
                 id="inquiryType"
                 name="inquiryType"
@@ -310,11 +312,11 @@ export default function ArtContact() {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="message">Message *</Label>
+              <Label htmlFor="message">{t('art.contact.message')} *</Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Tell me about your inquiry..."
+                placeholder={t('forms.message')}
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -322,7 +324,7 @@ export default function ArtContact() {
             </FormGroup>
 
             <SubmitBtn type="submit" disabled={status === 'loading'}>
-              {status === 'loading' ? 'Sending...' : 'Send Message'}
+              {status === 'loading' ? t('art.contact.sending') : t('art.contact.send')}
             </SubmitBtn>
           </Form>
         </FormContainer>

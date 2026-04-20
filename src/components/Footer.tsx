@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { theme } from '../styles/theme';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const FooterContainer = styled.footer`
   background-color: ${theme.colors.background.dark};
@@ -121,37 +122,39 @@ interface FooterProps {
 const defaultAboutText = "Professional photographer and creative artist specializing in weddings, wildlife, portraits, and commercial photography. Based in Vancouver, BC, available worldwide.";
 
 export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
+  const { t } = useTranslation();
+
   return (
     <FooterContainer>
       <FooterContent>
         <FooterSection>
-          <h3>About</h3>
-          <p>{aboutText}</p>
+          <h3>{t('footer.about')}</h3>
+          <p>{t('footer.aboutText')}</p>
         </FooterSection>
 
         <FooterSection>
-          <h3>Photography</h3>
+          <h3>{t('footer.photography')}</h3>
           <ul>
-            <li><Link href="/photography/wedding-couples">Wedding & Couples</Link></li>
-            <li><Link href="/photography/pets">Pet Photography</Link></li>
-            <li><Link href="/photography/headshots">Professional Headshots</Link></li>
-            <li><Link href="/photography/wildlife">Wildlife Photography</Link></li>
+            <li><Link href="/photography/wedding-couples">{t('nav.wedding')}</Link></li>
+            <li><Link href="/photography/pets">{t('nav.pets')}</Link></li>
+            <li><Link href="/photography/headshots">{t('nav.headshots')}</Link></li>
+            <li><Link href="/my-art/wildlife-photography">{t('nav.wildlifePhotography')}</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
-          <h3>Tech</h3>
+          <h3>{t('footer.tech')}</h3>
           <ul>
-            <li><Link href="/tech/engineering">Software Engineering</Link></li>
+            <li><Link href="/tech/engineering">{t('nav.softwareEngineering')}</Link></li>
             <li><Link href="/tech/cloud">Cloud Architecture</Link></li>
             <li><Link href="/tech/writing">Technical Writing</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
-          <h3>Creative Services</h3>
+          <h3>{t('footer.creativeServices')}</h3>
           <ul>
-            <li><Link href="/creative-services/brand-identity">Brand Identity</Link></li>
+            <li><Link href="/creative-services/brand-identity">{t('nav.brandIdentity')}</Link></li>
             <li><Link href="/creative-services/editorial">Editorial</Link></li>
             <li><Link href="/creative-services/commercial">Commercial</Link></li>
             <li><Link href="/creative-services/art-prints">Art Prints</Link></li>
@@ -159,21 +162,21 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
         </FooterSection>
 
         <FooterSection>
-          <h3>My Art</h3>
+          <h3>{t('footer.myArt')}</h3>
           <ul>
-            <li><Link href="/my-art/digital-art">Digital Art</Link></li>
-            <li><Link href="/my-art/traditional-art">Traditional Art</Link></li>
-            <li><Link href="/my-art/everyday-photography">Photography</Link></li>
-            <li><Link href="/my-art/blog">Blog</Link></li>
+            <li><Link href="/my-art/digital-art">{t('nav.digitalArt')}</Link></li>
+            <li><Link href="/my-art/traditional-art">{t('nav.traditionalArt')}</Link></li>
+            <li><Link href="/my-art/everyday-photography">{t('nav.everydayPhotography')}</Link></li>
+            <li><Link href="/my-art/blog">{t('nav.blog')}</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
-          <h3>Contact</h3>
+          <h3>{t('footer.contact')}</h3>
           <ul>
-            <li>Email: bycamilalonart@gmail.com</li>
-            <li>Phone: +1 (672) 338 - 9307</li>
-            <li>Location: Vancouver, BC, Canada</li>
+            <li>{t('footer.email')}: bycamilalonart@gmail.com</li>
+            <li>{t('footer.phone')}: +1 (672) 338 - 9307</li>
+            <li>{t('footer.location')}: Vancouver, BC, Canada</li>
           </ul>
           <SocialLinks>
             <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" title="Instagram @camilalonart">📷</a>
@@ -184,7 +187,7 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
       </FooterContent>
 
       <Copyright>
-        <CopyrightText>© {new Date().getFullYear()} Camilalonart. All artwork and images © {new Date().getFullYear()} Camila Londoño. All rights reserved. Reproduction without permission is prohibited.</CopyrightText>
+        <CopyrightText>{t('footer.copyright')}</CopyrightText>
         <LanguageWrapper>
           <span>|</span>
           <LanguageSwitcher isDark />

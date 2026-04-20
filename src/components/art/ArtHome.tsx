@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styled, { keyframes, css } from 'styled-components';
 import data from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 const C: Record<string, string> = {
   bg: '#080808',
@@ -475,6 +476,7 @@ const SocialLinks = styled.div`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function ArtHome() {
+  const { t } = useTranslation();
   const heroImage = '/images/art/traditionalArt/Carrying Home/Moving.webp';
 
   // Featured paintings: first painting from first 3 collections
@@ -543,10 +545,10 @@ export default function ArtHome() {
 
       {/* Collections */}
       <Section id="collections">
-        <SectionEyebrow>Collections</SectionEyebrow>
+        <SectionEyebrow>{t('nav.collections')}</SectionEyebrow>
         <SectionTitle>Explore</SectionTitle>
         <SectionDesc>
-          Organized by season, theme, and artistic exploration. Each collection tells its own story.
+          {t('art.traditional.subtitle')}
         </SectionDesc>
         <CollectionsGrid>
           {data.collections.map(col => (
@@ -574,8 +576,8 @@ export default function ArtHome() {
 
       {/* About Teaser */}
       <Section>
-        <SectionEyebrow>The Artist</SectionEyebrow>
-        <SectionTitle>About</SectionTitle>
+        <SectionEyebrow>{t('art.traditional.about')}</SectionEyebrow>
+        <SectionTitle>{t('nav.about')}</SectionTitle>
         <AboutTeaserWrap>
           {data.about.photoSrc && (
             <AboutPhotoWrap>
@@ -592,7 +594,7 @@ export default function ArtHome() {
               <AboutP key={i}>{para}</AboutP>
             ))}
             <ReadMoreLink href="/art/about/">
-              Read Full Bio →
+              {t('art.traditional.readFullBio')}
             </ReadMoreLink>
           </AboutTextWrap>
         </AboutTeaserWrap>
@@ -601,7 +603,7 @@ export default function ArtHome() {
       {/* Footer */}
       <Footer>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. All artwork and images are copyrighted and protected. Reproduction without permission is prohibited.
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('footer.copyright').replace(`© ${new Date().getFullYear()} Camilalonart. `, '')}
         </FooterText>
         <SocialLinks>
           <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">

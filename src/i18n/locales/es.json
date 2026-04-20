@@ -21,7 +21,11 @@
     "softwareEngineering": "Ingeniería de Software",
     "techCourses": "Cursos de Tecnología",
     "about": "Acerca de",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "collections": "Colecciones",
+    "allPaintings": "Todas las Pinturas",
+    "collaborations": "Colaboraciones",
+    "earlyPaintings": "Primeras Pinturas"
   },
   "home": {
     "title": "Camilalonart",
@@ -91,17 +95,92 @@
       "description": "Cursos en línea y talleres sobre desarrollo web, computación en la nube y más."
     }
   },
+  "art": {
+    "traditional": {
+      "title": "Portafolio de Arte Tradicional",
+      "subtitle": "Organizadas por temporada, tema y exploración artística. Cada colección cuenta su propia historia.",
+      "getInTouch": "Ponte en Contacto",
+      "contactDescription": "¿Tienes una pregunta o inquietud? Me encantaría escucharte.",
+      "about": "La Artista",
+      "allPaintings": "Todas las Pinturas",
+      "collections": "Colecciones",
+      "collaborations": "Colaboraciones",
+      "earlyPaintings": "Primeras Pinturas",
+      "backToHome": "Volver al inicio de arte",
+      "backToArt": "Volver a arte",
+      "readFullBio": "Leer Biografía Completa →"
+    },
+    "contact": {
+      "heading": "Ponte en Contacto",
+      "description": "¿Tienes una pregunta o inquietud? Me encantaría escucharte.",
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "inquiryType": "Tipo de Consulta",
+      "message": "Mensaje",
+      "send": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "successMessage": "¡Gracias por comunicarte! Me pondré en contacto pronto.",
+      "errorMessage": "Algo salió mal. Por favor, intenta más tarde.",
+      "failedMessage": "No se pudo enviar el mensaje. Por favor, intenta de nuevo.",
+      "notConfigured": "El formulario no está configurado. Por favor, contacta al administrador."
+    }
+  },
+  "photography": {
+    "wedding": {
+      "title": "Bodas y Parejas",
+      "description": "Momentos atemporales de amor y conexión"
+    },
+    "pets": {
+      "title": "Fotografía de Mascotas",
+      "description": "Capturando la personalidad de tus mascotas queridas"
+    },
+    "headshots": {
+      "title": "Retratos Profesionales",
+      "description": "Retratos profesionales agudos y pulidos"
+    },
+    "family": {
+      "title": "Familia y Maternidad",
+      "description": "Momentos preciosos con los que amas"
+    },
+    "wildlife": {
+      "title": "Fotografía de Vida Salvaje",
+      "description": "Naturaleza y animales en su elemento"
+    }
+  },
   "footer": {
-    "copyright": "© 2024 Camilalonart. Todos los derechos reservados.",
-    "followMe": "Sígueme",
-    "quickLinks": "Enlaces Rápidos",
-    "services": "Servicios",
-    "legal": "Legal",
-    "privacyPolicy": "Política de Privacidad",
-    "termsOfService": "Términos de Servicio"
+    "about": "Acerca de",
+    "aboutText": "Fotógrafa profesional y artista creativa especializada en bodas, vida silvestre, retratos y fotografía comercial. Con base en Vancouver, BC, disponible en todo el mundo.",
+    "photography": "Fotografía",
+    "tech": "Tecnología",
+    "creativeServices": "Servicios Creativos",
+    "myArt": "Mi Arte",
+    "contact": "Contacto",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "location": "Ubicación",
+    "copyright": "© 2024 Camilalonart. Todo el arte e imágenes © 2024 Camila Londoño. Todos los derechos reservados. Se prohíbe la reproducción sin permiso.",
+    "language": "Idioma"
+  },
+  "forms": {
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono (Opcional)",
+    "message": "Mensaje",
+    "submit": "Enviar Mensaje",
+    "submitting": "Enviando...",
+    "success": "¡Gracias por tu mensaje! Me pondré en contacto lo antes posible.",
+    "error": "Algo salió mal. Por favor, intenta más tarde.",
+    "failed": "No se pudo enviar el mensaje. Por favor, intenta de nuevo."
+  },
+  "gallery": {
+    "closeViewer": "Cerrar visor de imágenes",
+    "closeModal": "Cerrar modal",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "loading": "Cargando..."
   },
   "common": {
-    "learnMore": "Conoce Más",
+    "learnMore": "Saber Más",
     "bookNow": "Reservar Ahora",
     "viewPortfolio": "Ver Portafolio",
     "contactUs": "Contáctanos",
@@ -113,6 +192,7 @@
     "next": "Siguiente",
     "previous": "Anterior",
     "submit": "Enviar",
-    "sending": "Enviando..."
+    "sending": "Enviando...",
+    "changeLanguage": "Cambiar idioma"
   }
 }
