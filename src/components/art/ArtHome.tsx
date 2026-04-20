@@ -81,13 +81,19 @@ const ArtistName = styled.h1`
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${C.text};
-  line-height: 0.9;
+  line-height: 0.95;
   margin: 0 0 1.2rem;
   word-break: break-word;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.5rem, 5vw, 4rem);
+    padding: 0 0.3rem;
+  }
 
   @media (max-width: 480px) {
-    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    letter-spacing: 0.08em;
   }
 `;
 
@@ -182,8 +188,13 @@ const FeaturedGrid = styled.div`
   }
 
   @media (max-width: 700px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
   }
 `;
 
