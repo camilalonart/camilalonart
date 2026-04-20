@@ -172,17 +172,18 @@ const SectionDesc = styled.p`
 // ─── Featured Works ────────────────────────────────────────────────
 const FeaturedGrid = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
   margin-bottom: 3.5rem;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 
   @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
 `;
 

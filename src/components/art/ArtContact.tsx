@@ -34,12 +34,12 @@ const Content = styled.main`
 
 const FormContainer = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   background: ${C.surface};
   border: 1px solid ${C.border};
-  padding: clamp(2.5rem, 5vw, 4rem);
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: clamp(3rem, 6vw, 5rem);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 `;
 
 const PageHeader = styled.div`
@@ -83,17 +83,20 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 1rem;
-  background: ${C.surface};
-  border: 1px solid ${C.border};
+  padding: 0.9rem 1.1rem;
+  background: #FAFAF8;
+  border: 1.5px solid ${C.border};
   color: ${C.text};
   font-family: inherit;
   font-size: 0.95rem;
-  transition: border-color 0.3s ease;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 
   &:focus {
     outline: none;
     border-color: ${C.gold};
+    background: ${C.surface};
+    box-shadow: 0 0 0 3px rgba(200, 168, 122, 0.1);
   }
 
   &::placeholder {
@@ -123,19 +126,23 @@ const Select = styled.select`
 `;
 
 const Textarea = styled.textarea`
-  padding: 1rem;
-  background: ${C.surface};
-  border: 1px solid ${C.border};
+  padding: 0.9rem 1.1rem;
+  background: #FAFAF8;
+  border: 1.5px solid ${C.border};
   color: ${C.text};
   font-family: inherit;
   font-size: 0.95rem;
-  min-height: 150px;
+  min-height: 140px;
   resize: vertical;
-  transition: border-color 0.3s ease;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  line-height: 1.5;
 
   &:focus {
     outline: none;
     border-color: ${C.gold};
+    background: ${C.surface};
+    box-shadow: 0 0 0 3px rgba(200, 168, 122, 0.1);
   }
 
   &::placeholder {
@@ -144,25 +151,26 @@ const Textarea = styled.textarea`
 `;
 
 const SubmitBtn = styled.button`
-  padding: 1.2rem 2.5rem;
+  padding: 1rem 2.5rem;
   background: ${C.gold};
-  border: 1px solid ${C.gold};
+  border: none;
   color: ${C.bg};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1.5rem;
   width: 100%;
   font-weight: 600;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(200, 168, 122, 0.2);
 
   &:hover:not(:disabled) {
     background: ${C.goldLight};
-    border-color: ${C.goldLight};
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(200, 168, 122, 0.2);
+    box-shadow: 0 8px 25px rgba(200, 168, 122, 0.3);
   }
 
   &:active:not(:disabled) {

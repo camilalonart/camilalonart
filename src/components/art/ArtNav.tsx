@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useTranslation } from '../../i18n/TranslationContext';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 const C = {
   bg: '#080808',
@@ -41,9 +43,14 @@ const NavLogo = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${C.gold};
+  }
 
   span {
-    color: ${C.gold};
+    color: inherit;
   }
 `;
 
@@ -138,6 +145,7 @@ const HamburgerBtn = styled.button`
 `;
 
 export default function ArtNav() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -162,11 +170,12 @@ export default function ArtNav() {
         <span />
       </HamburgerBtn>
       <NavLinks $isOpen={mobileMenuOpen}>
-        <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>Collections</NavLink>
-        <NavLink href="/art/about/" onClick={() => setMobileMenuOpen(false)}>About</NavLink>
-        <NavLink href="/art/contact/" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink>
-        <NavLink href="/art/collaborations/" onClick={() => setMobileMenuOpen(false)}>Collaborations</NavLink>
-        <NavLink href="/art/early-first-paintings/" onClick={() => setMobileMenuOpen(false)}>Archival Works</NavLink>
+        <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collections')}</NavLink>
+        <NavLink href="/art/about/" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</NavLink>
+        <NavLink href="/art/contact/" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</NavLink>
+        <NavLink href="/art/collaborations/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collaborations')}</NavLink>
+        <NavLink href="/art/early-first-paintings/" onClick={() => setMobileMenuOpen(false)}>{t('nav.earlyPaintings')}</NavLink>
+        <LanguageSwitcher />
       </NavLinks>
     </Nav>
   );

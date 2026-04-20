@@ -11,6 +11,7 @@ import { visibleSections } from '../config/sections';
 const PageContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(135deg, ${theme.colors.background.main} 0%, ${theme.colors.background.light} 100%);
+  position: relative;
 `;
 
 const LanguageSwitcherWrapper = styled.div`
@@ -28,23 +29,23 @@ const LanguageSwitcherWrapper = styled.div`
 const Hero = styled.section`
   padding: clamp(${theme.spacing['3xl']}, 8vw, ${theme.spacing['4xl']}) ${theme.spacing['2xl']};
   text-align: center;
-  background: linear-gradient(180deg, rgba(122, 107, 95, 0.1) 0%, transparent 100%);
-  border-bottom: 1px solid rgba(122, 107, 95, 0.1);
+  background: linear-gradient(180deg, rgba(122, 107, 95, 0.08) 0%, transparent 100%);
+  border-bottom: none;
 
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: ${theme.spacing.md};
+    margin-bottom: ${theme.spacing.lg};
     color: ${theme.colors.primary.main};
     letter-spacing: 0.05em;
     font-weight: 300;
   }
 
   p {
-    font-size: clamp(${theme.typography.fontSize.lg}, 2vw, ${theme.typography.fontSize.xl});
+    font-size: clamp(${theme.typography.fontSize.base}, 1.8vw, ${theme.typography.fontSize.lg});
     color: ${theme.colors.text.secondary};
     max-width: min(700px, 90%);
     margin: 0 auto;
-    line-height: 1.8;
+    line-height: 1.7;
     font-weight: 300;
   }
 
@@ -112,38 +113,40 @@ const Card = styled(Link)`
   flex-direction: column;
   padding: ${theme.spacing.xl};
   background: white;
-  border-radius: ${theme.borderRadius.lg};
-  box-shadow: ${theme.shadows.md};
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(122, 107, 95, 0.08);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: ${theme.shadows.lg};
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(122, 107, 95, 0.15);
     border-color: ${theme.colors.primary.main};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.lg};
+    min-height: 160px;
   }
 `;
 
 const CardTitle = styled.h3`
-  font-size: clamp(${theme.typography.fontSize.lg}, 2vw, ${theme.typography.fontSize.xl});
+  font-size: clamp(${theme.typography.fontSize.lg}, 2.5vw, ${theme.typography.fontSize.xl});
   color: ${theme.colors.primary.main};
-  margin-bottom: ${theme.spacing.sm};
+  margin: 0;
   font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
 `;
 
 const CardDescription = styled.p`
-  font-size: ${theme.typography.fontSize.base};
-  color: ${theme.colors.text.secondary};
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
+  display: none;
 `;
 
 const TagSection = styled.div`
@@ -199,10 +202,10 @@ export default function HomePage() {
       </LanguageSwitcherWrapper>
 
       <Hero>
-        <h1>Camila Londoño</h1>
+        <h1>{t('home.title')}</h1>
         <Divider />
         <p>
-          Photographer, Artist & Creative Director. Capturing moments, creating beauty, and telling visual stories across photography, traditional art, and design.
+          {t('home.subtitle')}
         </p>
       </Hero>
 
