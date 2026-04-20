@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
 import ContactForm from '../ContactForm';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -883,6 +884,7 @@ interface ModalState {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function ArtPortfolio() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [modal, setModal] = useState<ModalState | null>(null);
 
@@ -1144,10 +1146,10 @@ export default function ArtPortfolio() {
       {/* ── Contact ── */}
       <ContactSection id="contact-section" role="region" aria-label="Contact Camila">
         <ContactContent>
-          <SectionEyebrow>Contact</SectionEyebrow>
-          <ContactTitle>Get in Touch</ContactTitle>
+          <SectionEyebrow>{t('nav.contact')}</SectionEyebrow>
+          <ContactTitle>{t('art.contact.heading')}</ContactTitle>
           <ContactDescription>
-            Interested in commissioning a painting, collaboration, or just want to chat? Feel free to reach out. I'll get back to you as soon as possible.
+            {t('art.contact.portfolioDescription')}
           </ContactDescription>
           <ContactFormWrapper role="form" aria-label="Contact form">
             <ContactForm service="art-inquiry" />
@@ -1175,7 +1177,7 @@ export default function ArtPortfolio() {
         >
           <CloseBtn
             onClick={() => setModal(null)}
-            aria-label="Close"
+            aria-label={t('common.close')}
           >
             ×
           </CloseBtn>
@@ -1239,7 +1241,7 @@ export default function ArtPortfolio() {
                 onClick={() => navigate(-1)}
                 $disabled={modal.siblingIndex === 0}
                 disabled={modal.siblingIndex === 0}
-                aria-label="Previous painting"
+                aria-label={t('gallery.previousPainting')}
               >
                 ←
               </NavBtn>
@@ -1250,7 +1252,7 @@ export default function ArtPortfolio() {
                 onClick={() => navigate(1)}
                 $disabled={modal.siblingIndex === modal.siblings.length - 1}
                 disabled={modal.siblingIndex === modal.siblings.length - 1}
-                aria-label="Next painting"
+                aria-label={t('gallery.nextPainting')}
               >
                 →
               </NavBtn>

@@ -113,6 +113,7 @@
     "contact": {
       "heading": "Ponte en Contacto",
       "description": "¿Tienes una pregunta o inquietud? Me encantaría escucharte.",
+      "portfolioDescription": "¿Interesado en encargar un cuadro, colaboración o simplemente quieres charlar? Siéntete libre de comunicarte. Te responderé lo antes posible.",
       "name": "Nombre",
       "email": "Correo Electrónico",
       "inquiryType": "Tipo de Consulta",
@@ -177,6 +178,8 @@
     "closeModal": "Cerrar modal",
     "previous": "Anterior",
     "next": "Siguiente",
+    "previousPainting": "Cuadro anterior",
+    "nextPainting": "Siguiente cuadro",
     "loading": "Cargando..."
   },
   "common": {

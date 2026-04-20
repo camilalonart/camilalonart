@@ -113,6 +113,7 @@
     "contact": {
       "heading": "Get in Touch",
       "description": "Have a question or inquiry? I'd love to hear from you.",
+      "portfolioDescription": "Interested in commissioning a painting, collaboration, or just want to chat? Feel free to reach out. I'll get back to you as soon as possible.",
       "name": "Name",
       "email": "Email",
       "inquiryType": "Inquiry Type",
@@ -177,6 +178,8 @@
     "closeModal": "Close modal",
     "previous": "Previous",
     "next": "Next",
+    "previousPainting": "Previous painting",
+    "nextPainting": "Next painting",
     "loading": "Loading..."
   },
   "common": {

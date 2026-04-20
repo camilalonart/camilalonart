@@ -690,15 +690,15 @@ const data: ArtPortfolioData = {
     { image: "/images/art/traditionalArt/Carrying Home/We.webp", id: "sh-4", collectionId: "carrying-home", paintingId: "carrying-home-04" },
     { image: "/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp", id: "sh-5", collectionId: "carrying-home", paintingId: "carrying-home-05" },
     { image: "/images/art/traditionalArt/Fuego Interior/TheInnerTide.webp", id: "sh-14", collectionId: "fuego-interior", paintingId: "fuego-interior-02" },
+    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13", collectionId: "fuego-interior", paintingId: "fuego-interior-01" },
     { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp", id: "sh-10", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-02" },
     { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp", id: "sh-9", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-03" },
-    { image: "/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp", id: "sh-13", collectionId: "fuego-interior", paintingId: "fuego-interior-01" },
+    { image: "/images/art/traditionalArt/Pandemic Lockdown/AtravesDeMiVentana.webp", id: "sh-7", collectionId: "pandemic-lockdown", paintingId: "pandemic-lockdown-01" },
     { image: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/EngineeringEpistemology.webp", id: "sh-15", collectionId: "siempre-vuelvo", paintingId: "siempre-vuelvo-04" },
     { image: "/images/art/traditionalArt/Perspective/WhyNot.webp", id: "sh-16", collectionId: "perspective", paintingId: "perspective-01" },
     { image: "/images/art/traditionalArt/Yellow/DontGo.webp", id: "sh-17", collectionId: "yellow", paintingId: "yellow-01" },
     { image: "/images/art/traditionalArt/Dear Inner Child/Creative.webp", id: "sh-18", collectionId: "dear-inner-child", paintingId: "dear-inner-child-03" },
     { image: "/images/art/traditionalArt/Dear Inner Child/Loyal.webp", id: "sh-19", collectionId: "dear-inner-child", paintingId: "dear-inner-child-05" },
-    { image: "/images/art/traditionalArt/Pandemic Lockdown/AtravesDeMiVentana.webp", id: "sh-7", collectionId: "pandemic-lockdown", paintingId: "pandemic-lockdown-01" },
     { image: "/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp", id: "sh-8", collectionId: "pandemic-lockdown", paintingId: "pandemic-lockdown-02" }
   ]
 };
