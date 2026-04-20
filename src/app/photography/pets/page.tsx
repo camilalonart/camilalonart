@@ -192,13 +192,9 @@ const ServiceCardButton = styled.button`
 `;
 
 const Section = styled.section<{ $bgColor?: string }>`
-  padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
   background: ${props => props.$bgColor || 'transparent'};
   position: relative;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.sm} ${theme.spacing.md};
-  }
 `;
 
 const SectionTitle = styled.h1`

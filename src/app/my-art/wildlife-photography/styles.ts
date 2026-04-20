@@ -169,8 +169,8 @@ export const LandingContent = styled.div`
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  padding: 4rem;
-  margin-left: 5rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  margin-left: clamp(1rem, 3vw, 5rem);
   pointer-events: none;
   
   * {
@@ -202,6 +202,9 @@ export const EnterButton = styled.button`
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   padding: 8px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.1em;
@@ -242,12 +245,8 @@ export const EnterButton = styled.button`
 
 export const PortfolioPage = styled.div`
   min-height: 100vh;
-  padding: 120px 40px 80px;
+  padding: clamp(80px, 10vw, 120px) clamp(1.25rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
   background: #000000;
-
-  @media (max-width: 768px) {
-    padding: 100px 20px 60px;
-  }
 `;
 
 export const PortfolioHeader = styled.div`
@@ -278,6 +277,7 @@ export const BackButton = styled.button`
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding: 8px 0;
+  min-height: 44px;
   font-size: 0.9rem;
   font-weight: 300;
   letter-spacing: 0.1em;

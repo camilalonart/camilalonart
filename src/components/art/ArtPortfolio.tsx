@@ -505,10 +505,10 @@ const LightboxInfo = styled.div`
     border-left: none;
     border-top: 1px solid ${C.border};
     padding: 1.5rem;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
-    overflow-x: auto;
+    overflow-x: hidden;
   }
 `;
 

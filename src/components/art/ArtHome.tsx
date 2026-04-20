@@ -89,29 +89,23 @@ const ArtistName = styled.h1`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: clamp(1.5rem, 4.5vw, 3.5rem);
     padding: 0 0.3rem;
     letter-spacing: 0.08em;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     font-size: clamp(1.2rem, 5vw, 2rem);
     letter-spacing: 0.05em;
     padding: 0 0.2rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     font-size: clamp(1rem, 4.5vw, 1.5rem);
     letter-spacing: 0.04em;
     padding: 0 0.2rem;
     word-spacing: 9999px;
-  }
-
-  @media (max-width: 380px) {
-    font-size: clamp(0.9rem, 4vw, 1.3rem);
-    letter-spacing: 0.03em;
-    padding: 0 0.15rem;
   }
 `;
 
@@ -190,7 +184,7 @@ const SectionDesc = styled.p`
   color: ${C.muted};
   max-width: 640px;
   line-height: 1.8;
-  margin: 0 0 3.5rem;
+  margin: 0 0 clamp(2rem, 4vw, 3.5rem);
 `;
 
 // ─── Featured Works ────────────────────────────────────────────────
@@ -200,7 +194,7 @@ const FeaturedGrid = styled.div`
   gap: 1rem;
   margin-bottom: 3.5rem;
 
-  @media (max-width: 1440px) {
+  @media (max-width: 1280px) {
     grid-template-columns: repeat(5, 1fr);
     gap: 0.9rem;
   }
@@ -210,13 +204,13 @@ const FeaturedGrid = styled.div`
     gap: 0.8rem;
   }
 
-  @media (max-width: 700px) {
-    grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.7rem;
   }
 
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
   }
 `;

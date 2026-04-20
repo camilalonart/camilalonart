@@ -94,7 +94,11 @@ const PaintingsGrid = styled.div`
   columns: 2 320px;
   column-gap: 3px;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
+    columns: 1;
+  }
+
+  @media (max-width: 640px) {
     columns: 1;
   }
 `;
@@ -153,6 +157,11 @@ const PaintingTitle = styled.h3`
   color: ${C.text};
   margin: 0 0 0.2rem;
   text-transform: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const PaintingMeta = styled.p`
@@ -183,6 +192,9 @@ const NavLink = styled(Link)`
   text-decoration: none;
   border: 1px solid ${C.border};
   padding: 0.6rem 1.1rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   transition: border-color 0.2s, color 0.2s;
 
   &:hover {

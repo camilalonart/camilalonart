@@ -196,7 +196,7 @@ const HeroDecorative = styled.div`
 
 // Intro Section with elegant typography
 const IntroSection = styled.section`
-  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
   text-align: center;
   max-width: 1000px;
   margin: 0 auto;
@@ -218,10 +218,6 @@ const IntroSection = styled.section`
     font-weight: 300;
     max-width: 800px;
     margin: 0 auto;
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
   }
 `;
 
@@ -575,19 +571,17 @@ const GallerySection = styled.section`
 const GalleryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 250px);
+  grid-template-rows: auto;
   gap: ${theme.spacing.md};
   max-width: 1400px;
   margin: 0 auto ${theme.spacing['3xl']};
 
   @media (max-width: ${theme.breakpoints.lg}) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 200px);
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 250px);
   }
 `;
 

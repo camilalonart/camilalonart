@@ -121,6 +121,11 @@ const CardTitle = styled.h3`
   letter-spacing: 0.03em;
   color: ${C.text};
   margin: 0 0 0.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const CardMeta = styled.p`

@@ -75,7 +75,7 @@ const FormHeader = styled.div`
   background: linear-gradient(180deg, rgba(201, 160, 80, 0.08) 0%, transparent 100%);
   
   h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     font-weight: 300;
     color: #4A4039;
     margin-bottom: 8px;
@@ -387,7 +387,7 @@ const SuccessContent = styled.div`
   }
   
   h3 {
-    font-size: 1.8rem;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
     color: #4A4039;
     margin-bottom: 12px;
     font-family: 'Playfair Display', serif;

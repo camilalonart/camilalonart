@@ -25,9 +25,9 @@ const Site = styled.div`
 `;
 
 const Content = styled.main`
-  padding-top: 64px;
   min-height: 100vh;
   padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem);
+  padding-top: calc(clamp(4rem, 8vw, 8rem) + 64px);
 `;
 
 const PageHeader = styled.div`
@@ -108,6 +108,11 @@ const CardTitle = styled.h3`
   font-weight: 300;
   letter-spacing: 0.04em;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const CardMeta = styled.p`

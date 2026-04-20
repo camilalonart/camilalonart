@@ -66,8 +66,10 @@ const SocialLinks = styled.div`
   flex-wrap: wrap;
 
   a {
-    width: 40px;
-    height: 40px;
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: ${theme.colors.background.light};
     display: flex;

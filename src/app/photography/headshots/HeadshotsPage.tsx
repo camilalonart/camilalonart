@@ -152,8 +152,8 @@ const CloseButton = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
   color: rgb(44, 62, 80);
-  width: 40px;
-  height: 40px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -177,13 +177,9 @@ const HeroImageContainer = styled.div`
 `;
 
 const Section = styled.section<{ $bgColor?: string }>`
-  padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
   background: ${props => props.$bgColor || 'transparent'};
   position: relative;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.sm} ${theme.spacing.md};
-  }
 `;
 
 const SectionTitle = styled.h2`

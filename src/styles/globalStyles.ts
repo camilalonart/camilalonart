@@ -108,17 +108,17 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: ${theme.typography.fontSize['5xl']};
+    font-size: clamp(2rem, 5vw, 4rem);
     margin-bottom: ${theme.spacing['2xl']};
   }
 
   h2 {
-    font-size: ${theme.typography.fontSize['4xl']};
+    font-size: clamp(1.75rem, 4vw, 3rem);
     margin-bottom: ${theme.spacing.xl};
   }
 
   h3 {
-    font-size: ${theme.typography.fontSize['3xl']};
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     margin-bottom: ${theme.spacing.lg};
   }
 

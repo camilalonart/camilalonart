@@ -28,29 +28,17 @@ const PageContainer = styled.div`
 `;
 
 const IntroSection = styled.section`
-  padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-  
+
   p {
     font-size: clamp(1rem, 1.4vw, 1.2rem);
     line-height: 1.8;
     color: ${theme.colors.text.secondary};
     font-weight: 300;
     letter-spacing: 0.02em;
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['lg']} ${theme.spacing.md};
-    
-    p {
-      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-    }
-  }
-
-  @media (max-width: ${theme.breakpoints.sm}) {
-    padding: ${theme.spacing.xl} ${theme.spacing.lg};
   }
 `;
 
@@ -152,26 +140,18 @@ const HeroContent = styled.div`
 `;
 
 const Section = styled.section<{ $dark?: boolean }>`
-  padding: ${theme.spacing['3xl']} ${theme.spacing['2xl']};
-  background-color: ${props => 
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
+  background-color: ${props =>
     props.$dark ? '#edede9' : theme.colors.background.main};
   width: 100%;
   box-sizing: border-box;
-  
+
   h2 {
     font-size: clamp(1.4rem, 2.6vw, 2.2rem);
     font-weight: 600;
     margin-bottom: ${theme.spacing['sm']};
     text-align: center;
     color: #796B5F;
-  }
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
-  }
-
-  @media (max-width: ${theme.breakpoints.sm}) {
-    padding: ${theme.spacing.xl} ${theme.spacing.lg};
   }
 `;
 
@@ -696,7 +676,8 @@ const ServiceCard = styled.div`
   margin: ${theme.spacing.md};
   height: auto;
   min-height: 600px;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   transition: all 0.3s ease;
   text-align: center;
   display: flex;
@@ -893,8 +874,8 @@ const CarouselStyles = styled.div`
     }
 
     .react-multi-carousel-arrow {
-      min-width: 35px;
-      min-height: 35px;
+      min-width: 44px;
+      min-height: 44px;
 
       &::before {
         font-size: 1.2rem;
@@ -912,8 +893,8 @@ const CarouselStyles = styled.div`
     }
 
     .react-multi-carousel-arrow {
-      min-width: 30px;
-      min-height: 30px;
+      min-width: 44px;
+      min-height: 44px;
 
       &::before {
         font-size: 1rem;
