@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import SecureImage from '../../../components/SecureImage';
 import Footer from '../../../components/Footer';
+import PhotographyNav from '../../../components/PhotographyNav';
 
 const PageContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
   background-color: rgb(26, 20, 15);
   color: #2C3E50;
+  padding-top: 64px;
 `;
 
 const Hero = styled.section`
@@ -619,6 +621,7 @@ export default function HeadshotsPage() {
 
   return (
     <PageContainer>
+      <PhotographyNav pageTitle="Professional Headshots" />
       <Hero>
         <HeroImageContainer>
           <SecureImage

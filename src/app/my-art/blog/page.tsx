@@ -4,11 +4,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import Link from 'next/link';
+import SimpleNav from '../../../components/SimpleNav';
 
 const PageContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: ${theme.spacing['2xl']};
+  padding-top: calc(${theme.spacing['2xl']} + 64px);
 `;
 
 const Header = styled.header`
@@ -131,7 +133,9 @@ export default function BlogPage() {
   ];
 
   return (
-    <PageContainer>
+    <>
+      <SimpleNav />
+      <PageContainer>
       <Header>
         <h1>Blog</h1>
         <p>
@@ -165,5 +169,6 @@ export default function BlogPage() {
         ))}
       </BlogGrid>
     </PageContainer>
+    </>
   );
 } 

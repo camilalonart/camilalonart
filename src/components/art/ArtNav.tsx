@@ -112,6 +112,12 @@ const NavLink = styled(Link)`
   }
 `;
 
+const NavRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
 const HamburgerBtn = styled.button`
   display: none;
   background: none;
@@ -170,23 +176,25 @@ export default function ArtNav() {
       <NavLogo title="Back to art home" onClick={handleLogoClick}>
         Camila <span>Londoño</span> <Dot />
       </NavLogo>
-      <HamburgerBtn
-        aria-expanded={mobileMenuOpen}
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        aria-label="Toggle navigation menu"
-      >
-        <span />
-        <span />
-        <span />
-      </HamburgerBtn>
       <NavLinks $isOpen={mobileMenuOpen}>
         <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collections')}</NavLink>
         <NavLink href="/art/about/" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</NavLink>
         <NavLink href="/art/contact/" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</NavLink>
         <NavLink href="/art/collaborations/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collaborations')}</NavLink>
         <NavLink href="/art/early-first-paintings/" onClick={() => setMobileMenuOpen(false)}>{t('nav.earlyPaintings')}</NavLink>
-        <LanguageSwitcher />
       </NavLinks>
+      <NavRight>
+        <LanguageSwitcher />
+        <HamburgerBtn
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span />
+          <span />
+          <span />
+        </HamburgerBtn>
+      </NavRight>
     </Nav>
   );
 }

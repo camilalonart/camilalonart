@@ -86,6 +86,8 @@ const ArtistName = styled.h1`
   word-break: break-word;
   padding: 0 0.5rem;
   max-width: 95vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (max-width: 768px) {
     font-size: clamp(1.5rem, 4.5vw, 3.5rem);
@@ -93,10 +95,23 @@ const ArtistName = styled.h1`
     letter-spacing: 0.08em;
   }
 
-  @media (max-width: 480px) {
-    font-size: clamp(1rem, 3.5vw, 1.8rem);
-    letter-spacing: 0.06em;
+  @media (max-width: 600px) {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    letter-spacing: 0.05em;
     padding: 0 0.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    letter-spacing: 0.04em;
+    padding: 0 0.2rem;
+    word-spacing: 9999px;
+  }
+
+  @media (max-width: 380px) {
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+    letter-spacing: 0.03em;
+    padding: 0 0.15rem;
   }
 `;
 
@@ -181,13 +196,18 @@ const SectionDesc = styled.p`
 // ─── Featured Works ────────────────────────────────────────────────
 const FeaturedGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
   margin-bottom: 3.5rem;
 
+  @media (max-width: 1440px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.9rem;
+  }
+
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
   }
 
   @media (max-width: 700px) {
@@ -334,6 +354,7 @@ const CollectionOverlay = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   padding: 2rem;
+  pointer-events: none;
 
   ${CollectionCard}:hover & {
     background: linear-gradient(to top, rgba(4, 4, 4, 1) 0%, rgba(4, 4, 4, 0.7) 50%, transparent 100%);

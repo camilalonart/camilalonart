@@ -4,11 +4,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ProtectedImage from '../../../components/ProtectedImage';
+import SimpleNav from '../../../components/SimpleNav';
 
 const PageContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: ${theme.spacing['2xl']};
+  padding-top: calc(${theme.spacing['2xl']} + 64px);
 `;
 
 const Hero = styled.section`
@@ -132,7 +134,9 @@ export default function EverydayPhotographyPage() {
   ];
 
   return (
-    <PageContainer>
+    <>
+      <SimpleNav />
+      <PageContainer>
       <Hero>
         <h1>Everyday Photography</h1>
         <p>
@@ -163,5 +167,6 @@ export default function EverydayPhotographyPage() {
         </Section>
       ))}
     </PageContainer>
+    </>
   );
 } 

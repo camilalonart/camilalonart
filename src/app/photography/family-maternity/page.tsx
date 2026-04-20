@@ -6,6 +6,7 @@ import { theme } from '../../../styles/theme';
 import ProtectedImage from '../../../components/ProtectedImage';
 import ImageModal from '../../../components/ImageModal';
 import Link from 'next/link';
+import PhotographyNav from '../../../components/PhotographyNav';
 
 // Soft animations
 const fadeIn = keyframes`
@@ -33,6 +34,7 @@ const PageContainer = styled.div`
   overflow-x: hidden;
   background-color: #FDF8F5;
   color: #5D4E42;
+  padding-top: 64px;
 `;
 
 // Split Hero Section
@@ -1214,6 +1216,7 @@ export default function FamilyMaternityPage() {
 
   return (
     <PageContainer>
+      <PhotographyNav pageTitle="Family & Maternity" />
       <Hero>
         <HeroImageSide>
           <ProtectedImage

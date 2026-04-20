@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SimpleNav from '../../../components/SimpleNav';
 import {
   WildlifeContainer,
   LandingPage,
@@ -17,6 +18,7 @@ import {
 export default function WildlifePhotographyPage() {
   return (
     <WildlifeContainer>
+      <SimpleNav />
       {/* Back to Main Button */}
       <HamburgerMenu>
         <HamburgerButton 

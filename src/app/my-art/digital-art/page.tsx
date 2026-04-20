@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ProtectedImage from '../../../components/ProtectedImage';
+import SimpleNav from '../../../components/SimpleNav';
 
 const PageContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: ${theme.spacing['2xl']};
+  padding-top: calc(${theme.spacing['2xl']} + 64px);
 `;
 
 const Header = styled.header`
@@ -152,7 +154,9 @@ export default function DigitalArtPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <PageContainer>
+    <>
+      <SimpleNav />
+      <PageContainer>
       <Header>
         <h1>Digital Art</h1>
         <p>
@@ -203,5 +207,6 @@ export default function DigitalArtPage() {
         )}
       </Modal>
     </PageContainer>
+    </>
   );
 } 
