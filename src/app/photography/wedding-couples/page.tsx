@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import ContactForm from '../../../components/ContactForm';
+import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import ProtectedImage from '../../../components/ProtectedImage';
 import WeddingInquiryForm from '../../../components/WeddingInquiryForm';
 import ImageModal from '../../../components/ImageModal';
@@ -22,6 +23,18 @@ const PageContainer = styled.div`
 
   @media (max-width: ${theme.breakpoints.md}) {
     overflow-x: hidden;
+  }
+`;
+
+const LanguageSwitcherWrapper = styled.div`
+  position: fixed;
+  top: ${theme.spacing.lg};
+  right: ${theme.spacing.lg};
+  z-index: 100;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    top: ${theme.spacing.md};
+    right: ${theme.spacing.md};
   }
 `;
 
@@ -1221,6 +1234,9 @@ export default function WeddingCouplesPage() {
 
   return (
     <PageContainer>
+      <LanguageSwitcherWrapper>
+        <LanguageSwitcher />
+      </LanguageSwitcherWrapper>
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
