@@ -958,14 +958,10 @@ export default function ArtPortfolio() {
       {/* ── Nav ── */}
       <Nav $scrolled={scrolled} role="navigation" aria-label="Site navigation">
         <NavLogo 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        // on click it will take you to /art
+          onClick={() => window.location.href = '/art'}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
           aria-label="Camila Londoño - Go to home"
         >
           CamilaLonart

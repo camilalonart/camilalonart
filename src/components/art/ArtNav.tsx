@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
@@ -32,7 +32,7 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
 `;
 
-const NavLogo = styled(Link)`
+const NavLogo = styled.button`
   font-size: 1.05rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -44,6 +44,10 @@ const NavLogo = styled(Link)`
   align-items: center;
   gap: 0.4rem;
   transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: inherit;
+  padding: 0;
 
   &:hover {
     color: ${C.gold};
@@ -146,6 +150,7 @@ const HamburgerBtn = styled.button`
 
 export default function ArtNav() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -155,9 +160,14 @@ export default function ArtNav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    setMobileMenuOpen(false);
+    router.push('/art/');
+  };
+
   return (
     <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
-      <NavLogo href="/art/" title="Back to art home" onClick={() => setMobileMenuOpen(false)}>
+      <NavLogo title="Back to art home" onClick={handleLogoClick}>
         Camila <span>Londoño</span> <Dot />
       </NavLogo>
       <HamburgerBtn

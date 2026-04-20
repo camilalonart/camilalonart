@@ -29,17 +29,29 @@ const Content = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(2rem, 5vw, 4rem);
 `;
 
 const FormContainer = styled.div`
   width: 100%;
-  max-width: 700px;
+  max-width: 650px;
   background: ${C.surface};
   border: 1px solid ${C.border};
-  padding: clamp(3rem, 6vw, 5rem);
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: clamp(2.5rem, 6vw, 4rem);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.5s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const PageHeader = styled.div`
@@ -151,26 +163,26 @@ const Textarea = styled.textarea`
 `;
 
 const SubmitBtn = styled.button`
-  padding: 1rem 2.5rem;
-  background: ${C.gold};
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, ${C.gold}, ${C.goldLight});
   border: none;
   color: ${C.bg};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   width: 100%;
   font-weight: 600;
-  border-radius: 4px;
-  box-shadow: 0 4px 15px rgba(200, 168, 122, 0.2);
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(200, 168, 122, 0.15);
 
   &:hover:not(:disabled) {
-    background: ${C.goldLight};
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(200, 168, 122, 0.3);
+    background: linear-gradient(135deg, ${C.goldLight}, ${C.gold});
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(200, 168, 122, 0.25);
   }
 
   &:active:not(:disabled) {
@@ -178,7 +190,7 @@ const SubmitBtn = styled.button`
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.65;
     cursor: not-allowed;
   }
 `;

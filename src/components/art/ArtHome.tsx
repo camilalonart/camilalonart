@@ -188,13 +188,13 @@ const FeaturedGrid = styled.div`
   }
 
   @media (max-width: 700px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.7rem;
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.4rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
   }
 `;
 

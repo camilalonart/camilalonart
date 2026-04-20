@@ -113,26 +113,26 @@ const Card = styled(Link)`
   flex-direction: column;
   padding: ${theme.spacing.xl};
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(122, 107, 95, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(122, 107, 95, 0.06);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  border: 1px solid rgba(122, 107, 95, 0.1);
   cursor: pointer;
-  min-height: 200px;
+  min-height: 180px;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(122, 107, 95, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(122, 107, 95, 0.12);
     border-color: ${theme.colors.primary.main};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.lg};
-    min-height: 160px;
+    min-height: 150px;
   }
 `;
 
@@ -149,26 +149,6 @@ const CardDescription = styled.p`
   display: none;
 `;
 
-const TagSection = styled.div`
-  margin-top: ${theme.spacing.lg};
-  padding-top: ${theme.spacing.md};
-  border-top: 1px solid rgba(122, 107, 95, 0.1);
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${theme.spacing.sm};
-`;
-
-const Tag = styled.span`
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  background: ${theme.colors.primary.main};
-  color: white;
-  border-radius: ${theme.borderRadius.sm};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-`;
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -219,10 +199,6 @@ export default function HomePage() {
             return (
               <Card key={section.id} href={section.href}>
                 <CardTitle>{title}</CardTitle>
-                <CardDescription>{description}</CardDescription>
-                <TagSection>
-                  <Tag>{getCategoryLabel(section.category)}</Tag>
-                </TagSection>
               </Card>
             );
           })}
