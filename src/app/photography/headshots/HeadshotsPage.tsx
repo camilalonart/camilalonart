@@ -643,11 +643,11 @@ export default function HeadshotsPage() {
       <Section>
         <SectionTitle>Portfolio</SectionTitle>
         <PortfolioGrid>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <PortfolioItem key={i}>
+          {['A7T01707', 'A7T01710', 'A7T02159', 'A7T03166', 'A7T03675', 'A7T05969', 'A7T06722', 'A7T07393'].map((filename) => (
+            <PortfolioItem key={filename}>
               <SecureImage
-                src={`/images/headshots/portfolio-${i}.jpg`}
-                alt={`Professional headshot example ${i}`}
+                src={`/images/headshots/${filename}.webp`}
+                alt={`Professional headshot ${filename}`}
                 quality={90}
               />
               <PortfolioOverlay>

@@ -899,13 +899,44 @@ const CarouselStyles = styled.div`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
+    .carousel-container {
+      padding: ${theme.spacing.lg} 0;
+    }
+
     .react-multi-carousel-arrow {
       min-width: 35px;
       min-height: 35px;
-      
+
       &::before {
         font-size: 1.2rem;
       }
+    }
+
+    .react-multi-carousel-dot--active button {
+      width: 24px;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    .carousel-container {
+      padding: ${theme.spacing.md} 0;
+    }
+
+    .react-multi-carousel-arrow {
+      min-width: 30px;
+      min-height: 30px;
+
+      &::before {
+        font-size: 1rem;
+      }
+    }
+
+    .react-multi-carousel-item {
+      margin: 0 ${theme.spacing.xs};
+    }
+
+    .custom-dot-list-style {
+      bottom: -30px;
     }
   }
 `;

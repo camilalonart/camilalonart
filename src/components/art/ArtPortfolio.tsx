@@ -968,9 +968,10 @@ export default function ArtPortfolio() {
           }}
           aria-label="Camila Londoño - Go to home"
         >
-          Camila <span>Londoño</span>
+          CamilaLonart
         </NavLogo>
         <NavLinks>
+          <NavLinkComponent href="/art">Home</NavLinkComponent>
           <NavLinkComponent href="/art/collections">Collections</NavLinkComponent>
           <NavLinkComponent href="/art/all-paintings">All Paintings</NavLinkComponent>
           <NavLinkComponent href="/art/early-first-paintings">Archival Works</NavLinkComponent>

@@ -44,7 +44,7 @@ export const visibleSections: Section[] = [
     id: 'wildlife',
     title: 'Wildlife Photography',
     description: 'Nature and animals in their element',
-    href: '/my-art/wildlife',
+    href: '/my-art/wildlife-photography',
     icon: '🦁',
     category: 'photography',
   },
