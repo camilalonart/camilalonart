@@ -85,15 +85,18 @@ const ArtistName = styled.h1`
   margin: 0 0 1.2rem;
   word-break: break-word;
   padding: 0 0.5rem;
+  max-width: 95vw;
 
   @media (max-width: 768px) {
-    font-size: clamp(1.5rem, 5vw, 4rem);
+    font-size: clamp(1.5rem, 4.5vw, 3.5rem);
     padding: 0 0.3rem;
+    letter-spacing: 0.08em;
   }
 
   @media (max-width: 480px) {
-    font-size: clamp(1.2rem, 4vw, 2rem);
-    letter-spacing: 0.08em;
+    font-size: clamp(1rem, 3.5vw, 1.8rem);
+    letter-spacing: 0.06em;
+    padding: 0 0.2rem;
   }
 `;
 

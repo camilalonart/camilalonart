@@ -7,8 +7,7 @@
     "wedding": "Bodas y Parejas",
     "family": "Familia y Maternidad",
     "myArt": "Mi Arte",
-    "digitalArt": "Arte Digital",
-    "traditionalArt": "Arte Tradicional",
+    "art": "Arte",
     "wildlifePhotography": "Fotografía de Vida Salvaje",
     "everydayPhotography": "Fotografía Cotidiana",
     "blog": "Blog",
@@ -54,13 +53,9 @@
       "title": "Eventos",
       "description": "Fotografía profesional de eventos capturando la energía y momentos de tus ocasiones especiales."
     },
-    "digitalArt": {
-      "title": "Arte Digital",
-      "description": "Ilustraciones digitales y obras de arte creadas con herramientas modernas."
-    },
-    "traditionalArt": {
-      "title": "Arte Tradicional",
-      "description": "Pinturas y dibujos originales usando medios tradicionales."
+    "art": {
+      "title": "Arte",
+      "description": "Pinturas, dibujos y obras de arte digitales originales."
     },
     "wildlifePhotography": {
       "title": "Fotografía de Vida Salvaje",

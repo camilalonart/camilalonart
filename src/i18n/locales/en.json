@@ -7,8 +7,7 @@
     "wedding": "Wedding & Couples",
     "family": "Family & Maternity",
     "myArt": "My Art",
-    "digitalArt": "Digital Art",
-    "traditionalArt": "Traditional Art",
+    "art": "Art",
     "wildlifePhotography": "Wildlife Photography",
     "everydayPhotography": "Everyday Photography",
     "blog": "Blog",
@@ -54,13 +53,9 @@
       "title": "Events",
       "description": "Professional event photography capturing the energy and moments of your special occasions."
     },
-    "digitalArt": {
-      "title": "Digital Art",
-      "description": "Digital illustrations and artwork created with modern tools."
-    },
-    "traditionalArt": {
-      "title": "Traditional Art",
-      "description": "Original paintings and drawings using traditional mediums."
+    "art": {
+      "title": "Art",
+      "description": "Original paintings, drawings, and digital artwork."
     },
     "wildlifePhotography": {
       "title": "Wildlife Photography",

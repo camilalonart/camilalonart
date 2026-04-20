@@ -160,7 +160,7 @@ export default function HomePage() {
       headshots: 'home.headshots',
       family: 'home.familyMaternity',
       wildlife: 'home.wildlifePhotography',
-      'traditional-art': 'home.traditionalArt',
+      art: 'home.art',
     };
     return keyMap[id] || '';
   };

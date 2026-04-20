@@ -49,8 +49,8 @@ export const visibleSections: Section[] = [
     category: 'photography',
   },
   {
-    id: 'traditional-art',
-    title: 'Traditional Art',
+    id: 'art',
+    title: 'Art',
     description: 'Oil paintings and artistic collections',
     href: '/art',
     icon: '🎨',
@@ -59,14 +59,6 @@ export const visibleSections: Section[] = [
 ];
 
 export const hiddenSections: Section[] = [
-  {
-    id: 'digital-art',
-    title: 'Digital Art',
-    description: 'Digital illustrations and designs',
-    href: '/my-art/digital-art',
-    icon: '🖼️',
-    category: 'art',
-  },
   {
     id: 'brand-identity',
     title: 'Brand Identity',

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 import PetInquiryForm from '../../../components/PetInquiryForm';
-import LanguageSwitcher from '../../../components/LanguageSwitcher';
+import PhotographyNav from '../../../components/PhotographyNav';
 import ProtectedImage from '../../../components/ProtectedImage';
 import ImageModal from '../../../components/ImageModal';
 import Link from 'next/link';
@@ -16,18 +16,7 @@ const PageContainer = styled.div`
   overflow-x: hidden;
   background-color:rgba(0, 0, 0, 1);
   color: #2C3E50;
-`;
-
-const LanguageSwitcherWrapper = styled.div`
-  position: fixed;
-  top: ${theme.spacing.lg};
-  right: ${theme.spacing.lg};
-  z-index: 100;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    top: ${theme.spacing.md};
-    right: ${theme.spacing.md};
-  }
+  padding-top: 64px;
 `;
 
 const Hero = styled.section`
@@ -833,9 +822,7 @@ export default function PetsPage() {
 
   return (
     <PageContainer>
-      <LanguageSwitcherWrapper>
-        <LanguageSwitcher />
-      </LanguageSwitcherWrapper>
+      <PhotographyNav pageTitle="Pet Photography" />
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
