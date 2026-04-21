@@ -12,7 +12,6 @@ const PageContainer = styled.div`
   overflow-x: hidden;
   background-color: rgb(26, 20, 15);
   color: #2C3E50;
-  padding-top: 64px;
 `;
 
 const Hero = styled.section`
@@ -617,7 +616,7 @@ export default function HeadshotsPage() {
 
   return (
     <PageContainer>
-      <PhotographyNav pageTitle="Professional Headshots" />
+      <PhotographyNav />
       <Hero>
         <HeroImageContainer>
           <SecureImage

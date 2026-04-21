@@ -10,39 +10,35 @@ import { visibleSections } from '../config/sections';
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, ${theme.colors.background.main} 0%, ${theme.colors.background.light} 100%);
+  background: #0D0D0D;
   position: relative;
 `;
 
 const LanguageSwitcherWrapper = styled.div`
   position: fixed;
-  top: ${theme.spacing.lg};
-  right: ${theme.spacing.lg};
+  top: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
   z-index: 100;
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    top: ${theme.spacing.md};
-    right: ${theme.spacing.md};
-  }
 `;
 
 const Hero = styled.section`
-  padding: clamp(${theme.spacing['3xl']}, 8vw, ${theme.spacing['4xl']}) ${theme.spacing['2xl']};
+  padding: clamp(5rem, 10vw, 8rem) 2rem clamp(3rem, 5vw, 4rem);
   text-align: center;
-  background: linear-gradient(180deg, rgba(122, 107, 95, 0.08) 0%, transparent 100%);
-  border-bottom: none;
+  background: transparent;
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     margin-bottom: ${theme.spacing.lg};
-    color: ${theme.colors.primary.main};
-    letter-spacing: 0.05em;
+    color: #F0EDE8;
+    letter-spacing: 0.12em;
     font-weight: 300;
+    font-family: var(--font-cormorant), serif;
+    text-transform: uppercase;
   }
 
   p {
     font-size: clamp(${theme.typography.fontSize.base}, 1.8vw, ${theme.typography.fontSize.lg});
-    color: ${theme.colors.text.secondary};
+    color: rgba(240, 237, 232, 0.6);
     max-width: min(700px, 90%);
     margin: 0 auto;
     line-height: 1.7;
@@ -50,16 +46,16 @@ const Hero = styled.section`
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.lg};
+    padding: clamp(3rem, 5vw, 5rem) 1.5rem clamp(2rem, 4vw, 3rem);
   }
 `;
 
 const Divider = styled.div`
-  width: 60px;
-  height: 3px;
-  background: ${theme.colors.primary.main};
+  width: 48px;
+  height: 1px;
+  background: #C8A87A;
   margin: ${theme.spacing.lg} auto;
-  border-radius: 2px;
+  border-radius: 0;
 `;
 
 const ContentWrapper = styled.div`
@@ -94,55 +90,62 @@ const SectionHeader = styled.div`
 const Grid = styled.div<{ $columns?: number }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${theme.spacing.xl};
+  gap: clamp(0.75rem, 2vw, 1.5rem);
   margin-bottom: clamp(${theme.spacing['3xl']}, 5vw, ${theme.spacing['4xl']});
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: ${theme.spacing.lg};
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
-    gap: ${theme.spacing.md};
   }
 `;
 
 const Card = styled(Link)`
   display: flex;
   flex-direction: column;
-  padding: ${theme.spacing.xl};
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(122, 107, 95, 0.06);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0;
+  box-shadow: none;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
-  border: 1px solid rgba(122, 107, 95, 0.1);
+  border: 1px solid rgba(200, 168, 122, 0.15);
   cursor: pointer;
-  min-height: 180px;
+  min-height: 140px;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(122, 107, 95, 0.12);
-    border-color: ${theme.colors.primary.main};
+    transform: none;
+    background: rgba(200, 168, 122, 0.06);
+    border-color: rgba(200, 168, 122, 0.5);
+    box-shadow: none;
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.lg};
-    min-height: 150px;
+    min-height: 130px;
   }
 `;
 
+const CardIcon = styled.div`
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+`;
+
 const CardTitle = styled.h3`
-  font-size: clamp(${theme.typography.fontSize.lg}, 2.5vw, ${theme.typography.fontSize.xl});
-  color: ${theme.colors.primary.main};
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: #F0EDE8;
   margin: 0;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: var(--font-cormorant), serif;
   text-align: center;
   line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 `;
 
 const CardDescription = styled.p`
@@ -178,7 +181,7 @@ export default function HomePage() {
   return (
     <PageContainer>
       <LanguageSwitcherWrapper>
-        <LanguageSwitcher />
+        <LanguageSwitcher isDark />
       </LanguageSwitcherWrapper>
 
       <Hero>
@@ -198,6 +201,7 @@ export default function HomePage() {
 
             return (
               <Card key={section.id} href={section.href}>
+                <CardIcon>{section.icon}</CardIcon>
                 <CardTitle>{title}</CardTitle>
               </Card>
             );

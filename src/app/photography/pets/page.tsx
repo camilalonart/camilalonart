@@ -16,7 +16,6 @@ const PageContainer = styled.div`
   overflow-x: hidden;
   background-color:rgba(0, 0, 0, 1);
   color: #2C3E50;
-  padding-top: 64px;
 `;
 
 const Hero = styled.section`
@@ -818,7 +817,7 @@ export default function PetsPage() {
 
   return (
     <PageContainer>
-      <PhotographyNav pageTitle="Pet Photography" />
+      <PhotographyNav />
       <Hero>
         <HeroImageContainer>
           <ProtectedImage

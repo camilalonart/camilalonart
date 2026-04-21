@@ -16,7 +16,6 @@ const PageContainer = styled.div`
   margin: 0 auto;
   overflow-x: hidden;
   position: relative;
-  padding-top: 64px;
 
   * {
     box-sizing: border-box;
@@ -1235,7 +1234,7 @@ export default function WeddingCouplesPage() {
 
   return (
     <PageContainer>
-      <PhotographyNav pageTitle="Wedding & Couples" />
+      <PhotographyNav />
       <Hero>
         <HeroImageContainer>
           <ProtectedImage
