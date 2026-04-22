@@ -107,6 +107,12 @@ const ArtistName = styled.h1`
     padding: 0 0.2rem;
     word-spacing: 9999px;
   }
+
+  @media (max-width: 530px) {
+    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    letter-spacing: 0.03em;
+    padding: 0 0.15rem;
+  }
 `;
 
 const HeroRule = styled.div`
