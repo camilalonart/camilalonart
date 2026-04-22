@@ -59,6 +59,10 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
     padding: 0 clamp(0.75rem, 3vw, 2rem);
   }
 
+  @media (max-width: 768px) {
+    overflow: visible;
+  }
+
   @media (max-width: 600px) {
     padding: 0.5rem clamp(0.75rem, 3vw, 1.5rem);
   }
@@ -397,8 +401,11 @@ const PaintingGrid = styled.div`
 // ─── Collection grid (with always-visible titles) ──────────────────────────────
 const CollectionGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 2rem;
+  max-width: 100%;
+
+  @media (max-width: 768px) { grid-template-columns: repeat(3, 1fr); }
 `;
 
 const CollectionCard = styled(Link)`
@@ -886,12 +893,12 @@ const ProjectsButton = styled(Link)`
 
 // ─── Selected Works ───────────────────────────────────────────────────────────
 const SelectedWorksGrid = styled.div`
-  columns: 5 150px;
+  columns: 7 85px;
   column-gap: 2px;
 
-  @media (max-width: 1200px) { columns: 4 140px; }
-  @media (max-width: 768px) { columns: 3 120px; }
-  @media (max-width: 500px) { columns: 2 100px; }
+  @media (max-width: 1200px) { columns: 6 75px; }
+  @media (max-width: 768px) { columns: 5 65px; }
+  @media (max-width: 500px) { columns: 3 60px; }
 `;
 
 const SelectedWorkCard = styled(Link)`
@@ -900,14 +907,15 @@ const SelectedWorkCard = styled(Link)`
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  aspect-ratio: auto;
+  aspect-ratio: 1;
   display: block;
   text-decoration: none;
 
   img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
     user-select: none;
     pointer-events: none;
@@ -990,7 +998,10 @@ export default function ArtPortfolio() {
 
   // Scroll listener for nav
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+      setMobileMenuOpen(false);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
