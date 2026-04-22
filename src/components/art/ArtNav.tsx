@@ -67,10 +67,10 @@ const Dot = styled.div`
 
 const NavLinks = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  gap: 2.5rem;
+  gap: clamp(4rem, 5vw, 5rem);
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     position: absolute;
     top: 64px;
     left: 0;
@@ -80,34 +80,39 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
     background: rgba(8, 8, 8, 0.98);
     border-bottom: 1px solid ${C.border};
     backdrop-filter: blur(12px);
-    max-height: ${p => p.$isOpen ? '300px' : '0'};
+    max-height: ${p => p.$isOpen ? '500px' : '0'};
     overflow: hidden;
     transition: max-height 0.3s ease;
     padding: ${p => p.$isOpen ? '1rem 0' : '0'};
+    z-index: 199;
   }
 `;
 
 const NavLink = styled(Link)`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.6rem;
+  font-size: clamp(0.8rem, 1.5vw, 1.25rem);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${C.muted};
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
-    color: ${C.gold};
+    color: rgba(41, 38, 35, 1);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: block;
     padding: 0.75rem clamp(1.5rem, 4vw, 4rem);
     width: 100%;
+    white-space: normal;
+    flex-shrink: 1;
 
     &:hover {
-      background: rgba(200, 168, 122, 0.05);
+      background: rgba(75, 65, 51, 0.05);
     }
   }
 `;
@@ -128,7 +133,7 @@ const HamburgerBtn = styled.button`
   z-index: 201;
   transition: color 0.2s ease;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -176,13 +181,17 @@ export default function ArtNav() {
 
   const handleLogoClick = (e: React.MouseEvent) => {
     setMobileMenuOpen(false);
-    router.push('/art/');
+    if (window.location.pathname !== '/art/') {
+      router.push('/art/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
     <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
       <NavLogo title="Back to art home" onClick={handleLogoClick}>
-        Camila <span>Londoño</span> <Dot />
+        Camila Londoño
       </NavLogo>
       <NavLinks $isOpen={mobileMenuOpen}>
         <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collections')}</NavLink>

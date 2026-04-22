@@ -322,7 +322,7 @@ const CollectionCard = styled(Link)`
   text-decoration: none;
   color: inherit;
   aspect-ratio: 4/5;
-  background: 0 8px 32px rgba(157, 125, 81, 0.15);
+  background: 0 8px 32px rgba(255, 255, 255, 0.47);
   border: 1px solid ${C.border};
   transition: all 0.3s ease;
 
