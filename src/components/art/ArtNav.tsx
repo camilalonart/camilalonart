@@ -124,21 +124,29 @@ const HamburgerBtn = styled.button`
   border: none;
   color: ${C.text};
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.75rem;
   z-index: 201;
+  transition: color 0.2s ease;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover {
+    color: ${C.gold};
   }
 
   span {
-    width: 20px;
-    height: 2px;
-    background: ${C.text};
+    width: 24px;
+    height: 2.5px;
+    background: currentColor;
     transition: all 0.3s ease;
     display: block;
+    border-radius: 1px;
   }
 
   &[aria-expanded="true"] span:nth-child(1) {

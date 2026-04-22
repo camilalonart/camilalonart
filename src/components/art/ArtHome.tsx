@@ -322,13 +322,13 @@ const CollectionCard = styled(Link)`
   text-decoration: none;
   color: inherit;
   aspect-ratio: 4/5;
-  background: 0 8px 32px rgba(200, 168, 122, 0.15);
+  background: 0 8px 32px rgba(157, 125, 81, 0.15);
   border: 1px solid ${C.border};
   transition: all 0.3s ease;
 
   &:hover {
     border-color: ${C.gold};
-    box-shadow: 0 8px 32px rgba(149, 118, 74, 0.38);
+    box-shadow: 0 8px 32px rgba(94, 72, 41, 0.38);
   }
 `;
 
