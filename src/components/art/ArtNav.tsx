@@ -90,7 +90,7 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
 
 const NavLink = styled(Link)`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: clamp(0.8rem, 1.5vw, 1.25rem);
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${C.muted};

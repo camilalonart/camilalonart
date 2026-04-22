@@ -81,8 +81,6 @@ const data: ArtPortfolioData = {
             "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp",
             "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp",
           ],
-          thoughts:
-            "The details speak louder than the whole. Each fragment holds memory — the work documents not just the painting but the space it occupies.",
         },
         {
           id: "carrying-home-02",
@@ -91,6 +89,7 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/InTransit.webp"],
+          thoughts: "Un homenaje a quienes viven lejos de donde nacieron… a quienes un día se fueron y tuvieron que aprender a ser de nuevo."
         },
         {
           id: "carrying-home-03",
@@ -99,14 +98,16 @@ const data: ArtPortfolioData = {
           size: "24 x 18 in",
           year: 2026,
           images: ["/images/art/traditionalArt/Carrying Home/Moving.webp"],
+          thoughts: "Siempre en transición, siempre en cambio, siempre moviendonos."
         },
         {
           id: "carrying-home-04",
-          title: "We",
+          title: "Together",
           materials: "Oil painting, oil pastels and acrylic on canvas",
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/We.webp"],
+          thoughts: "No nacimos con alas propias… el vuelo nos lo tejieron en la piel quienes vinieron antes. Traigo el pulso de mi tierra, del trabajo, de familias que enfrentaron tiempos duros y aun así siempre siguieron, caminaron con honestidad, con la dignidad de quien avanza sin hacer daño. Mientras pintaba pensaba en ellos… pensaba también en todos los que (por elección o por urgencia) han vuelto a empezar. En quienes se han reconstruido desde cero: a veces en nuevas tierras, o a veces convirtiéndose en una persona distinta incluso sin moverse del lugar de siempre. Al mismo tiempo pensaba en algo más grande… en la idea de que cada uno de nosotros es un universo complejo y distinto… y aun así, en el fondo, todos somos iguales.. Somos humanos, somos animales, somos finitos. Vamos por la vida creando historias, cargando dolores y alegrías… mundos enteros que casi nunca se ven. Hay tanto por contar, tanto por recordar, tanto que con el tiempo se pierde sin que nadie lo note… Pensaba que todos esos rostros desconocidos que caminan a mi lado en la calle son universos enteros, tan complejos como el mío… es increíble como no alcanzamos a dimensionar toda la realidad que cada uno de nosotros guarda… Millones de desconocidos llenos de sueños que intentan abrirse camino, duelos silenciosos que nadie más conoce, pequeñas victorias que sostienen lo imposible. Tantas historias, tantas voces que merecen ser vistas, escuchadas, recordadas. y al final, por más distintos que parezcamos, todos somos lo mismo… animales finitos, humanos, buscando un poco de sentido mientras seguimos avanzando. Y es en esa multitud silenciosa, en esos pasos que avanzan sin mirarse, donde se intuye algo que todos compartimos: la certeza de que no caminamos solos, que somos parte de algo más grande, de algo que sigue vivo cada vez que alguien decide intentarlo una vez más y seguir"
         },
         {
           id: "carrying-home-05",
@@ -115,6 +116,7 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp"],
+          thoughts: "Aprender a habitarse mientras todo alrededor cambia… Caminar hacia adelante acompañada por las mujeres que fui…  Dejando fragmentos en cada frontera invisible."
         },
       ],
     },
@@ -123,7 +125,7 @@ const data: ArtPortfolioData = {
       name: "Dear Inner Child",
       period: "2023",
       description:
-        "A series of conversations with earlier versions of ourselves. Each painting is a letter, a question, a remembrance of the person we were before the world taught us how to be.",
+        "A remembrance of the person we were before the world taught us how to be.",
       paintings: [
         {
           id: "dear-inner-child-01",
