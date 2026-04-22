@@ -87,7 +87,7 @@ const NavLogo = styled.a`
   span { color: ${C.text}; }
 `;
 
-const NavLinks = styled.div`
+const NavLinks = styled.div<{ $isOpen: boolean }>`
   display: flex;
   gap: 2.5rem;
   align-items: center;
@@ -95,6 +95,21 @@ const NavLinks = styled.div`
   justify-content: flex-end;
 
   @media (max-width: 900px) { gap: 1.5rem; }
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(8, 8, 8, 0.98);
+    border-bottom: 1px solid ${C.border};
+    backdrop-filter: blur(12px);
+    max-height: ${p => p.$isOpen ? '500px' : '0'};
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: ${p => p.$isOpen ? '1rem 0' : '0'};
+  }
   @media (max-width: 600px) { gap: 1rem; font-size: 0.55rem; }
 `;
 
@@ -126,12 +141,66 @@ const NavLinkComponent = styled(Link)`
   cursor: pointer;
   transition: color 0.2s;
 
-  &:focus-visible { 
+  &:focus-visible {
     outline: 2px solid ${C.gold};
     outline-offset: 2px;
   }
 
   &:hover { color: ${C.gold}; }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 0.75rem clamp(1.5rem, 4vw, 4rem);
+    width: 100%;
+
+    &:hover {
+      background: rgba(200, 168, 122, 0.05);
+    }
+  }
+`;
+
+const HamburgerBtn = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: ${C.text};
+  cursor: pointer;
+  padding: 0.75rem;
+  z-index: 201;
+  transition: color 0.2s ease;
+
+  @media (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover {
+    color: ${C.gold};
+  }
+
+  span {
+    width: 24px;
+    height: 2.5px;
+    background: currentColor;
+    transition: all 0.3s ease;
+    display: block;
+    border-radius: 1px;
+  }
+
+  &[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translateY(10px);
+  }
+
+  &[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-10px);
+  }
 `;
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
@@ -917,6 +986,7 @@ export default function ArtPortfolio() {
   const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [modal, setModal] = useState<ModalState | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Scroll listener for nav
   useEffect(() => {
@@ -987,7 +1057,7 @@ export default function ArtPortfolio() {
     <Site>
       {/* ── Nav ── */}
       <Nav $scrolled={scrolled} role="navigation" aria-label="Site navigation">
-        <NavLogo 
+        <NavLogo
         // on click it will take you to /art
           onClick={() => window.location.href = '/art'}
           role="button"
@@ -996,14 +1066,17 @@ export default function ArtPortfolio() {
         >
           CamilaLonart
         </NavLogo>
-        <NavLinks>
-          <NavLinkComponent href="/art">Home</NavLinkComponent>
-          <NavLinkComponent href="/art/collections">Collections</NavLinkComponent>
-          <NavLinkComponent href="/art/all-paintings">All Paintings</NavLinkComponent>
-          <NavLinkComponent href="/art/early-first-paintings">Archival Works</NavLinkComponent>
-          <NavLinkComponent href="/art/collaborations">Collaborations</NavLinkComponent>
-          <NavLink 
-            onClick={() => scrollTo('about')}
+        <NavLinks $isOpen={mobileMenuOpen}>
+          <NavLinkComponent href="/art" onClick={() => setMobileMenuOpen(false)}>Home</NavLinkComponent>
+          <NavLinkComponent href="/art/collections" onClick={() => setMobileMenuOpen(false)}>Collections</NavLinkComponent>
+          <NavLinkComponent href="/art/all-paintings" onClick={() => setMobileMenuOpen(false)}>All Paintings</NavLinkComponent>
+          <NavLinkComponent href="/art/early-first-paintings" onClick={() => setMobileMenuOpen(false)}>Archival Works</NavLinkComponent>
+          <NavLinkComponent href="/art/collaborations" onClick={() => setMobileMenuOpen(false)}>Collaborations</NavLinkComponent>
+          <NavLink
+            onClick={() => {
+              scrollTo('about');
+              setMobileMenuOpen(false);
+            }}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -1015,8 +1088,11 @@ export default function ArtPortfolio() {
           >
             About
           </NavLink>
-          <NavLink 
-            onClick={() => scrollTo('contact-section')}
+          <NavLink
+            onClick={() => {
+              scrollTo('contact-section');
+              setMobileMenuOpen(false);
+            }}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -1029,6 +1105,15 @@ export default function ArtPortfolio() {
             Contact
           </NavLink>
         </NavLinks>
+        <HamburgerBtn
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span />
+          <span />
+          <span />
+        </HamburgerBtn>
       </Nav>
 
       {/* ── Hero ── */}
