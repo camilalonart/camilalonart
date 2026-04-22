@@ -196,28 +196,28 @@ const SectionDesc = styled.p`
 // ─── Featured Works ────────────────────────────────────────────────
 const FeaturedGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.8rem;
   margin-bottom: 3.5rem;
 
   @media (max-width: 1280px) {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.12rem;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.7rem;
   }
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.10rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.6rem;
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
   }
 
   @media (max-width: 640px) {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.6rem;
+    gap: 0.4rem;
   }
 `;
 
@@ -322,13 +322,13 @@ const CollectionCard = styled(Link)`
   text-decoration: none;
   color: inherit;
   aspect-ratio: 4/5;
-  background: ${C.surface};
+  background: 0 8px 32px rgba(200, 168, 122, 0.15);
   border: 1px solid ${C.border};
   transition: all 0.3s ease;
 
   &:hover {
     border-color: ${C.gold};
-    box-shadow: 0 8px 32px rgba(200, 168, 122, 0.15);
+    box-shadow: 0 8px 32px rgba(149, 118, 74, 0.38);
   }
 `;
 
