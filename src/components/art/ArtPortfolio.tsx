@@ -174,13 +174,43 @@ const HeroContent = styled.div`
 `;
 
 const ArtistName = styled.h1`
-  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-size: clamp(2rem, 8vw, 9rem);
   font-weight: 300;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${C.text};
-  line-height: 0.9;
+  line-height: 0.95;
   margin: 0 0 1.2rem;
+  word-break: break-word;
+  padding: 0 0.5rem;
+  max-width: 95vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 1024px) {
+    font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+    padding: 0 0.3rem;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    letter-spacing: 0.05em;
+    padding: 0 0.2rem;
+  }
+
+  @media (max-width: 640px) {
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    letter-spacing: 0.04em;
+    padding: 0 0.2rem;
+    word-spacing: 9999px;
+  }
+
+  @media (max-width: 530px) {
+    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    letter-spacing: 0.03em;
+    padding: 0 0.15rem;
+  }
 `;
 
 const HeroRule = styled.div`
