@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import data, { type Collaboration } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '@/i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -180,18 +181,20 @@ const EmptyState = styled.div`
 `;
 
 export default function CollaborationsPage() {
+  const { t } = useTranslation();
+
   if (data.collaborations.length === 0) {
     return (
       <Site>
         <ArtNav />
         <Content>
           <PageHeader>
-            <h1>Collaborations</h1>
-            <p>Creative projects</p>
+            <h1>{t('nav.collaborations')}</h1>
+            <p>{t('art.creativeProjects')}</p>
           </PageHeader>
           <EmptyState>
-            <h2>Coming soon</h2>
-            <p>Collaborative works are being added.</p>
+            <h2>{t('art.comingSoon')}</h2>
+            <p>{t('art.collaborativeWorksAdded')}</p>
           </EmptyState>
         </Content>
       </Site>
@@ -203,8 +206,8 @@ export default function CollaborationsPage() {
       <ArtNav />
       <Content>
         <PageHeader>
-          <h1>Collaborations</h1>
-          <p>Creative projects</p>
+          <h1>{t('nav.collaborations')}</h1>
+          <p>{t('art.creativeProjects')}</p>
         </PageHeader>
 
         <CollaborationsGrid>
@@ -223,7 +226,7 @@ export default function CollaborationsPage() {
                     {collab.year && <CardMeta>{collab.year}</CardMeta>}
                     {collab.externalUrl && (
                       <ExternalLink href={collab.externalUrl} target="_blank" rel="noopener noreferrer">
-                        View →
+                        {t('art.viewLink')}
                       </ExternalLink>
                     )}
                   </CardOverlay>
@@ -237,7 +240,7 @@ export default function CollaborationsPage() {
                     {collab.year && <CardMeta>{collab.year}</CardMeta>}
                     {collab.externalUrl && (
                       <ExternalLink href={collab.externalUrl} target="_blank" rel="noopener noreferrer">
-                        View →
+                        {t('art.viewLink')}
                       </ExternalLink>
                     )}
                   </CardOverlay>

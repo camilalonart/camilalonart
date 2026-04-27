@@ -6,6 +6,7 @@ export interface Painting {
   year: number;
   images: string[];
   thoughts?: string;
+  thoughtsEs?: string;
   additionalImages?: string[];
 }
 
@@ -14,6 +15,7 @@ export interface Collection {
   name: string;
   period: string;
   description: string;
+  descriptionEs?: string;
   paintings: Painting[];
 }
 
@@ -62,8 +64,8 @@ const data: ArtPortfolioData = {
       id: "carrying-home",
       name: "Carrying Home",
       period: "2024",
-      description:
-        "A meditation on displacement and belonging. These works explore the space between leaving and arriving, between home and journey.",
+      description: "A meditation on displacement and belonging. These works explore the space between leaving and arriving, between home and journey.",
+      descriptionEs: "Una meditación sobre el desplazamiento y el sentido de pertenencia. Estas obras exploran el espacio entre partir y llegar, entre el hogar y el camino.",
       paintings: [
         {
           id: "carrying-home-01",
@@ -124,8 +126,8 @@ const data: ArtPortfolioData = {
       id: "dear-inner-child",
       name: "Dear Inner Child",
       period: "2023",
-      description:
-        "A remembrance of the person we were before the world taught us how to be.",
+      description: "A remembrance of the person we were before the world taught us how to be.",
+      descriptionEs: "Un recuerdo de la persona que éramos antes de que el mundo nos enseñara cómo ser.",
       paintings: [
         {
           id: "dear-inner-child-01",
@@ -173,8 +175,8 @@ const data: ArtPortfolioData = {
       id: "magic",
       name: "Magic",
       period: "2023–2024",
-      description:
-        "Finding wonder in ordinary spaces.",
+      description: "Finding wonder in ordinary spaces.",
+      descriptionEs: "Encontrando maravilla en los espacios cotidianos.",
       paintings: [
         {
           id: "magic-01",
@@ -183,8 +185,8 @@ const data: ArtPortfolioData = {
           size: "8.27 x 11.69 in",
           year: 2023,
           images: ["/images/art/traditionalArt/Magic/Luthier.webp"],
-          thoughts:
-            "The craft of making something whole from broken pieces. A portrait of creation itself.",
+          thoughts: "The craft of making something whole from broken pieces. A portrait of creation itself.",
+          thoughtsEs: "El arte de hacer algo completo a partir de piezas rotas. Un retrato de la creación misma.",
         },
         {
           id: "magic-02",
@@ -232,8 +234,8 @@ const data: ArtPortfolioData = {
       id: "the-essential-is-invisible",
       name: "The Essential is Invisible (Red)",
       period: "2022–2023",
-      description:
-        "A suite of works exploring emotional intensity, complexity, and the hidden depths beneath surface appearances. The red doodles are the stories we carry within, the feelings that shape us but often go unseen.",
+      description: "A suite of works exploring emotional intensity, complexity, and the hidden depths beneath surface appearances. The red doodles are the stories we carry within, the feelings that shape us but often go unseen.",
+      descriptionEs: "Una serie de obras que exploran la intensidad emocional, la complejidad y las profundidades ocultas bajo las apariencias. Los garabatos rojos son las historias que llevamos dentro, los sentimientos que nos forman pero que a menudo no se ven.",
       paintings: [
         {
           id: "essential-01",
@@ -321,8 +323,8 @@ const data: ArtPortfolioData = {
       id: "siempre-vuelvo",
       name: "Siempre vuelvo a esta versión de mi",
       period: "2023",
-      description:
-        "Paintings made when I was 17, feeling on top of the world, feeling everything was fine, and finding excitment in everything. Naive and romantic Camila, I always come back to you, to the way you see the world, to the way you feel. These paintings are a love letter to that version of myself, and a reminder that we carry all our versions within us.",
+      description: "Paintings made when I was 17, feeling on top of the world, feeling everything was fine, and finding excitment in everything. Naive and romantic Camila, I always come back to you, to the way you see the world, to the way you feel. These paintings are a love letter to that version of myself, and a reminder that we carry all our versions within us.",
+      descriptionEs: "Pinturas hechas cuando tenía 17 años, sintiéndome en la cima del mundo, sintiéndome que todo estaba bien y encontrando emoción en todo. Camila ingenua y romántica, siempre vuelvo a ti, a la forma en que ves el mundo, a la forma en que sientes. Estas pinturas son una carta de amor a esa versión de mí misma, y un recordatorio de que llevamos todas nuestras versiones dentro de nosotros.",
       paintings: [
         {
           id: "siempre-01",
@@ -363,8 +365,8 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2016,
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TakeMeBackTo2016.webp"],
-          thoughts:
-            "A nostalgic invocation. What would we tell that version of ourselves? What do we wish we had known?",
+          thoughts: "A nostalgic invocation. What would we tell that version of ourselves? What do we wish we had known?",
+          thoughtsEs: "Una invocación nostálgica. ¿Qué le diríamos a esa versión de nosotros mismos? ¿Qué desearíamos haber sabido?",
         },
         {
           id: "siempre-06",
@@ -380,8 +382,8 @@ const data: ArtPortfolioData = {
       id: "in-your-eyes",
       name: "In Your Eyes",
       period: "2023",
-      description:
-        "They say the eyes are the window to the soul. These paintings explore the stories we carry in our gaze, the way we see ourselves and others, and the emotions that flicker behind our eyes.",
+      description: "They say the eyes are the window to the soul. These paintings explore the stories we carry in our gaze, the way we see ourselves and others, and the emotions that flicker behind our eyes.",
+      descriptionEs: "Dicen que los ojos son la ventana del alma. Estas pinturas exploran las historias que llevamos en la mirada, la forma en que nos vemos a nosotros mismos y a los demás, y las emociones que parpadean detrás de los ojos.",
       paintings: [
         {
           id: "in-your-eyes-01",
@@ -409,8 +411,8 @@ const data: ArtPortfolioData = {
             "/images/art/traditionalArt/In Your Eyes/Navigate.webp",
             "/images/art/traditionalArt/In Your Eyes/NavigateCloseup.webp",
           ],
-          thoughts:
-            "A large-scale figure study with intimate detail. The closeup reveals what the distance conceals.",
+          thoughts: "A large-scale figure study with intimate detail. The closeup reveals what the distance conceals.",
+          thoughtsEs: "Un estudio de figura a gran escala con detalles íntimos. El primer plano revela lo que la distancia oculta.",
         },
         {
           id: "in-your-eyes-04",
@@ -427,6 +429,7 @@ const data: ArtPortfolioData = {
       name: "Yellow",
       period: "2015",
       description: "I love yellow. These works are studies I did as a teen, and I always come back to the way I experienced art back then. Drawing thousands of art pieces, obsessed with the process of making.",
+      descriptionEs: "Amo el amarillo. Estas obras son estudios que hice de adolescente, y siempre regreso a la forma en que experimentaba el arte entonces. Dibujando miles de piezas, obsesionada con el proceso de crear.",
       paintings: [
         {
           id: "yellow-01",
@@ -474,8 +477,8 @@ const data: ArtPortfolioData = {
       id: "perspective",
       name: "Perspective",
       period: "2022–2023",
-      description:
-        "Geometry and not taking it too seriously. An exploration of perspective as a way to play with space, form, and the way we see the world.",
+      description: "Geometry and not taking it too seriously. An exploration of perspective as a way to play with space, form, and the way we see the world.",
+      descriptionEs: "Geometría sin tomársela demasiado en serio. Una exploración de la perspectiva como forma de jugar con el espacio, la forma y la manera en que vemos el mundo.",
       paintings: [
         {
           id: "perspective-01",
@@ -515,8 +518,8 @@ const data: ArtPortfolioData = {
       id: "pandemic-lockdown",
       name: "Pandemic Lockdown",
       period: "2020",
-      description:
-        "Works created during isolation. A documentation of interior life, and the way confinement can sharpen perception.",
+      description: "Works created during isolation. A documentation of interior life, and the way confinement can sharpen perception.",
+      descriptionEs: "Obras creadas durante el aislamiento. Una documentación de la vida interior y de cómo el confinamiento puede agudizar la percepción.",
       paintings: [
         {
           id: "pandemic-01",
@@ -556,8 +559,8 @@ const data: ArtPortfolioData = {
       id: "mis-raices",
       name: "Mis Raíces",
       period: "2021–2022",
-      description:
-        "A return to origins. Works celebrating family, landscape, coffee, and the birds that inhabit the mountains of Colombia.",
+      description: "A return to origins. Works celebrating family, landscape, coffee, and the birds that inhabit the mountains of Colombia.",
+      descriptionEs: "Un regreso a los orígenes. Obras que celebran la familia, el paisaje, el café y los pájaros que habitan las montañas de Colombia.",
       paintings: [
         {
           id: "mis-raices-01",
@@ -574,8 +577,8 @@ const data: ArtPortfolioData = {
           size: "",
           year: 2022,
           images: ["/images/art/traditionalArt/Mis Raices/Paola.webp"],
-          thoughts:
-            "A portrait of family, of the women who shaped me, of the landscape they carry within.",
+          thoughts: "A portrait of family, of the women who shaped me, of the landscape they carry within.",
+          thoughtsEs: "Un retrato de familia, de las mujeres que me formaron, del paisaje que llevan dentro.",
         },
       ],
     },
@@ -583,8 +586,8 @@ const data: ArtPortfolioData = {
       id: "blanco-y-negro",
       name: "Blanco y Negro",
       period: "2021",
-      description:
-        "Studies in contrast and simplicity. Black and white as a way to strip down to essence, to find form in its purest state.",
+      description: "Studies in contrast and simplicity. Black and white as a way to strip down to essence, to find form in its purest state.",
+      descriptionEs: "Estudios en contraste y simplicidad. El blanco y negro como forma de reducir a lo esencial, de encontrar la forma en su estado más puro.",
       paintings: [
         {
           id: "blanco-negro-01",
@@ -616,8 +619,8 @@ const data: ArtPortfolioData = {
       id: "red-doodles",
       name: "Red Doodles",
       period: "2021",
-      description:
-        "Spontaneous marks and studies. Sketchbook pages that celebrate the joy of line and color without the weight of intention.",
+      description: "Spontaneous marks and studies. Sketchbook pages that celebrate the joy of line and color without the weight of intention.",
+      descriptionEs: "Trazos espontáneos y estudios. Páginas de cuaderno que celebran la alegría del trazo y el color sin el peso de la intención.",
       paintings: [
         {
           id: "red-doodles-01",
@@ -698,6 +701,43 @@ const data: ArtPortfolioData = {
     { image: "/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp", id: "sh-9", collectionId: "magic", paintingId: "magic-06" },
   ]
 };
+
+// ─── Material translations ────────────────────────────────────────────────────
+const MATERIALS_ES: Record<string, string> = {
+  "Mixed media on paper": "Técnica mixta sobre papel",
+  "Oil painting, oil pastels and acrylic on canvas": "Óleo, pasteles al óleo y acrílico sobre lienzo",
+  "Watercolor on paper": "Acuarela sobre papel",
+  "Oil on canvas": "Óleo sobre lienzo",
+  "Digital art": "Arte digital",
+  "Mixed media": "Técnica mixta",
+  "Watercolor": "Acuarela",
+  "Pen, ink and watercolor on paper": "Pluma, tinta y acuarela sobre papel",
+  "Pen on paper": "Pluma sobre papel",
+  "Watercolor, pencil and collage": "Acuarela, lápiz y collage",
+  "Pastels on yellow paper": "Pasteles sobre papel amarillo",
+  "Pastels and watercolor on yellow paper": "Pasteles y acuarela sobre papel amarillo",
+  "Color pencil on paper": "Lápiz de color sobre papel",
+  "Watercolor and oil pastel on paper": "Acuarela y pastel al óleo sobre papel",
+  "Charcoal on paper": "Carboncillo sobre papel",
+  "Graphite and ink": "Grafito y tinta",
+  "Digital": "Digital",
+  "Variable": "Variable",
+};
+
+export function localizedMaterials(materials: string, locale: string): string {
+  if (locale !== 'es') return materials;
+  return MATERIALS_ES[materials] ?? materials;
+}
+
+export function localizedThoughts(painting: Painting, locale: string): string | undefined {
+  if (locale === 'es') return painting.thoughtsEs ?? painting.thoughts;
+  return painting.thoughts;
+}
+
+export function localizedDescription(collection: Collection, locale: string): string {
+  if (locale === 'es') return collection.descriptionEs ?? collection.description;
+  return collection.description;
+}
 
 // Collections order — modify this array to change display order
 export const COLLECTIONS_ORDER = [

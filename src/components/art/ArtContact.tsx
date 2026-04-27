@@ -325,11 +325,11 @@ export default function ArtContact() {
                 value={formData.inquiryType}
                 onChange={handleChange}
               >
-                <option value="general">General Inquiry</option>
-                <option value="purchase">Purchase Inquiry</option>
-                <option value="commission">Commission Request</option>
-                <option value="exhibition">Exhibition Opportunity</option>
-                <option value="collaboration">Collaboration</option>
+                <option value="general">{t('art.contact.generalInquiry')}</option>
+                <option value="purchase">{t('art.contact.purchaseInquiry')}</option>
+                <option value="commission">{t('art.contact.commissionRequest')}</option>
+                <option value="exhibition">{t('art.contact.exhibitionOpportunity')}</option>
+                <option value="collaboration">{t('art.contact.collaborationInquiry')}</option>
               </Select>
             </FormGroup>
 

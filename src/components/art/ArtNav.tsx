@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -11,6 +12,7 @@ const C = {
   gold: '#C8A87A',
   muted: '#6E6B65',
   border: '#1E1E1E',
+  dim: '#3A3835',
 };
 
 const Nav = styled.nav<{ $scrolled: boolean }>`
@@ -102,6 +104,48 @@ const NavLinkA = styled(Link)`
   }
 `;
 
+const NavRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+`;
+
+const LangToggle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid ${C.border};
+  padding: 0.3rem 0.5rem;
+  transition: border-color 0.2s;
+
+  &:hover { border-color: ${C.dim}; }
+`;
+
+const LangOpt = styled.button<{ $active: boolean }>`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: ${p => p.$active ? C.gold : C.muted};
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+
+  &:hover { color: ${C.gold}; }
+`;
+
+const LangSep = styled.span`
+  color: ${C.dim};
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.5rem;
+  line-height: 1;
+  user-select: none;
+`;
+
 const HamburgerBtn = styled.button`
   display: none;
   background: none;
@@ -146,6 +190,7 @@ const HamburgerBtn = styled.button`
 
 export default function ArtNav() {
   const router = useRouter();
+  const { locale, setLocale, t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -163,7 +208,7 @@ export default function ArtNav() {
   return (
     <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
       <NavLogo
-        title="Back to art home"
+        title={t('art.traditional.backToHome')}
         onClick={() => {
           close();
           if (window.location.pathname !== '/art/') {
@@ -178,24 +223,44 @@ export default function ArtNav() {
       </NavLogo>
 
       <NavLinks $isOpen={mobileMenuOpen}>
-        <NavLinkA href="/art/" onClick={close}>Home</NavLinkA>
-        <NavLinkA href="/art/collections/" onClick={close}>Collections</NavLinkA>
-        <NavLinkA href="/art/all-paintings/" onClick={close}>All Paintings</NavLinkA>
-        <NavLinkA href="/art/early-first-paintings/" onClick={close}>Archival Works</NavLinkA>
-        <NavLinkA href="/art/collaborations/" onClick={close}>Collaborations</NavLinkA>
-        <NavLinkA href="/art/about/" onClick={close}>About</NavLinkA>
-        <NavLinkA href="/art/contact/" onClick={close}>Contact</NavLinkA>
+        <NavLinkA href="/art/" onClick={close}>{t('nav.home')}</NavLinkA>
+        <NavLinkA href="/art/collections/" onClick={close}>{t('nav.collections')}</NavLinkA>
+        <NavLinkA href="/art/all-paintings/" onClick={close}>{t('nav.allPaintings')}</NavLinkA>
+        <NavLinkA href="/art/early-first-paintings/" onClick={close}>{t('nav.archivalWorks')}</NavLinkA>
+        <NavLinkA href="/art/collaborations/" onClick={close}>{t('nav.collaborations')}</NavLinkA>
+        <NavLinkA href="/art/about/" onClick={close}>{t('nav.about')}</NavLinkA>
+        <NavLinkA href="/art/contact/" onClick={close}>{t('nav.contact')}</NavLinkA>
       </NavLinks>
 
-      <HamburgerBtn
-        aria-expanded={mobileMenuOpen}
-        onClick={() => setMobileMenuOpen(v => !v)}
-        aria-label="Toggle navigation menu"
-      >
-        <span />
-        <span />
-        <span />
-      </HamburgerBtn>
+      <NavRight>
+        <LangToggle aria-label={t('common.changeLanguage')}>
+          <LangOpt
+            $active={locale === 'en'}
+            onClick={() => setLocale('en')}
+            aria-label="English"
+          >
+            EN
+          </LangOpt>
+          <LangSep>·</LangSep>
+          <LangOpt
+            $active={locale === 'es'}
+            onClick={() => setLocale('es')}
+            aria-label="Español"
+          >
+            ES
+          </LangOpt>
+        </LangToggle>
+
+        <HamburgerBtn
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(v => !v)}
+          aria-label="Toggle navigation menu"
+        >
+          <span />
+          <span />
+          <span />
+        </HamburgerBtn>
+      </NavRight>
     </Nav>
   );
 }

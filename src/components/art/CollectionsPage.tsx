@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import data, { COLLECTIONS_ORDER, type Collection } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '@/i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -115,6 +116,7 @@ const CardMeta = styled.p`
 `;
 
 export default function CollectionsPage() {
+  const { t } = useTranslation();
   const sortedCollections = data.collections.sort((a, b) => {
     const indexA = COLLECTIONS_ORDER.indexOf(a.id);
     const indexB = COLLECTIONS_ORDER.indexOf(b.id);
@@ -126,8 +128,8 @@ export default function CollectionsPage() {
       <ArtNav />
       <Content>
         <PageHeader>
-          <h1>Collections</h1>
-          <p>Explore all collections</p>
+          <h1>{t('art.collectionsTitle')}</h1>
+          <p>{t('art.exploreAllCollections')}</p>
         </PageHeader>
 
         <CollectionsGrid>

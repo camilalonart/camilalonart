@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import data, { COLLECTIONS_ORDER } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -324,6 +325,7 @@ export default function AllPaintingsPage() {
   }
   const years = allYears.current;
 
+  const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const [medium, setMedium] = useState('all');
   const [year, setYear] = useState('all');
@@ -368,16 +370,14 @@ export default function AllPaintingsPage() {
     <PageWrapper>
       <ArtNav />
       <PageHeader>
-        <PageTitle>All Paintings</PageTitle>
-        <PageSubtitle>
-          A complete collection spanning different periods and series, from archival works to contemporary pieces.
-        </PageSubtitle>
+        <PageTitle>{t('nav.allPaintings')}</PageTitle>
+        <PageSubtitle>{t('art.allPaintingsSubtitle')}</PageSubtitle>
       </PageHeader>
 
       <Toolbar>
         <SearchInput
           type="search"
-          placeholder="Search…"
+          placeholder={t('art.searchPlaceholder')}
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -385,7 +385,7 @@ export default function AllPaintingsPage() {
         <Divider />
 
         <NativeSelect value={medium} onChange={e => setMedium(e.target.value)}>
-          <option value="all">All media</option>
+          <option value="all">{t('art.allMedia')}</option>
           <option value="oil">Oil</option>
           <option value="watercolor">Watercolor</option>
           <option value="digital">Digital</option>
@@ -395,7 +395,7 @@ export default function AllPaintingsPage() {
         </NativeSelect>
 
         <NativeSelect value={year} onChange={e => setYear(e.target.value)}>
-          <option value="all">All years</option>
+          <option value="all">{t('art.allYears')}</option>
           {years.map(y => (
             <option key={y} value={String(y)}>{y}</option>
           ))}
@@ -404,24 +404,24 @@ export default function AllPaintingsPage() {
         <Divider />
 
         <NativeSelect value={sort} onChange={e => setSort(e.target.value)}>
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
-          <option value="collection">By collection</option>
+          <option value="newest">{t('art.newestFirst')}</option>
+          <option value="oldest">{t('art.oldestFirst')}</option>
+          <option value="collection">{t('art.byCollection')}</option>
         </NativeSelect>
 
-        <Count>{filtered.length} {filtered.length === 1 ? 'work' : 'works'}</Count>
+        <Count>{filtered.length} {filtered.length === 1 ? t('art.work') : t('art.works')}</Count>
       </Toolbar>
 
       <GalleryContainer>
         {filtered.length === 0 && (
-          <EmptyState>No paintings match the selected filters.</EmptyState>
+          <EmptyState>{t('art.noResults')}</EmptyState>
         )}
 
         {sort === 'collection' && groups ? (
           groups.map(group => (
             <CollectionGroup key={group.id}>
               <CollectionGroupTitle>
-                {group.name}
+                {group.id === 'early-first-paintings' ? t('art.archivalWorks') : group.name}
                 <span style={{ color: C.dim }}>{group.items.length}</span>
               </CollectionGroupTitle>
               <MasonryGrid>
@@ -438,7 +438,7 @@ export default function AllPaintingsPage() {
 
       <PageFooter>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. All rights reserved.
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
         </FooterText>
       </PageFooter>
     </PageWrapper>

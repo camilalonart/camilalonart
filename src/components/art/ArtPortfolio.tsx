@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
-import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
+import data, { type Collection, type Painting, COLLECTIONS_ORDER, localizedMaterials, localizedThoughts, localizedDescription } from '../../data/artPortfolio';
 import ContactForm from '../ContactForm';
 import { useTranslation } from '../../i18n/TranslationContext';
 import ArtNav from './ArtNav';
@@ -831,7 +831,7 @@ interface ModalState {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function ArtPortfolio() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [modal, setModal] = useState<ModalState | null>(null);
 
   // Keyboard navigation
@@ -908,12 +908,12 @@ export default function ArtPortfolio() {
         <HeroContent>
           <ArtistName>CamilaLonart</ArtistName>
           <HeroRule />
-          <HeroTagline>Fine Artist</HeroTagline>
+          <HeroTagline>{t('art.fineArtist')}</HeroTagline>
           <br/>
         </HeroContent>
         <ScrollCue aria-hidden="true">
           <ScrollLine />
-          <span>Scroll</span>
+          <span>{t('art.scroll')}</span>
         </ScrollCue>
       </Hero>
 
@@ -939,19 +939,19 @@ export default function ArtPortfolio() {
 
       {/* ── Other projects ── */}
       <Section id="other-work">
-        <SectionEyebrow>Explore</SectionEyebrow>
+        <SectionEyebrow>{t('art.explore')}</SectionEyebrow>
         <ProjectsButtonGroup>
           <ProjectsButton href="/art/collections">
-            <p>Current</p>
-            <h3>Collections</h3>
+            <p>{t('art.current')}</p>
+            <h3>{t('nav.collections')}</h3>
           </ProjectsButton>
           <ProjectsButton href="/art/early-first-paintings">
-            <p>Archival</p>
-            <h3>Early First Paintings</h3>
+            <p>{t('art.archival')}</p>
+            <h3>{t('art.earlyFirstPaintings')}</h3>
           </ProjectsButton>
           <ProjectsButton href="/art/collaborations">
-            <p>Creative</p>
-            <h3>Collaborations</h3>
+            <p>{t('art.creative')}</p>
+            <h3>{t('nav.collaborations')}</h3>
           </ProjectsButton>
         </ProjectsButtonGroup>
       </Section>
@@ -960,10 +960,10 @@ export default function ArtPortfolio() {
       <div id="collections">
         {sortedCollections.map((col: Collection, i: number) => (
           <Section key={col.id}>
-            <SectionEyebrow>Collection {String(i + 1).padStart(2, '0')}</SectionEyebrow>
+            <SectionEyebrow>{t('art.collection')} {String(i + 1).padStart(2, '0')}</SectionEyebrow>
             <CollectionTitleLink href={`/art/${col.id}`}>{col.name}</CollectionTitleLink>
             <SectionMeta>{col.period}</SectionMeta>
-            {col.description && <SectionDesc>{col.description}</SectionDesc>}
+            {col.description && <SectionDesc>{localizedDescription(col, locale)}</SectionDesc>}
             <CollectionGrid>
               {col.paintings.map(p => (
                 <CollectionCard
@@ -990,8 +990,8 @@ export default function ArtPortfolio() {
 
       {/* ── About ── */}
       <AboutSection id="about">
-        <AboutEyebrow>The Artist</AboutEyebrow>
-        <AboutTitle>About</AboutTitle>
+        <AboutEyebrow>{t('art.theArtist')}</AboutEyebrow>
+        <AboutTitle>{t('art.aboutTitle')}</AboutTitle>
         <AboutGrid>
           {data.about.photoSrc && (
             <AboutPhoto>
@@ -1048,7 +1048,7 @@ export default function ArtPortfolio() {
       {/* ── Footer ── */}
       <Footer>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. All rights reserved.
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
         </FooterText>
         <FooterText>
           <FooterGold>@camilalonart</FooterGold>
@@ -1101,11 +1101,11 @@ export default function ArtPortfolio() {
             <InfoHandle>@camilalonart</InfoHandle>
             <InfoTitle>{modal.painting.title}</InfoTitle>
             <InfoMeta>
-              <MetaKey>Year</MetaKey>
+              <MetaKey>{t('art.year')}</MetaKey>
               <MetaVal>{modal.painting.year}</MetaVal>
-              <MetaKey>Materials</MetaKey>
-              <MetaVal>{modal.painting.materials}</MetaVal>
-              <MetaKey>Size</MetaKey>
+              <MetaKey>{t('art.materials')}</MetaKey>
+              <MetaVal>{localizedMaterials(modal.painting.materials, locale)}</MetaVal>
+              <MetaKey>{t('art.size')}</MetaKey>
               <MetaVal>{modal.painting.size}</MetaVal>
             </InfoMeta>
 
@@ -1115,11 +1115,11 @@ export default function ArtPortfolio() {
                   onClick={() => setModal(m => m ? { ...m, thoughtsOpen: !m.thoughtsOpen } : m)}
                   aria-expanded={modal.thoughtsOpen}
                 >
-                  Artist&apos;s Statement
+                  {t('art.artistStatement')}
                   <span>{modal.thoughtsOpen ? '−' : '+'}</span>
                 </ThoughtsToggle>
                 <ThoughtsText $open={modal.thoughtsOpen}>
-                  {modal.painting.thoughts}
+                  {localizedThoughts(modal.painting, locale)}
                 </ThoughtsText>
               </>
             )}

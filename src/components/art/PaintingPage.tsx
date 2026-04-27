@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import data, { type Painting, type Collection } from '../../data/artPortfolio';
+import data, { type Painting, type Collection, localizedMaterials, localizedThoughts } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -341,6 +342,7 @@ export default function PaintingPage({
   collection,
   siblingIndex,
 }: PaintingPageProps) {
+  const { t, locale } = useTranslation();
   const [imageIndex, setImageIndex] = useState(0);
   const router = useRouter();
 
@@ -373,7 +375,7 @@ export default function PaintingPage({
       <Content>
         {/* Breadcrumbs */}
         <Breadcrumbs>
-          <BreadcrumbLink href="/art/">Art</BreadcrumbLink> /{' '}
+          <BreadcrumbLink href="/art/">{t('nav.art')}</BreadcrumbLink> /{' '}
           <BreadcrumbLink href={`/art/${collection.id}`}>
             {collection.name}
           </BreadcrumbLink>{' '}
@@ -416,18 +418,18 @@ export default function PaintingPage({
             <InfoTitle>{painting.title}</InfoTitle>
 
             <MetaGrid>
-              <MetaKey>Year</MetaKey>
+              <MetaKey>{t('art.year')}</MetaKey>
               <MetaVal>{painting.year}</MetaVal>
-              <MetaKey>Materials</MetaKey>
-              <MetaVal>{painting.materials}</MetaVal>
-              <MetaKey>Size</MetaKey>
+              <MetaKey>{t('art.materials')}</MetaKey>
+              <MetaVal>{localizedMaterials(painting.materials, locale)}</MetaVal>
+              <MetaKey>{t('art.size')}</MetaKey>
               <MetaVal>{painting.size}</MetaVal>
             </MetaGrid>
 
             {painting.thoughts && (
               <ThoughtsSection>
-                <ThoughtsTitle>Artist's Statement</ThoughtsTitle>
-                <ThoughtsText>{painting.thoughts}</ThoughtsText>
+                <ThoughtsTitle>{t('art.artistStatement')}</ThoughtsTitle>
+                <ThoughtsText>{localizedThoughts(painting, locale)}</ThoughtsText>
               </ThoughtsSection>
             )}
           </InfoSection>
@@ -436,7 +438,7 @@ export default function PaintingPage({
         {/* Details Collage */}
         {painting.additionalImages && painting.additionalImages.length > 0 && (
           <DetailsSection>
-            <DetailsLabel>Details</DetailsLabel>
+            <DetailsLabel>{t('art.details')}</DetailsLabel>
             <DetailsGrid>
               {painting.additionalImages.map((src, i) => (
                 <DetailImage

@@ -3,8 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import data, { type Collection } from '../../data/artPortfolio';
+import data, { type Collection, localizedDescription } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -230,7 +231,7 @@ interface CollectionPageProps {
 }
 
 export default function CollectionPage({ collection }: CollectionPageProps) {
-  // Find previous and next collection
+  const { t, locale } = useTranslation();
   const currentIndex = data.collections.findIndex(c => c.id === collection.id);
   const prevCollection = currentIndex > 0 ? data.collections[currentIndex - 1] : null;
   const nextCollection =
@@ -245,7 +246,7 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
       <Content>
         {/* Breadcrumb */}
         <Breadcrumbs>
-          <BreadcrumbLink href="/art/">Art</BreadcrumbLink>
+          <BreadcrumbLink href="/art/">{t('nav.art')}</BreadcrumbLink>
           / {collection.name}
         </Breadcrumbs>
 
@@ -253,7 +254,7 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
         <Header>
           <CollectionName>{collection.name}</CollectionName>
           <CollectionPeriod>{collection.period}</CollectionPeriod>
-          <CollectionDesc>{collection.description}</CollectionDesc>
+          <CollectionDesc>{localizedDescription(collection, locale)}</CollectionDesc>
         </Header>
 
         {/* Paintings */}
@@ -290,7 +291,7 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
             </NavLink>
           ) : (
             <div style={{ opacity: 0.3, pointerEvents: 'none' }}>
-              ← Previous
+              ← {t('common.previous')}
             </div>
           )}
 
@@ -300,7 +301,7 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
             </NavLink>
           ) : (
             <div style={{ opacity: 0.3, pointerEvents: 'none' }}>
-              Next →
+              {t('common.next')} →
             </div>
           )}
         </Navigation>
@@ -309,8 +310,7 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
         <Footer>
           <FooterText>
             © {new Date().getFullYear()}{' '}
-            <span style={{ color: C.gold }}>Camila Londoño</span>. All rights
-            reserved.
+            <span style={{ color: C.gold }}>Camila Londoño</span>. {t('art.allRightsReserved')}
           </FooterText>
         </Footer>
       </Content>

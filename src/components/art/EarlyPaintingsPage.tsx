@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import data, { type Painting } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '@/i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -142,18 +143,20 @@ const EmptyState = styled.div`
 `;
 
 export default function EarlyPaintingsPage() {
+  const { t } = useTranslation();
+
   if (data.earlyFirstPaintings.length === 0) {
     return (
       <Site>
         <ArtNav />
         <Content>
           <PageHeader>
-            <h1>Early First Paintings</h1>
-            <p>Archival collection</p>
+            <h1>{t('art.earlyFirstPaintings')}</h1>
+            <p>{t('art.archivalCollection')}</p>
           </PageHeader>
           <EmptyState>
-            <h2>Coming soon</h2>
-            <p>This collection is being curated.</p>
+            <h2>{t('art.comingSoon')}</h2>
+            <p>{t('art.beingCurated')}</p>
           </EmptyState>
         </Content>
       </Site>
@@ -165,8 +168,8 @@ export default function EarlyPaintingsPage() {
       <ArtNav />
       <Content>
         <PageHeader>
-          <h1>Early First Paintings</h1>
-          <p>Archival collection</p>
+          <h1>{t('art.earlyFirstPaintings')}</h1>
+          <p>{t('art.archivalCollection')}</p>
         </PageHeader>
 
         <PaintingsGrid>

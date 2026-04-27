@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import data from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
   bg: '#080808',
@@ -172,6 +173,7 @@ const FooterText = styled.p`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function ArtAbout() {
+  const { t } = useTranslation();
   return (
     <Site>
       <ArtNav />
@@ -179,12 +181,12 @@ export default function ArtAbout() {
       <Content>
         {/* Breadcrumb */}
         <Breadcrumb>
-          <BreadcrumbLink href="/art/">Art</BreadcrumbLink> / About
+          <BreadcrumbLink href="/art/">{t('nav.art')}</BreadcrumbLink> / {t('nav.about')}
         </Breadcrumb>
 
         {/* Header */}
         <Header>
-          <Title>About the Artist</Title>
+          <Title>{t('art.aboutTheArtist')}</Title>
         </Header>
 
         {/* Main Content */}
@@ -232,8 +234,7 @@ export default function ArtAbout() {
         <Footer>
           <FooterText>
             © {new Date().getFullYear()}{' '}
-            <span style={{ color: C.gold }}>Camila Londoño</span>. All rights
-            reserved.
+            <span style={{ color: C.gold }}>Camila Londoño</span>. {t('art.allRightsReserved')}
           </FooterText>
         </Footer>
       </Content>
