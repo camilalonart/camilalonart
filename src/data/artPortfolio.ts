@@ -70,7 +70,7 @@ const data: ArtPortfolioData = {
           title: "Carrying Home",
           materials: "Mixed media on paper",
           size: "Variable",
-          year: 2024,
+          year: 2026,
           images: [
             "/images/art/traditionalArt/Carrying Home/CarryingHome.webp",
             "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp",
