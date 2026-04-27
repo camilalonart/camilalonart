@@ -1,11 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useTranslation } from '../../i18n/TranslationContext';
-import LanguageSwitcher from '../LanguageSwitcher';
 
 const C = {
   bg: '#080808',
@@ -17,17 +15,15 @@ const C = {
 
 const Nav = styled.nav<{ $scrolled: boolean }>`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
-  height: 64px;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  min-height: 64px;
   transition: background 0.4s ease, border-color 0.4s ease;
-  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.96)' : 'transparent'};
+  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.98)' : 'transparent'};
   border-bottom: 1px solid ${p => p.$scrolled ? C.border : 'transparent'};
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
 `;
@@ -37,7 +33,6 @@ const NavLogo = styled.button`
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: ${C.text};
-  text-decoration: none;
   cursor: pointer;
   font-weight: 300;
   display: flex;
@@ -48,14 +43,9 @@ const NavLogo = styled.button`
   border: none;
   font-family: inherit;
   padding: 0;
+  flex-shrink: 0;
 
-  &:hover {
-    color: ${C.gold};
-  }
-
-  span {
-    color: inherit;
-  }
+  &:hover { color: ${C.gold}; }
 `;
 
 const Dot = styled.div`
@@ -63,64 +53,53 @@ const Dot = styled.div`
   height: 6px;
   border-radius: 50%;
   background: ${C.gold};
+  flex-shrink: 0;
 `;
 
 const NavLinks = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  gap: clamp(4rem, 5vw, 5rem);
+  gap: 2.5rem;
   align-items: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 900px) { gap: 1.5rem; }
+
+  @media (max-width: 768px) {
     position: absolute;
     top: 64px;
     left: 0;
     right: 0;
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
     background: rgba(8, 8, 8, 0.98);
-    border-bottom: 1px solid ${C.border};
     backdrop-filter: blur(12px);
-    max-height: ${p => p.$isOpen ? '500px' : '0'};
+    max-height: ${p => p.$isOpen ? '600px' : '0'};
     overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding: ${p => p.$isOpen ? '1rem 0' : '0'};
-    z-index: 199;
+    transition: max-height 0.35s ease;
+    padding: ${p => p.$isOpen ? '0.5rem 0' : '0'};
   }
 `;
 
-const NavLink = styled(Link)`
+const NavLinkA = styled(Link)`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.text};
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
   white-space: nowrap;
-  flex-shrink: 0;
 
-  &:hover {
-    color: rgba(41, 38, 35, 1);
-  }
+  &:hover { color: ${C.gold}; }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     display: block;
-    padding: 0.75rem clamp(1.5rem, 4vw, 4rem);
-    width: 100%;
+    padding: 0.85rem clamp(1.5rem, 4vw, 4rem);
     white-space: normal;
-    flex-shrink: 1;
 
-    &:hover {
-      background: rgba(75, 65, 51, 0.05);
-    }
+    &:hover { background: rgba(200, 168, 122, 0.05); }
   }
-`;
-
-const NavRight = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
 `;
 
 const HamburgerBtn = styled.button`
@@ -133,7 +112,7 @@ const HamburgerBtn = styled.button`
   z-index: 201;
   transition: color 0.2s ease;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -141,9 +120,7 @@ const HamburgerBtn = styled.button`
     justify-content: center;
   }
 
-  &:hover {
-    color: ${C.gold};
-  }
+  &:hover { color: ${C.gold}; }
 
   span {
     width: 24px;
@@ -168,50 +145,57 @@ const HamburgerBtn = styled.button`
 `;
 
 export default function ArtNav() {
-  const { t } = useTranslation();
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+      setMobileMenuOpen(false);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleLogoClick = (e: React.MouseEvent) => {
-    setMobileMenuOpen(false);
-    if (window.location.pathname !== '/art/') {
-      router.push('/art/');
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  const close = () => setMobileMenuOpen(false);
 
   return (
     <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
-      <NavLogo title="Back to art home" onClick={handleLogoClick}>
-        Camila Londoño
+      <NavLogo
+        title="Back to art home"
+        onClick={() => {
+          close();
+          if (window.location.pathname !== '/art/') {
+            router.push('/art/');
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+      >
+        <Dot />
+        CamilaLonart
       </NavLogo>
+
       <NavLinks $isOpen={mobileMenuOpen}>
-        <NavLink href="/art/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collections')}</NavLink>
-        <NavLink href="/art/about/" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</NavLink>
-        <NavLink href="/art/contact/" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</NavLink>
-        <NavLink href="/art/collaborations/" onClick={() => setMobileMenuOpen(false)}>{t('nav.collaborations')}</NavLink>
-        <NavLink href="/art/early-first-paintings/" onClick={() => setMobileMenuOpen(false)}>{t('nav.earlyPaintings')}</NavLink>
+        <NavLinkA href="/art/" onClick={close}>Home</NavLinkA>
+        <NavLinkA href="/art/collections/" onClick={close}>Collections</NavLinkA>
+        <NavLinkA href="/art/all-paintings/" onClick={close}>All Paintings</NavLinkA>
+        <NavLinkA href="/art/early-first-paintings/" onClick={close}>Archival Works</NavLinkA>
+        <NavLinkA href="/art/collaborations/" onClick={close}>Collaborations</NavLinkA>
+        <NavLinkA href="/art/about/" onClick={close}>About</NavLinkA>
+        <NavLinkA href="/art/contact/" onClick={close}>Contact</NavLinkA>
       </NavLinks>
-      <NavRight>
-        <LanguageSwitcher />
-        <HamburgerBtn
-          aria-expanded={mobileMenuOpen}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          <span />
-          <span />
-          <span />
-        </HamburgerBtn>
-      </NavRight>
+
+      <HamburgerBtn
+        aria-expanded={mobileMenuOpen}
+        onClick={() => setMobileMenuOpen(v => !v)}
+        aria-label="Toggle navigation menu"
+      >
+        <span />
+        <span />
+        <span />
+      </HamburgerBtn>
     </Nav>
   );
 }

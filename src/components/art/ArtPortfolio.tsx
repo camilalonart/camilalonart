@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 import data, { type Collection, type Painting, COLLECTIONS_ORDER } from '../../data/artPortfolio';
 import ContactForm from '../ContactForm';
 import { useTranslation } from '../../i18n/TranslationContext';
+import ArtNav from './ArtNav';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -37,175 +38,6 @@ const Site = styled.div`
   * { box-sizing: border-box; }
 `;
 
-// ─── Nav ────────────────────────────────────────────────────────────────────
-const Nav = styled.nav<{ $scrolled: boolean }>`
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(1rem, 4vw, 3rem);
-  height: auto;
-  min-height: 64px;
-  transition: background 0.4s ease, border-color 0.4s ease;
-  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.98)' : 'transparent'};
-  border-bottom: 1px solid ${p => p.$scrolled ? C.border : 'transparent'};
-  backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media (max-width: 900px) {
-    padding: 0 clamp(0.75rem, 3vw, 2rem);
-  }
-
-  @media (max-width: 768px) {
-    overflow: visible;
-  }
-
-  @media (max-width: 600px) {
-    padding: 0.5rem clamp(0.75rem, 3vw, 1.5rem);
-  }
-`;
-
-const NavLogo = styled.a`
-  font-size: 1.05rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: ${C.text};
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 300;
-  transition: color 0.2s;
-  flex-shrink: 0;
-
-  &:focus-visible {
-    outline: 2px solid ${C.gold};
-    outline-offset: 2px;
-  }
-
-  &:hover {
-    color: ${C.gold};
-  }
-
-  span { color: ${C.text}; }
-`;
-
-const NavLinks = styled.div<{ $isOpen: boolean }>`
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-
-  @media (max-width: 900px) { gap: 1.5rem; }
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 0;
-    background: rgba(8, 8, 8, 0.98);
-    border-bottom: 1px solid ${C.border};
-    backdrop-filter: blur(12px);
-    max-height: ${p => p.$isOpen ? '500px' : '0'};
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding: ${p => p.$isOpen ? '1rem 0' : '0'};
-  }
-  @media (max-width: 600px) { gap: 1rem; font-size: 0.55rem; }
-`;
-
-const NavLink = styled.a`
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: ${C.text};
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s;
-
-  &:focus-visible { 
-    outline: 2px solid ${C.gold};
-    outline-offset: 2px;
-  }
-
-  &:hover { color: ${C.gold}; }
-`;
-
-const NavLinkComponent = styled(Link)`
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: ${C.text};
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s;
-
-  &:focus-visible {
-    outline: 2px solid ${C.gold};
-    outline-offset: 2px;
-  }
-
-  &:hover { color: ${C.gold}; }
-
-  @media (max-width: 768px) {
-    display: block;
-    padding: 0.75rem clamp(1.5rem, 4vw, 4rem);
-    width: 100%;
-
-    &:hover {
-      background: rgba(200, 168, 122, 0.05);
-    }
-  }
-`;
-
-const HamburgerBtn = styled.button`
-  display: none;
-  background: none;
-  border: none;
-  color: ${C.text};
-  cursor: pointer;
-  padding: 0.75rem;
-  z-index: 201;
-  transition: color 0.2s ease;
-
-  @media (max-width: 900px) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &:hover {
-    color: ${C.gold};
-  }
-
-  span {
-    width: 24px;
-    height: 2.5px;
-    background: currentColor;
-    transition: all 0.3s ease;
-    display: block;
-    border-radius: 1px;
-  }
-
-  &[aria-expanded="true"] span:nth-child(1) {
-    transform: rotate(45deg) translateY(10px);
-  }
-
-  &[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-  }
-
-  &[aria-expanded="true"] span:nth-child(3) {
-    transform: rotate(-45deg) translateY(-10px);
-  }
-`;
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 const Hero = styled.section`
@@ -477,6 +309,8 @@ const CollectionCardOverlay = styled.div`
   justify-content: flex-end;
   padding: 1.5rem;
   pointer-events: none;
+
+  @media (max-width: 768px) { display: none; }
 `;
 
 const CardTitle = styled.h3`
@@ -897,8 +731,14 @@ const SelectedWorksGrid = styled.div`
   column-gap: 2px;
 
   @media (max-width: 1200px) { columns: 6 75px; }
-  @media (max-width: 768px) { columns: 5 65px; }
-  @media (max-width: 500px) { columns: 3 60px; }
+  @media (max-width: 768px) {
+    columns: 4 65px;
+    & > *:nth-child(n+17) { display: none; }
+  }
+  @media (max-width: 500px) {
+    columns: 3 60px;
+    & > *:nth-child(n+10) { display: none; }
+  }
 `;
 
 const SelectedWorkCard = styled(Link)`
@@ -992,19 +832,7 @@ interface ModalState {
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function ArtPortfolio() {
   const { t } = useTranslation();
-  const [scrolled, setScrolled] = useState(false);
   const [modal, setModal] = useState<ModalState | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Scroll listener for nav
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 60);
-      setMobileMenuOpen(false);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Keyboard navigation
   useEffect(() => {
@@ -1054,10 +882,6 @@ export default function ArtPortfolio() {
 
   const heroImage = '/images/art/traditionalArt/Carrying Home/We.webp';
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const sortedCollections = [...data.collections].sort((a, b) => {
     const aIndex = COLLECTIONS_ORDER.indexOf(a.id);
     const bIndex = COLLECTIONS_ORDER.indexOf(b.id);
@@ -1066,66 +890,7 @@ export default function ArtPortfolio() {
 
   return (
     <Site>
-      {/* ── Nav ── */}
-      <Nav $scrolled={scrolled} role="navigation" aria-label="Site navigation">
-        <NavLogo
-        // on click it will take you to /art
-          onClick={() => window.location.href = '/art'}
-          role="button"
-          tabIndex={0}
-          aria-label="Camila Londoño - Go to home"
-        >
-          CamilaLonart
-        </NavLogo>
-        <NavLinks $isOpen={mobileMenuOpen}>
-          <NavLinkComponent href="/art" onClick={() => setMobileMenuOpen(false)}>Home</NavLinkComponent>
-          <NavLinkComponent href="/art/collections" onClick={() => setMobileMenuOpen(false)}>Collections</NavLinkComponent>
-          <NavLinkComponent href="/art/all-paintings" onClick={() => setMobileMenuOpen(false)}>All Paintings</NavLinkComponent>
-          <NavLinkComponent href="/art/early-first-paintings" onClick={() => setMobileMenuOpen(false)}>Archival Works</NavLinkComponent>
-          <NavLinkComponent href="/art/collaborations" onClick={() => setMobileMenuOpen(false)}>Collaborations</NavLinkComponent>
-          <NavLink
-            onClick={() => {
-              scrollTo('about');
-              setMobileMenuOpen(false);
-            }}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                scrollTo('about');
-              }
-            }}
-            aria-label="Scroll to about section"
-          >
-            About
-          </NavLink>
-          <NavLink
-            onClick={() => {
-              scrollTo('contact-section');
-              setMobileMenuOpen(false);
-            }}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                scrollTo('contact-section');
-              }
-            }}
-            aria-label="Scroll to contact section"
-          >
-            Contact
-          </NavLink>
-        </NavLinks>
-        <HamburgerBtn
-          aria-expanded={mobileMenuOpen}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          <span />
-          <span />
-          <span />
-        </HamburgerBtn>
-      </Nav>
+      <ArtNav />
 
       {/* ── Hero ── */}
       <Hero>

@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import data, { COLLECTIONS_ORDER } from '../../data/artPortfolio';
+import ArtNav from './ArtNav';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -365,6 +366,7 @@ export default function AllPaintingsPage() {
 
   return (
     <PageWrapper>
+      <ArtNav />
       <PageHeader>
         <PageTitle>All Paintings</PageTitle>
         <PageSubtitle>

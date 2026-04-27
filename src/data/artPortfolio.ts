@@ -288,7 +288,7 @@ const data: ArtPortfolioData = {
           title: "Little Prince",
           materials: "Watercolor, pencil and collage",
           size: "11 x 13 in",
-          year: 2022,
+          year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/LittlePrince.webp"],
         },
         {

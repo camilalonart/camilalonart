@@ -6,13 +6,13 @@ import ArtNav from './ArtNav';
 import { useTranslation } from '@/i18n/TranslationContext';
 
 const C: Record<string, string> = {
-  bg: '#F5F3F0',
-  surface: '#FFFFFF',
-  border: '#E5DDD8',
+  bg: '#000000ff',
+  surface: '#2b2a23ff',
+  border: '#201e1cff',
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
-  text: '#2C2C2C',
-  muted: '#8B8B8B',
+  text: '#ffffffff',
+  muted: '#ba914aff',
 };
 
 const Site = styled.div`
@@ -96,9 +96,9 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: 0.9rem 1.1rem;
-  background: #FAFAF8;
+  background: #fafaf821;
   border: 1.5px solid ${C.border};
-  color: ${C.text};
+  color: ${C.gold};
   font-family: inherit;
   font-size: 0.95rem;
   border-radius: 4px;
@@ -120,11 +120,12 @@ const Select = styled.select`
   padding: 1rem;
   background: ${C.surface};
   border: 1px solid ${C.border};
-  color: ${C.text};
+  color: ${C.gold};
   font-family: inherit;
   font-size: 0.95rem;
   transition: border-color 0.3s ease;
   cursor: pointer;
+  background: #fafaf821;
 
   &:focus {
     outline: none;
@@ -139,9 +140,10 @@ const Select = styled.select`
 
 const Textarea = styled.textarea`
   padding: 0.9rem 1.1rem;
-  background: #FAFAF8;
+    background: #fafaf821;
+
   border: 1.5px solid ${C.border};
-  color: ${C.text};
+  color: ${C.gold};
   font-family: inherit;
   font-size: 0.95rem;
   min-height: 140px;
@@ -163,26 +165,26 @@ const Textarea = styled.textarea`
 `;
 
 const SubmitBtn = styled.button`
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, ${C.gold}, ${C.goldLight});
+  padding: 1rem 2.5rem;
+  background: ${C.gold};
   border: none;
   color: ${C.bg};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   width: 100%;
   font-weight: 600;
-  border-radius: 3px;
-  box-shadow: 0 4px 12px rgba(200, 168, 122, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(200, 168, 122, 0.2);
 
   &:hover:not(:disabled) {
-    background: linear-gradient(135deg, ${C.goldLight}, ${C.gold});
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(200, 168, 122, 0.25);
+    background: ${C.goldLight};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(200, 168, 122, 0.3);
   }
 
   &:active:not(:disabled) {
@@ -190,7 +192,7 @@ const SubmitBtn = styled.button`
   }
 
   &:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 `;
