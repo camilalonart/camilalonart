@@ -115,11 +115,13 @@ const LangToggle = styled.div`
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  border: 1px solid ${C.border};
-  padding: 0.3rem 0.5rem;
+  background: #080808;
+  border: 1px solid ${C.dim};
+  border-radius: 2px;
+  padding: 0.35rem 0.6rem;
   transition: border-color 0.2s;
 
-  &:hover { border-color: ${C.dim}; }
+  &:hover { border-color: ${C.gold}; }
 `;
 
 const LangOpt = styled.button<{ $active: boolean }>`
@@ -127,7 +129,7 @@ const LangOpt = styled.button<{ $active: boolean }>`
   font-size: 0.5rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: ${p => p.$active ? C.gold : C.muted};
+  color: ${p => p.$active ? C.gold : C.text};
   background: none;
   border: none;
   padding: 0;
@@ -139,7 +141,7 @@ const LangOpt = styled.button<{ $active: boolean }>`
 `;
 
 const LangSep = styled.span`
-  color: ${C.dim};
+  color: ${C.muted};
   font-family: var(--font-montserrat), sans-serif;
   font-size: 0.5rem;
   line-height: 1;

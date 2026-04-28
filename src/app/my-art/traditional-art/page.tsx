@@ -1,11 +1,12 @@
-import ArtPortfolio from '@/components/art/ArtPortfolio';
+'use client';
 
-export const metadata = {
-  title: 'Traditional Art — Camila Londoño',
-  description: 'Original paintings in oil, watercolor, and mixed media by Camila Londoño. Browse collections and individual works.',
-  alternates: { canonical: 'https://www.camilalonart.com/art/' },
-};
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function TraditionalArtPage() {
-  return <ArtPortfolio />;
+export default function TraditionalArtRedirect() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace('/art/');
+  }, [router]);
+  return null;
 }

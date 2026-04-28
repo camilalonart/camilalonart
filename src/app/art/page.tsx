@@ -1,8 +1,24 @@
 import ArtPortfolio from '@/components/art/ArtPortfolio';
-import { metadata } from './metadata';
+import { metadata, artistPersonSchema, artGallerySchema, artBreadcrumbSchema } from './metadata';
 
 export { metadata };
 
 export default function ArtPage() {
-  return <ArtPortfolio />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(artistPersonSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(artGallerySchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(artBreadcrumbSchema) }}
+      />
+      <ArtPortfolio />
+    </>
+  );
 }

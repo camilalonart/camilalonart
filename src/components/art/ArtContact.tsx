@@ -20,16 +20,42 @@ const Site = styled.div`
   color: ${C.text};
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   * { box-sizing: border-box; }
 `;
 
 const Content = styled.main`
-  min-height: 100vh;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(5.5rem, 14vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+`;
+
+const ArtFooter = styled.footer`
+  border-top: 1px solid ${C.border};
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+`;
+
+const FooterText = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  margin: 0;
+`;
+
+const FooterGold = styled.span`
+  color: ${C.gold};
 `;
 
 const FormContainer = styled.div`
@@ -284,13 +310,22 @@ export default function ArtContact() {
             <p>{t('art.contact.description')}</p>
           </PageHeader>
 
-          {status !== 'idle' && (
-            <Message $type={status === 'success' ? 'success' : 'error'}>
-              {statusMessage}
-            </Message>
-          )}
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {status !== 'idle' && (
+              <Message
+                $type={status === 'success' ? 'success' : 'error'}
+                role={status === 'error' ? 'alert' : undefined}
+              >
+                {statusMessage}
+              </Message>
+            )}
+          </div>
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} noValidate aria-label={t('art.contact.heading')}>
             <FormGroup>
               <Label htmlFor="name">{t('art.contact.name')} *</Label>
               <Input
@@ -301,6 +336,8 @@ export default function ArtContact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                autoComplete="name"
               />
             </FormGroup>
 
@@ -314,6 +351,8 @@ export default function ArtContact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                autoComplete="email"
               />
             </FormGroup>
 
@@ -324,6 +363,7 @@ export default function ArtContact() {
                 name="inquiryType"
                 value={formData.inquiryType}
                 onChange={handleChange}
+                aria-required="true"
               >
                 <option value="general">{t('art.contact.generalInquiry')}</option>
                 <option value="purchase">{t('art.contact.purchaseInquiry')}</option>
@@ -342,15 +382,29 @@ export default function ArtContact() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                aria-required="true"
               />
             </FormGroup>
 
-            <SubmitBtn type="submit" disabled={status === 'loading'}>
+            <SubmitBtn
+              type="submit"
+              disabled={status === 'loading'}
+              aria-busy={status === 'loading'}
+            >
               {status === 'loading' ? t('art.contact.sending') : t('art.contact.send')}
             </SubmitBtn>
           </Form>
         </FormContainer>
       </Content>
+
+      <ArtFooter>
+        <FooterText>
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
+        </FooterText>
+        <FooterText>
+          <FooterGold>@camilalonart</FooterGold>
+        </FooterText>
+      </ArtFooter>
     </Site>
   );
 }
