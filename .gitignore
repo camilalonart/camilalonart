@@ -46,8 +46,10 @@ next-env.d.ts
 !/public/images/art/
 !/public/images/artClasses/
 !/public/images/everyday/
-!/public/images/traditionalArt/
+!/public/images/oldArt/
 !/public/images/aboutTheArtist/
+!/public/images/traditionalArt/
+
 !/public/images/.gitkeep
 /src/assets/images/**/*
 
