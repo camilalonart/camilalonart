@@ -36,6 +36,7 @@ export interface ArtPortfolioData {
   selectedWorks: Array<{ image: string; id: string; collectionId: string; paintingId: string }>;
   about: {
     bio: string[];
+    bioEs?: string[];
     instagram1Url: string;
     instagram1Handle: string;
     instagram2Url: string;
@@ -51,6 +52,12 @@ const data: ArtPortfolioData = {
       "As an artist who moved to Canada, she carries a deep appreciation for this place while holding onto fragments of where she comes from. That in-between space informs how she observes, remembers, and creates. One of the themes she explores in her work is migration and the inner journey of self-discovery, reflecting on identity, belonging, and transformation",
       "With a background in engineering, she brings a quiet sense of structure into her intuitive process, exploring the space where the logical and the emotional coexist.",
       "For her, making art is also a practice of presence, a way of slowing down and noticing the small details that turn ordinary moments into something quietly meaningful."
+    ],
+    bioEs: [
+      "Camilalonart es una artista e ingeniera colombiana multidisciplinaria cuyo trabajo tiene sus raíces en contar historias a través de los momentos cotidianos. Se siente atraída por lo que suele pasar desapercibido: la luz cambiante, los gestos sutiles y los instantes fugaces que guardan emoción y significado en silencio. Su práctica se centra en la pintura, trabajando con distintos materiales, desde óleo y acuarelas hasta tiza.",
+      "Como artista que emigró a Canadá, lleva consigo una profunda apreciación por este lugar sin dejar de sostener fragmentos de donde viene. Ese espacio intermedio define cómo observa, recuerda y crea. Uno de los temas que explora en su obra es la migración y el viaje interior de autodescubrimiento, reflexionando sobre la identidad, la pertenencia y la transformación.",
+      "Con una formación en ingeniería, aporta un sentido silencioso de estructura a su proceso intuitivo, explorando el espacio donde lo lógico y lo emocional coexisten.",
+      "Para ella, hacer arte es también una práctica de presencia: una manera de desacelerar y notar los pequeños detalles que convierten los momentos ordinarios en algo quietamente significativo."
     ],
     instagram1Url: "https://www.instagram.com/camilalonart",
     instagram1Handle: "@camilalonart",
@@ -737,6 +744,11 @@ export function localizedThoughts(painting: Painting, locale: string): string | 
 export function localizedDescription(collection: Collection, locale: string): string {
   if (locale === 'es') return collection.descriptionEs ?? collection.description;
   return collection.description;
+}
+
+export function localizedBio(about: ArtPortfolioData['about'], locale: string): string[] {
+  if (locale === 'es') return about.bioEs ?? about.bio;
+  return about.bio;
 }
 
 // Collections order — modify this array to change display order

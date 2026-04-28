@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
-import data, { type Collection, type Painting, COLLECTIONS_ORDER, localizedMaterials, localizedThoughts, localizedDescription } from '../../data/artPortfolio';
+import data, { type Collection, type Painting, COLLECTIONS_ORDER, localizedMaterials, localizedThoughts, localizedDescription, localizedBio } from '../../data/artPortfolio';
 import ContactForm from '../ContactForm';
 import { useTranslation } from '../../i18n/TranslationContext';
 import ArtNav from './ArtNav';
@@ -1004,7 +1004,7 @@ export default function ArtPortfolio() {
             </AboutPhoto>
           )}
           <AboutText>
-            {data.about.bio.map((para, i) => (
+            {localizedBio(data.about, locale).map((para, i) => (
               <BioP key={i}>{para}</BioP>
             ))}
             <InstagramLinks>

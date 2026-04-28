@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
-import data from '../../data/artPortfolio';
+import data, { localizedBio } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -173,7 +173,7 @@ const FooterText = styled.p`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function ArtAbout() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   return (
     <Site>
       <ArtNav />
@@ -203,7 +203,7 @@ export default function ArtAbout() {
           )}
 
           <BioWrap>
-            {data.about.bio.map((para, i) => (
+            {localizedBio(data.about, locale).map((para, i) => (
               <BioParagraph key={i}>{para}</BioParagraph>
             ))}
 
