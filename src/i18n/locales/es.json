@@ -126,7 +126,7 @@
       "exhibitionOpportunity": "Oportunidad de Exposición",
       "collaborationInquiry": "Colaboración"
     },
-    "fineArtist": "Artista Plástica",
+    "fineArtist": "Artista",
     "scroll": "Deslizar",
     "explore": "Explorar",
     "current": "Actual",
@@ -174,7 +174,119 @@
   "photography": {
     "wedding": {
       "title": "Bodas y Parejas",
-      "description": "Momentos atemporales de amor y conexión"
+      "description": "Momentos atemporales de amor y conexión",
+      "hero": {
+        "title": "Fotografía de Elopements y Parejas",
+        "subtitle": "Fotógrafa en Vancouver para elopements, compromisos e historias de amor.",
+        "cta": "Consultar"
+      },
+      "intro1": "Soy fotógrafa en Vancouver, capturo historias de amor con profundidad y emoción para preservar tus momentos más significativos.",
+      "intro2": "Ya sea la emoción íntima de un elopement, la alegría de un compromiso, o un momento compartido en un día ordinario... estos son recuerdos únicos en la vida. Merecen ser capturados con cuidado y creatividad, para que puedas revivirlos, compartirlos y transmitirlos por años.",
+      "services": {
+        "heading": "Servicios",
+        "startingAt": "Desde",
+        "inquireNow": "Consultar",
+        "elopements": {
+          "title": "Elopements",
+          "description": "Cada elopement merece cuidado y atención. Te ayudaré a documentar tu día de una manera real, relajada y auténtica.",
+          "f1": "Hasta 3 horas de cobertura",
+          "f2": "30 fotos editadas en alta resolución",
+          "f3": "Consulta previa a la sesión",
+          "f4": "Adicional: Todas las imágenes sin editar +$100",
+          "f5": "Adicional: Hora extra de cobertura +$100"
+        },
+        "engagement": {
+          "title": "Sesión de Compromiso",
+          "description": "Ya sea justo después de la propuesta o en las semanas siguientes, te ayudaré a capturar el momento en que dijiste 'sí'.",
+          "f1": "Sesión de 1.5 horas",
+          "f2": "30 imágenes editadas en alta resolución",
+          "f3": "Consulta previa a la sesión",
+          "f4": "Adicional: Todas las imágenes sin editar +$100",
+          "f5": "Adicional: Ubicación adicional +$100"
+        },
+        "couples": {
+          "title": "Sesiones de Parejas",
+          "description": "Ya sea un aniversario, un fin de semana fuera, o simplemente como son ahora mismo...",
+          "f1": "Sesión de 1 hora - 1 ubicación",
+          "f2": "Cambio de atuendo",
+          "f3": "30 imágenes editadas en alta resolución",
+          "f4": "Adicional: Todas las imágenes sin editar +$50",
+          "f5": "Adicional: Ubicación adicional +$100"
+        },
+        "photobooks": {
+          "title": "Fotolibros",
+          "description": "Estos fotolibros están cuidadosamente diseñados para preservar tu sesión o boda en un formato hermoso y duradero.",
+          "f1": "Diseño personalizado con tus imágenes favoritas",
+          "f2": "Tamaño: 8x8in - 20 páginas dobles (40 páginas)",
+          "f3": "Envío en 4 semanas tras aprobación final",
+          "f4": "Adicional: Páginas extra +$10 cada una"
+        }
+      },
+      "process": {
+        "heading": "Nuestro Proceso",
+        "s1t": "Contáctame",
+        "s1d": "Envíame un mensaje con algunos detalles sobre lo que estás planeando. Te responderé con los próximos pasos",
+        "s2t": "Planeamos",
+        "s2d": "Conocemos tu visión: ubicaciones, estilos, tableros de inspiración",
+        "s3t": "Fotografiamos",
+        "s3d": "Equipo profesional. Dirijo suavemente cuando es necesario, pero principalmente capturo cómo se desarrollan naturalmente.",
+        "s4t": "Editamos",
+        "s4d": "Post-procesamiento de alta calidad",
+        "s5t": "Entregamos",
+        "s5d": "En 1-2 semanas recibirás una galería privada en línea con tus imágenes editadas"
+      },
+      "gallerySection": {
+        "heading": "Ver Galería",
+        "description": "Explora nuestra colección completa de fotografías de bodas, compromisos y parejas. Cada imagen cuenta una historia única de amor y conexión.",
+        "cta": "Ver Galería Completa"
+      },
+      "testimonial": {
+        "quote": "Camila fotografió nuestra boda y no podríamos estar más felices con los resultados. Capturó cada momento especial de manera tan hermosa y natural. Su trabajo es emotivo, profesional y absolutamente impresionante. Le tenemos plena confianza y la recomendamos a cualquiera que busque fotos atemporales y significativas.",
+        "author": "Ana & Jorge (Elopement en Vancouver)"
+      },
+      "footer": {
+        "contact": "Contacto",
+        "contactTagline": "Creemos algo hermoso juntos",
+        "followAlong": "Sígueme",
+        "copyright": "Todos los derechos reservados.",
+        "copyrightNotice": "Todas las fotografías y contenidos están protegidos por derechos de autor y no pueden ser reproducidos, distribuidos, transmitidos, mostrados o publicados sin permiso escrito."
+      },
+      "form": {
+        "heading": "Creemos Algo Mágico",
+        "subheading": "Cuéntame sobre tu día especial",
+        "step1Title": "Tus Datos",
+        "step2Title": "Detalles de la Sesión",
+        "step3Title": "Cuéntanos Más",
+        "fullName": "Nombre Completo *",
+        "namePlaceholder": "Tu nombre",
+        "email": "Correo Electrónico *",
+        "phone": "Teléfono",
+        "choosePackage": "Elige un Paquete *",
+        "preferredDate": "Fecha Preferida",
+        "location": "Ubicación",
+        "locationPlaceholder": "Ciudad o lugar",
+        "yourVision": "Tu Visión *",
+        "visionPlaceholder": "Comparte tus ideas, preferencias de estilo y lo que buscas...",
+        "aboutYou": "Sobre Ustedes (Opcional)",
+        "aboutPlaceholder": "Cuéntanos un poco sobre ustedes y su historia...",
+        "howFound": "¿Cómo nos encontraste?",
+        "selectOption": "Selecciona una opción",
+        "friendReferral": "Referido de un Amigo",
+        "other": "Otro",
+        "back": "← Atrás",
+        "continue": "Continuar →",
+        "send": "Enviar Consulta",
+        "sending": "Enviando...",
+        "close": "Cerrar",
+        "successTitle": "¡Gracias!",
+        "successMessage": "Tu consulta ha sido recibida. Nos pondremos en contacto en 24-48 horas para hablar sobre tu día especial.",
+        "sentSuccess": "✓ ¡Enviado con éxito!",
+        "failedSend": "No se pudo enviar. Por favor, intenta de nuevo.",
+        "pkgElopementDesc": "Ceremonia íntima",
+        "pkgEngagementDesc": "Celebra tu amor",
+        "pkgCouplesDesc": "Sesión de retratos",
+        "pkgPhotobooksDesc": "Álbumes personalizados"
+      }
     },
     "pets": {
       "title": "Fotografía de Mascotas",

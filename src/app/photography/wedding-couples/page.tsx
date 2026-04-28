@@ -8,6 +8,7 @@ import PhotographyNav from '../../../components/PhotographyNav';
 import ProtectedImage from '../../../components/ProtectedImage';
 import WeddingInquiryForm from '../../../components/WeddingInquiryForm';
 import ImageModal from '../../../components/ImageModal';
+import { useTranslation } from '../../../i18n/TranslationContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -1219,6 +1220,7 @@ const SubmitButtonWrapper = styled.div<{ $embedded?: boolean }>`
 `;
 
 export default function WeddingCouplesPage() {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>();
   const [selectedImage, setSelectedImage] = useState<string>();
@@ -1231,6 +1233,74 @@ export default function WeddingCouplesPage() {
   const handleImageClick = (imageSrc: string) => {
     setSelectedImage(imageSrc);
   };
+
+  const w = 'photography.wedding';
+
+  const services = [
+    {
+      title: t(`${w}.services.elopements.title`),
+      price: '$500',
+      description: t(`${w}.services.elopements.description`),
+      features: [
+        t(`${w}.services.elopements.f1`),
+        t(`${w}.services.elopements.f2`),
+        t(`${w}.services.elopements.f3`),
+        t(`${w}.services.elopements.f4`),
+        t(`${w}.services.elopements.f5`),
+      ],
+      action: t(`${w}.services.inquireNow`),
+      package: 'Elopement'
+    },
+    {
+      title: t(`${w}.services.engagement.title`),
+      price: '$350',
+      description: t(`${w}.services.engagement.description`),
+      features: [
+        t(`${w}.services.engagement.f1`),
+        t(`${w}.services.engagement.f2`),
+        t(`${w}.services.engagement.f3`),
+        t(`${w}.services.engagement.f4`),
+        t(`${w}.services.engagement.f5`),
+      ],
+      action: t(`${w}.services.inquireNow`),
+      package: 'Engagement'
+    },
+    {
+      title: t(`${w}.services.couples.title`),
+      price: '$250',
+      description: t(`${w}.services.couples.description`),
+      features: [
+        t(`${w}.services.couples.f1`),
+        t(`${w}.services.couples.f2`),
+        t(`${w}.services.couples.f3`),
+        t(`${w}.services.couples.f4`),
+        t(`${w}.services.couples.f5`),
+      ],
+      action: t(`${w}.services.inquireNow`),
+      package: 'Couples'
+    },
+    {
+      title: t(`${w}.services.photobooks.title`),
+      price: '$250',
+      description: t(`${w}.services.photobooks.description`),
+      features: [
+        t(`${w}.services.photobooks.f1`),
+        t(`${w}.services.photobooks.f2`),
+        t(`${w}.services.photobooks.f3`),
+        t(`${w}.services.photobooks.f4`),
+      ],
+      action: t(`${w}.services.inquireNow`),
+      package: 'Photobooks'
+    }
+  ];
+
+  const processSteps = [
+    { title: t(`${w}.process.s1t`), desc: t(`${w}.process.s1d`) },
+    { title: t(`${w}.process.s2t`), desc: t(`${w}.process.s2d`) },
+    { title: t(`${w}.process.s3t`), desc: t(`${w}.process.s3d`) },
+    { title: t(`${w}.process.s4t`), desc: t(`${w}.process.s4d`) },
+    { title: t(`${w}.process.s5t`), desc: t(`${w}.process.s5d`) },
+  ];
 
   return (
     <PageContainer>
@@ -1246,17 +1316,16 @@ export default function WeddingCouplesPage() {
           />
         </HeroImageContainer>
         <HeroContent>
-          <h2>Elopement & Couples Photography</h2>
-          <p>Vancouver-based  photography for elopements, engagements, and love stories.</p>
-          <HeroButton onClick={() => handleBookClick('Wedding Photography')}>Inquire Now</HeroButton>
+          <h2>{t(`${w}.hero.title`)}</h2>
+          <p>{t(`${w}.hero.subtitle`)}</p>
+          <HeroButton onClick={() => handleBookClick('Wedding Photography')}>{t(`${w}.hero.cta`)}</HeroButton>
         </HeroContent>
       </Hero>
 
       <IntroSection>
         <p>
-          I'm a Vancouver-based photographer capturing love stories with depth and emotion, I'm here to preserve your most meaningful moments.<br/><br/>
-          Whether it's the intimate emotion of an elopement, the joy of an engagement, or a shared moment on an ordinary day... these are once in a lifetime memories.
-          They deserve to be captured with care and creativity, so you can relive them, share them, and pass them down for years to come.
+          {t(`${w}.intro1`)}<br/><br/>
+          {t(`${w}.intro2`)}
           <br/>
           <br/>
           - Camila Londono
@@ -1291,7 +1360,7 @@ export default function WeddingCouplesPage() {
       </SectionDivider>
 
       <Section>
-        <h2>Services</h2>
+        <h2>{t(`${w}.services.heading`)}</h2>
         <ServicesSection>
           <Carousel
             responsive={responsive}
@@ -1308,40 +1377,7 @@ export default function WeddingCouplesPage() {
             itemClass="carousel-item"
             partialVisible={true}
           >
-            {[
-              {
-                title: 'Elopements',
-                price: '$500',
-                description: "Every elopement deserves care and attention. I'll help you document your day in a way that feels real, relaxed, and true to you.",
-                features: ['Up to 3 hours of coverage', '30 edited photos, high-resolution', 'Pre-session consultation', 'Add-on: All unedited images +$100', 'Add-on: Extra hour of coverage +$100'],
-                action: 'Inquire Now',
-                package: 'Elopement'
-              },
-              {
-                title: 'Engagement Session',
-                price: '$350',
-                description: "Whether it's right after the proposal or sometime in the weeks that follow, I'll help you to capture the moment you said 'yes'.",
-                features: ['1.5-hour session', '30 edited, high-resolution images', 'Pre-session consultation', 'Add-on: All unedited images +$100', 'Add-on: Additional location +$100'],
-                action: 'Inquire Now',
-                package: 'Engagement'
-              },
-              {
-                title: 'Couples Sessions',
-                price: '$250',
-                description: "Whether it's an anniversary, a weekend away, or just the way you are right now...",
-                features: ['1-hour session - 1 location', 'Outfit change', '30 edited, high-resolution images', 'Add-on: All unedited images +$50', 'Add-on: Additional location +$100'],
-                action: 'Inquire Now',
-                package: 'Couples'
-              },
-              {
-                title: 'Photobooks',
-                price: '$250',
-                description: 'These photobooks are carefully designed to preserve your session or wedding in a beautiful, lasting format.',
-                features: ['Custom design with your favorite images','Size: 8x8in - 20 spreads (40 pages)', 'Ships within 4 weeks after final approval','Add-on: Extra spreads +$10 each'],
-                action: 'Inquire Now',
-                package: 'Photobooks'
-              }
-            ].map((service, index) => (
+            {services.map((service, index) => (
               <ServiceCard key={index}>
                 <div className="card-content">
                   <div>
@@ -1352,7 +1388,7 @@ export default function WeddingCouplesPage() {
                         <li key={i}>{feature}</li>
                       ))}
                     </ul>
-                    <p className="price">Starting at {service.price}</p>
+                    <p className="price">{t(`${w}.services.startingAt`)} {service.price}</p>
                   </div>
                   <div className="button-wrapper">
                     <BookButton onClick={() => handleBookClick(service.package)}>
@@ -1395,44 +1431,18 @@ export default function WeddingCouplesPage() {
       </SectionDivider>
 
       <ProcessSection>
-        <h2>Our Process</h2>
+        <h2>{t(`${w}.process.heading`)}</h2>
         <ProcessContainer>
           <ProcessSteps>
-            <ProcessStep>
-              <StepNumber>1</StepNumber>
-              <StepContent>
-                <h3>Reach Out</h3>
-                <p>Send me a message through the contact form with a few details about what you're planning. I'll reply with next steps</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>2</StepNumber>
-              <StepContent>
-                <h3>Plan</h3>
-                <p>We get to know you and your vision. Locations, styles, mood boards</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>3</StepNumber>
-              <StepContent>
-                <h3>Shoot</h3>
-                <p>Professional equipment. I'll gently direct when needed, but mostly capture how things unfold naturally.</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>4</StepNumber>
-              <StepContent>
-                <h3>Edit</h3>
-                <p>High-quality post-processing</p>
-              </StepContent>
-            </ProcessStep>
-            <ProcessStep>
-              <StepNumber>5</StepNumber>
-              <StepContent>
-                <h3>Deliver</h3>
-                <p>1–2 weeks, you'll receive a private online gallery with your edited images</p>
-              </StepContent>
-            </ProcessStep>
+            {processSteps.map((step, i) => (
+              <ProcessStep key={i}>
+                <StepNumber>{i + 1}</StepNumber>
+                <StepContent>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </StepContent>
+              </ProcessStep>
+            ))}
           </ProcessSteps>
         </ProcessContainer>
       </ProcessSection>
@@ -1465,12 +1475,9 @@ export default function WeddingCouplesPage() {
       </SectionDivider>
 
       <GalleryLink>
-        <h2>View Our Gallery</h2>
-        <p>
-          Explore our complete collection of wedding, engagement, and couples photography. 
-          Each image tells a unique story of love and connection.
-        </p>
-        <a href="/photography/wedding-couples/gallery/">View Full Gallery</a>
+        <h2>{t(`${w}.gallerySection.heading`)}</h2>
+        <p>{t(`${w}.gallerySection.description`)}</p>
+        <a href="/photography/wedding-couples/gallery/">{t(`${w}.gallerySection.cta`)}</a>
       </GalleryLink>
 
       <SectionDivider>
@@ -1505,10 +1512,10 @@ export default function WeddingCouplesPage() {
           <TestimonialContent>
             <div className="stars">★★★★★</div>
             <div className="quote">
-              "Camila photographed our wedding, and we couldn't be happier with the results. She captured every special moment so beautifully and naturally. Her work is heartfelt, professional, and absolutely stunning. We trust her completely and recommend her to anyone looking for timeless, meaningful photos."
+              &ldquo;{t(`${w}.testimonial.quote`)}&rdquo;
             </div>
             <div className="author">
-              — Ana & Jorge (Vancouver Elopement)
+              — {t(`${w}.testimonial.author`)}
             </div>
           </TestimonialContent>
           <TestimonialImage>
@@ -1524,9 +1531,9 @@ export default function WeddingCouplesPage() {
 
       <InquirySection>
         <InquiryFormContainer>
-          <WeddingInquiryForm 
-            isOpen={true} 
-            onClose={() => {}} 
+          <WeddingInquiryForm
+            isOpen={true}
+            onClose={() => {}}
             selectedPackage={undefined}
             embedded={true}
           />
@@ -1536,8 +1543,8 @@ export default function WeddingCouplesPage() {
       <Footer>
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Contact</h3>
-            <p>Let's create something beautiful together</p>
+            <h3>{t(`${w}.footer.contact`)}</h3>
+            <p>{t(`${w}.footer.contactTagline`)}</p>
             <ul>
               <li><a href="mailto:bycamilalonart@gmail.com">bycamilalonart@gmail.com</a></li>
               <li><a href="tel:+1 672-338-9307">+1 (672) 338-9307</a></li>
@@ -1546,7 +1553,7 @@ export default function WeddingCouplesPage() {
           </div>
 
           <div className="footer-section">
-            <h3>Follow Along</h3>
+            <h3>{t(`${w}.footer.followAlong`)}</h3>
             <ul>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
               <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
@@ -1555,9 +1562,8 @@ export default function WeddingCouplesPage() {
         </div>
 
         <div className="copyright">
-          <p>© {new Date().getFullYear()} Camilalonart. All rights reserved.</p>
-          <p>All photographs and content are protected by copyright law and may not be reproduced, distributed, 
-          transmitted, displayed, or published without written permission.</p>
+          <p>© {new Date().getFullYear()} Camilalonart. {t(`${w}.footer.copyright`)}</p>
+          <p>{t(`${w}.footer.copyrightNotice`)}</p>
         </div>
       </Footer>
 
@@ -1565,8 +1571,8 @@ export default function WeddingCouplesPage() {
         <div className="seo-content">
           <h2>Vancouver Elopement Photographer | Engagement & Couples Photography in BC | Camilalonart</h2>
           <p>
-            Specializing in intimate elopements, engagement sessions, and couples photography 
-            throughout British Columbia. Capturing authentic moments and creating timeless 
+            Specializing in intimate elopements, engagement sessions, and couples photography
+            throughout British Columbia. Capturing authentic moments and creating timeless
             memories for couples in love.
           </p>
           <p>

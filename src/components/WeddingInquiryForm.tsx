@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -426,13 +427,6 @@ const Notification = styled.div<{ $type: 'success' | 'error' }>`
 
 const WEDDING_SCRIPT_URL = process.env.NEXT_PUBLIC_WEDDING_FORM_URL;
 
-const packages = [
-  { id: 'Elopement', name: 'Elopement', icon: '💍', desc: 'Intimate ceremony' },
-  { id: 'Engagement', name: 'Engagement', icon: '💑', desc: 'Celebrate your love' },
-  { id: 'Couples', name: 'Couples', icon: '❤️', desc: 'Portrait session' },
-  { id: 'Photobooks', name: 'Photobooks', icon: '📖', desc: 'Custom albums' },
-];
-
 interface WeddingInquiryFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -441,6 +435,17 @@ interface WeddingInquiryFormProps {
 }
 
 export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, embedded = false }: WeddingInquiryFormProps) {
+  const { t } = useTranslation();
+  const wf = 'photography.wedding.form';
+  const ws = 'photography.wedding.services';
+
+  const packages = [
+    { id: 'Elopement', name: t(`${ws}.elopements.title`), icon: '💍', desc: t(`${wf}.pkgElopementDesc`) },
+    { id: 'Engagement', name: t(`${ws}.engagement.title`), icon: '💑', desc: t(`${wf}.pkgEngagementDesc`) },
+    { id: 'Couples', name: t(`${ws}.couples.title`), icon: '❤️', desc: t(`${wf}.pkgCouplesDesc`) },
+    { id: 'Photobooks', name: t(`${ws}.photobooks.title`), icon: '📖', desc: t(`${wf}.pkgPhotobooksDesc`) },
+  ];
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -518,21 +523,21 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   const successContent = (
     <SuccessContent>
       <div className="icon">✓</div>
-      <h3>Thank You</h3>
-      <p>Your inquiry has been received. We'll be in touch within 24-48 hours to discuss your special day.</p>
-      <Button $primary onClick={onClose}>Close</Button>
+      <h3>{t(`${wf}.successTitle`)}</h3>
+      <p>{t(`${wf}.successMessage`)}</p>
+      <Button $primary onClick={onClose}>{t(`${wf}.close`)}</Button>
     </SuccessContent>
   );
 
   const formContent = submitStatus === 'success' ? successContent : (
     <Form onSubmit={handleSubmit}>
       <StepContent $active={step === 1}>
-        <StepTitle>Your Details</StepTitle>
+        <StepTitle>{t(`${wf}.step1Title`)}</StepTitle>
         <InputGroup>
-          <label>Full Name *</label>
+          <label>{t(`${wf}.fullName`)}</label>
           <Input
             type="text"
-            placeholder="Enter your name"
+            placeholder={t(`${wf}.namePlaceholder`)}
             required
             value={formData.name}
             onChange={e => setFormData({...formData, name: e.target.value})}
@@ -540,7 +545,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
         </InputGroup>
         <TwoColumn>
           <InputGroup>
-            <label>Email *</label>
+            <label>{t(`${wf}.email`)}</label>
             <Input
               type="email"
               placeholder="your@email.com"
@@ -550,7 +555,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
             />
           </InputGroup>
           <InputGroup>
-            <label>Phone</label>
+            <label>{t(`${wf}.phone`)}</label>
             <Input
               type="tel"
               placeholder="(123) 456-7890"
@@ -562,9 +567,9 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       </StepContent>
 
       <StepContent $active={step === 2}>
-        <StepTitle>Session Details</StepTitle>
+        <StepTitle>{t(`${wf}.step2Title`)}</StepTitle>
         <InputGroup>
-          <label>Choose a Package *</label>
+          <label>{t(`${wf}.choosePackage`)}</label>
         </InputGroup>
         <PackageGrid>
           {packages.map(pkg => (
@@ -582,7 +587,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
         </PackageGrid>
         <TwoColumn>
           <InputGroup>
-            <label>Preferred Date</label>
+            <label>{t(`${wf}.preferredDate`)}</label>
             <Input
               type="date"
               value={formData.date}
@@ -590,10 +595,10 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
             />
           </InputGroup>
           <InputGroup>
-            <label>Location</label>
+            <label>{t(`${wf}.location`)}</label>
             <Input
               type="text"
-              placeholder="City or venue"
+              placeholder={t(`${wf}.locationPlaceholder`)}
               value={formData.location}
               onChange={e => setFormData({...formData, location: e.target.value})}
             />
@@ -602,37 +607,37 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       </StepContent>
 
       <StepContent $active={step === 3}>
-        <StepTitle>Tell Us More</StepTitle>
+        <StepTitle>{t(`${wf}.step3Title`)}</StepTitle>
         <InputGroup>
-          <label>Your Vision *</label>
+          <label>{t(`${wf}.yourVision`)}</label>
           <TextArea
-            placeholder="Share your ideas, style preferences, and what you're looking for..."
+            placeholder={t(`${wf}.visionPlaceholder`)}
             required
             value={formData.message}
             onChange={e => setFormData({...formData, message: e.target.value})}
           />
         </InputGroup>
         <InputGroup>
-          <label>About You (Optional)</label>
+          <label>{t(`${wf}.aboutYou`)}</label>
           <TextArea
-            placeholder="Tell us a bit about yourselves and your story..."
+            placeholder={t(`${wf}.aboutPlaceholder`)}
             value={formData.about}
             onChange={e => setFormData({...formData, about: e.target.value})}
           />
         </InputGroup>
         <InputGroup>
-          <label>How did you find us?</label>
+          <label>{t(`${wf}.howFound`)}</label>
           <SelectWrapper>
             <Select
               value={formData.referral}
               onChange={e => setFormData({...formData, referral: e.target.value})}
             >
-              <option value="">Select an option</option>
+              <option value="">{t(`${wf}.selectOption`)}</option>
               <option value="Google">Google</option>
               <option value="Instagram">Instagram</option>
               <option value="Facebook">Facebook</option>
-              <option value="Friend">Friend Referral</option>
-              <option value="Other">Other</option>
+              <option value="Friend">{t(`${wf}.friendReferral`)}</option>
+              <option value="Other">{t(`${wf}.other`)}</option>
             </Select>
           </SelectWrapper>
         </InputGroup>
@@ -641,16 +646,16 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       <ButtonRow>
         {step > 1 && (
           <Button type="button" onClick={handlePrev}>
-            ← Back
+            {t(`${wf}.back`)}
           </Button>
         )}
         {step < totalSteps ? (
           <Button type="button" $primary onClick={handleNext}>
-            Continue →
+            {t(`${wf}.continue`)}
           </Button>
         ) : (
           <Button type="submit" $primary disabled={isSubmitting} $loading={isSubmitting}>
-            {isSubmitting ? <><Spinner /> Sending...</> : 'Send Inquiry'}
+            {isSubmitting ? <><Spinner /> {t(`${wf}.sending`)}</> : t(`${wf}.send`)}
           </Button>
         )}
       </ButtonRow>
@@ -659,7 +664,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
 
   const notification = (submitStatus === 'success' || submitStatus === 'error') && (
     <Notification $type={submitStatus}>
-      {submitStatus === 'success' ? '✓ Sent successfully!' : errorMessage || 'Failed to send. Please try again.'}
+      {submitStatus === 'success' ? t(`${wf}.sentSuccess`) : errorMessage || t(`${wf}.failedSend`)}
     </Notification>
   );
 
@@ -667,8 +672,8 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
     return (
       <ModalContent $embedded>
         <FormHeader>
-          <h2>Let's Create Magic</h2>
-          <p>Tell us about your special day</p>
+          <h2>{t(`${wf}.heading`)}</h2>
+          <p>{t(`${wf}.subheading`)}</p>
         </FormHeader>
         <StepIndicator>
           {[1, 2, 3].map(s => (
@@ -691,8 +696,8 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       <ModalContent onClick={e => e.stopPropagation()}>
         <CloseButton onClick={onClose}>×</CloseButton>
         <FormHeader>
-          <h2>Let's Create Magic</h2>
-          <p>Tell us about your special day</p>
+          <h2>{t(`${wf}.heading`)}</h2>
+          <p>{t(`${wf}.subheading`)}</p>
         </FormHeader>
         <StepIndicator>
           {[1, 2, 3].map(s => (

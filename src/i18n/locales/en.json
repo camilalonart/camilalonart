@@ -174,7 +174,119 @@
   "photography": {
     "wedding": {
       "title": "Wedding & Couples",
-      "description": "Timeless moments of love and connection"
+      "description": "Timeless moments of love and connection",
+      "hero": {
+        "title": "Elopement & Couples Photography",
+        "subtitle": "Vancouver-based photography for elopements, engagements, and love stories.",
+        "cta": "Inquire Now"
+      },
+      "intro1": "I'm a Vancouver-based photographer capturing love stories with depth and emotion, I'm here to preserve your most meaningful moments.",
+      "intro2": "Whether it's the intimate emotion of an elopement, the joy of an engagement, or a shared moment on an ordinary day... these are once in a lifetime memories. They deserve to be captured with care and creativity, so you can relive them, share them, and pass them down for years to come.",
+      "services": {
+        "heading": "Services",
+        "startingAt": "Starting at",
+        "inquireNow": "Inquire Now",
+        "elopements": {
+          "title": "Elopements",
+          "description": "Every elopement deserves care and attention. I'll help you document your day in a way that feels real, relaxed, and true to you.",
+          "f1": "Up to 3 hours of coverage",
+          "f2": "30 edited photos, high-resolution",
+          "f3": "Pre-session consultation",
+          "f4": "Add-on: All unedited images +$100",
+          "f5": "Add-on: Extra hour of coverage +$100"
+        },
+        "engagement": {
+          "title": "Engagement Session",
+          "description": "Whether it's right after the proposal or sometime in the weeks that follow, I'll help you to capture the moment you said 'yes'.",
+          "f1": "1.5-hour session",
+          "f2": "30 edited, high-resolution images",
+          "f3": "Pre-session consultation",
+          "f4": "Add-on: All unedited images +$100",
+          "f5": "Add-on: Additional location +$100"
+        },
+        "couples": {
+          "title": "Couples Sessions",
+          "description": "Whether it's an anniversary, a weekend away, or just the way you are right now...",
+          "f1": "1-hour session - 1 location",
+          "f2": "Outfit change",
+          "f3": "30 edited, high-resolution images",
+          "f4": "Add-on: All unedited images +$50",
+          "f5": "Add-on: Additional location +$100"
+        },
+        "photobooks": {
+          "title": "Photobooks",
+          "description": "These photobooks are carefully designed to preserve your session or wedding in a beautiful, lasting format.",
+          "f1": "Custom design with your favorite images",
+          "f2": "Size: 8x8in - 20 spreads (40 pages)",
+          "f3": "Ships within 4 weeks after final approval",
+          "f4": "Add-on: Extra spreads +$10 each"
+        }
+      },
+      "process": {
+        "heading": "Our Process",
+        "s1t": "Reach Out",
+        "s1d": "Send me a message through the contact form with a few details about what you're planning. I'll reply with next steps",
+        "s2t": "Plan",
+        "s2d": "We get to know you and your vision. Locations, styles, mood boards",
+        "s3t": "Shoot",
+        "s3d": "Professional equipment. I'll gently direct when needed, but mostly capture how things unfold naturally.",
+        "s4t": "Edit",
+        "s4d": "High-quality post-processing",
+        "s5t": "Deliver",
+        "s5d": "1–2 weeks, you'll receive a private online gallery with your edited images"
+      },
+      "gallerySection": {
+        "heading": "View Our Gallery",
+        "description": "Explore our complete collection of wedding, engagement, and couples photography. Each image tells a unique story of love and connection.",
+        "cta": "View Full Gallery"
+      },
+      "testimonial": {
+        "quote": "Camila photographed our wedding, and we couldn't be happier with the results. She captured every special moment so beautifully and naturally. Her work is heartfelt, professional, and absolutely stunning. We trust her completely and recommend her to anyone looking for timeless, meaningful photos.",
+        "author": "Ana & Jorge (Vancouver Elopement)"
+      },
+      "footer": {
+        "contact": "Contact",
+        "contactTagline": "Let's create something beautiful together",
+        "followAlong": "Follow Along",
+        "copyright": "All rights reserved.",
+        "copyrightNotice": "All photographs and content are protected by copyright law and may not be reproduced, distributed, transmitted, displayed, or published without written permission."
+      },
+      "form": {
+        "heading": "Let's Create Magic",
+        "subheading": "Tell us about your special day",
+        "step1Title": "Your Details",
+        "step2Title": "Session Details",
+        "step3Title": "Tell Us More",
+        "fullName": "Full Name *",
+        "namePlaceholder": "Enter your name",
+        "email": "Email *",
+        "phone": "Phone",
+        "choosePackage": "Choose a Package *",
+        "preferredDate": "Preferred Date",
+        "location": "Location",
+        "locationPlaceholder": "City or venue",
+        "yourVision": "Your Vision *",
+        "visionPlaceholder": "Share your ideas, style preferences, and what you're looking for...",
+        "aboutYou": "About You (Optional)",
+        "aboutPlaceholder": "Tell us a bit about yourselves and your story...",
+        "howFound": "How did you find us?",
+        "selectOption": "Select an option",
+        "friendReferral": "Friend Referral",
+        "other": "Other",
+        "back": "← Back",
+        "continue": "Continue →",
+        "send": "Send Inquiry",
+        "sending": "Sending...",
+        "close": "Close",
+        "successTitle": "Thank You",
+        "successMessage": "Your inquiry has been received. We'll be in touch within 24-48 hours to discuss your special day.",
+        "sentSuccess": "✓ Sent successfully!",
+        "failedSend": "Failed to send. Please try again.",
+        "pkgElopementDesc": "Intimate ceremony",
+        "pkgEngagementDesc": "Celebrate your love",
+        "pkgCouplesDesc": "Portrait session",
+        "pkgPhotobooksDesc": "Custom albums"
+      }
     },
     "pets": {
       "title": "Pet Photography",
