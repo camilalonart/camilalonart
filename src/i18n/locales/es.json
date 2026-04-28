@@ -161,7 +161,15 @@
     "beingCurated": "Esta colección está siendo curada.",
     "collaborativeWorksAdded": "Se están añadiendo obras colaborativas.",
     "viewLink": "Ver →",
-    "details": "Detalles"
+    "details": "Detalles",
+    "footer": {
+      "mediums": "Óleo · Acrílico · Técnica Mixta · Acuarela",
+      "tagline": "Pinturas originales, encargos y prints",
+      "follow": "Seguir",
+      "fullName": "María Camila Londoño Arteaga",
+      "locations": "Vancouver, BC · Bogotá, Colombia",
+      "keywords": "Pintura al óleo · Acrílico sobre lienzo · Técnica mixta · Arte plástico · Pinturas originales · Encargos · Pintora colombiana · Artista en Vancouver · Arte contemporáneo · Pintura figurativa · Prints de arte · Retrato · Paisaje"
+    }
   },
   "photography": {
     "wedding": {

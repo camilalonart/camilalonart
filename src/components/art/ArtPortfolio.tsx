@@ -768,17 +768,139 @@ const SelectedWorkCard = styled(Link)`
 // ─── Footer ──────────────────────────────────────────────────────────────────
 const Footer = styled.footer`
   border-top: 1px solid ${C.border};
-  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+  background: ${C.bg};
+`;
+
+const FooterGrid = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+
+  @media (max-width: 768px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 480px) { grid-template-columns: 1fr; }
+`;
+
+const FooterCol = styled.div``;
+
+const FooterArtistName = styled.p`
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${C.text};
+  margin: 0 0 0.2rem;
+`;
+
+const FooterArtistFullName = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.12em;
+  color: ${C.gold};
+  opacity: 0.6;
+  margin: 0 0 0.6rem;
+  font-style: italic;
+`;
+
+const FooterKeywordsStrip = styled.div`
+  border-top: 1px solid ${C.border};
+  padding: 1rem clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  color: ${C.dim};
+  line-height: 1.8;
+`;
+
+const FooterColHeading = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: ${C.gold};
+  margin: 0 0 1.2rem;
+`;
+
+const FooterMeta = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  margin: 0 0 0.3rem;
+`;
+
+const FooterMediums = styled.p`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${C.dim};
+  margin: 1rem 0 0;
+`;
+
+const FooterNavList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+`;
+
+const FooterNavLink = styled(Link)`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover { color: ${C.gold}; }
+`;
+
+const FooterSocialLink = styled.a`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  &:hover { color: ${C.gold}; }
+`;
+
+const FooterEmailLink = styled.a`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.12em;
+  color: ${C.muted};
+  text-decoration: none;
+  display: block;
+  margin-bottom: 1.2rem;
+  transition: color 0.2s;
+
+  &:hover { color: ${C.gold}; }
+`;
+
+const FooterBottom = styled.div`
+  border-top: 1px solid ${C.border};
+  padding: 1.2rem clamp(1.5rem, 5vw, 5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.8rem;
 `;
 
 const FooterText = styled.p`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: ${C.muted};
@@ -1047,12 +1169,64 @@ export default function ArtPortfolio() {
 
       {/* ── Footer ── */}
       <Footer>
-        <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
-        </FooterText>
-        <FooterText>
-          <FooterGold>@camilalonart</FooterGold>
-        </FooterText>
+        <FooterGrid>
+          <FooterCol>
+            <FooterArtistName>Camila Londoño</FooterArtistName>
+            <FooterArtistFullName>{t('art.footer.fullName')}</FooterArtistFullName>
+            <FooterMeta>{t('art.footer.locations')}</FooterMeta>
+            <FooterMeta>{t('art.fineArtist')}</FooterMeta>
+            <FooterMediums>{t('art.footer.mediums')}</FooterMediums>
+          </FooterCol>
+
+          <FooterCol>
+            <FooterColHeading>{t('art.explore')}</FooterColHeading>
+            <FooterNavList>
+              <li><FooterNavLink href="/art/collections">{t('art.traditional.collections')}</FooterNavLink></li>
+              <li><FooterNavLink href="/art/all-paintings">{t('art.traditional.allPaintings')}</FooterNavLink></li>
+              <li><FooterNavLink href="/art/early-first-paintings">{t('art.traditional.earlyPaintings')}</FooterNavLink></li>
+              <li><FooterNavLink href="/art/collaborations">{t('art.traditional.collaborations')}</FooterNavLink></li>
+              <li><FooterNavLink href="/art/about">{t('art.aboutTheArtist')}</FooterNavLink></li>
+              <li><FooterNavLink href="/art#contact-section">{t('art.contact.commissionRequest')}</FooterNavLink></li>
+            </FooterNavList>
+          </FooterCol>
+
+          <FooterCol>
+            <FooterColHeading>{t('nav.contact')}</FooterColHeading>
+            <FooterEmailLink href="mailto:camilalonart@gmail.com">
+              camilalonart@gmail.com
+            </FooterEmailLink>
+            <FooterNavList>
+              <li>
+                <FooterSocialLink href={data.about.instagram1Url} target="_blank" rel="noopener noreferrer">
+                  <IgIcon />{data.about.instagram1Handle}
+                </FooterSocialLink>
+              </li>
+              <li>
+                <FooterSocialLink href={data.about.instagram2Url} target="_blank" rel="noopener noreferrer">
+                  <IgIcon />{data.about.instagram2Handle}
+                </FooterSocialLink>
+              </li>
+              <li>
+                <FooterSocialLink href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer">
+                  Behance
+                </FooterSocialLink>
+              </li>
+            </FooterNavList>
+          </FooterCol>
+        </FooterGrid>
+
+        <FooterKeywordsStrip>
+          {t('art.footer.keywords')}
+        </FooterKeywordsStrip>
+
+        <FooterBottom>
+          <FooterText>
+            © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold> · <FooterGold>{t('art.footer.fullName')}</FooterGold>. {t('art.allRightsReserved')}
+          </FooterText>
+          <FooterText>
+            <FooterGold>@camilalonart</FooterGold>
+          </FooterText>
+        </FooterBottom>
       </Footer>
 
       {/* ── Lightbox ── */}

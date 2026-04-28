@@ -161,7 +161,15 @@
     "beingCurated": "This collection is being curated.",
     "collaborativeWorksAdded": "Collaborative works are being added.",
     "viewLink": "View →",
-    "details": "Details"
+    "details": "Details",
+    "footer": {
+      "mediums": "Oil · Acrylic · Mixed Media · Watercolor",
+      "tagline": "Original paintings, commissions & prints",
+      "follow": "Follow",
+      "fullName": "María Camila Londoño Arteaga",
+      "locations": "Vancouver, BC · Bogotá, Colombia",
+      "keywords": "Oil painting · Acrylic on canvas · Mixed media · Fine art · Original paintings · Commissions · Colombian artist · Vancouver artist · Contemporary art · Figurative painting · Art prints · Portrait painting · Landscape"
+    }
   },
   "photography": {
     "wedding": {
