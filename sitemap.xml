@@ -5,15 +5,35 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.camilalonart.com/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
+  </url>
+
+  <!-- Art Gallery — Camila Londoño (highest priority for name searches) -->
+  <url>
+    <loc>https://www.camilalonart.com/art/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://www.camilalonart.com/images/art/traditionalArt/Carrying Home/We.webp</image:loc>
+      <image:title>Camila Londoño — Oil Paintings Gallery | camilalonart</image:title>
+      <image:caption>Original oil paintings by Camila Londoño (Maria Camila Londoño Arteaga), Vancouver BC artist</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.camilalonart.com/art/contact/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 
   <!-- Photography Services - High Priority -->
   <url>
     <loc>https://www.camilalonart.com/photography/wedding-couples/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -25,7 +45,7 @@
 
   <url>
     <loc>https://www.camilalonart.com/photography/pets/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -37,7 +57,7 @@
 
   <url>
     <loc>https://www.camilalonart.com/photography/headshots/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -49,7 +69,7 @@
 
   <url>
     <loc>https://www.camilalonart.com/photography/family-maternity/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -57,21 +77,21 @@
   <!-- Gallery Pages -->
   <url>
     <loc>https://www.camilalonart.com/photography/wedding-couples/gallery/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/photography/pets/gallery/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/photography/headshots/gallery/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -79,96 +99,82 @@
   <!-- My Art Section -->
   <url>
     <loc>https://www.camilalonart.com/my-art/wildlife-photography/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/my-art/wildlife-photography/gallery/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.camilalonart.com/my-art/digital-art/</loc>
-    <lastmod>2025-12-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.camilalonart.com/my-art/traditional-art/</loc>
-    <lastmod>2025-12-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/my-art/everyday-photography/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/my-art/blog/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.65</priority>
   </url>
 
   <!-- Creative Services -->
   <url>
     <loc>https://www.camilalonart.com/creative-services/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/creative-services/brand-identity/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/creative-services/graphic-recording/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/creative-services/ux-ui-design/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://www.camilalonart.com/creative-services/art-classes/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.75</priority>
   </url>
 
   <!-- Tech Section -->
   <url>
     <loc>https://www.camilalonart.com/tech/courses/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.65</priority>
   </url>
 
   <!-- Portfolio -->
   <url>
     <loc>https://www.camilalonart.com/portfolio/</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.80</priority>
   </url>
 
 </urlset>
