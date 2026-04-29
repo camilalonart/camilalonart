@@ -15,7 +15,9 @@
     "refs-check": "node scripts/update-image-refs.js",
     "refs-update": "node scripts/update-image-refs.js --update",
     "video-check": "node scripts/video-convert.js",
-    "video-convert": "node scripts/video-convert.js --convert"
+    "video-convert": "node scripts/video-convert.js --convert",
+    "video-cleanup-check": "node scripts/video-cleanup.js",
+    "video-cleanup": "node scripts/video-cleanup.js --delete"
   },
   "keywords": [],
   "author": "",

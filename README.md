@@ -191,12 +191,14 @@ npm run webp-cleanup
 
 **3. Procesa los videos** (requiere `ffmpeg`):
 ```sh
-npm run video-check      # previsualiza qué se procesaría (sin cambios)
-npm run video-convert    # comprime y extrae poster
+npm run video-check         # previsualiza qué se procesaría (sin cambios)
+npm run video-convert       # comprime y extrae poster
+npm run video-cleanup-check # muestra qué originales se borrarían (sin cambios)
+npm run video-cleanup       # borra los videos originales que ya tienen su _opt.mp4
 ```
 
 > ⚠️ Requiere `ffmpeg`: instálalo una vez con `brew install ffmpeg`
-> ⚠️ Guarda los videos originales en un disco externo — solo sube los `_opt.mp4` al repo
+> ⚠️ Guarda los videos originales en un disco externo ANTES de correr `video-cleanup`
 
 El script genera por cada video:
 - `proceso_opt.mp4` — comprimido, sin audio, listo para web
@@ -259,6 +261,7 @@ npm run webp-check         # muestra qué imágenes se convertirán (sin cambios
 npm run webp-cleanup-check # muestra qué originales se borrarían (sin cambios)
 npm run refs-check         # muestra qué referencias en el código cambiarían (sin cambios)
 npm run video-check        # muestra qué videos se procesarían (sin cambios)
+npm run video-cleanup-check # muestra qué originales se borrarían (sin cambios)
 ```
 
 ---
@@ -279,13 +282,14 @@ npm run refs-update           # actualiza referencias .jpg → .webp en el códi
 
 # Videos (arte tradicional)
 npm run video-convert         # comprime videos y extrae poster frames
-npm run video-check           # previsualiza sin modificar nada
+npm run video-cleanup         # borra los videos originales que ya tienen su _opt.mp4
 
 # Previsualizaciones (no modifican nada)
 npm run webp-check
 npm run webp-cleanup-check
 npm run refs-check
 npm run video-check
+npm run video-cleanup-check
 ```
 
 ---
