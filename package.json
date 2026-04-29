@@ -13,7 +13,9 @@
     "webp-cleanup-check": "node scripts/webp-cleanup.js",
     "webp-cleanup": "node scripts/webp-cleanup.js --delete",
     "refs-check": "node scripts/update-image-refs.js",
-    "refs-update": "node scripts/update-image-refs.js --update"
+    "refs-update": "node scripts/update-image-refs.js --update",
+    "video-check": "node scripts/video-convert.js",
+    "video-convert": "node scripts/video-convert.js --convert"
   },
   "keywords": [],
   "author": "",

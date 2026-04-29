@@ -1,3 +1,10 @@
+export interface DetailVideo {
+  type: 'video';
+  src: string;
+  poster: string;
+}
+
+// details[] mixes image paths (string) and videos (DetailVideo)
 export interface Painting {
   id: string;
   title: string;
@@ -7,7 +14,7 @@ export interface Painting {
   images: string[];
   thoughts?: string;
   thoughtsEs?: string;
-  additionalImages?: string[];
+  details?: Array<string | DetailVideo>;
 }
 
 export interface Collection {

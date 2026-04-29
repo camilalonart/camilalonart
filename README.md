@@ -172,6 +172,62 @@ git push origin main
 
 ---
 
+### Agregar fotos y videos de detalles a una pintura
+
+La página de cada pintura puede mostrar una sección "Details" con imágenes y videos mezclados. Los videos muestran un thumbnail estático hasta que el visitante hace clic — no se descarga ningún byte de video hasta ese momento.
+
+**1. Coloca los archivos** en la carpeta de la pintura:
+```
+public/images/art/traditionalArt/Tu Colección/
+  proceso.mov        ← video crudo (cualquier formato)
+  detalle1.jpg       ← foto de detalle
+```
+
+**2. Convierte imágenes a WebP** (como siempre):
+```sh
+npm run webp-convert
+npm run webp-cleanup
+```
+
+**3. Procesa los videos** (requiere `ffmpeg`):
+```sh
+npm run video-check      # previsualiza qué se procesaría (sin cambios)
+npm run video-convert    # comprime y extrae poster
+```
+
+> ⚠️ Requiere `ffmpeg`: instálalo una vez con `brew install ffmpeg`
+> ⚠️ Guarda los videos originales en un disco externo — solo sube los `_opt.mp4` al repo
+
+El script genera por cada video:
+- `proceso_opt.mp4` — comprimido, sin audio, listo para web
+- `proceso_poster.webp` — primer frame como thumbnail
+
+**4. Registra los detalles** en `src/data/artPortfolio.ts` con el campo `details`:
+
+```ts
+{
+  id: "painting-01",
+  title: "Título",
+  materials: "Óleo",
+  size: "70 × 90 cm",
+  year: 2024,
+  images: ["/images/art/traditionalArt/Tu Colección/principal.webp"],
+  details: [
+    "/images/art/traditionalArt/Tu Colección/detalle1.webp",   // imagen
+    {
+      type: "video",
+      src: "/images/art/traditionalArt/Tu Colección/proceso_opt.mp4",
+      poster: "/images/art/traditionalArt/Tu Colección/proceso_poster.webp",
+    },
+    "/images/art/traditionalArt/Tu Colección/detalle2.webp",   // imagen
+  ],
+}
+```
+
+El orden del array controla el orden en el grid.
+
+---
+
 ### Agregar un escrito largo a una pintura ("Artist's Statement")
 
 Si quieres que una pintura tenga un escrito personal que se muestre solo en su página:
@@ -202,6 +258,7 @@ Cada comando destructivo tiene una versión de previsualización:
 npm run webp-check         # muestra qué imágenes se convertirán (sin cambios)
 npm run webp-cleanup-check # muestra qué originales se borrarían (sin cambios)
 npm run refs-check         # muestra qué referencias en el código cambiarían (sin cambios)
+npm run video-check        # muestra qué videos se procesarían (sin cambios)
 ```
 
 ---
@@ -220,10 +277,15 @@ npm run webp-cleanup          # borra originales que ya tienen .webp
 npm run generate-images       # regenera los JSON de galerías (pets/bodas/wildlife)
 npm run refs-update           # actualiza referencias .jpg → .webp en el código
 
+# Videos (arte tradicional)
+npm run video-convert         # comprime videos y extrae poster frames
+npm run video-check           # previsualiza sin modificar nada
+
 # Previsualizaciones (no modifican nada)
 npm run webp-check
 npm run webp-cleanup-check
 npm run refs-check
+npm run video-check
 ```
 
 ---

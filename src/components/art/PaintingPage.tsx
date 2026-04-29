@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import data, { type Painting, type Collection, localizedMaterials, localizedThoughts } from '../../data/artPortfolio';
+import data, { type Painting, type Collection, type DetailVideo, localizedMaterials, localizedThoughts } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -277,6 +277,57 @@ const DetailImage = styled.img`
   }
 `;
 
+const DetailVideoWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  break-inside: avoid;
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const DetailVideoPoster = styled.img`
+  width: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+`;
+
+const DetailVideoEl = styled.video`
+  width: 100%;
+  display: block;
+`;
+
+const PlayButton = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  transition: background 0.2s;
+
+  ${DetailVideoWrapper}:hover & {
+    background: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const PlayIcon = styled.div`
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(200, 168, 122, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(200, 168, 122, 0.9);
+  font-size: 1rem;
+  padding-left: 3px;
+`;
+
 // ─── Navigation ────────────────────────────────────────────────────
 const NavBar = styled.div`
   display: flex;
@@ -329,6 +380,47 @@ const NavCounter = styled.span`
   text-align: center;
   min-width: 100px;
 `;
+
+// ─── VideoThumb ────────────────────────────────────────────────────
+function VideoThumb({ src, poster }: DetailVideo) {
+  const [active, setActive] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const activate = () => {
+    setActive(true);
+    // play() runs after the video element mounts on next render
+  };
+
+  useEffect(() => {
+    if (active && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [active]);
+
+  return (
+    <DetailVideoWrapper onClick={!active ? activate : undefined}>
+      {active ? (
+        <DetailVideoEl
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          preload="auto"
+          playsInline
+          muted
+          loop
+          controls
+        />
+      ) : (
+        <>
+          <DetailVideoPoster src={poster} alt="video" draggable={false} onContextMenu={e => e.preventDefault()} />
+          <PlayButton>
+            <PlayIcon>▶</PlayIcon>
+          </PlayButton>
+        </>
+      )}
+    </DetailVideoWrapper>
+  );
+}
 
 // ─── Component ─────────────────────────────────────────────────────
 interface PaintingPageProps {
@@ -436,20 +528,24 @@ export default function PaintingPage({
         </MainGrid>
 
         {/* Details Collage */}
-        {painting.additionalImages && painting.additionalImages.length > 0 && (
+        {painting.details && painting.details.length > 0 && (
           <DetailsSection>
             <DetailsLabel>{t('art.details')}</DetailsLabel>
             <DetailsGrid>
-              {painting.additionalImages.map((src, i) => (
-                <DetailImage
-                  key={i}
-                  src={src}
-                  alt={`Detail ${i + 1}`}
-                  loading="lazy"
-                  draggable={false}
-                  onContextMenu={e => e.preventDefault()}
-                />
-              ))}
+              {painting.details.map((item, i) =>
+                typeof item === 'string' ? (
+                  <DetailImage
+                    key={i}
+                    src={item}
+                    alt={`Detail ${i + 1}`}
+                    loading="lazy"
+                    draggable={false}
+                    onContextMenu={e => e.preventDefault()}
+                  />
+                ) : (
+                  <VideoThumb key={i} {...item} />
+                )
+              )}
             </DetailsGrid>
           </DetailsSection>
         )}
