@@ -814,9 +814,9 @@ const data: ArtPortfolioData = {
           title: "Precio",
           materials: "Graphite and ink",
           size: "8.27 × 11.69 in",
-          year: 2021,
+          year: 2016,
           images: ["/images/art/traditionalArt/Blanco y Negro/Precio.webp"],
-        },
+        }
       ],
     },
     {
@@ -973,6 +973,20 @@ const data: ArtPortfolioData = {
       descriptionEs: "Una colección de obras que no encajan en una sola serie: experimentos, regalos y observaciones tranquilas.",
       paintings: [
         {
+          id: "otros-azul",
+          title: "Azul",
+          materials: "Mixed media",
+          size: "11.7x8.26in",
+          year: 2025,
+          images: ["/images/art/traditionalArt/Otros/Detalles/Azul.webp"],
+          details: [
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso1.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso2.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso3.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso4.webp",
+          ],
+        },
+        {
           id: "otros-menta",
           title: "Menta",
           materials: "Pencil, Watercolor",
@@ -1019,20 +1033,6 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Otros/VancouverParaKen.webp"],
           details: [],
-        },
-        {
-          id: "otros-azul",
-          title: "Azul",
-          materials: "Mixed media",
-          size: "11.7x8.26in",
-          year: 2025,
-          images: [],
-          details: [
-            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso1.webp",
-            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso2.webp",
-            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso3.webp",
-            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso4.webp",
-          ],
         },
         {
           id: "otros-universidadsimonbolivarparaandres",
@@ -2909,6 +2909,8 @@ export const COLLECTIONS_ORDER = [
   'pandemic-lockdown',
   'mis-raices',
   'blanco-y-negro',
+  'colorful',
+  'otros',
   'red-doodles',
   'yellow',
   'dibujitos-para-will',
