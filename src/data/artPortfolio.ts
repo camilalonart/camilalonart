@@ -99,6 +99,8 @@ const data: ArtPortfolioData = {
           ],
           details: [
             "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles2.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles1.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/proceso-carryinghome.webp",
           ],
         },
         {
@@ -113,6 +115,11 @@ const data: ArtPortfolioData = {
             "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles5.webp",
             "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles6.webp",
             "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles7.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles0.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles1.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles2.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/ProcesoIntransit.webp",
           ],
           thoughts: "Un homenaje a quienes viven lejos de donde nacieron… a quienes un día se fueron y tuvieron que aprender a ser de nuevo."
         },
@@ -286,6 +293,19 @@ const data: ArtPortfolioData = {
           size: "13 x 11 in",
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/FirstLove.webp"],
+          details: [
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-0C64976E-FDA3-4068-A2FD-158C4C00D3BD.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-4563A3A5-73F2-4461-B1AA-D2F2FE492B89.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-71EB87D7-1951-4F69-A708-50736B66ABCA.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-7943E1A7-EE96-41FE-A600-59D35175777D.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-81230E14-8552-4F48-9D9F-F51ECFD59D10.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-86523B1C-5D89-444E-8A55-EB3D99AA9B3E.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-98E6CFC9-C081-4252-A013-D5479ECEE1FD.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-B6048329-8CC1-4591-B0BB-DDDF08B3192D.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-B741EC7A-D470-4804-86A4-37B2FF894C9A.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-CA95AEE0-86FA-4ADF-B29F-B6EF149E2B11.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-EA7F41A0-7C4F-4700-9826-F9CB1353051F.MP4_poster.webp",
+          ],
         },
         {
           id: "essential-02",
@@ -415,6 +435,11 @@ const data: ArtPortfolioData = {
           size: "11 x 13 in",
           year: 2016,
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp"],
+          details: [
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/camaleon-proceso.MP4_poster.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/filtered-D9773DF1-0745-4A14-96F9-5AA876A2BDB6.MP4_poster.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/filtered-D9CE4C41-202B-4804-ABEF-4B5FA62B8F05.MP4_poster.webp",
+          ],
         },
         {
           id: "siempre-03",
@@ -452,6 +477,13 @@ const data: ArtPortfolioData = {
           size: "11 x 13 in",
           year: 2016,
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp"],
+          details: [
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3204.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3205.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3206.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3209.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/tragicpolitics-sosteniendoeldibujo copy.webp",
+          ],
         },
       ],
     },
@@ -531,6 +563,10 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2016,
           images: ["/images/art/traditionalArt/Yellow/Escultura.webp"],
+          details: [
+            "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles1_poster.webp",
+            "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles2_poster.webp",
+          ],
         },
         {
           id: "yellow-04",
@@ -555,6 +591,11 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2016,
           images: ["/images/art/traditionalArt/Yellow/Abrazarme.webp"],
+          details: [
+            "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles1_poster.webp",
+            "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles2_poster.webp",
+            "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles3_poster.webp",
+          ],
         },
         {
           id: "yellow-07",
@@ -588,6 +629,10 @@ const data: ArtPortfolioData = {
           size: "",
           year: 2022,
           images: ["/images/art/traditionalArt/Perspective/NotAsNaive.webp"],
+          details: [
+            "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso1.webp",
+            "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso2_poster.webp",
+          ],
         },
         {
           id: "perspective-03",
@@ -637,6 +682,9 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2020,
           images: ["/images/art/traditionalArt/Pandemic Lockdown/EnUnRinconDeMiMente.webp"],
+          details: [
+            "/images/art/traditionalArt/Pandemic Lockdown/Detalles/EnUnRinconDeMiMente_Proceso.webp",
+          ],
         },
         {
           id: "pandemic-04",
@@ -645,6 +693,11 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2020,
           images: ["/images/art/traditionalArt/Pandemic Lockdown/Pandemic.webp"],
+          details: [
+            "/images/art/traditionalArt/Pandemic Lockdown/Detalles/Pandemic_Proceso1.webp",
+            "/images/art/traditionalArt/Pandemic Lockdown/Detalles/Pandemic_Proceso2.webp",
+            "/images/art/traditionalArt/Pandemic Lockdown/Detalles/Pandemic_Proceso3.webp",
+          ],
         },
       ],
     },
@@ -664,7 +717,11 @@ const data: ArtPortfolioData = {
           images: ["/images/art/traditionalArt/Mis Raices/AvesDelQuindio.webp"],
           details: [
             "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles1.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles2.webp",
             "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles3.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles4.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles5.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles6.webp",
           ],
         },
         {
@@ -674,6 +731,10 @@ const data: ArtPortfolioData = {
           size: "",
           year: 2022,
           images: ["/images/art/traditionalArt/Mis Raices/Colombia.webp"],
+          details: [
+            "/images/art/traditionalArt/Mis Raices/Detalles/Colombia_Detalles1.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Colombia_Detalles2.webp",
+          ],
         },
         {
           id: "mis-raices-03",
@@ -702,7 +763,10 @@ const data: ArtPortfolioData = {
           size: "11.7x8.26in",
           year: 2025,
           images: ["/images/art/traditionalArt/Mis Raices/Guacamaya.webp"],
-          details: [],
+          details: [
+            "/images/art/traditionalArt/Mis Raices/Detalles/Guacamaya_Detalles1.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Guacamaya_Detalles2.webp",
+          ],
         },
       ],
     },
@@ -846,7 +910,11 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp"],
           details: [
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles0.webp",
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles1.webp",
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles2.webp",
             "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles3.webp",
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles4.webp",
           ],
         },
         {
@@ -877,7 +945,6 @@ const data: ArtPortfolioData = {
             "/images/art/traditionalArt/Colorful/Detalles/Nana_Detalles0.webp",
             "/images/art/traditionalArt/Colorful/Detalles/Nana_Detalles1.webp",
             "/images/art/traditionalArt/Colorful/Detalles/Nana_Detalles2.webp",
-            "/images/art/traditionalArt/Colorful/Detalles/Nana_Detalles3.webp",
             "/images/art/traditionalArt/Colorful/Detalles/Nana_Detalles3.webp",
           ],
         },
@@ -930,7 +997,10 @@ const data: ArtPortfolioData = {
           size: "16.5x11.7in",
           year: 2025,
           images: ["/images/art/traditionalArt/Otros/Rojo.webp"],
-          details: [],
+          details: [
+            "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso1_poster.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso2_poster.webp",
+          ],
         },
         {
           id: "otros-vpl",
@@ -949,6 +1019,32 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Otros/VancouverParaKen.webp"],
           details: [],
+        },
+        {
+          id: "otros-azul",
+          title: "Azul",
+          materials: "Mixed media",
+          size: "11.7x8.26in",
+          year: 2025,
+          images: [],
+          details: [
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso1.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso2.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso3.webp",
+            "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso4.webp",
+          ],
+        },
+        {
+          id: "otros-universidadsimonbolivarparaandres",
+          title: "Universidad Simon Bolivar Para Andres",
+          materials: "Mixed media",
+          size: "",
+          year: 2025,
+          images: ["/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres.webp"],
+          details: [
+            "/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres_Proceso1.webp",
+            "/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres_Proceso2.webp",
+          ],
         },
       ],
     },
