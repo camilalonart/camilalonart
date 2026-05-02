@@ -107,8 +107,8 @@ Sigue estos pasos para cada galería:
 **2. Convierte a WebP y limpia**:
 
 ```sh
-npm run webp-convert      # convierte los JPGs nuevos a WebP (omite los que ya están)
-npm run webp-cleanup      # borra los JPGs originales que ya tienen su .webp
+npm run webp-convert      # convierte los JPGs/PNGs/HEICs nuevos a WebP (omite los que ya están)
+npm run webp-cleanup      # borra los originales (JPG/PNG/HEIC) que ya tienen su .webp
 npm run generate-images   # regenera automáticamente el JSON de la galería
 ```
 
@@ -136,8 +136,8 @@ public/images/art/traditionalArt/Tu Colección/
 
 **3. Convierte a WebP**:
 ```sh
-npm run webp-convert      # convierte todo a WebP
-npm run webp-cleanup      # borra los originales
+npm run webp-convert      # convierte todo a WebP (JPG/PNG/HEIC → WebP)
+npm run webp-cleanup      # borra los originales (JPG/PNG/HEIC) que ya tienen .webp
 ```
 
 **4. Registra la colección** en `src/data/artPortfolio.ts`:
@@ -266,6 +266,34 @@ npm run video-cleanup-check # muestra qué originales se borrarían (sin cambios
 
 ---
 
+## Sincronizar imágenes con datos del portafolio
+
+Usa estos scripts para verificar que todas las imágenes en las carpetas estén registradas en `src/data/artPortfolio.ts` (y viceversa).
+
+**Reportes de sincronización:**
+
+```sh
+# Arte tradicional: compara /public/images/art/traditionalArt con artPortfolio.ts
+node scripts/sync-art-images.js
+
+# OldArt/early paintings: compara /public/images/art/oldArt con datos
+node scripts/sync-oldart-images.js
+
+# Ver imágenes faltantes agrupadas por carpeta
+node scripts/generate-updated-portfolio.js
+
+# Generar stubs de pinturas + guía actualización → artPortfolio.UPDATES.md
+node scripts/generate-artportfolio-updated.js
+```
+
+Estos scripts **nunca modifican** nada — solo reportan qué imágenes:
+- Existen en la carpeta pero no están registradas en datos
+- Están en datos pero la imagen no existe (referencias rotas)
+
+**Documentación completa:** ver `scripts/README.md` para workflows, troubleshooting y guía paso a paso.
+
+---
+
 ## Todos los comandos
 
 ```sh
@@ -275,8 +303,8 @@ npm run build            # construye el sitio → carpeta /out
 npm run lint             # revisa errores de código
 
 # Imágenes
-npm run webp-convert          # convierte JPG/PNG → WebP
-npm run webp-cleanup          # borra originales que ya tienen .webp
+npm run webp-convert          # convierte JPG/PNG/HEIC → WebP
+npm run webp-cleanup          # borra originales (JPG/PNG/HEIC) que ya tienen .webp
 npm run generate-images       # regenera los JSON de galerías (pets/bodas/wildlife)
 npm run refs-update           # actualiza referencias .jpg → .webp en el código
 

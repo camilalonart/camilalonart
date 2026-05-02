@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Deletes original JPG/PNG files that already have a .webp counterpart.
+ * Deletes original JPG/PNG/HEIC files that already have a .webp counterpart.
  * Run AFTER webp-convert and AFTER verifying the WebP files look correct.
  *
  * Usage:
@@ -14,7 +14,7 @@ const path = require('path');
 const args = process.argv.slice(2);
 const DRY_RUN = !args.includes('--delete');
 const IMAGE_DIR = path.join(__dirname, '..', 'public', 'images');
-const ORIGINALS = ['.jpg', '.jpeg', '.png'];
+const ORIGINALS = ['.jpg', '.jpeg', '.png', '.heic'];
 
 let toDelete = [];
 let totalBytes = 0;
@@ -25,7 +25,7 @@ function walk(dir) {
     if (entry.isDirectory()) { walk(full); continue; }
     const ext = path.extname(entry.name).toLowerCase();
     if (!ORIGINALS.includes(ext)) continue;
-    const webp = full.replace(/\.(jpe?g|png)$/i, '.webp');
+    const webp = full.replace(/\.(jpe?g|png|heic)$/i, '.webp');
     if (fs.existsSync(webp)) {
       toDelete.push(full);
       totalBytes += fs.statSync(full).size;

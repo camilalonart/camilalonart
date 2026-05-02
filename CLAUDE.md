@@ -17,6 +17,13 @@ npm run generate-images       # Regenerate gallery JSON (pets/wedding/wildlife o
 npm run refs-update           # Update .jpg references in source code to .webp
 
 # Each has a dry-run preview variant: webp-check, webp-cleanup-check, refs-check
+
+# Art Portfolio Sync (sync images with artPortfolio.ts data)
+node scripts/sync-art-images.js           # Check /public/images/art/traditionalArt vs data
+node scripts/sync-oldart-images.js        # Check /public/images/art/oldArt vs data
+node scripts/generate-updated-portfolio.js # Group missing images by folder
+
+# See scripts/README.md for detailed documentation
 ```
 
 **Deployment** is automated via GitHub Actions (`.github/workflows/deploy.yml`). Manual: `bash deploy.sh`.
