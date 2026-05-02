@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import data, { COLLECTIONS_ORDER, earlyFirstPaintings_COLLECTIONS_ORDER } from '../../data/artPortfolio';
@@ -63,13 +63,12 @@ const Toolbar = styled.div`
   z-index: 100;
   background: rgba(8, 8, 8, 0.97);
   backdrop-filter: blur(12px);
-  padding: 0.75rem clamp(1.5rem, 5vw, 5rem);
+  padding: 1rem clamp(1.5rem, 5vw, 5rem);
   border-bottom: 1px solid ${C.border};
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  row-gap: 0.6rem;
 `;
 
 const SearchInput = styled.input`
@@ -319,48 +318,175 @@ function categorizeMaterial(materials: string): string {
   return 'other';
 }
 
-// ─── Multi-select filter pills ────────────────────────────────────────────────
-const FilterRow = styled.div`
+// ─── Multi-select dropdown ────────────────────────────────────────────────────
+const DropdownWrapper = styled.div`
+  position: relative;
+  flex-shrink: 0;
+`;
+
+const DropdownTrigger = styled.button<{ $active: boolean }>`
+  background: ${({ $active }) => ($active ? 'rgba(200,168,122,0.12)' : C.surface)};
+  border: 1px solid ${({ $active }) => ($active ? C.gold : C.border)};
+  color: ${({ $active }) => ($active ? C.gold : C.text)};
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-`;
-
-const FilterLabel = styled.span`
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.45rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: ${C.muted};
-  flex-shrink: 0;
-`;
-
-const FilterPill = styled.button<{ $active: boolean }>`
-  background: ${({ $active }) => ($active ? C.gold : 'transparent')};
-  border: 1px solid ${({ $active }) => ($active ? C.gold : C.border)};
-  color: ${({ $active }) => ($active ? C.bg : C.muted)};
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.45rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.55rem;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  gap: 0.5rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  outline: none;
 
   &:hover {
     border-color: ${C.gold};
-    color: ${({ $active }) => ($active ? C.bg : C.goldLight)};
+    color: ${C.gold};
   }
 `;
 
-function toggleSet(prev: Set<string>, value: string): Set<string> {
-  const next = new Set(prev);
-  if (next.has(value)) next.delete(value); else next.add(value);
-  return next;
+const DropdownChevron = styled.span<{ $open: boolean }>`
+  display: inline-block;
+  transition: transform 0.2s;
+  transform: ${({ $open }) => ($open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  font-size: 0.6rem;
+  line-height: 1;
+`;
+
+const DropdownBadge = styled.span`
+  background: ${C.gold};
+  color: ${C.bg};
+  font-size: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  min-width: 1.2em;
+  text-align: center;
+`;
+
+const DropdownMenu = styled.div<{ $open: boolean }>`
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  background: #141414;
+  border: 1px solid ${C.border};
+  min-width: 160px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: ${({ $open }) => ($open ? 'block' : 'none')};
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+`;
+
+const DropdownItem = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: ${C.text};
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+
+  &:hover { background: rgba(200,168,122,0.08); color: ${C.goldLight}; }
+
+  input[type='checkbox'] {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1px solid ${C.border};
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.15s, background 0.15s;
+
+    &:checked {
+      background: ${C.gold};
+      border-color: ${C.gold};
+    }
+
+    &:checked::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: -1px;
+      width: 5px;
+      height: 8px;
+      border: 1.5px solid ${C.bg};
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+  }
+`;
+
+interface MultiSelectProps {
+  label: string;
+  options: { value: string; label: string }[];
+  selected: Set<string>;
+  onChange: (next: Set<string>) => void;
 }
+
+function MultiSelect({ label, options, selected, onChange }: MultiSelectProps) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    if (!open) return;
+    function onClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) close();
+    }
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  }, [open, close]);
+
+  function toggle(value: string) {
+    const next = new Set(selected);
+    if (next.has(value)) next.delete(value); else next.add(value);
+    onChange(next);
+  }
+
+  const activeCount = selected.size;
+
+  return (
+    <DropdownWrapper ref={wrapperRef}>
+      <DropdownTrigger $active={activeCount > 0} onClick={() => setOpen(o => !o)} type="button">
+        {label}
+        {activeCount > 0 && <DropdownBadge>{activeCount}</DropdownBadge>}
+        <DropdownChevron $open={open}>▾</DropdownChevron>
+      </DropdownTrigger>
+      <DropdownMenu $open={open}>
+        {options.map(opt => (
+          <DropdownItem key={opt.value}>
+            <input
+              type="checkbox"
+              checked={selected.has(opt.value)}
+              onChange={() => toggle(opt.value)}
+            />
+            {opt.label}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </DropdownWrapper>
+  );
+}
+
+const MEDIUM_OPTIONS = [
+  { value: 'oil', label: 'Oil' },
+  { value: 'watercolor', label: 'Watercolor' },
+  { value: 'digital', label: 'Digital' },
+  { value: 'mixed', label: 'Mixed media' },
+  { value: 'pastels', label: 'Pastels' },
+  { value: 'pen', label: 'Pen & Ink' },
+];
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function AllPaintingsPage() {
@@ -433,33 +559,19 @@ export default function AllPaintingsPage() {
 
         <Divider />
 
-        <FilterRow>
-          <FilterLabel>{t('art.allMedia')}</FilterLabel>
-          {(['oil', 'watercolor', 'digital', 'mixed', 'pastels', 'pen'] as const).map(m => (
-            <FilterPill
-              key={m}
-              $active={selectedMediums.has(m)}
-              onClick={() => setSelectedMediums(prev => toggleSet(prev, m))}
-            >
-              {m === 'oil' ? 'Oil' : m === 'watercolor' ? 'Watercolor' : m === 'digital' ? 'Digital' : m === 'mixed' ? 'Mixed' : m === 'pastels' ? 'Pastels' : 'Pen & Ink'}
-            </FilterPill>
-          ))}
-        </FilterRow>
+        <MultiSelect
+          label={t('art.allMedia')}
+          options={MEDIUM_OPTIONS}
+          selected={selectedMediums}
+          onChange={setSelectedMediums}
+        />
 
-        <Divider />
-
-        <FilterRow>
-          <FilterLabel>{t('art.allYears')}</FilterLabel>
-          {years.map(y => (
-            <FilterPill
-              key={y}
-              $active={selectedYears.has(String(y))}
-              onClick={() => setSelectedYears(prev => toggleSet(prev, String(y)))}
-            >
-              {y}
-            </FilterPill>
-          ))}
-        </FilterRow>
+        <MultiSelect
+          label={t('art.allYears')}
+          options={years.map(y => ({ value: String(y), label: String(y) }))}
+          selected={selectedYears}
+          onChange={setSelectedYears}
+        />
 
         <Divider />
 
