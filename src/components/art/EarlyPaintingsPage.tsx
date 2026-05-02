@@ -90,26 +90,26 @@ const ArtistName = styled.h1`
   text-overflow: ellipsis;
 
   @media (max-width: 1024px) {
-    font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+    font-size: clamp(5rem);
     padding: 0 0.3rem;
     letter-spacing: 0.08em;
   }
 
   @media (max-width: 768px) {
-    font-size: clamp(1.2rem, 5vw, 2rem);
+    font-size: clamp(2rem, 5vw, 2rem);
     letter-spacing: 0.05em;
     padding: 0 0.2rem;
   }
 
   @media (max-width: 640px) {
-    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    font-size: clamp(2rem, 4.5vw, 1.5rem);
     letter-spacing: 0.04em;
     padding: 0 0.2rem;
     word-spacing: 9999px;
   }
 
   @media (max-width: 530px) {
-    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    font-size: clamp(2rem, 3.5vw, 1.2rem);
     letter-spacing: 0.03em;
     padding: 0 0.15rem;
   }

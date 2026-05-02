@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Converts all JPG/PNG images in public/images to WebP in-place.
+ * Converts all JPG/PNG/HEIC images in public/images to WebP in-place.
  * Requires: brew install webp  (provides cwebp command)
+ * HEIC conversion uses macOS built-in `sips` (no extra install needed).
  *
  * Usage:
  *   node scripts/convert-to-webp.js            # dry run — shows what would be converted
@@ -12,6 +13,7 @@
 const { execSync, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const args = process.argv.slice(2);
 const DRY_RUN = !args.includes('--convert');
@@ -21,11 +23,18 @@ const QUALITY = (() => {
 })();
 const IMAGE_DIR = path.join(__dirname, '..', 'public', 'images');
 const EXTENSIONS = ['.jpg', '.jpeg', '.png'];
+const HEIC_EXTENSIONS = ['.heic'];
 
 // Check cwebp is installed
 if (spawnSync('which', ['cwebp']).status !== 0) {
   console.error('❌  cwebp not found. Install it with: brew install webp');
   process.exit(1);
+}
+
+// Check sips is available (macOS only) for HEIC conversion
+const hasSips = spawnSync('which', ['sips']).status === 0;
+if (!hasSips) {
+  console.warn('⚠️  sips not found — HEIC files will be skipped (sips is built into macOS).');
 }
 
 let totalOriginalBytes = 0;
@@ -39,8 +48,13 @@ function walk(dir) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       walk(fullPath);
-    } else if (EXTENSIONS.includes(path.extname(entry.name).toLowerCase())) {
-      processImage(fullPath);
+    } else {
+      const ext = path.extname(entry.name).toLowerCase();
+      if (EXTENSIONS.includes(ext)) {
+        processImage(fullPath);
+      } else if (HEIC_EXTENSIONS.includes(ext) && hasSips) {
+        processHeic(fullPath);
+      }
     }
   }
 }
@@ -83,6 +97,61 @@ function processImage(srcPath) {
   console.log(`✓  ${rel}  ${(originalSize / 1024).toFixed(0)} KB → ${(webpSize / 1024).toFixed(0)} KB  (-${savings}%)`);
 }
 
+function processHeic(srcPath) {
+  const webpPath = srcPath.replace(/\.heic$/i, '.webp');
+
+  if (fs.existsSync(webpPath)) {
+    skipped++;
+    return;
+  }
+
+  const originalSize = fs.statSync(srcPath).size;
+
+  if (DRY_RUN) {
+    const rel = path.relative(IMAGE_DIR, srcPath);
+    console.log(`  would convert (HEIC): ${rel}  (${(originalSize / 1024).toFixed(0)} KB)`);
+    totalOriginalBytes += originalSize;
+    converted++;
+    return;
+  }
+
+  // Convert HEIC → temp PNG via sips, then PNG → WebP via cwebp
+  const tmpPng = path.join(os.tmpdir(), `heic_tmp_${Date.now()}_${path.basename(srcPath, '.heic')}.png`);
+
+  try {
+    const sipsResult = spawnSync('sips', ['-s', 'format', 'png', srcPath, '--out', tmpPng], {
+      stdio: 'pipe',
+    });
+
+    if (sipsResult.status !== 0) {
+      console.error(`❌  sips failed for: ${srcPath}`);
+      console.error(sipsResult.stderr?.toString());
+      return;
+    }
+
+    const result = spawnSync('cwebp', ['-q', String(QUALITY), tmpPng, '-o', webpPath], {
+      stdio: 'pipe',
+    });
+
+    if (result.status !== 0) {
+      console.error(`❌  cwebp failed for: ${srcPath}`);
+      console.error(result.stderr?.toString());
+      return;
+    }
+
+    const webpSize = fs.statSync(webpPath).size;
+    totalOriginalBytes += originalSize;
+    totalWebpBytes += webpSize;
+    converted++;
+
+    const savings = (((originalSize - webpSize) / originalSize) * 100).toFixed(0);
+    const rel = path.relative(IMAGE_DIR, srcPath);
+    console.log(`✓  ${rel}  ${(originalSize / 1024).toFixed(0)} KB → ${(webpSize / 1024).toFixed(0)} KB  (-${savings}%)`);
+  } finally {
+    if (fs.existsSync(tmpPng)) fs.unlinkSync(tmpPng);
+  }
+}
+
 console.log(`\n📁  Scanning: ${IMAGE_DIR}`);
 console.log(`🎚️   Quality: ${QUALITY}`);
 console.log(DRY_RUN ? '🔍  DRY RUN — no files will be modified\n' : '⚡  Converting...\n');
@@ -102,7 +171,7 @@ if (DRY_RUN) {
   console.log(`Saved:     ${(saved / 1024 / 1024).toFixed(0)} MB  (${(((saved) / totalOriginalBytes) * 100).toFixed(0)}% reduction)`);
   console.log(`\n⚠️  Next steps:`);
   console.log(`   1. Update image references in src/ to use .webp extensions`);
-  console.log(`   2. Delete original JPG/PNG files after verifying WebP looks correct`);
+  console.log(`   2. Delete original JPG/PNG/HEIC files after verifying WebP looks correct`);
   console.log(`   3. Run: npm run generate-images`);
 }
 console.log();

@@ -97,6 +97,9 @@ const data: ArtPortfolioData = {
             "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp",
             "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp",
           ],
+          details: [
+            "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles2.webp",
+          ],
         },
         {
           id: "carrying-home-02",
@@ -105,6 +108,12 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/InTransit.webp"],
+          details: [
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles4.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles5.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles6.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles7.webp",
+          ],
           thoughts: "Un homenaje a quienes viven lejos de donde nacieron… a quienes un día se fueron y tuvieron que aprender a ser de nuevo."
         },
         {
@@ -114,6 +123,10 @@ const data: ArtPortfolioData = {
           size: "24 x 18 in",
           year: 2026,
           images: ["/images/art/traditionalArt/Carrying Home/Moving.webp"],
+          details: [
+            "/images/art/traditionalArt/Carrying Home/Details/Moving_Detalles1.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/Moving_Detalles2.webp",
+          ],
           thoughts: "Siempre en transición, siempre en cambio, siempre moviendonos."
         },
         {
@@ -123,6 +136,9 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/We.webp"],
+          details: [
+            "/images/art/traditionalArt/Carrying Home/Details/We_Detalles1.webp",
+          ],
           thoughts: "No nacimos con alas propias… el vuelo nos lo tejieron en la piel quienes vinieron antes. Traigo el pulso de mi tierra, del trabajo, de familias que enfrentaron tiempos duros y aun así siempre siguieron, caminaron con honestidad, con la dignidad de quien avanza sin hacer daño. Mientras pintaba pensaba en ellos… pensaba también en todos los que (por elección o por urgencia) han vuelto a empezar. En quienes se han reconstruido desde cero: a veces en nuevas tierras, o a veces convirtiéndose en una persona distinta incluso sin moverse del lugar de siempre. Al mismo tiempo pensaba en algo más grande… en la idea de que cada uno de nosotros es un universo complejo y distinto… y aun así, en el fondo, todos somos iguales.. Somos humanos, somos animales, somos finitos. Vamos por la vida creando historias, cargando dolores y alegrías… mundos enteros que casi nunca se ven. Hay tanto por contar, tanto por recordar, tanto que con el tiempo se pierde sin que nadie lo note… Pensaba que todos esos rostros desconocidos que caminan a mi lado en la calle son universos enteros, tan complejos como el mío… es increíble como no alcanzamos a dimensionar toda la realidad que cada uno de nosotros guarda… Millones de desconocidos llenos de sueños que intentan abrirse camino, duelos silenciosos que nadie más conoce, pequeñas victorias que sostienen lo imposible. Tantas historias, tantas voces que merecen ser vistas, escuchadas, recordadas. y al final, por más distintos que parezcamos, todos somos lo mismo… animales finitos, humanos, buscando un poco de sentido mientras seguimos avanzando. Y es en esa multitud silenciosa, en esos pasos que avanzan sin mirarse, donde se intuye algo que todos compartimos: la certeza de que no caminamos solos, que somos parte de algo más grande, de algo que sigue vivo cada vez que alguien decide intentarlo una vez más y seguir"
         },
         {
@@ -150,6 +166,9 @@ const data: ArtPortfolioData = {
           size: "11.81 x 11.81 in",
           year: 2018,
           images: ["/images/art/traditionalArt/Dear Inner Child/Adventurous.webp"],
+          details: [
+            { type: 'video', src: "/images/art/traditionalArt/Dear Inner Child/Detalles/Adventurous_Process_opt.mp4", poster: "/images/art/traditionalArt/Dear Inner Child/Detalles/Adventurous_Process_poster.webp" },
+          ],
         },
         {
           id: "dear-inner-child-02",
@@ -199,6 +218,9 @@ const data: ArtPortfolioData = {
           size: "8.27 x 11.69 in",
           year: 2023,
           images: ["/images/art/traditionalArt/Magic/Luthier.webp"],
+          details: [
+            "/images/art/traditionalArt/Magic/Detalles/Luthier_Proceso1.webp",
+          ],
           thoughts: "The craft of making something whole from broken pieces. A portrait of creation itself.",
           thoughtsEs: "El arte de hacer algo completo a partir de piezas rotas. Un retrato de la creación misma.",
         },
@@ -241,6 +263,12 @@ const data: ArtPortfolioData = {
           size: "",
           year: 2022,
           images: ["/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo.webp"],
+          details: [
+            "/images/art/traditionalArt/StartOver/Viaje a Canada Dibujo Detalle.webp",
+            "/images/art/traditionalArt/StartOver/Viaje a Canada Part 1.webp",
+            "/images/art/traditionalArt/StartOver/Viaje a Canada Part 2.webp",
+            "/images/art/traditionalArt/StartOver/Viaje a Canada Part 6.webp",
+          ],
         }
       ],
     },
@@ -331,6 +359,38 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/CarlosVeracierta.webp"],
         },
+        {
+          id: "essential-11",
+          title: "Blue",
+          materials: "Watercolor, pencil and collage",
+          size: "13 x 11 in",
+          year: 2017,
+          images: ["/images/art/traditionalArt/The essential is invisible (Red)/Blue.webp"],
+        },
+        {
+          id: "essential-12",
+          title: "Calculus Notebook",
+          materials: "Watercolor, pencil and collage",
+          size: "13 x 11 in",
+          year: 2017,
+          images: ["/images/art/traditionalArt/The essential is invisible (Red)/CalculusNotebook.webp"],
+        },
+        {
+          id: "essential-13",
+          title: "Camila",
+          materials: "Watercolor, pencil and collage",
+          size: "13 x 11 in",
+          year: 2017,
+          images: ["/images/art/traditionalArt/The essential is invisible (Red)/Camila.webp"],
+        },
+        {
+          id: "essential-14",
+          title: "Girasol",
+          materials: "Watercolor, pencil and collage",
+          size: "13 x 11 in",
+          year: 2017,
+          images: ["/images/art/traditionalArt/The essential is invisible (Red)/Girasol.webp"],
+        },
       ],
     },
     {
@@ -362,7 +422,10 @@ const data: ArtPortfolioData = {
           materials: "Pen, ink and watercolor on paper",
           size: "8.27 × 11.69 in",
           year: 2016,
-          images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Domesticated.webp"],
+          images: [
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Domesticated.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Domesticado.webp",
+          ],
         },
         {
           id: "siempre-04",
@@ -485,6 +548,22 @@ const data: ArtPortfolioData = {
           year: 2016,
           images: ["/images/art/traditionalArt/Yellow/SweetDreams.webp"],
         },
+        {
+          id: "yellow-06",
+          title: "Abrazarme",
+          materials: "Pastels on yellow paper",
+          size: "8.27 × 11.69 in",
+          year: 2016,
+          images: ["/images/art/traditionalArt/Yellow/Abrazarme.webp"],
+        },
+        {
+          id: "yellow-07",
+          title: "Quiet",
+          materials: "Pastels on yellow paper",
+          size: "8.27 × 11.69 in",
+          year: 2016,
+          images: ["/images/art/traditionalArt/Yellow/Quiet.webp"],
+        },
       ],
     },
     {
@@ -583,6 +662,18 @@ const data: ArtPortfolioData = {
           size: "20 × 28 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Mis Raices/AvesDelQuindio.webp"],
+          details: [
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles1.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/AvesDelQuindio_Detalles3.webp",
+          ],
+        },
+        {
+          id: "mis-raices-02",
+          title: "Colombia",
+          materials: "Mixed media",
+          size: "",
+          year: 2022,
+          images: ["/images/art/traditionalArt/Mis Raices/Colombia.webp"],
         },
         {
           id: "mis-raices-03",
@@ -591,6 +682,16 @@ const data: ArtPortfolioData = {
           size: "",
           year: 2022,
           images: ["/images/art/traditionalArt/Mis Raices/Paola.webp"],
+          details: [
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles1.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles2.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles3.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles4.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles5.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles6.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles7.webp",
+            "/images/art/traditionalArt/Mis Raices/Detalles/Paola-Detalles8.webp",
+          ],
           thoughts: "A portrait of family, of the women who shaped me, of the landscape they carry within.",
           thoughtsEs: "Un retrato de familia, de las mujeres que me formaron, del paisaje que llevan dentro.",
         },
@@ -626,6 +727,22 @@ const data: ArtPortfolioData = {
           size: "8.27 × 11.69 in",
           year: 2019,
           images: ["/images/art/traditionalArt/Blanco y Negro/IntentoDePuntillismo1.webp"],
+        },
+        {
+          id: "blanco-negro-04",
+          title: "Pecas",
+          materials: "Graphite and ink",
+          size: "8.27 × 11.69 in",
+          year: 2021,
+          images: ["/images/art/traditionalArt/Blanco y Negro/Pecas.webp"],
+        },
+        {
+          id: "blanco-negro-05",
+          title: "Precio",
+          materials: "Graphite and ink",
+          size: "8.27 × 11.69 in",
+          year: 2021,
+          images: ["/images/art/traditionalArt/Blanco y Negro/Precio.webp"],
         },
       ],
     },
@@ -663,6 +780,50 @@ const data: ArtPortfolioData = {
       ],
     },
     {
+      id: "dibujitos-para-will",
+      name: "Dibujitos Para Will",
+      period: "2023",
+      description: "A small series of drawings made with love for Will.",
+      descriptionEs: "Una pequeña serie de dibujitos hechos con cariño para Will.",
+      paintings: [
+        {
+          id: "dibujitos-para-will-01",
+          title: "Dibujo 1",
+          materials: "Mixed media",
+          year: 2023,
+          images: ["/images/art/traditionalArt/DibujitosParaWill/DibujitoParaWill_1.webp"],
+        },
+        {
+          id: "dibujitos-para-will-02",
+          title: "Dibujo 2",
+          materials: "Mixed media",
+          year: 2023,
+          images: ["/images/art/traditionalArt/DibujitosParaWill/DibujitoParaWill_2.webp"],
+        },
+        {
+          id: "dibujitos-para-will-03",
+          title: "Dibujo 3",
+          materials: "Mixed media",
+          year: 2023,
+          images: ["/images/art/traditionalArt/DibujitosParaWill/DibujitoParaWill_3.webp"],
+        },
+        {
+          id: "dibujitos-para-will-04",
+          title: "Dibujo 4",
+          materials: "Mixed media",
+          year: 2023,
+          images: ["/images/art/traditionalArt/DibujitosParaWill/DibujitoParaWill_4.webp"],
+        },
+        {
+          id: "dibujitos-para-will-05",
+          title: "Dibujo 5",
+          materials: "Mixed media",
+          year: 2023,
+          images: ["/images/art/traditionalArt/DibujitosParaWill/DibujitoParaWill_5.webp"],
+        },
+      ],
+    },
+    {
       id: "fuego-interior",
       name: "Fuego Interior",
       period: "2024",
@@ -675,6 +836,9 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp"],
+          details: [
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles3.webp",
+          ],
         },
         {
           id: "fuego-interior-02",
@@ -2548,7 +2712,8 @@ export const COLLECTIONS_ORDER = [
   'mis-raices',
   'blanco-y-negro',
   'red-doodles',
-  'yellow'
+  'yellow',
+  'dibujitos-para-will',
 ];
 
 export const earlyFirstPaintings_COLLECTIONS_ORDER = [

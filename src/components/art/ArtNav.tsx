@@ -63,9 +63,7 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
   gap: 2.5rem;
   align-items: center;
 
-  @media (max-width: 900px) { gap: 1.5rem; }
-
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     position: absolute;
     top: 64px;
     left: 0;
@@ -95,7 +93,7 @@ const NavLinkA = styled(Link)`
 
   &:hover { color: ${C.gold}; }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: block;
     padding: 0.85rem clamp(1.5rem, 4vw, 4rem);
     white-space: normal;
@@ -158,7 +156,7 @@ const HamburgerBtn = styled.button`
   z-index: 201;
   transition: color 0.2s ease;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
