@@ -426,7 +426,7 @@ export default function AllPaintingsPage() {
           groups.map(group => (
             <CollectionGroup key={group.id}>
               <CollectionGroupTitle>
-                {group.id === 'early-first-paintings' ? t('art.archivalWorks') : group.name}
+                {group.id === 'early-first-paintings' ? t('art.earlyPaintings') : group.name}
                 <span style={{ color: C.dim }}>{group.items.length}</span>
               </CollectionGroupTitle>
               <MasonryGrid>

@@ -228,7 +228,7 @@ export default function ArtNav() {
         <NavLinkA href="/art/" onClick={close}>{t('nav.home')}</NavLinkA>
         <NavLinkA href="/art/collections/" onClick={close}>{t('nav.collections')}</NavLinkA>
         <NavLinkA href="/art/all-paintings/" onClick={close}>{t('nav.allPaintings')}</NavLinkA>
-        <NavLinkA href="/art/early-first-paintings/" onClick={close}>{t('nav.archivalWorks')}</NavLinkA>
+        <NavLinkA href="/art/early-first-paintings/" onClick={close}>{t('nav.earlyPaintings')}</NavLinkA>
         <NavLinkA href="/art/collaborations/" onClick={close}>{t('nav.collaborations')}</NavLinkA>
         <NavLinkA href="/art/about/" onClick={close}>{t('nav.about')}</NavLinkA>
         <NavLinkA href="/art/contact/" onClick={close}>{t('nav.contact')}</NavLinkA>

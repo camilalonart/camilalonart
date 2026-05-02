@@ -24,9 +24,8 @@
     "collections": "Collections",
     "allPaintings": "All Paintings",
     "collaborations": "Collaborations",
-    "earlyPaintings": "Early Paintings",
-    "archivalWorks": "Archival Works"
-  },
+    "earlyPaintings": "Early Paintings"
+    },
   "home": {
     "title": "Camila Londoño",
     "subtitle": "Photographer, Artist & Creative Director. Capturing moments, creating beauty, and telling visual stories across photography, traditional art, and design.",
@@ -151,7 +150,7 @@
     "work": "work",
     "works": "works",
     "noResults": "No paintings match the selected filters.",
-    "archivalWorks": "Archival Works",
+    "earlyPaintings": "Early Paintings",
     "exploreAllCollections": "Explore all collections",
     "aboutTheArtist": "About the Artist",
     "collectionsTitle": "Collections",
