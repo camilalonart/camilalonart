@@ -903,7 +903,7 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Fuego Interior/FuegoInterior.webp"],
           details: [
-            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles0.webp",
+            "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles5.webp",
             "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles1.webp",
             "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles2.webp",
             "/images/art/traditionalArt/Fuego Interior/Detalles/FuegoInterior_detalles3.webp",
