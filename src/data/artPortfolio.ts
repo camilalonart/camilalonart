@@ -288,8 +288,8 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/FirstLove.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles1_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles2_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles2_poster.webp" },
           ],
         },
         {
@@ -316,8 +316,8 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/TheFirstOneIActuallyLiked.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles1_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles2_poster.webp"
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles2_poster.webp" },
           ],
         },
         {
@@ -328,8 +328,8 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/Enough.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles1_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles2_poster.webp"
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles2_poster.webp" },
           ],
         },
         {
@@ -348,9 +348,9 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/LittlePrince.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles1_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles2_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles3_poster.webp"
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles2_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles3_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles3_poster.webp" },
           ],
         },
         {
@@ -369,7 +369,7 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/EngineeringIsBeautiful.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/EngineeringIsBeautiful_Detalles1_poster.webp"
+            { type: 'video', src: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/EngineeringIsBeautiful_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/EngineeringIsBeautiful_Detalles1_poster.webp" },
           ],
         },
         {
@@ -438,7 +438,7 @@ const data: ArtPortfolioData = {
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp"],
           details: [
             "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details1.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details2_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details2_opt.mp4", poster: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details2_poster.webp" },
           ],
         },
         {
@@ -480,8 +480,8 @@ const data: ArtPortfolioData = {
           details: [
             "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details1.webp",
             "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details2.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details3_poster.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details4_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details3_opt.mp4", poster: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details3_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details4_opt.mp4", poster: "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details4_poster.webp" },
             "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details5.webp"
           ],
         },
@@ -564,8 +564,8 @@ const data: ArtPortfolioData = {
           year: 2016,
           images: ["/images/art/traditionalArt/Yellow/Escultura.webp"],
           details: [
-            "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles1_poster.webp",
-            "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles2_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles1_opt.mp4", poster: "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/Yellow/Detalles/Escultura_Detalles2_poster.webp" },
           ],
         },
         {
@@ -593,8 +593,8 @@ const data: ArtPortfolioData = {
           images: ["/images/art/traditionalArt/Yellow/Abrazarme.webp"],
           details: [
             "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles1.webp",
-            "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles2_poster.webp",
-            "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles3_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles2_opt.mp4", poster: "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles2_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles3_opt.mp4", poster: "/images/art/traditionalArt/Yellow/Detalles/Abrazarme_Detalles3_poster.webp" },
           ],
         },
         {
@@ -631,7 +631,7 @@ const data: ArtPortfolioData = {
           images: ["/images/art/traditionalArt/Perspective/NotAsNaive.webp"],
           details: [
             "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso1.webp",
-            "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso2_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso2_opt.mp4", poster: "/images/art/traditionalArt/Perspective/Detalles/NotAsNaive_Proceso2_poster.webp" },
           ],
         },
         {
@@ -1012,8 +1012,8 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Otros/Rojo.webp"],
           details: [
-            "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso1_poster.webp",
-            "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso2_poster.webp",
+            { type: 'video', src: "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso1_opt.mp4", poster: "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso1_poster.webp" },
+            { type: 'video', src: "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso2_opt.mp4", poster: "/images/art/traditionalArt/Otros/Detalles/Rojo_Proceso2_poster.webp" },
           ],
         },
         {
