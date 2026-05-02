@@ -63,12 +63,13 @@ const Toolbar = styled.div`
   z-index: 100;
   background: rgba(8, 8, 8, 0.97);
   backdrop-filter: blur(12px);
-  padding: 1rem clamp(1.5rem, 5vw, 5rem);
+  padding: 0.75rem clamp(1.5rem, 5vw, 5rem);
   border-bottom: 1px solid ${C.border};
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
+  row-gap: 0.6rem;
 `;
 
 const SearchInput = styled.input`
@@ -318,6 +319,49 @@ function categorizeMaterial(materials: string): string {
   return 'other';
 }
 
+// ─── Multi-select filter pills ────────────────────────────────────────────────
+const FilterRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+`;
+
+const FilterLabel = styled.span`
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: ${C.muted};
+  flex-shrink: 0;
+`;
+
+const FilterPill = styled.button<{ $active: boolean }>`
+  background: ${({ $active }) => ($active ? C.gold : 'transparent')};
+  border: 1px solid ${({ $active }) => ($active ? C.gold : C.border)};
+  color: ${({ $active }) => ($active ? C.bg : C.muted)};
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+
+  &:hover {
+    border-color: ${C.gold};
+    color: ${({ $active }) => ($active ? C.bg : C.goldLight)};
+  }
+`;
+
+function toggleSet(prev: Set<string>, value: string): Set<string> {
+  const next = new Set(prev);
+  if (next.has(value)) next.delete(value); else next.add(value);
+  return next;
+}
+
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function AllPaintingsPage() {
   const allEntriesRef = useRef<PaintingEntry[] | null>(null);
@@ -332,14 +376,14 @@ export default function AllPaintingsPage() {
 
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
-  const [medium, setMedium] = useState('all');
-  const [year, setYear] = useState('all');
+  const [selectedMediums, setSelectedMediums] = useState<Set<string>>(new Set());
+  const [selectedYears, setSelectedYears] = useState<Set<string>>(new Set());
   const [sort, setSort] = useState('newest');
 
   // Compute filtered inline — no useMemo so there's no stale-closure risk
   let filtered = allEntries.filter(p => {
-    if (medium !== 'all' && categorizeMaterial(p.materials) !== medium) return false;
-    if (year !== 'all' && String(p.year) !== year) return false;
+    if (selectedMediums.size > 0 && !selectedMediums.has(categorizeMaterial(p.materials))) return false;
+    if (selectedYears.size > 0 && !selectedYears.has(String(p.year))) return false;
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       if (!p.title.toLowerCase().includes(q) && !p.materials.toLowerCase().includes(q)) return false;
@@ -389,22 +433,33 @@ export default function AllPaintingsPage() {
 
         <Divider />
 
-        <NativeSelect value={medium} onChange={e => setMedium(e.target.value)}>
-          <option value="all">{t('art.allMedia')}</option>
-          <option value="oil">Oil</option>
-          <option value="watercolor">Watercolor</option>
-          <option value="digital">Digital</option>
-          <option value="mixed">Mixed media</option>
-          <option value="pastels">Pastels</option>
-          <option value="pen">Pen &amp; Ink</option>
-        </NativeSelect>
-
-        <NativeSelect value={year} onChange={e => setYear(e.target.value)}>
-          <option value="all">{t('art.allYears')}</option>
-          {years.map(y => (
-            <option key={y} value={String(y)}>{y}</option>
+        <FilterRow>
+          <FilterLabel>{t('art.allMedia')}</FilterLabel>
+          {(['oil', 'watercolor', 'digital', 'mixed', 'pastels', 'pen'] as const).map(m => (
+            <FilterPill
+              key={m}
+              $active={selectedMediums.has(m)}
+              onClick={() => setSelectedMediums(prev => toggleSet(prev, m))}
+            >
+              {m === 'oil' ? 'Oil' : m === 'watercolor' ? 'Watercolor' : m === 'digital' ? 'Digital' : m === 'mixed' ? 'Mixed' : m === 'pastels' ? 'Pastels' : 'Pen & Ink'}
+            </FilterPill>
           ))}
-        </NativeSelect>
+        </FilterRow>
+
+        <Divider />
+
+        <FilterRow>
+          <FilterLabel>{t('art.allYears')}</FilterLabel>
+          {years.map(y => (
+            <FilterPill
+              key={y}
+              $active={selectedYears.has(String(y))}
+              onClick={() => setSelectedYears(prev => toggleSet(prev, String(y)))}
+            >
+              {y}
+            </FilterPill>
+          ))}
+        </FilterRow>
 
         <Divider />
 
