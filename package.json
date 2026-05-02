@@ -17,7 +17,8 @@
     "video-check": "node scripts/video-convert.js",
     "video-convert": "node scripts/video-convert.js --convert",
     "video-cleanup-check": "node scripts/video-cleanup.js",
-    "video-cleanup": "node scripts/video-cleanup.js --delete"
+    "video-cleanup": "node scripts/video-cleanup.js --delete",
+    "generateOldArtData": "node scripts/generateOldArtData.js"
   },
   "keywords": [],
   "author": "",

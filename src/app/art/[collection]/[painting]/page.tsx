@@ -5,15 +5,17 @@ interface PaintingRouteProps {
   params: Promise<{ collection: string; painting: string }>;
 }
 
+const allCollections = () => [...data.collections, ...data.earlyFirstPaintings];
+
 export async function generateStaticParams() {
-  return data.collections.flatMap(c =>
+  return allCollections().flatMap(c =>
     c.paintings.map(p => ({ collection: c.id, painting: p.id }))
   );
 }
 
 export async function generateMetadata({ params }: PaintingRouteProps) {
   const { collection: collectionId, painting: paintingId } = await params;
-  const collection = data.collections.find(c => c.id === collectionId);
+  const collection = allCollections().find(c => c.id === collectionId);
   const painting = collection?.paintings.find(p => p.id === paintingId);
 
   if (!painting) {
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: PaintingRouteProps) {
 
 export default async function PaintingRoute({ params }: PaintingRouteProps) {
   const { collection: collectionId, painting: paintingId } = await params;
-  const collection = data.collections.find(c => c.id === collectionId);
+  const collection = allCollections().find(c => c.id === collectionId);
   const painting = collection?.paintings.find(p => p.id === paintingId);
 
   if (!collection || !painting) {

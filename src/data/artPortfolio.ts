@@ -9,7 +9,7 @@ export interface Painting {
   id: string;
   title: string;
   materials: string;
-  size: string;
+  size?: string;
   year: number;
   images: string[];
   thoughts?: string;
@@ -38,7 +38,7 @@ export interface Collaboration {
 
 export interface ArtPortfolioData {
   collections: Collection[];
-  earlyFirstPaintings: Painting[];
+  earlyFirstPaintings: Collection[];
   collaborations: Collaboration[];
   selectedWorks: Array<{ image: string; id: string; collectionId: string; paintingId: string }>;
   about: {
@@ -688,7 +688,1782 @@ const data: ArtPortfolioData = {
     },
   ],
 
-  earlyFirstPaintings: [],
+  earlyFirstPaintings: [
+    {
+      "id": "acuarelapapelamarillo",
+      "name": "AcuarelaPapelAmarillo",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "acuarelapapelamarillo-01",
+          "title": "Colibri",
+          "materials": "Ink Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Colibri_11.7x8.3in_Jul2016_InkWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-02",
+          "title": "DePerfil",
+          "materials": "Pastels Yellow Paper Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/DePerfil_11.7x8.3in_May2016_PastelsYellowPaperWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-03",
+          "title": "EresUnUniversoEntero",
+          "materials": "Collage Pastels Yellow Paper",
+          "size": "8.3x11.7in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/EresUnUniversoEntero_8.3x11.7in_March2017_CollagePastelsYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-04",
+          "title": "Iguana",
+          "materials": "Ink Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Iguana_11.7x8.3in_Jul2016_InkWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-05",
+          "title": "Incompletos",
+          "materials": "Pastels Yellow Paper Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Incompletos_11.7x8.3in_May2016_PastelsYellowPaperWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-06",
+          "title": "Lineas",
+          "materials": "Pastels Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Lineas_11.7x8.3in_Jan2017_PastelsYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-07",
+          "title": "Mujer",
+          "materials": "Pastels Watercolor Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Mujer_11.7x8.3in_Sept2016_PastelsWatercolorYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-08",
+          "title": "Ojitos",
+          "materials": "Pastel Watercolor Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Ojitos_11.7x8.3in_May2016_PastelWatercolorYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-09",
+          "title": "PaLante",
+          "materials": "Ink Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/PaLante_11.7x8.3in_Jul2016_InkWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-10",
+          "title": "Picks",
+          "materials": "Pastel Watercolor Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Picks_11.7x8.3in_Oct2016_PastelWatercolorYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-11",
+          "title": "Plumas",
+          "materials": "Pastels Yellow Paper Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Plumas_11.7x8.3in_May2016_PastelsYellowPaperWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-12",
+          "title": "RachelParaJeraldine",
+          "materials": "Pastels Yellow Paper Watercolor Pen.webp",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/RachelParaJeraldine_11.7x8.3in_May2016_PastelsYellowPaperWatercolorPen.webp.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-13",
+          "title": "RachelParaJeraldine",
+          "materials": "Yellow Paper Watercolor Pen",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/RachelParaJeraldine_11.7x8.3in_May2016_YellowPaperWatercolorPen.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-14",
+          "title": "RostroFlores",
+          "materials": "Pen Watercolor Pastels Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/RostroFlores_11.7x8.3in_Jan2017_PenWatercolorPastelsYellowPaper .webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-15",
+          "title": "RostroOrigami",
+          "materials": "Pastels Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/RostroOrigami_11.7x8.3in_Jan2017_PastelsYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-16",
+          "title": "SerMujer",
+          "materials": "Oil",
+          "size": "1.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/SerMujer_1.7x8.3in_Sept2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-17",
+          "title": "SerenaBW",
+          "materials": "Pastels Yellow Paper Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/SerenaBW_11.7x8.3in_May2016_PastelsYellowPaperWatercolor.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-18",
+          "title": "Serena",
+          "materials": "Pastels Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/Serena_11.7x8.3in_May2016_PastelsYellowPaper.webp"
+          ]
+        },
+        {
+          "id": "acuarelapapelamarillo-19",
+          "title": "UnCuerpoMas",
+          "materials": "Ink Watercolor Yellow Paper",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/AcuarelaPapelAmarillo/UnCuerpoMas_11.7x8.3in_Jul2016_InkWatercolorYellowPaper.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "name": "Color",
+      "period": "2015",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "color-01",
+          "title": "Chaplin",
+          "materials": "Oil",
+          "size": "11.7x8.3in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/Chaplin_11.7x8.3in_July2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "color-02",
+          "title": "MedioRostro1",
+          "materials": "Oil",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/MedioRostro1_13.8x9.8in_Jul2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "color-03",
+          "title": "MedioRostro2",
+          "materials": "Oil",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/MedioRostro2_13.8x9.8in_Aug2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "color-04",
+          "title": "Opuestos",
+          "materials": "Oil",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/Opuestos_13.8x9.8in_Aug2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "color-05",
+          "title": "RostroAcuarela1",
+          "materials": "Watercolor",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/RostroAcuarela1_13.8x9.8in_July2015_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "color-06",
+          "title": "RostroAcuarela2",
+          "materials": "Watercolor",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/RostroAcuarela2_13.8x9.8in_July2015_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "color-07",
+          "title": "RostroConOjos",
+          "materials": "Oil",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/RostroConOjos_13.8x9.8in_Jul2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "color-08",
+          "title": "Rostro",
+          "materials": "Oil",
+          "size": "13.8x9.8in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Color/Rostro_13.8x9.8in_Jul2015_Oil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cuerpos",
+      "name": "Cuerpos",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "cuerpos-01",
+          "title": "Ballet",
+          "materials": "Pencil.webp",
+          "size": "13.8x9.8in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Cuerpos/Ballet_13.8x9.8in_Dec2016_Pencil.webp.webp"
+          ]
+        },
+        {
+          "id": "cuerpos-02",
+          "title": "Neblina",
+          "materials": "Pencil.webp",
+          "size": "13.8x9.8in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Cuerpos/Neblina_13.8x9.8in_Dec2016_Pencil.webp.webp"
+          ]
+        },
+        {
+          "id": "cuerpos-03",
+          "title": "Nublada",
+          "materials": "Pencil",
+          "size": "13.8x9.8in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Cuerpos/Nublada_13.8x9.8in_Dec2016_Pencil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fortaleza",
+      "name": "Fortaleza",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "fortaleza-01",
+          "title": "Cansada",
+          "materials": "Pastels Oil",
+          "size": "14x10in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Fortaleza/Cansada_14x10in_Dec2016_PastelsOil.webp"
+          ]
+        },
+        {
+          "id": "fortaleza-02",
+          "title": "Fuerte",
+          "materials": "Pastels Oil",
+          "size": "14x10in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Fortaleza/Fuerte_14x10in_Dec2016_PastelsOil.webp"
+          ]
+        },
+        {
+          "id": "fortaleza-03",
+          "title": "No",
+          "materials": "Pastels Oil",
+          "size": "14x10in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Fortaleza/No_14x10in_Dec2016_PastelsOil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "journal",
+      "name": "Journal",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "journal-01",
+          "title": "Anatomia",
+          "materials": "Pastels Oil.webp",
+          "size": "7x5in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Journal/Anatomia_7x5in_Dec2016_PastelsOil.webp.webp"
+          ]
+        },
+        {
+          "id": "journal-02",
+          "title": "CuerposDeMiDiario",
+          "materials": "Pastels Oil.webp",
+          "size": "7x5in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Journal/CuerposDeMiDiario_7x5in_Dec2016_PastelsOil.webp.webp"
+          ]
+        },
+        {
+          "id": "journal-03",
+          "title": "DiarioPaginaAleatoria",
+          "materials": "Pastels Oil.webp",
+          "size": "7x5in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Journal/DiarioPaginaAleatoria_7x5in_Dec2016_PastelsOil.webp.webp"
+          ]
+        },
+        {
+          "id": "journal-04",
+          "title": "Ojo1",
+          "materials": "Pastels",
+          "size": "7x5in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Journal/Ojo1_7x5in_FEb2016_Pastels.webp"
+          ]
+        },
+        {
+          "id": "journal-05",
+          "title": "Ojo2",
+          "materials": "Pastels",
+          "size": "7x5in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Journal/Ojo2_7x5in_FEb2016_Pastels.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mascotas",
+      "name": "Mascotas",
+      "period": "2017",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "mascotas-01",
+          "title": "Arturo",
+          "materials": "Watercolor.webp",
+          "size": "11.7x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Mascotas/Arturo_11.7x8.3in_Nov2017_Watercolor.webp.webp"
+          ]
+        },
+        {
+          "id": "mascotas-02",
+          "title": "Gatito",
+          "materials": "Fabric Color Ink Watercolor",
+          "size": "14x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Mascotas/Gatito_14x8.3in_Jun2017_FabricColorInkWatercolor.webp"
+          ]
+        },
+        {
+          "id": "mascotas-03",
+          "title": "Thor",
+          "materials": "Watercolor Color",
+          "size": "11.7x8.3in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Mascotas/Thor_11.7x8.3in_Aug2017_WatercolorColor.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oleosadolescente",
+      "name": "OleosAdolescente",
+      "period": "2026",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "oleosadolescente-01",
+          "title": "AbstractVsRealist",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2026,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/AbstractVsRealist_24x18in_Jul2026_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-02",
+          "title": "BuqueEscuelaGloria",
+          "materials": "Oil",
+          "size": "30x40in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/BuqueEscuelaGloria_30x40in_Oct2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-03",
+          "title": "Caos",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Caos_18x24in_Nov2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-04",
+          "title": "DiaDelAmorYAmistad",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/DiaDelAmorYAmistad_24x18in_Feb2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-05",
+          "title": "Einstein",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Einstein_18x24in_Jan2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-06",
+          "title": "EllaSeBañaEnIlusionesParaLimpiarLasImpurezas",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/EllaSeBañaEnIlusionesParaLimpiarLasImpurezas_18x24in_Aug2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-07",
+          "title": "Explorandome",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Explorandome_24x18in_May2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-08",
+          "title": "Hombre",
+          "materials": "Oil",
+          "size": "40x17in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Hombre_40x17in_Feb2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-09",
+          "title": "Ignorancia",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Ignorancia_18x24in_Aug2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-10",
+          "title": "Infancia",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Infancia_18x24in_Jan2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-11",
+          "title": "Masquerade",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Masquerade_24x18in_Nov2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-12",
+          "title": "Melting",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Melting_24x18in_Feb2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-13",
+          "title": "Mujer",
+          "materials": "Oil",
+          "size": "40x17in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Mujer_40x17in_Jan2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-14",
+          "title": "PintarConCuchillos",
+          "materials": "Oil.",
+          "size": "24x18in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/PintarConCuchillos_24x18in_Oct2016_Oil..webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-15",
+          "title": "Placer",
+          "materials": "Oil.",
+          "size": "24x18in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Placer_24x18in_May2016_Oil..webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-16",
+          "title": "QuieroSerTuTango",
+          "materials": "Oil",
+          "size": "24x18in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/QuieroSerTuTango_24x18in_Sept2015_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-18",
+          "title": "SofiYCami",
+          "materials": "Oil",
+          "size": "18x24in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/SofiYCami_18x24in_Jan2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-19",
+          "title": "SomosSoloUno",
+          "materials": "Oil",
+          "size": "40x17in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/SomosSoloUno_40x17in_March2016_Oil.webp"
+          ]
+        },
+        {
+          "id": "oleosadolescente-20",
+          "title": "Tiempo",
+          "materials": "Oil",
+          "size": "40x17in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/OleosAdolescente/Tiempo_40x17in_March2016_Oil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "otros",
+      "name": "Otros",
+      "period": "2017",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "otros-01",
+          "title": "Abstraccion",
+          "materials": "Pen Paper",
+          "size": "10×12in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Otros/Abstraccion_10×12in_Jul2017_PenPaper.webp"
+          ]
+        },
+        {
+          "id": "otros-02",
+          "title": "Azar",
+          "materials": "Color Pencil",
+          "size": "8×10in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Otros/Azar_8×10in_Oct2017_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "otros-03",
+          "title": "EresUnUniversoEntero",
+          "materials": "",
+          "size": "12x16in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Otros/EresUnUniversoEntero_12x16in_April2016ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "otros-04",
+          "title": "Garabatos",
+          "materials": "Pen Watercolor",
+          "size": "12×8in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/Otros/Garabatos_12×8in_2014_PenWatercolor.webp"
+          ]
+        },
+        {
+          "id": "otros-05",
+          "title": "Impresionismo",
+          "materials": "Oil Pastels",
+          "size": "12×10in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Otros/Impresionismo_12×10in_Nov2017_OilPastels.webp"
+          ]
+        },
+        {
+          "id": "otros-06",
+          "title": "Labios",
+          "materials": "Color Pencilwebp",
+          "size": "8×10in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/Otros/Labios_8×10in_Jul2015_ColorPencilwebp.webp"
+          ]
+        },
+        {
+          "id": "otros-07",
+          "title": "Rostro",
+          "materials": "Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Otros/Rostro_11.7x8.3in_Sept2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "otros-08",
+          "title": "Sabiduria",
+          "materials": "Watercolor",
+          "size": "10×12in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Otros/Sabiduria_10×12in_Nov2017_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "otros-09",
+          "title": "UnBesito",
+          "materials": "Watercolor",
+          "size": "10×12in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Otros/UnBesito_10×12in_Dec2016_Watercolor.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partituras",
+      "name": "Partituras",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "partituras-01",
+          "title": "Mozart",
+          "materials": "Watercolor",
+          "size": "11.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Partituras/Mozart_11.7x8.3in_Nov2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "partituras-02",
+          "title": "SonataIX",
+          "materials": "Watercolor Pen",
+          "size": "1.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Partituras/SonataIX_1.7x8.3in_Nov2016_WatercolorPen.webp"
+          ]
+        },
+        {
+          "id": "partituras-03",
+          "title": "SonataK282",
+          "materials": "Watercolor Pen.",
+          "size": "1.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Partituras/SonataK282_1.7x8.3in_Nov2016_WatercolorPen..webp"
+          ]
+        },
+        {
+          "id": "partituras-04",
+          "title": "SonataN28",
+          "materials": "Watercolor Pen.",
+          "size": "1.7x8.3in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/Partituras/SonataN28_1.7x8.3in_Nov2016_WatercolorPen..webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "primerosdibujos",
+      "name": "PrimerosDibujos",
+      "period": "2014",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "primerosdibujos-01",
+          "title": "AlejandraCardozo",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/AlejandraCardozo_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-02",
+          "title": "AlgunaCelebridad",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/AlgunaCelebridad_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-03",
+          "title": "Anime2",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Anime2_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-04",
+          "title": "Anime3",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Anime3_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-05",
+          "title": "Anime4",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Anime4_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-06",
+          "title": "AnimeCirco",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/AnimeCirco_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-07",
+          "title": "Anime",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Anime_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-08",
+          "title": "Circo",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Circo_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-09",
+          "title": "DanielaArredondo",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/DanielaArredondo_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-10",
+          "title": "Dragon",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Dragon_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-11",
+          "title": "Eagle",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Eagle_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-12",
+          "title": "Gato",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Gato_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-13",
+          "title": "IntentoDeDemiLovato",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/IntentoDeDemiLovato_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-14",
+          "title": "Joaquin",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Joaquin_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-15",
+          "title": "Juanita",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Juanita_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-16",
+          "title": "Juliana",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Juliana_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-17",
+          "title": "Majo",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Majo_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-18",
+          "title": "Malefica",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Malefica_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-19",
+          "title": "Manga2",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Manga2_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-20",
+          "title": "Manga",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Manga_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-21",
+          "title": "NicolasCardozo",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/NicolasCardozo_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-22",
+          "title": "Ojo2",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Ojo2_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-23",
+          "title": "Ojo3",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Ojo3_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-24",
+          "title": "Ojo",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Ojo_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-25",
+          "title": "Ojos8.5×11in",
+          "materials": "",
+          "size": "2012",
+          "year": 0,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Ojos8.5×11in_2012_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-26",
+          "title": "Ojos",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Ojos_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-27",
+          "title": "Papa",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Papa_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-28",
+          "title": "Perrito",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Perrito_8.5×11in_2012_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-29",
+          "title": "Piwi",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Piwi_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-30",
+          "title": "RafaellaChavez",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/RafaellaChavez_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-31",
+          "title": "Retrato2",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Retrato2_8.5×11in_2013_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-32",
+          "title": "Rostro18.5×11in",
+          "materials": "",
+          "size": "2013",
+          "year": 0,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Rostro18.5×11in_2013_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-33",
+          "title": "Rostro2",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2012,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Rostro2_8.5×11in_2012_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-34",
+          "title": "SebasRK",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/SebasRK_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-35",
+          "title": "SebastianGaldamez",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/SebastianGaldamez_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-36",
+          "title": "SebastianGutierrez",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/SebastianGutierrez_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-37",
+          "title": "Tyler",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Tyler_8.5×11in_2013_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-38",
+          "title": "ValeSuarez",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/ValeSuarez_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-39",
+          "title": "ValeriaMartin",
+          "materials": "Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/ValeriaMartin_8.5×11in_2014_Pencil.webp"
+          ]
+        },
+        {
+          "id": "primerosdibujos-40",
+          "title": "Valeria",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2013,
+          "images": [
+            "/images/art/oldArt/PrimerosDibujos/Valeria_8.5×11in_2013_ColorPencil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "primerosretratos",
+      "name": "PrimerosRetratos",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "primerosretratos-01",
+          "title": "AbuelitaLucre",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/AbuelitaLucre_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-02",
+          "title": "AbuelitoLuis",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/AbuelitoLuis_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-03",
+          "title": "AbueloJairo",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/AbueloJairo_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-04",
+          "title": "ArianaGrande",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/ArianaGrande_8.5×11in_2014_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-05",
+          "title": "Cara",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2015,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/Cara_8.5×11in_2015_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-06",
+          "title": "DanielaArredondo",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/DanielaArredondo_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-07",
+          "title": "ElSombrerero",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/ElSombrerero_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-08",
+          "title": "JuanitaGuerra",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/JuanitaGuerra_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-09",
+          "title": "Julieta",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/Julieta_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-10",
+          "title": "MajorVargas",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/MajorVargas_8.5×11in_2014_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-11",
+          "title": "MariaAngelica",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/MariaAngelica_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-12",
+          "title": "MarioRuiz",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/MarioRuiz_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-13",
+          "title": "MickeMoreno",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/MickeMoreno_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-14",
+          "title": "Primer Autoretrato",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2014,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/Primer Autoretrato_8.5×11in_2014_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-15",
+          "title": "SebastianSuarez",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/SebastianSuarez_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-16",
+          "title": "SofiLondono",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/SofiLondono_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-17",
+          "title": "ValentinaSuarez",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/ValentinaSuarez_8.5×11in_2016_ColorPencil.webp"
+          ]
+        },
+        {
+          "id": "primerosretratos-18",
+          "title": "ValeriaPerez",
+          "materials": "Color Pencil",
+          "size": "8.5×11in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/PrimerosRetratos/ValeriaPerez_8.5×11in_2016_ColorPencil.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recuerdosdelau",
+      "name": "RecuerdosDeLaU",
+      "period": "0",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "recuerdosdelau-01",
+          "title": "Universidad",
+          "materials": "",
+          "year": 0,
+          "images": [
+            "/images/art/oldArt/RecuerdosDeLaU/Universidad.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retratos",
+      "name": "Retratos",
+      "period": "2017",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "retratos-01",
+          "title": "AngelicaSalazar",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/AngelicaSalazar_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-02",
+          "title": "AntonioEhrlich",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/AntonioEhrlich_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-03",
+          "title": "Ciencia",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Ciencia_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-04",
+          "title": "GabrielaMoreno",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/GabrielaMoreno_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-05",
+          "title": "Gatito",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Gatito_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-06",
+          "title": "JuanCamiloVega",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/JuanCamiloVega_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-07",
+          "title": "Laura Negron",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Laura Negron_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-08",
+          "title": "LoQuePintabaMientrasMurioArturito",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/LoQuePintabaMientrasMurioArturito_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-09",
+          "title": "MajoVargas",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/MajoVargas_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-10",
+          "title": "ManuelaNieto",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/ManuelaNieto_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-11",
+          "title": "MariaJoseVargas",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/MariaJoseVargas_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-12",
+          "title": "Origami",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Origami_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-13",
+          "title": "PabloCastano",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/PabloCastano_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-14",
+          "title": "Pajarito",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Pajarito_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-15",
+          "title": "Plastica",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Plastica_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-16",
+          "title": "Retrato",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Retrato_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-17",
+          "title": "SebastianOsorio",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/SebastianOsorio_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-18",
+          "title": "Sushi",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/Sushi_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        },
+        {
+          "id": "retratos-19",
+          "title": "YannGoudet",
+          "materials": "Pencil Watercolor Ink Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/Retratos/YannGoudet_9.8x13.8in_2017_PencilWatercolorInkPen.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retratoscongarabatos",
+      "name": "RetratosConGarabatos",
+      "period": "2017",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "retratoscongarabatos-01",
+          "title": "FabioTrillos",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/FabioTrillos_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        },
+        {
+          "id": "retratoscongarabatos-02",
+          "title": "MajoVargas",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/MajoVargas_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        },
+        {
+          "id": "retratoscongarabatos-03",
+          "title": "MickeMoreno",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/MickeMoreno_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        },
+        {
+          "id": "retratoscongarabatos-04",
+          "title": "SebastianPenaloza",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/SebastianPenaloza_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        },
+        {
+          "id": "retratoscongarabatos-05",
+          "title": "ValentinaPerez",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/ValentinaPerez_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        },
+        {
+          "id": "retratoscongarabatos-06",
+          "title": "ValeriaPerez",
+          "materials": "Pencil Pen",
+          "size": "9.8x13.8in",
+          "year": 2017,
+          "images": [
+            "/images/art/oldArt/RetratosConGarabatos/ValeriaPerez_9.8x13.8in_2017_PencilPen.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rostrosdeacuarela",
+      "name": "RostrosDeAcuarela",
+      "period": "2016",
+      "description": "Something",
+      "descriptionEs": "Algo",
+      "paintings": [
+        {
+          "id": "rostrosdeacuarela-01",
+          "title": "Rostro1",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro1_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-02",
+          "title": "Rostro2",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro2_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-03",
+          "title": "Rostro3",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro3_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-04",
+          "title": "Rostro4",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro4_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-05",
+          "title": "Rostro5",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro5_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-06",
+          "title": "Rostro6",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro6_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        },
+        {
+          "id": "rostrosdeacuarela-07",
+          "title": "Rostro7",
+          "materials": "Watercolor",
+          "size": "16.5x11.7in",
+          "year": 2016,
+          "images": [
+            "/images/art/oldArt/RostrosDeAcuarela/Rostro7_16.5x11.7in_Aug2016_Watercolor.webp"
+          ]
+        }
+      ]
+    }
+  ],
   collaborations: [],
 
   selectedWorks: [
@@ -775,5 +2550,25 @@ export const COLLECTIONS_ORDER = [
   'red-doodles',
   'yellow'
 ];
+
+export const earlyFirstPaintings_COLLECTIONS_ORDER = [
+  'Retratos',
+  'RetratosConGarabatos',
+  'Mascotas',
+  'Partituras',
+  'Fortaleza',
+  'AcuarelaPapelAmarillo',
+  'Color',
+  'Cuerpos',
+  'Otros',
+  'RostrosDeAcuarela',
+  'RecuerdosDeLaU',
+  'OleosAdolescente',
+  'PrimerosRetratos',
+  'PrimerosDibujos'
+];
+
+// Old Paintings
+
 
 export default data;

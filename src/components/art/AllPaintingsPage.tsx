@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import data, { COLLECTIONS_ORDER } from '../../data/artPortfolio';
+import data, { COLLECTIONS_ORDER, earlyFirstPaintings_COLLECTIONS_ORDER } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -286,19 +286,24 @@ function buildEntries(): PaintingEntry[] {
       });
     });
   });
-  data.earlyFirstPaintings.forEach(p => {
-    entries.push({
-      id: `early-${p.id}`,
-      title: p.title,
-      year: p.year,
-      materials: p.materials,
-      image: p.images[0],
-      collectionId: 'early-first-paintings',
-      collectionName: 'Archival Works',
-      paintingId: p.id,
-      collectionIndex: 999,
+
+  data.earlyFirstPaintings.forEach(col => {
+    const idx = earlyFirstPaintings_COLLECTIONS_ORDER.findIndex(s => s.toLowerCase() === col.id.toLowerCase());
+    col.paintings.forEach(p => {
+      entries.push({
+        id: p.id,
+        title: p.title,
+        year: p.year,
+        materials: p.materials,
+        image: p.images[0],
+        collectionId: col.id,
+        collectionName: col.name,
+        paintingId: p.id,
+        collectionIndex: idx === -1 ? 999 : idx,
+      });
     });
   });
+
   return entries;
 }
 
