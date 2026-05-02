@@ -97,31 +97,47 @@ const Divider = styled.div`
   @media (max-width: 600px) { display: none; }
 `;
 
-const NativeSelect = styled.select`
-  background: ${C.surface};
-  border: 1px solid ${C.border};
-  color: ${C.text};
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
-  padding: 0.5rem 0.6rem;
-  cursor: pointer;
+// ─── Sort segmented control ────────────────────────────────────────────────────
+const SortGroup = styled.div`
+  display: flex;
   flex-shrink: 0;
+  border: 1px solid ${C.border};
+  overflow: hidden;
+`;
+
+const SortButton = styled.button<{ $active: boolean }>`
+  background: ${({ $active }) => ($active ? C.gold : 'transparent')};
+  color: ${({ $active }) => ($active ? C.bg : C.muted)};
+  border: none;
+  border-right: 1px solid ${C.border};
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
   outline: none;
-  transition: border-color 0.2s;
 
-  option {
-    background: #181818;
-    color: ${C.text};
-  }
+  &:last-child { border-right: none; }
 
-  &:focus, &:hover {
-    border-color: ${C.gold};
+  &:hover {
+    background: ${({ $active }) => ($active ? C.gold : 'rgba(200,168,122,0.08)')};
+    color: ${({ $active }) => ($active ? C.bg : C.goldLight)};
   }
 `;
 
+const SortIcon = styled.span`
+  font-size: 0.7rem;
+  line-height: 1;
+  opacity: 0.8;
+`;
+
 const Count = styled.span`
-  font-family: var(--font-montserrat), sans-serif;
   font-size: 0.55rem;
   letter-spacing: 0.2em;
   color: ${C.gold};
@@ -575,11 +591,17 @@ export default function AllPaintingsPage() {
 
         <Divider />
 
-        <NativeSelect value={sort} onChange={e => setSort(e.target.value)}>
-          <option value="newest">{t('art.newestFirst')}</option>
-          <option value="oldest">{t('art.oldestFirst')}</option>
-          <option value="collection">{t('art.byCollection')}</option>
-        </NativeSelect>
+        <SortGroup>
+          <SortButton $active={sort === 'newest'} onClick={() => setSort('newest')} type="button">
+            <SortIcon>↓</SortIcon>{t('art.newestFirst')}
+          </SortButton>
+          <SortButton $active={sort === 'oldest'} onClick={() => setSort('oldest')} type="button">
+            <SortIcon>↑</SortIcon>{t('art.oldestFirst')}
+          </SortButton>
+          <SortButton $active={sort === 'collection'} onClick={() => setSort('collection')} type="button">
+            <SortIcon>⊞</SortIcon>{t('art.byCollection')}
+          </SortButton>
+        </SortGroup>
 
         <Count>{filtered.length} {filtered.length === 1 ? t('art.work') : t('art.works')}</Count>
       </Toolbar>
