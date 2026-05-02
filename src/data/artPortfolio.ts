@@ -288,17 +288,8 @@ const data: ArtPortfolioData = {
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/FirstLove.webp"],
           details: [
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-0C64976E-FDA3-4068-A2FD-158C4C00D3BD.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-4563A3A5-73F2-4461-B1AA-D2F2FE492B89.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-71EB87D7-1951-4F69-A708-50736B66ABCA.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-7943E1A7-EE96-41FE-A600-59D35175777D.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-81230E14-8552-4F48-9D9F-F51ECFD59D10.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-86523B1C-5D89-444E-8A55-EB3D99AA9B3E.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-98E6CFC9-C081-4252-A013-D5479ECEE1FD.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-B6048329-8CC1-4591-B0BB-DDDF08B3192D.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-B741EC7A-D470-4804-86A4-37B2FF894C9A.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-CA95AEE0-86FA-4ADF-B29F-B6EF149E2B11.MP4_poster.webp",
-            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/filtered-EA7F41A0-7C4F-4700-9826-F9CB1353051F.MP4_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles1_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/FirstLove_Detalles2_poster.webp",
           ],
         },
         {
@@ -324,6 +315,10 @@ const data: ArtPortfolioData = {
           size: "13 x 11 in",
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/TheFirstOneIActuallyLiked.webp"],
+          details: [
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles1_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/TheFirstOneIActuallyLiked_Detalles2_poster.webp"
+          ],
         },
         {
           id: "essential-05",
@@ -332,6 +327,10 @@ const data: ArtPortfolioData = {
           size: "13 x 11 in",
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/Enough.webp"],
+          details: [
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles1_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/Enough_Detalles2_poster.webp"
+          ],
         },
         {
           id: "essential-06",
@@ -348,6 +347,11 @@ const data: ArtPortfolioData = {
           size: "11 x 13 in",
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/LittlePrince.webp"],
+          details: [
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles1_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles2_poster.webp",
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/LittlePrince_Detalles3_poster.webp"
+          ],
         },
         {
           id: "essential-08",
@@ -364,6 +368,9 @@ const data: ArtPortfolioData = {
           size: "11 x 13 in",
           year: 2017,
           images: ["/images/art/traditionalArt/The essential is invisible (Red)/EngineeringIsBeautiful.webp"],
+          details: [
+            "/images/art/traditionalArt/The essential is invisible (Red)/Detalles/EngineeringIsBeautiful_Detalles1_poster.webp"
+          ],
         },
         {
           id: "essential-10",
