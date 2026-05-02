@@ -956,11 +956,10 @@ const data: ArtPortfolioData = {
           year: 2024,
           images: ["/images/art/traditionalArt/Colorful/ParaPipe.webp"],
           details: [
-            "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles5.webp",
-            "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles1.webp",
             "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles2.webp",
             "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles3.webp",
-            "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles3.webp",
+            "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles4.webp",
+            "/images/art/traditionalArt/Colorful/Detalles/ParaPipe_Detalles1.webp"
           ],
         },
       ],
