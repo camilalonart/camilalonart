@@ -89,18 +89,11 @@ const data: ArtPortfolioData = {
           year: 2026,
           images: [
             "/images/art/traditionalArt/Carrying Home/CarryingHome.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/A7T02372.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/A7T06893 copy.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/A7T06900 copy.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/A7T06901 2 copy.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/A7T06901 copy 2.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/IMG_0986.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/IMG_2345 copy.webp",
           ],
           details: [
             "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles2.webp",
             "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles1.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/proceso-carryinghome.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/CarryingHome_Detalles3.webp",
           ],
         },
         {
@@ -111,15 +104,11 @@ const data: ArtPortfolioData = {
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/InTransit.webp"],
           details: [
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles4.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles5.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles6.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles7.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles0.webp",
             "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles1.webp",
             "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles2.webp",
-            "/images/art/traditionalArt/Carrying Home/Details/ProcesoIntransit.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles3.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles4.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/InTransit_Detalles0.webp"
           ],
           thoughts: "Un homenaje a quienes viven lejos de donde nacieron… a quienes un día se fueron y tuvieron que aprender a ser de nuevo."
         },
@@ -155,6 +144,11 @@ const data: ArtPortfolioData = {
           size: "18 x 24 in",
           year: 2025,
           images: ["/images/art/traditionalArt/Carrying Home/HoldingDeparture.webp"],
+          details: [
+            "/images/art/traditionalArt/Carrying Home/Details/HoldingDeparture_Detalles1.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/HoldingDeparture_Detalles2.webp",
+            "/images/art/traditionalArt/Carrying Home/Details/HoldingDeparture_Detalles3.webp"
+          ],
           thoughts: "Aprender a habitarse mientras todo alrededor cambia… Caminar hacia adelante acompañada por las mujeres que fui…  Dejando fragmentos en cada frontera invisible."
         },
       ],
@@ -436,9 +430,8 @@ const data: ArtPortfolioData = {
           year: 2016,
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Camouflage.webp"],
           details: [
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/camaleon-proceso.MP4_poster.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/filtered-D9773DF1-0745-4A14-96F9-5AA876A2BDB6.MP4_poster.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/filtered-D9CE4C41-202B-4804-ABEF-4B5FA62B8F05.MP4_poster.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details1.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/Camouflage_Details2_poster.webp",
           ],
         },
         {
@@ -478,11 +471,11 @@ const data: ArtPortfolioData = {
           year: 2016,
           images: ["/images/art/traditionalArt/Siempre vuelvo a esta version de mi/TragicPolitics.webp"],
           details: [
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3204.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3205.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3206.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/IMG_3209.webp",
-            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/tragicpolitics-sosteniendoeldibujo copy.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details1.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details2.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details3_poster.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details4_poster.webp",
+            "/images/art/traditionalArt/Siempre vuelvo a esta version de mi/Detalles/TragicPolitics_Details5.webp"
           ],
         },
       ],
@@ -1040,7 +1033,7 @@ const data: ArtPortfolioData = {
           materials: "Mixed media",
           size: "",
           year: 2025,
-          images: ["/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres.webp"],
+          images: ["/images/art/traditionalArt/Otros/UniversidadSimonBolivarParaAndres.webp"],
           details: [
             "/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres_Proceso1.webp",
             "/images/art/traditionalArt/Otros/Detalles/UniversidadSimonBolivarParaAndres_Proceso2.webp",
