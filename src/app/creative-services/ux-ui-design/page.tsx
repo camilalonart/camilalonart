@@ -13,17 +13,25 @@ const FORMSPREE_ID = 'xnjwdddj';
 
 // ── Palette ───────────────────────────────────────────────────────────────────
 const C = {
-  bg:      '#FAFAFA',
-  white:   '#FFFFFF',
-  text:    '#0A0A0A',
-  muted:   '#9A9A9A',
-  border:  'rgba(0,0,0,0.09)',
-  hover:   'rgba(0,0,0,0.54)',
+  dark:        '#0A0A0A',
+  light:       '#F4F4F0',
+  white:       '#FFFFFF',
+  text:        '#0A0A0A',
+  textLight:   '#FAFAFA',
+  muted:       '#888888',
+  mutedDark:   'rgba(250,250,250,0.38)',
+  accent:      '#C8F135',   // electric lime
+  border:      'rgba(0,0,0,0.1)',
+  borderDark:  'rgba(255,255,255,0.1)',
 };
 
-// ── Animations ────────────────────────────────────────────────────────────────
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+const marqueeAnim = keyframes`
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+`;
 const fadeUp = keyframes`
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 const fadeIn = keyframes`
@@ -34,260 +42,315 @@ const fadeIn = keyframes`
 // ── NAV ───────────────────────────────────────────────────────────────────────
 const PageNav = styled.nav`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1.5rem,4vw,3rem);
-  height: 60px;
-  background: rgba(250,250,250,0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid ${C.border};
+  padding: 0 clamp(1.25rem,3.5vw,2.5rem);
+  height: 56px;
+  background: ${C.dark};
+  border-bottom: 1px solid ${C.borderDark};
 `;
 
 const NavLogo = styled(Link)`
-  font-family: var(--font-cormorant);
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: ${C.text};
-  letter-spacing: 0.04em;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.55; }
+  font-family: var(--font-montserrat);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${C.textLight};
+  transition: color 0.2s;
+  &:hover { color: ${C.accent}; }
 `;
 
-const NavBack = styled(Link)`
+const NavTag = styled.span`
   font-family: var(--font-montserrat);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.accent};
+  border: 1px solid ${C.accent};
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+
+  @media (max-width: 520px) { display: none; }
+`;
+
+const NavRight = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: color 0.2s;
-  &:hover { color: ${C.text}; }
-`;
-
-// ── Page shell ────────────────────────────────────────────────────────────────
-const Page = styled.div`
-  background: ${C.bg};
-  min-height: 100vh;
+  gap: 1.25rem;
 `;
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 const Hero = styled.section`
-  position: relative;
+  background: ${C.dark};
   min-height: 100svh;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  padding: 0 clamp(1.5rem,4vw,3rem);
-  padding-top: 60px;
-`;
-
-const HeroCenter = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  padding: clamp(3rem,6vw,5rem) 0 clamp(2rem,4vw,3rem);
+  justify-content: flex-end;
+  padding-top: 56px;
+`;
+
+const HeroContent = styled.div`
+  padding: clamp(3rem,6vw,5rem) clamp(1.25rem,3.5vw,2.5rem) 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(2rem,4vw,3rem);
+  animation: ${fadeUp} 0.9s ease both;
+`;
+
+const HeroLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+const Dot = styled.span`
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: ${C.accent};
 `;
 
 const HeroEyebrow = styled.span`
   font-family: var(--font-montserrat);
-  font-size: 0.62rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: ${C.muted};
-  animation: ${fadeUp} 0.9s ease both;
-  animation-delay: 0.05s;
+  color: ${C.mutedDark};
 `;
 
 const HeroTitle = styled.h1`
-  font-family: var(--font-cormorant);
-  font-size: clamp(5rem, 12vw, 10.5rem);
-  font-weight: 300;
-  color: ${C.text};
+  font-family: var(--font-montserrat);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 700;
+  color: ${C.textLight};
   line-height: 0.88;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   margin: 0;
-  animation: ${fadeUp} 1s ease both;
-  animation-delay: 0.1s;
 
-  em {
-    font-style: italic;
+  span {
+    color: ${C.accent};
   }
 `;
 
-const HeroTagline = styled.p`
+const HeroSub = styled.p`
   font-family: var(--font-montserrat);
-  font-size: clamp(0.82rem,1.2vw,0.92rem);
+  font-size: clamp(0.82rem,1.3vw,0.95rem);
   font-weight: 300;
-  color: ${C.muted};
-  max-width: 340px;
+  color: ${C.mutedDark};
+  max-width: 380px;
   line-height: 1.8;
   margin: 0;
-  letter-spacing: 0.01em;
-  animation: ${fadeUp} 1s ease both;
-  animation-delay: 0.2s;
 `;
 
-const HeroBottom = styled.div`
+// ── MARQUEE ───────────────────────────────────────────────────────────────────
+const MarqueeWrap = styled.div`
+  overflow: hidden;
+  border-top: 1px solid ${C.borderDark};
+  padding: 1rem 0;
+  margin-top: clamp(2rem,4vw,3rem);
+`;
+
+const MarqueeTrack = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding-bottom: clamp(1.5rem,3vw,2rem);
-  border-top: 1px solid ${C.border};
-  padding-top: 1.25rem;
+  width: max-content;
+  animation: ${marqueeAnim} 22s linear infinite;
+  gap: 0;
 `;
 
-const HeroCount = styled.span`
+const MarqueeItem = styled.span`
   font-family: var(--font-montserrat);
-  font-size: 0.62rem;
-  font-weight: 500;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.mutedDark};
+  white-space: nowrap;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &::after {
+    content: '·';
+    color: ${C.accent};
+    font-size: 1rem;
+  }
 `;
 
-const ScrollHint = styled.span`
+// ── STATS BAR ─────────────────────────────────────────────────────────────────
+const StatsBar = styled.div`
+  display: flex;
+  border-top: 1px solid ${C.borderDark};
+`;
+
+const StatItem = styled.div`
+  flex: 1;
+  padding: 1.25rem clamp(1.25rem,3.5vw,2.5rem);
+  border-right: 1px solid ${C.borderDark};
+
+  &:last-child { border-right: none; }
+
+  @media (max-width: 480px) {
+    &:nth-child(3) { display: none; }
+  }
+`;
+
+const StatNum = styled.div`
   font-family: var(--font-montserrat);
-  font-size: 0.62rem;
+  font-size: clamp(1.4rem,2.5vw,2rem);
+  font-weight: 700;
+  color: ${C.textLight};
+  line-height: 1;
+  margin-bottom: 0.2rem;
+`;
+
+const StatLabel = styled.div`
+  font-family: var(--font-montserrat);
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: ${C.muted};
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: ${C.mutedDark};
 `;
 
 // ── PROJECTS ──────────────────────────────────────────────────────────────────
 const WorkSection = styled.section`
-  padding: clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem);
-  max-width: 1400px;
-  margin: 0 auto;
+  background: ${C.light};
 `;
 
-const SectionLabel = styled.p`
-  font-family: var(--font-montserrat);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: ${C.muted};
-  margin: 0 0 2.5rem;
-`;
-
-const ProjectGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: clamp(1rem,2.5vw,2rem);
-
-  @media (max-width: 640px) { grid-template-columns: 1fr; }
-`;
-
-const ProjectItem = styled.button`
-  all: unset;
-  display: block;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-
-  &:hover .proj-thumb { transform: scale(1.02); }
-  &:hover .proj-overlay { opacity: 1; }
-  &:focus-visible { outline: 1.5px solid ${C.text}; outline-offset: 4px; }
-`;
-
-const ProjectThumbWrap = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  background: #EFEFEF;
-`;
-
-const ProjectThumb = styled.div.attrs({ className: 'proj-thumb' })`
-  position: absolute;
-  inset: 0;
-  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-`;
-
-const ProjectOverlay = styled.div.attrs({ className: 'proj-overlay' })`
-  position: absolute;
-  inset: 0;
-  background: rgba(10,10,10,0.42);
+const WorkHeader = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 2;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: clamp(2.5rem,5vw,4rem) clamp(1.25rem,3.5vw,2.5rem) clamp(1.5rem,3vw,2.5rem);
+  border-bottom: 1px solid ${C.border};
 `;
 
-const OverlayLabel = styled.span`
+const WorkTitle = styled.h2`
   font-family: var(--font-montserrat);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #fff;
+  font-size: clamp(1.5rem,3vw,2.2rem);
+  font-weight: 700;
+  color: ${C.text};
+  letter-spacing: -0.02em;
+  margin: 0;
 `;
 
-const ProjectMeta = styled.div`
-  padding: 0.9rem 0 0;
-`;
-
-const ProjectNumber = styled.span`
+const WorkCount = styled.span`
   font-family: var(--font-montserrat);
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: ${C.muted};
-  display: block;
-  margin-bottom: 0.3rem;
 `;
 
-const ProjectName = styled.h3`
+const ProjectRow = styled.button`
+  all: unset;
+  display: grid;
+  grid-template-columns: 3rem 1fr auto auto;
+  align-items: center;
+  gap: clamp(1rem,2.5vw,2rem);
+  width: 100%;
+  padding: clamp(1.25rem,2.5vw,2rem) clamp(1.25rem,3.5vw,2.5rem);
+  border-bottom: 1px solid ${C.border};
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.35s ease, padding-left 0.35s ease;
+  box-sizing: border-box;
+
+  &:hover {
+    background: ${C.dark};
+    padding-left: calc(clamp(1.25rem,3.5vw,2.5rem) + 0.5rem);
+  }
+
+  &:hover .prow-num   { color: ${C.accent}; }
+  &:hover .prow-name  { color: ${C.textLight}; }
+  &:hover .prow-tags  { color: ${C.mutedDark}; }
+  &:hover .prow-arrow { color: ${C.accent}; transform: translateX(6px); }
+  &:hover .prow-thumb { opacity: 1; }
+
+  &:focus-visible { outline: 2px solid ${C.accent}; outline-offset: -2px; }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+`;
+
+const PRowNum = styled.span.attrs({ className: 'prow-num' })`
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: ${C.muted};
+  transition: color 0.3s ease;
+`;
+
+const PRowInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+`;
+
+const PRowName = styled.span.attrs({ className: 'prow-name' })`
   font-family: var(--font-cormorant);
-  font-size: clamp(1.4rem,2.2vw,1.9rem);
+  font-size: clamp(1.6rem,3.5vw,2.8rem);
   font-weight: 400;
   color: ${C.text};
-  margin: 0 0 0.35rem;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: color 0.3s ease;
 `;
 
-const ProjectDesc = styled.p`
+const PRowTags = styled.span.attrs({ className: 'prow-tags' })`
   font-family: var(--font-montserrat);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
+  font-weight: 400;
   color: ${C.muted};
-  font-weight: 300;
-  line-height: 1.7;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+`;
+
+const PRowThumb = styled.div.attrs({ className: 'prow-thumb' })`
+  position: relative;
+  width: clamp(80px,10vw,120px);
+  aspect-ratio: 4/3;
+  border-radius: 4px;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  flex-shrink: 0;
+
+  @media (max-width: 600px) { display: none; }
+`;
+
+const PRowArrow = styled.span.attrs({ className: 'prow-arrow' })`
+  font-size: clamp(1.2rem,2vw,1.6rem);
+  color: ${C.muted};
+  transition: transform 0.3s ease, color 0.3s ease;
+  line-height: 1;
+  flex-shrink: 0;
 `;
 
 // ── CONTACT ───────────────────────────────────────────────────────────────────
 const ContactSection = styled.section`
-  padding: clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,3rem);
-  border-top: 1px solid ${C.border};
-  max-width: 1400px;
-  margin: 0 auto;
+  background: ${C.white};
+  padding: clamp(4rem,8vw,7rem) clamp(1.25rem,3.5vw,2.5rem);
 `;
 
-const ContactGrid = styled.div`
+const ContactInner = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem,6vw,6rem);
+  gap: clamp(3rem,6vw,7rem);
   align-items: start;
 
   @media (max-width: 768px) { grid-template-columns: 1fr; }
@@ -295,43 +358,48 @@ const ContactGrid = styled.div`
 
 const ContactLeft = styled.div``;
 
-const ContactHeading = styled.h2`
-  font-family: var(--font-cormorant);
-  font-size: clamp(2.5rem,5vw,4rem);
-  font-weight: 300;
-  color: ${C.text};
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin: 0 0 1rem;
+const ContactTag = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+`;
 
-  em { font-style: italic; }
+const ContactHeading = styled.h2`
+  font-family: var(--font-montserrat);
+  font-size: clamp(2.2rem,5vw,3.8rem);
+  font-weight: 700;
+  color: ${C.text};
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 1.25rem;
 `;
 
 const ContactSub = styled.p`
   font-family: var(--font-montserrat);
-  font-size: 0.82rem;
-  color: ${C.muted};
+  font-size: 0.85rem;
   font-weight: 300;
+  color: ${C.muted};
   line-height: 1.8;
   margin: 0;
-  max-width: 300px;
+  max-width: 320px;
 `;
 
 const ContactRight = styled.div`
-  padding-top: 0.25rem;
+  padding-top: 0.5rem;
 `;
 
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1.75rem;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
 `;
 
 const FieldLabel = styled.label`
   font-family: var(--font-montserrat);
   font-size: 0.6rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: ${C.muted};
@@ -340,52 +408,47 @@ const FieldLabel = styled.label`
 const underlineBase = css`
   background: transparent;
   border: none;
-  border-bottom: 1px solid ${C.border};
+  border-bottom: 1.5px solid ${C.border};
   border-radius: 0;
   padding: 0.55rem 0;
   color: ${C.text};
   font-family: var(--font-montserrat);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 300;
   width: 100%;
   outline: none;
-  transition: border-color 0.25s ease;
+  transition: border-color 0.2s ease;
 
-  &::placeholder { color: rgba(0,0,0,0.2); }
+  &::placeholder { color: rgba(0,0,0,0.18); }
   &:focus { border-bottom-color: ${C.text}; }
   @media (max-width: 600px) { font-size: 16px; }
 `;
 
 const FieldInput    = styled.input`${underlineBase}`;
-const FieldTextarea = styled.textarea`
-  ${underlineBase}
-  min-height: 100px;
-  resize: none;
-`;
+const FieldTextarea = styled.textarea`${underlineBase} min-height:110px; resize:none;`;
 
 const SendButton = styled.button`
   font-family: var(--font-montserrat);
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: ${C.bg};
-  background: ${C.text};
+  color: ${C.dark};
+  background: ${C.accent};
   border: none;
-  padding: 0.85rem 2rem;
+  padding: 0.9rem 2rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 
-  &:hover:not(:disabled) { opacity: 0.72; }
+  &:hover:not(:disabled) { opacity: 0.82; transform: translateY(-1px); }
   &:disabled { opacity: 0.35; cursor: not-allowed; }
 `;
 
 const FormMsg = styled.div<{ $type: 'success' | 'error' }>`
   margin-bottom: 1.25rem;
-  padding: 0.75rem 0;
+  padding: 0.75rem 0 0.75rem 0.85rem;
   border-left: 2px solid ${p => p.$type === 'success' ? '#22c55e' : '#ef4444'};
-  padding-left: 0.85rem;
   color: ${p => p.$type === 'success' ? '#16a34a' : '#dc2626'};
   font-family: var(--font-montserrat);
   font-size: 0.8rem;
@@ -394,40 +457,41 @@ const FormMsg = styled.div<{ $type: 'success' | 'error' }>`
 
 // ── FOOTER ────────────────────────────────────────────────────────────────────
 const PageFooter = styled.footer`
-  border-top: 1px solid ${C.border};
-  padding: 1.5rem clamp(1.5rem,4vw,3rem);
+  background: ${C.dark};
+  border-top: 1px solid ${C.borderDark};
+  padding: 1.5rem clamp(1.25rem,3.5vw,2.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 
-  @media (max-width: 520px) { flex-direction: column; align-items: flex-start; }
+  @media (max-width: 480px) { flex-direction: column; align-items: flex-start; }
 `;
 
 const FooterNote = styled.span`
   font-family: var(--font-montserrat);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 400;
   letter-spacing: 0.08em;
-  color: ${C.muted};
+  color: ${C.mutedDark};
 `;
 
 const FooterLink = styled.a`
   font-family: var(--font-montserrat);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.mutedDark};
   transition: color 0.2s;
-  &:hover { color: ${C.text}; }
+  &:hover { color: ${C.accent}; }
 `;
 
 // ── DETAIL OVERLAY ────────────────────────────────────────────────────────────
 const DetailOverlay = styled.div<{ $visible: boolean }>`
   position: fixed;
   inset: 0;
-  background: ${C.bg};
+  background: ${C.dark};
   z-index: 1100;
   overflow-y: auto;
   display: ${p => (p.$visible ? 'block' : 'none')};
@@ -436,46 +500,43 @@ const DetailOverlay = styled.div<{ $visible: boolean }>`
 
 const DetailTopBar = styled.div`
   position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(250,250,250,0.92);
+  top: 0; z-index: 10;
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid ${C.border};
+  border-bottom: 1px solid ${C.borderDark};
   display: flex;
   align-items: center;
-  height: 60px;
-  padding: 0 clamp(1.5rem,4vw,3rem);
+  height: 56px;
+  padding: 0 clamp(1.25rem,3.5vw,2.5rem);
   gap: 1rem;
 `;
 
-const BackButton = styled.button`
+const BackBtn = styled.button`
   font-family: var(--font-montserrat);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: ${C.muted};
+  color: ${C.mutedDark};
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   padding: 0;
   flex-shrink: 0;
   transition: color 0.2s ease;
 
-  &:hover { color: ${C.text}; }
-  svg { width: 12px; height: 12px; }
+  &:hover { color: ${C.accent}; }
 `;
 
 const DetailBarTitle = styled.span`
   font-family: var(--font-cormorant);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 400;
-  color: ${C.text};
-  letter-spacing: 0.02em;
+  color: rgba(250,250,250,0.65);
   flex: 1;
   text-align: center;
   white-space: nowrap;
@@ -483,56 +544,56 @@ const DetailBarTitle = styled.span`
   text-overflow: ellipsis;
 `;
 
-const DetailBarSpacer = styled.div`
-  flex-shrink: 0;
-  min-width: 80px;
-`;
+const DetailBarSpacer = styled.div`min-width: 80px; flex-shrink: 0;`;
 
 const DetailHeader = styled.div`
-  padding: clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3rem) clamp(2rem,4vw,3rem);
-  max-width: 760px;
-  border-bottom: 1px solid ${C.border};
-  margin-bottom: 0;
+  padding: clamp(3rem,6vw,5rem) clamp(1.25rem,3.5vw,2.5rem) clamp(2rem,4vw,3rem);
+  max-width: 900px;
+  border-bottom: 1px solid ${C.borderDark};
 `;
 
 const DetailTitle = styled.h2`
-  font-family: var(--font-cormorant);
-  font-size: clamp(3rem,7vw,5.5rem);
-  font-weight: 300;
-  color: ${C.text};
+  font-family: var(--font-montserrat);
+  font-size: clamp(2.8rem,7vw,6rem);
+  font-weight: 700;
+  color: ${C.textLight};
   letter-spacing: -0.03em;
-  line-height: 0.9;
+  line-height: 0.92;
   margin: 0 0 1.25rem;
 `;
 
 const DetailDesc = styled.p`
   font-family: var(--font-montserrat);
-  font-size: 0.85rem;
-  color: ${C.muted};
+  font-size: 0.88rem;
+  color: ${C.mutedDark};
   font-weight: 300;
   line-height: 1.8;
   margin: 0;
-  max-width: 520px;
+  max-width: 540px;
 `;
 
-const FullWidthImageWrap = styled.div`
+const FullWidthWrap = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #111;
 `;
 
-const ImageGap = styled.div`
-  height: 3px;
-  background: ${C.bg};
+const ImageGap = styled.div`height: 3px; background: ${C.dark};`;
+
+const DetailFootBar = styled.div`
+  padding: clamp(2rem,4vw,3rem) clamp(1.25rem,3.5vw,2.5rem);
+  border-top: 1px solid ${C.borderDark};
 `;
 
-const DetailFooterBar = styled.div`
-  padding: clamp(2rem,4vw,3rem) clamp(1.5rem,4vw,3rem);
-  border-top: 1px solid ${C.border};
-`;
+// ── MARQUEE DATA ──────────────────────────────────────────────────────────────
+const TICKER = [
+  'UX Design', 'UI Design', 'Product Design',
+  'Branding', 'Mobile', 'Interface', 'Figma',
+  'Prototyping', 'User Research',
+];
 
-// ── Component ─────────────────────────────────────────────────────────────────
+// ── COMPONENT ─────────────────────────────────────────────────────────────────
 export default function UXUIDesignPage() {
   const { t, locale } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<UXUIProject | null>(null);
@@ -541,26 +602,17 @@ export default function UXUIDesignPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
 
-  const openProject = useCallback((project: UXUIProject) => {
-    setSelectedProject(project);
-  }, []);
-
-  const closeProject = useCallback(() => {
-    setSelectedProject(null);
-  }, []);
+  const openProject = useCallback((p: UXUIProject) => setSelectedProject(p), []);
+  const closeProject = useCallback(() => setSelectedProject(null), []);
 
   useEffect(() => {
-    if (selectedProject && detailRef.current) {
-      detailRef.current.scrollTop = 0;
-    }
+    if (selectedProject && detailRef.current) detailRef.current.scrollTop = 0;
   }, [selectedProject]);
 
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedProject) closeProject();
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    const h = (e: KeyboardEvent) => { if (e.key === 'Escape' && selectedProject) closeProject(); };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
   }, [selectedProject, closeProject]);
 
   useEffect(() => {
@@ -568,10 +620,9 @@ export default function UXUIDesignPage() {
     return () => { document.body.style.overflow = ''; };
   }, [selectedProject]);
 
-  const getDesc = (p: UXUIProject) =>
-    locale === 'es' ? p.descriptionEs : p.descriptionEn;
+  const getDesc = (p: UXUIProject) => locale === 'es' ? p.descriptionEs : p.descriptionEn;
 
-  const images = (p: UXUIProject) =>
+  const getImages = (p: UXUIProject) =>
     Array.from({ length: p.imageCount }, (_, i) => ({
       src: `/images/uxuidesign/${p.id}/img${i + 1}.webp`,
       alt: `${p.id} — ${i + 1}`,
@@ -605,93 +656,115 @@ export default function UXUIDesignPage() {
     }
   };
 
-  const Arrow = () => (
-    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8"
-      strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8 1L2 6l6 5" />
-    </svg>
-  );
+  const projectTags = (p: UXUIProject) => {
+    if (p.id === 'Cleverlynk') return 'Logo · Branding · UX/UI · Acquired by Rappi';
+    if (p.id === 'Alfred')     return 'Product Screens · Colombian Company';
+    return 'UX/UI Design';
+  };
 
   return (
-    <Page>
-      {/* ── Nav ────────────────────────────────────────────── */}
+    <>
+      {/* ── NAV ─────────────────────────────────────────────── */}
       <PageNav>
         <NavLogo href="/">camilalonart</NavLogo>
-        <NavBack href="/">
-          <Arrow />
-          {t('common.backToHome')}
-        </NavBack>
-        <LanguageSwitcher />
+        <LanguageSwitcher isDark />
       </PageNav>
 
-      {/* ── Hero ───────────────────────────────────────────── */}
+      {/* ── HERO ────────────────────────────────────────────── */}
       <Hero>
-        <HeroCenter>
-          <HeroEyebrow>{t('uxui.heroEyebrow')}</HeroEyebrow>
+        <HeroContent>
+          <HeroLabel>
+            <Dot />
+            <HeroEyebrow>{t('uxui.heroEyebrow')}</HeroEyebrow>
+          </HeroLabel>
           <HeroTitle>
-            UX /&thinsp;<em>UI</em>
+            UX &amp;&nbsp;<span>UI</span>
             <br />
-            Design.
+            Design
           </HeroTitle>
-          <HeroTagline>{t('uxui.heroSubtitle')}</HeroTagline>
-        </HeroCenter>
-        <HeroBottom>
-          <HeroCount>
-            {uxuiProjects.length.toString().padStart(2, '0')}&nbsp;{t('uxui.projectsTitle')}
-          </HeroCount>
-          <ScrollHint>Scroll ↓</ScrollHint>
-        </HeroBottom>
+          <HeroSub>{t('uxui.heroSubtitle')}</HeroSub>
+        </HeroContent>
+
+        {/* Marquee ticker */}
+        <MarqueeWrap>
+          <MarqueeTrack aria-hidden="true">
+            {[...TICKER, ...TICKER].map((tag, i) => (
+              <MarqueeItem key={i}>{tag}</MarqueeItem>
+            ))}
+          </MarqueeTrack>
+        </MarqueeWrap>
+
+        {/* Stats bar */}
+        <StatsBar>
+          <StatItem>
+            <StatNum>{uxuiProjects.length.toString().padStart(2, '0')}</StatNum>
+            <StatLabel>{t('uxui.projectsTitle')}</StatLabel>
+          </StatItem>
+          <StatItem>
+            <StatNum>01</StatNum>
+            <StatLabel>Unicorn Acquisition</StatLabel>
+          </StatItem>
+          <StatItem>
+            <StatNum>YVR</StatNum>
+            <StatLabel>Vancouver, Canada</StatLabel>
+          </StatItem>
+        </StatsBar>
       </Hero>
 
-      {/* ── Projects ───────────────────────────────────────── */}
+      {/* ── PROJECTS ────────────────────────────────────────── */}
       <WorkSection>
-        <SectionLabel>{t('uxui.projectsTitle')}</SectionLabel>
-        <ProjectGrid>
-          {uxuiProjects.map((project, idx) => {
-            const desc = getDesc(project);
-            return (
-              <ProjectItem
-                key={project.id}
-                onClick={() => openProject(project)}
-                aria-label={`${t('uxui.viewProject')} — ${project.id}`}
-              >
-                <ProjectThumbWrap>
-                  <ProjectThumb>
-                    <SecureImage
-                      src={`/images/uxuidesign/${project.id}/thumbnail.webp`}
-                      alt={project.id}
-                      fill
-                      objectFit="cover"
-                      showWatermark={false}
-                      sizes="(max-width:640px) 100vw, 50vw"
-                    />
-                  </ProjectThumb>
-                  <ProjectOverlay>
-                    <OverlayLabel>{t('uxui.viewProject')}&nbsp;→</OverlayLabel>
-                  </ProjectOverlay>
-                </ProjectThumbWrap>
-                <ProjectMeta>
-                  <ProjectNumber>
-                    {(idx + 1).toString().padStart(2, '0')}
-                  </ProjectNumber>
-                  <ProjectName>{project.id}</ProjectName>
-                  {desc && <ProjectDesc>{desc}</ProjectDesc>}
-                </ProjectMeta>
-              </ProjectItem>
-            );
-          })}
-        </ProjectGrid>
+        <WorkHeader>
+          <WorkTitle>Selected Work</WorkTitle>
+          <WorkCount>
+            {uxuiProjects.length.toString().padStart(2, '0')} {t('uxui.projectsTitle')}
+          </WorkCount>
+        </WorkHeader>
+
+        {uxuiProjects.map((project, idx) => (
+          <ProjectRow
+            key={project.id}
+            onClick={() => openProject(project)}
+            aria-label={`${t('uxui.viewProject')} — ${project.id}`}
+          >
+            <PRowNum>{(idx + 1).toString().padStart(2, '0')}</PRowNum>
+            <PRowInfo>
+              <PRowName>{project.id}</PRowName>
+              <PRowTags>{projectTags(project)}</PRowTags>
+            </PRowInfo>
+            <PRowThumb>
+              <SecureImage
+                src={`/images/uxuidesign/${project.id}/thumbnail.webp`}
+                alt={project.id}
+                fill
+                objectFit="cover"
+                showWatermark={false}
+                sizes="120px"
+              />
+            </PRowThumb>
+            <PRowArrow>→</PRowArrow>
+          </ProjectRow>
+        ))}
       </WorkSection>
 
-      {/* ── Contact ────────────────────────────────────────── */}
+      {/* ── CONTACT ─────────────────────────────────────────── */}
       <ContactSection>
-        <ContactGrid>
+        <ContactInner>
           <ContactLeft>
-            <SectionLabel>{t('uxui.projectsTitle').slice(0,0)}Contact</SectionLabel>
+            <ContactTag>
+              <Dot style={{ background: C.accent }} />
+              <span style={{
+                fontFamily: 'var(--font-montserrat)',
+                fontSize: '0.62rem',
+                fontWeight: 600,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: C.muted,
+              }}>
+                Contact
+              </span>
+            </ContactTag>
             <ContactHeading>
-              {t('uxui.contactTitle').split(' ').slice(0, 3).join(' ')}
-              <br />
-              <em>{t('uxui.contactTitle').split(' ').slice(3).join(' ')}</em>
+              {t('uxui.contactTitle')}
             </ContactHeading>
             <ContactSub>{t('uxui.contactSubtitle')}</ContactSub>
           </ContactLeft>
@@ -720,9 +793,9 @@ export default function UXUIDesignPage() {
                 />
               </FormField>
               <FormField>
-                <FieldLabel htmlFor="ux-message">{t('forms.message')}</FieldLabel>
+                <FieldLabel htmlFor="ux-msg">{t('forms.message')}</FieldLabel>
                 <FieldTextarea
-                  id="ux-message" name="message"
+                  id="ux-msg" name="message"
                   value={formData.message} onChange={handleChange}
                   required disabled={isSubmitting}
                   placeholder={t('forms.message')}
@@ -733,36 +806,30 @@ export default function UXUIDesignPage() {
               </SendButton>
             </form>
           </ContactRight>
-        </ContactGrid>
+        </ContactInner>
       </ContactSection>
 
-      {/* ── Footer ─────────────────────────────────────────── */}
+      {/* ── FOOTER ──────────────────────────────────────────── */}
       <PageFooter>
         <FooterNote>© {new Date().getFullYear()} Camila Londoño</FooterNote>
-        <FooterLink
-          href="https://instagram.com/camilalonart"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram
+        <FooterLink href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">
+          @camilalonart
         </FooterLink>
       </PageFooter>
 
-      {/* ── Detail overlay ─────────────────────────────────── */}
+      {/* ── DETAIL OVERLAY ──────────────────────────────────── */}
       <DetailOverlay
         $visible={!!selectedProject}
         ref={detailRef}
         role="dialog"
         aria-modal="true"
-        aria-label={selectedProject?.id}
       >
         {selectedProject && (
           <>
             <DetailTopBar>
-              <BackButton onClick={closeProject} aria-label={t('uxui.back')}>
-                <Arrow />
-                {t('uxui.back')}
-              </BackButton>
+              <BackBtn onClick={closeProject} aria-label={t('uxui.back')}>
+                ← {t('uxui.back')}
+              </BackBtn>
               <DetailBarTitle>{selectedProject.id}</DetailBarTitle>
               <DetailBarSpacer />
             </DetailTopBar>
@@ -774,10 +841,10 @@ export default function UXUIDesignPage() {
               )}
             </DetailHeader>
 
-            {images(selectedProject).map((img, idx) => (
+            {getImages(selectedProject).map((img, idx) => (
               <React.Fragment key={img.src}>
                 {idx > 0 && <ImageGap />}
-                <FullWidthImageWrap>
+                <FullWidthWrap>
                   <SecureImage
                     src={img.src}
                     alt={img.alt}
@@ -788,19 +855,18 @@ export default function UXUIDesignPage() {
                     sizes="100vw"
                     quality={90}
                   />
-                </FullWidthImageWrap>
+                </FullWidthWrap>
               </React.Fragment>
             ))}
 
-            <DetailFooterBar>
-              <BackButton onClick={closeProject}>
-                <Arrow />
-                {t('uxui.back')}
-              </BackButton>
-            </DetailFooterBar>
+            <DetailFootBar>
+              <BackBtn onClick={closeProject}>
+                ← {t('uxui.back')}
+              </BackBtn>
+            </DetailFootBar>
           </>
         )}
       </DetailOverlay>
-    </Page>
+    </>
   );
 }
