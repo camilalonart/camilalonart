@@ -25,7 +25,7 @@
     "allPaintings": "All Paintings",
     "collaborations": "Collaborations",
     "earlyPaintings": "Early Paintings"
-    },
+  },
   "home": {
     "title": "Camila Londoño",
     "subtitle": "Photographer, Artist & Creative Director. Capturing moments, creating beauty, and telling visual stories across photography, traditional art, and design.",
@@ -353,5 +353,15 @@
     "submit": "Submit",
     "sending": "Sending...",
     "changeLanguage": "Change language"
+  },
+  "uxui": {
+    "heroEyebrow": "Creative Services",
+    "heroTitle": "UX / UI Design",
+    "heroSubtitle": "Digital experiences that feel effortless.",
+    "projectsTitle": "Projects",
+    "back": "Back to Projects",
+    "viewProject": "View Project",
+    "contactTitle": "Let's create something together",
+    "contactSubtitle": "Have a project in mind? Tell me about it."
   }
 }

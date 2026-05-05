@@ -9,8 +9,16 @@ export interface Section {
 
 export const visibleSections: Section[] = [
   {
+    id: 'art',
+    title: 'Art',
+    description: 'Oil paintings and artistic collections',
+    href: '/art',
+    icon: '🎨',
+    category: 'art',
+  },
+  {
     id: 'wedding',
-    title: 'Wedding & Couples',
+    title: 'Wedding & Couples Photography',
     description: 'Elopements, engagements, and love stories',
     href: '/photography/wedding-couples',
     icon: '💍',
@@ -25,16 +33,8 @@ export const visibleSections: Section[] = [
     category: 'photography',
   },
   {
-    id: 'headshots',
-    title: 'Professional Headshots',
-    description: 'Sharp, polished professional portraits',
-    href: '/photography/headshots',
-    icon: '📸',
-    category: 'photography',
-  },
-  {
     id: 'family',
-    title: 'Family & Maternity',
+    title: 'Family & Maternity Photography',
     description: 'Precious moments with those you love',
     href: '/photography/family-maternity',
     icon: '👨‍👩‍👧‍👦',
@@ -49,12 +49,20 @@ export const visibleSections: Section[] = [
     category: 'photography',
   },
   {
-    id: 'art',
-    title: 'Art',
-    description: 'Oil paintings and artistic collections',
-    href: '/art',
-    icon: '🎨',
-    category: 'art',
+    id: 'ux-ui',
+    title: 'UX/UI Design',
+    description: 'User experience and interface design',
+    href: '/creative-services/ux-ui-design',
+    icon: '💻',
+    category: 'services',
+  },
+  {
+    id: 'headshots',
+    title: 'Professional Headshots',
+    description: 'Sharp, polished professional portraits',
+    href: '/photography/headshots',
+    icon: '📸',
+    category: 'photography',
   },
 ];
 
@@ -73,14 +81,6 @@ export const hiddenSections: Section[] = [
     description: 'Visual storytelling and events',
     href: '/creative-services/graphic-recording',
     icon: '📝',
-    category: 'services',
-  },
-  {
-    id: 'ux-ui',
-    title: 'UX/UI Design',
-    description: 'User experience and interface design',
-    href: '/creative-services/ux-ui',
-    icon: '💻',
     category: 'services',
   },
   {

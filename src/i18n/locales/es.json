@@ -353,5 +353,15 @@
     "submit": "Enviar",
     "sending": "Enviando...",
     "changeLanguage": "Cambiar idioma"
+  },
+  "uxui": {
+    "heroEyebrow": "Servicios Creativos",
+    "heroTitle": "Diseño UX / UI",
+    "heroSubtitle": "Experiencias digitales que se sienten naturales.",
+    "projectsTitle": "Proyectos",
+    "back": "Volver a Proyectos",
+    "viewProject": "Ver Proyecto",
+    "contactTitle": "Creemos algo juntos",
+    "contactSubtitle": "¿Tienes un proyecto en mente? Cuéntame."
   }
 }
