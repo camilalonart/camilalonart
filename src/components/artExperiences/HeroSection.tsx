@@ -345,9 +345,6 @@ export default function HeroSection() {
             <CTAPrimary onClick={() => scrollTo('upcoming')} href="#upcoming">
               {t('artExperiences.hero.cta3')}
             </CTAPrimary>
-            <CTASecondary onClick={() => scrollTo('experience-cards')} href="#experience-cards">
-              Explore Experiences
-            </CTASecondary>
           </CTARow>
         </TextSide>
 
