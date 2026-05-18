@@ -49,6 +49,8 @@ next-env.d.ts
 !/public/images/oldArt/
 !/public/images/aboutTheArtist/
 !/public/images/traditionalArt/
+!/public/images/artExperiences/
+
 
 !/public/images/.gitkeep
 /src/assets/images/**/*
