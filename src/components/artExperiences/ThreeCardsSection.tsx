@@ -680,7 +680,7 @@ export default function ThreeCardsSection() {
               <ModalTitle>you & i paint</ModalTitle>
               <div>
                 <ModalBadge>✦ 15+ events taught</ModalBadge>
-                <ModalBadge>Certified Instructor</ModalBadge>
+                <ModalBadge>✦ 6-50 attendees per event</ModalBadge>
               </div>
             </ModalHeader>
 
