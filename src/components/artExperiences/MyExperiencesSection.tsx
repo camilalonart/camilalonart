@@ -171,12 +171,6 @@ export default function MyExperiencesSection() {
             ))}
           </GridWrap>
         )}
-
-        <MoreComingSoon>
-          <TinyStar size={14} color={AE.blue} style={{ display: 'inline-block', marginBottom: '0.75rem' }} />
-          <MoreText>"More experiences are being crafted with care."</MoreText>
-          <MoreSubText>Follow along on Instagram and Flock to be the first to know.</MoreSubText>
-        </MoreComingSoon>
       </Container>
     </Section>
   );

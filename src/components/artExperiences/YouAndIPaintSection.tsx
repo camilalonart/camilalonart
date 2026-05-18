@@ -522,6 +522,21 @@ export default function YouAndIPaintSection() {
       </DecorativeBlob>
 
       <Container>
+        {/* Service cards */}
+        <ServicesRow>
+          <ServicesTitle>
+            {locale === 'en' ? 'Event Types I Teach' : 'Tipos de Eventos que Enseño'}
+          </ServicesTitle>
+          <ServiceCards>
+            {services.map((s, i) => (
+              <ServiceCard key={i}>
+                <ServiceIcon>{s.icon}</ServiceIcon>
+                <ServiceTitle>{s.title}</ServiceTitle>
+                <ServiceDesc>{s.desc}</ServiceDesc>
+              </ServiceCard>
+            ))}
+          </ServiceCards>
+        </ServicesRow>
         {/* Info + featured photo */}
         <IntroGrid>
           <LeftSide>
@@ -563,22 +578,6 @@ export default function YouAndIPaintSection() {
             <PhotoCount>{YOU_AND_I_IMAGES.length} photos from our events</PhotoCount>
           </RightSide>
         </IntroGrid>
-
-        {/* Service cards */}
-        <ServicesRow>
-          <ServicesTitle>
-            {locale === 'en' ? 'Event Types I Teach' : 'Tipos de Eventos que Enseño'}
-          </ServicesTitle>
-          <ServiceCards>
-            {services.map((s, i) => (
-              <ServiceCard key={i}>
-                <ServiceIcon>{s.icon}</ServiceIcon>
-                <ServiceTitle>{s.title}</ServiceTitle>
-                <ServiceDesc>{s.desc}</ServiceDesc>
-              </ServiceCard>
-            ))}
-          </ServiceCards>
-        </ServicesRow>
 
         {/* Photo gallery */}
         <GallerySection>
