@@ -220,8 +220,6 @@ export default function ArtExpNav() {
         <SmallFlower size={20} color={AE.blue} />
         <div>
           <LogoText>CamilaLonart</LogoText>
-          <br />
-          <LogoSub>Art Experiences</LogoSub>
         </div>
       </Logo>
 
