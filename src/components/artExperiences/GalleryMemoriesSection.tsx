@@ -51,13 +51,14 @@ const Eyebrow = styled.p`
 `;
 
 const SectionTitle = styled.h2`
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 600;
-  font-style: italic;
+  font-family: var(--font-railey), 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  font-weight: 400;
+  font-style: normal;
   color: ${AE.ink};
   margin: 0 0 1.25rem;
-  line-height: 1.15;
+  line-height: 1.1;
+  text-transform: lowercase;
 `;
 
 const WavyWrap = styled.div`

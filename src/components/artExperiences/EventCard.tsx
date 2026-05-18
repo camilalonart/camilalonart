@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import { AE, StarSpark, TinyStar } from './Doodles';
 import type { ArtEvent } from './data';
@@ -22,6 +23,7 @@ const CardWrap = styled.article<{ $featured?: boolean }>`
   display: flex;
   flex-direction: ${p => p.$featured ? 'row' : 'column'};
   height: 100%;
+  cursor: pointer;
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -324,6 +326,7 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, locale, featured = false, t }: EventCardProps) {
+  const router = useRouter();
   const title = event.title[locale];
   const description = event.description[locale];
 
@@ -332,7 +335,7 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
     : `$${event.price} ${event.currency}`;
 
   return (
-    <CardWrap $featured={featured}>
+    <CardWrap $featured={featured} onClick={() => router.push(`/art-experiences/events/${event.id}`)}>
       <ImageWrap $featured={featured}>
         {event.image ? (
           <Image
@@ -388,25 +391,25 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
         )}
 
         <CTARow>
-          {event.eventbriteUrl && (
-            <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer">
-              {t('artExperiences.myExperiences.buyTickets')}
+          {event.flockUrl && (
+            <CTAPrimary href={event.flockUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onFlock')}
               <span>↗</span>
             </CTAPrimary>
           )}
-          {event.flockUrl && (
-            <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer">
-              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onFlock')}
+          {event.eventbriteUrl && (
+            <CTASecondary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onEventbrite')}
               <span>↗</span>
             </CTASecondary>
           )}
           {event.artistPortfolioUrl && (
-            <ArtistPortfolioBtn href={event.artistPortfolioUrl}>
+            <ArtistPortfolioBtn href={event.artistPortfolioUrl} onClick={e => e.stopPropagation()}>
               🎨 {locale === 'en' ? "View Artist's Work" : 'Ver Obra de la Artista'}
             </ArtistPortfolioBtn>
           )}
           {!event.eventbriteUrl && !event.flockUrl && !event.artistPortfolioUrl && (
-            <CTAPrimary href="#upcoming">
+            <CTAPrimary href={`/art-experiences/events/${event.id}`} onClick={e => e.stopPropagation()}>
               {t('artExperiences.myExperiences.learnMore')}
             </CTAPrimary>
           )}

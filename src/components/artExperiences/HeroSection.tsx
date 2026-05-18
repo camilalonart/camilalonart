@@ -116,14 +116,15 @@ const EyebrowDot = styled.span`
 `;
 
 const Title = styled.h1`
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: clamp(4.2rem, 9vw, 7.5rem);
-  font-weight: 600;
-  font-style: italic;
-  line-height: 0.92;
+  font-family: var(--font-railey), 'Cormorant Garamond', serif;
+  font-size: clamp(4.8rem, 10vw, 8.5rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 0.95;
   color: ${AE.ink};
   margin: 0 0 2rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
 
   span {
     display: block;
@@ -357,7 +358,6 @@ export default function HeroSection() {
           <Badges>
             <Badge>✦ {t('artExperiences.hero.badge1')}</Badge>
             <Badge>✦ {t('artExperiences.hero.badge2')}</Badge>
-            <Badge>✦ {t('artExperiences.hero.badge3')}</Badge>
           </Badges>
         </TextSide>
 

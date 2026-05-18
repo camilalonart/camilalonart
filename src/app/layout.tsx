@@ -1,5 +1,6 @@
 import React from 'react';
 import { Montserrat, Cormorant_Garamond, Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 import StyledComponentsRegistry from '../lib/registry';
 import RootLayoutClient from '../components/RootLayoutClient';
 import { TranslationProvider } from '../i18n/TranslationContext';
@@ -23,6 +24,12 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-poppins',
+  display: 'swap',
+});
+
+const railey = localFont({
+  src: '../../public/fonts/Railey.woff2',
+  variable: '--font-railey',
   display: 'swap',
 });
 
@@ -81,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} ${poppins.variable} ${railey.variable}`}>
       <head>
         {/* Structured Data for SEO */}
         <script
