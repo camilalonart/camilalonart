@@ -152,6 +152,88 @@ const CardDescription = styled.p`
   display: none;
 `;
 
+const FeaturedCard = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1.25rem, 2.5vw, 2.25rem);
+  background: rgba(74, 114, 168, 0.07);
+  border-radius: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(74, 114, 168, 0.28);
+  cursor: pointer;
+  min-height: 140px;
+  grid-column: 1 / -1;
+
+  &:hover {
+    background: rgba(74, 114, 168, 0.13);
+    border-color: rgba(74, 114, 168, 0.6);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-column: 1 / -1;
+    min-height: 130px;
+  }
+`;
+
+const FeaturedCardInner = styled.div`
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+`;
+
+const FeaturedCardIcon = styled.div`
+  font-size: 2rem;
+  opacity: 0.85;
+  flex-shrink: 0;
+`;
+
+const FeaturedCardText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+`;
+
+const FeaturedCardTitle = styled.h3`
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  color: #F0EDE8;
+  margin: 0;
+  font-weight: 300;
+  font-family: var(--font-cormorant), serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
+const FeaturedCardDesc = styled.p`
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  color: rgba(74, 114, 168, 0.85);
+  margin: 0;
+  letter-spacing: 0.06em;
+  font-weight: 400;
+`;
+
+const FeaturedCardTag = styled.span`
+  display: inline-block;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(74, 114, 168, 0.7);
+  border: 1px solid rgba(74, 114, 168, 0.3);
+  border-radius: 50px;
+  padding: 0.2rem 0.75rem;
+  margin-bottom: 0.5rem;
+`;
+
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -164,6 +246,7 @@ export default function HomePage() {
       family: 'home.familyMaternity',
       wildlife: 'home.wildlifePhotography',
       art: 'home.art',
+      'art-experiences': 'home.artExperiences',
     };
     return keyMap[id] || '';
   };
@@ -198,6 +281,21 @@ export default function HomePage() {
             const translationKey = getTranslationKey(section.id);
             const title = translationKey ? t(`${translationKey}.title`) : section.title;
             const description = translationKey ? t(`${translationKey}.description`) : section.description;
+
+            if (section.id === 'art-experiences') {
+              return (
+                <FeaturedCard key={section.id} href={section.href}>
+                  <FeaturedCardInner>
+                    <FeaturedCardIcon>{section.icon}</FeaturedCardIcon>
+                    <FeaturedCardText>
+                      <FeaturedCardTag>New · Vancouver</FeaturedCardTag>
+                      <FeaturedCardTitle>{title}</FeaturedCardTitle>
+                      <FeaturedCardDesc>{description}</FeaturedCardDesc>
+                    </FeaturedCardText>
+                  </FeaturedCardInner>
+                </FeaturedCard>
+              );
+            }
 
             return (
               <Card key={section.id} href={section.href}>

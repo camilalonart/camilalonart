@@ -9,6 +9,14 @@ export interface Section {
 
 export const visibleSections: Section[] = [
   {
+    id: 'art-experiences',
+    title: 'Art Experiences',
+    description: 'Paint & sip events, creative community & art instruction in Vancouver.',
+    href: '/art-experiences',
+    icon: '🖌️',
+    category: 'art',
+  },
+  {
     id: 'art',
     title: 'Art',
     description: 'Oil paintings and artistic collections',

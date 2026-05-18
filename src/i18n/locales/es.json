@@ -57,6 +57,10 @@
       "title": "Arte",
       "description": "Pinturas, dibujos y obras de arte digitales originales."
     },
+    "artExperiences": {
+      "title": "Experiencias de Arte",
+      "description": "Eventos de pintura, comunidad creativa e instrucción artística en Vancouver."
+    },
     "wildlifePhotography": {
       "title": "Fotografía de Vida Salvaje",
       "description": "Capturando la belleza de la naturaleza y la vida silvestre."
@@ -363,5 +367,105 @@
     "viewProject": "Ver Proyecto",
     "contactTitle": "Creemos algo juntos",
     "contactSubtitle": "¿Tienes un proyecto en mente? Cuéntame."
+  },
+  "artExperiences": {
+    "nav": {
+      "myEvents": "Mis Eventos",
+      "community": "El Rincón Creativo",
+      "youAndIPaint": "You & I Paint",
+      "upcoming": "Próximos Eventos",
+      "gallery": "Recuerdos"
+    },
+    "hero": {
+      "eyebrow": "Experiencias Artísticas · Vancouver, BC",
+      "title1": "Crea.",
+      "title2": "Conéctate.",
+      "title3": "Pertenece.",
+      "subtitle": "Pintar juntos es la forma en que desaceleramos, encontramos alegría y nos descubrimos mutuamente. Ya sea que nunca hayas tomado un pincel o que pintes todos los días — hay un lugar para ti en la mesa.",
+      "cta1": "Explorar Experiencias",
+      "cta2": "Unirse a la Comunidad",
+      "cta3": "Ver Próximos Eventos",
+      "badge1": "Todos los niveles",
+      "badge2": "Materiales incluidos",
+      "badge3": "Vancouver, BC"
+    },
+    "myExperiences": {
+      "eyebrow": "Mis Experiencias de Arte",
+      "title": "Eventos de Pintura Curados",
+      "subtitle": "Sesiones de pintura guiada, íntimas y aptas para principiantes, donde creamos juntos paso a paso mientras disfrutamos de bebidas, música y una atmósfera cálida.",
+      "featured": "Evento Destacado",
+      "materialsProvided": "Todos los materiales de pintura incluidos",
+      "reserveSpot": "Reservar Lugar",
+      "buyTickets": "Comprar Boletos",
+      "onEventbrite": "en Eventbrite",
+      "onFlock": "en Flock",
+      "learnMore": "Saber Más",
+      "spotsLeft": "lugares disponibles"
+    },
+    "creativeCorner": {
+      "eyebrow": "El Rincón Creativo",
+      "title": "Una comunidad para todos los que crean — o quieren hacerlo.",
+      "subtitle": "Esto no es solo un grupo de pintura. Es un encuentro de personas curiosas y abiertas que se reúnen a través del arte. Sin experiencia previa. Sin juicios. Solo pinceles, color, conversación y calidez.",
+      "joinCta": "Unirse a Nuestra Comunidad en Flock",
+      "pillar1Title": "Pintar Juntos",
+      "pillar1Text": "Sesiones guiadas donde todos crean algo hermoso — sin experiencia necesaria.",
+      "pillar2Title": "Conectar de Verdad",
+      "pillar2Text": "Conoce personas en Vancouver que comparten tu amor por la creatividad, la calma y los momentos significativos.",
+      "pillar3Title": "Explorar Libremente",
+      "pillar3Text": "Prueba nuevas técnicas, experimenta con el color y exprésate sin presión ni juicio.",
+      "pillar4Title": "Pertenecer Aquí",
+      "pillar4Text": "Un espacio acogedor donde todos tienen un lugar en la mesa — especialmente los que creen que no saben pintar.",
+      "testimonial1": "No había pintado desde la escuela primaria. Estaba nerviosa. Luego entré y me sentí inmediatamente en casa. Al final tenía algo en el lienzo de lo que estaba genuinamente orgullosa.",
+      "testimonial1Author": "Sarah, Vancouver",
+      "testimonial2": "El Rincón Creativo cambió la forma en que paso mis fines de semana. Se ha convertido en mi forma favorita de desconectarme y reconectarme al mismo tiempo.",
+      "testimonial2Author": "Andrés, North Vancouver",
+      "for": "Para todos los que:",
+      "for1": "Quieren pintar de manera casual y alegre",
+      "for2": "Buscan conexión y comunidad",
+      "for3": "Necesitan un espacio creativo y calma",
+      "for4": "Nunca han pintado — y tienen curiosidad",
+      "for5": "Quieren intentar algo nuevo y significativo",
+      "notForArtistsOnly": "No solo para artistas."
+    },
+    "youAndIPaint": {
+      "eyebrow": "También Enseñando Con",
+      "title": "You & I Paint",
+      "subtitle": "También soy instructora de pintura certificada para You & I Paint — una empresa de lujo de paint & sip que ofrece experiencias elegantes y curadas para eventos públicos, celebraciones privadas y reuniones corporativas en Vancouver.",
+      "visitSite": "Visitar You & I Paint",
+      "publicTitle": "Eventos Públicos",
+      "publicDesc": "Noches de pintura abiertas en hermosos locales de la ciudad — una velada de creatividad para todos.",
+      "privateTitle": "Fiestas Privadas",
+      "privateDesc": "Sesiones de pintura personalizadas para cumpleaños, despedidas de soltera y cualquier celebración que merece un toque creativo.",
+      "corporateTitle": "Experiencias Corporativas",
+      "corporateDesc": "Experiencias de team-building que despiertan la creatividad, la conexión y la alegría en tu equipo.",
+      "weddingTitle": "Eventos de Bodas",
+      "weddingDesc": "Una actividad única y memorable para recepciones de bodas, despedidas de novia y celebraciones de compromiso.",
+      "galleryTitle": "En el Estudio",
+      "quoteText": "Pintar juntos crea momentos que la gente recuerda por años.",
+      "learnMore": "Saber Más"
+    },
+    "upcoming": {
+      "eyebrow": "Lo Que Viene",
+      "title": "Próximos Eventos",
+      "subtitle": "Reserva tu lugar antes de que se llene — las sesiones son pequeñas, íntimas y aptas para principiantes.",
+      "filterAll": "Todos los Eventos",
+      "filterMyEvents": "Mis Experiencias",
+      "filterYouAndI": "You & I Paint",
+      "noEvents": "Más eventos próximamente — ¡síguenos para ser el primero en enterarte!",
+      "soldOut": "Agotado",
+      "spotsLeft": "lugares disponibles",
+      "free": "Gratis",
+      "getTickets": "Obtener Boletos",
+      "reserveSpot": "Reservar Lugar",
+      "onEventbrite": "Eventbrite",
+      "onFlock": "Flock"
+    },
+    "memories": {
+      "eyebrow": "Recuerdos y Momentos",
+      "title": "Dentro del Estudio",
+      "subtitle": "Un vistazo a la calidez, las risas y la creatividad que llena cada sesión.",
+      "cta": "Únete a la Próxima",
+      "noPhotos": "¡Fotos de eventos pasados próximamente!"
+    }
   }
 }
