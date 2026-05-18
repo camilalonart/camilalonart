@@ -76,31 +76,39 @@ const CardsGrid = styled.div`
 const Card = styled.div<{ $accent?: string }>`
   background: ${AE.cream};
   border-radius: 24px;
-  padding: 2.25rem 1.75rem;
   border: 2px solid ${p => p.$accent ? `${p.$accent}22` : 'rgba(74,114,168,0.14)'};
   cursor: pointer;
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   position: relative;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: ${p => p.$accent || AE.blue};
-    opacity: 0.7;
-    border-radius: 24px 24px 0 0;
-  }
 
   &:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 40px rgba(74, 114, 168, 0.18);
     border-color: ${p => p.$accent ? `${p.$accent}44` : 'rgba(74,114,168,0.3)'};
   }
+`;
+
+const CardImageWrap = styled.div<{ $accent?: string }>`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 3px solid ${p => p.$accent || AE.blue};
+
+  img { transition: transform 0.35s ease; }
+  ${Card}:hover & img { transform: scale(1.06); }
+`;
+
+const CardContent = styled.div`
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
 `;
 
 const CardIconWrap = styled.div`
@@ -577,14 +585,6 @@ export default function ThreeCardsSection() {
     <>
       <Section id="experience-cards">
         <Container>
-          <SectionHeader>
-            <Eyebrow>
-              <StarSpark size={12} color={AE.blue} />
-              Choose Your Experience
-              <StarSpark size={12} color={AE.blue} />
-            </Eyebrow>
-          </SectionHeader>
-
           <CardsGrid>
             {/* Card 1 — Creative Corner */}
             <Card
@@ -595,14 +595,26 @@ export default function ThreeCardsSection() {
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
             >
-              <CardIconWrap>
-                <CommunityIcon />
-              </CardIconWrap>
-              <CardTitle>join the creative corner</CardTitle>
-              <CardDesc>
-                A community for everyone who creates — or wants to. Guided painting sessions, warmth, no experience needed. Just brushes, colour, and real connection.
-              </CardDesc>
-              <CardCTA>Join us on Flock <span>↗</span></CardCTA>
+              <CardImageWrap $accent={AE.blue}>
+                <Image
+                  src="/images/artExperiences/CreativeCorner/Illustration2.webp"
+                  alt="Creative Corner — community painting session"
+                  fill
+                  sizes="(max-width: 860px) 100vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </CardImageWrap>
+              <CardContent>
+                <CardIconWrap>
+                  <CommunityIcon />
+                </CardIconWrap>
+                <CardTitle>join the creative corner</CardTitle>
+                <CardDesc>
+                  A community for everyone who creates — or wants to. Guided painting sessions, warmth, no experience needed. Just brushes, colour, and real connection.
+                </CardDesc>
+                <CardCTA>Join us on Flock <span>↗</span></CardCTA>
+              </CardContent>
             </Card>
 
             {/* Card 2 — Art Events */}
@@ -611,14 +623,26 @@ export default function ThreeCardsSection() {
               onClick={() => scrollTo('upcoming')}
               style={{ cursor: 'pointer' }}
             >
-              <CardIconWrap>
-                <EventIcon />
-              </CardIconWrap>
-              <CardTitle>join art events</CardTitle>
-              <CardDesc>
-                Upcoming painting classes and paint & sip sessions in Vancouver. Small groups, beginner-friendly, all materials included. Reserve your spot.
-              </CardDesc>
-              <CardCTA>View upcoming events <span>→</span></CardCTA>
+              <CardImageWrap $accent={AE.blueDark}>
+                <Image
+                  src="/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Horizontal.webp"
+                  alt="Art event poster — painting class in Vancouver"
+                  fill
+                  sizes="(max-width: 860px) 100vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </CardImageWrap>
+              <CardContent>
+                <CardIconWrap>
+                  <EventIcon />
+                </CardIconWrap>
+                <CardTitle>join art events</CardTitle>
+                <CardDesc>
+                  Upcoming painting classes and paint & sip sessions in Vancouver. Small groups, beginner-friendly, all materials included. Reserve your spot.
+                </CardDesc>
+                <CardCTA>View upcoming events <span>→</span></CardCTA>
+              </CardContent>
             </Card>
 
             {/* Card 3 — You & I Paint */}
@@ -627,14 +651,26 @@ export default function ThreeCardsSection() {
               onClick={openModal}
               style={{ cursor: 'pointer' }}
             >
-              <CardIconWrap>
-                <BrushIcon />
-              </CardIconWrap>
-              <CardTitle>i'm also a teacher</CardTitle>
-              <CardDesc>
-                Certified instructor for You & I Paint. Over 15 events taught — from weddings and corporate gatherings to public paint & sip and private celebrations.
-              </CardDesc>
-              <CardCTA>See my experience <span>→</span></CardCTA>
+              <CardImageWrap $accent="#7FA4C7">
+                <Image
+                  src="/images/artExperiences/You&I/A7T06088.webp"
+                  alt="You & I Paint event — Camila teaching a painting class"
+                  fill
+                  sizes="(max-width: 860px) 100vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </CardImageWrap>
+              <CardContent>
+                <CardIconWrap>
+                  <BrushIcon />
+                </CardIconWrap>
+                <CardTitle>i'm also a teacher</CardTitle>
+                <CardDesc>
+                  Certified instructor for You & I Paint. Over 15 events taught — from weddings and corporate gatherings to public paint & sip and private celebrations.
+                </CardDesc>
+                <CardCTA>See my experience <span>→</span></CardCTA>
+              </CardContent>
             </Card>
           </CardsGrid>
         </Container>

@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import { AE, StarSpark, TinyStar } from './Doodles';
 import type { ArtEvent } from './data';
@@ -24,6 +23,7 @@ const CardWrap = styled.article<{ $featured?: boolean }>`
   flex-direction: ${p => p.$featured ? 'row' : 'column'};
   height: 100%;
   cursor: pointer;
+  position: relative;
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -33,6 +33,12 @@ const CardWrap = styled.article<{ $featured?: boolean }>`
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(74, 114, 168, 0.18), 0 2px 8px rgba(44, 36, 22, 0.08);
   }
+`;
+
+const CardCoverLink = styled(Link)`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 `;
 
 const ImageWrap = styled.div<{ $featured?: boolean }>`
@@ -238,6 +244,8 @@ const InstagramRow = styled.div`
   margin-top: 0.85rem;
   padding-top: 0.85rem;
   border-top: 1px solid rgba(74, 114, 168, 0.12);
+  position: relative;
+  z-index: 2;
 `;
 
 const InstagramLabel = styled.span`
@@ -265,6 +273,8 @@ const CTARow = styled.div`
   gap: 0.75rem;
   margin-top: auto;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
 `;
 
 const CTAPrimary = styled.a`
@@ -326,7 +336,6 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, locale, featured = false, t }: EventCardProps) {
-  const router = useRouter();
   const title = event.title[locale];
   const description = event.description[locale];
 
@@ -335,7 +344,8 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
     : `$${event.price} ${event.currency}`;
 
   return (
-    <CardWrap $featured={featured} onClick={() => router.push(`/art-experiences/events/${event.id}`)}>
+    <CardWrap $featured={featured}>
+      <CardCoverLink href={`/art-experiences/events/${event.id}`} aria-label={title} />
       <ImageWrap $featured={featured}>
         {event.image ? (
           <Image

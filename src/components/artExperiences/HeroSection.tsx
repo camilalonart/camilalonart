@@ -121,14 +121,14 @@ const Title = styled.h1`
   font-weight: 400;
   font-style: normal;
   line-height: 0.9;
-  color: ${AE.ink};
+  color: ${AE.blue};
   margin: 0 0 1rem;
   letter-spacing: 0.01em;
   text-transform: lowercase;
 `;
 
 const TitleTagline = styled.p`
-  font-family: var(--font-railey), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(1.6rem, 3.5vw, 2.6rem);
   font-weight: 400;
   font-style: normal;
@@ -136,7 +136,7 @@ const TitleTagline = styled.p`
   color: ${AE.blue};
   margin: 0 0 2rem;
   letter-spacing: 0.02em;
-  text-transform: lowercase;
+  text-transform: uppercase;
 `;
 
 const Subtitle = styled.p`
