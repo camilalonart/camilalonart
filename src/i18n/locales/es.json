@@ -378,15 +378,13 @@
     },
     "hero": {
       "eyebrow": "Experiencias Artísticas · Vancouver, BC",
-      "title1": "Crea.",
-      "title2": "Conéctate.",
-      "title3": "Pertenece.",
+      "title1": "Crear.",
+      "title2": "Conectar.",
+      "title3": "Pertenecer.",
       "subtitle": "Pintar juntos es la forma en que desaceleramos, encontramos alegría y nos descubrimos mutuamente. Ya sea que nunca hayas tomado un pincel o que pintes todos los días... hay un lugar para ti en la mesa.",
       "cta1": "Explorar Experiencias",
       "cta2": "Unirse a la Comunidad",
-      "cta3": "Ver Próximos Eventos",
-      "badge1": "Todos los niveles",
-      "badge2": "Vancouver, BC"
+      "cta3": "Ver Próximos Eventos"
     },
     "myExperiences": {
       "eyebrow": "Mis Experiencias de Arte",

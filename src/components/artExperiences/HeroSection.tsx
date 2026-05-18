@@ -349,11 +349,6 @@ export default function HeroSection() {
               Explore Experiences
             </CTASecondary>
           </CTARow>
-
-          <Badges>
-            <Badge>✦ {t('artExperiences.hero.badge1')}</Badge>
-            <Badge>✦ {t('artExperiences.hero.badge2')}</Badge>
-          </Badges>
         </TextSide>
 
         <IllustrationSide>
