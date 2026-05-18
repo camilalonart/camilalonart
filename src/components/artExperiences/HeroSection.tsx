@@ -117,26 +117,26 @@ const EyebrowDot = styled.span`
 
 const Title = styled.h1`
   font-family: var(--font-railey), 'Cormorant Garamond', serif;
-  font-size: clamp(4.8rem, 10vw, 8.5rem);
+  font-size: clamp(5rem, 11vw, 9.5rem);
   font-weight: 400;
   font-style: normal;
-  line-height: 0.95;
+  line-height: 0.9;
   color: ${AE.ink};
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
   letter-spacing: 0.01em;
   text-transform: lowercase;
+`;
 
-  span {
-    display: block;
-    color: ${AE.blue};
-
-    &:nth-child(2) {
-      color: ${AE.blueDark};
-    }
-    &:nth-child(3) {
-      color: ${AE.ink};
-    }
-  }
+const TitleTagline = styled.p`
+  font-family: var(--font-railey), 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.1;
+  color: ${AE.blue};
+  margin: 0 0 2rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
 `;
 
 const Subtitle = styled.p`
@@ -331,11 +331,9 @@ export default function HeroSection() {
             {t('artExperiences.hero.eyebrow')}
           </Eyebrow>
 
-          <Title>
-            <span>{t('artExperiences.hero.title1')}</span>
-            <span>{t('artExperiences.hero.title2')}</span>
-            <span>{t('artExperiences.hero.title3')}</span>
-          </Title>
+          <Title>art experiences</Title>
+
+          <TitleTagline>create. connect. belong.</TitleTagline>
 
           <WavyWrap>
             <WavyUnderline width={120} color={AE.blue} />
@@ -344,14 +342,11 @@ export default function HeroSection() {
           <Subtitle>{t('artExperiences.hero.subtitle')}</Subtitle>
 
           <CTARow>
-            <CTAPrimary onClick={() => scrollTo('my-experiences')} href="#my-experiences">
-              {t('artExperiences.hero.cta1')}
-            </CTAPrimary>
-            <CTASecondary onClick={() => scrollTo('creative-corner')} href="#creative-corner">
-              {t('artExperiences.hero.cta2')}
-            </CTASecondary>
-            <CTASecondary onClick={() => scrollTo('upcoming')} href="#upcoming">
+            <CTAPrimary onClick={() => scrollTo('upcoming')} href="#upcoming">
               {t('artExperiences.hero.cta3')}
+            </CTAPrimary>
+            <CTASecondary onClick={() => scrollTo('experience-cards')} href="#experience-cards">
+              Explore Experiences
             </CTASecondary>
           </CTARow>
 

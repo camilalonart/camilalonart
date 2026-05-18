@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, WavyUnderline, SmallFlower, StarSpark } from './Doodles';
@@ -30,6 +31,26 @@ const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
   animation: ${fadeInUp} 0.8s ease both;
+`;
+
+const BrandBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(74, 114, 168, 0.1);
+  border: 1.5px solid rgba(74, 114, 168, 0.25);
+  border-radius: 50px;
+  padding: 0.35rem 1.1rem;
+  margin-bottom: 1.25rem;
+`;
+
+const BrandBadgeText = styled.span`
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${AE.blue};
 `;
 
 const Eyebrow = styled.p`
@@ -72,53 +93,18 @@ const SectionSubtitle = styled.p`
   margin: 0 auto;
 `;
 
-const FilterRow = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-  animation: ${fadeInUp} 0.8s ease both;
-  animation-delay: 0.1s;
-`;
-
-const FilterBtn = styled.button<{ $active: boolean }>`
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: 0.76rem;
-  font-weight: ${p => p.$active ? '600' : '400'};
-  letter-spacing: 0.07em;
-  color: ${p => p.$active ? 'white' : AE.warmBrown};
-  background: ${p => p.$active ? AE.blue : 'transparent'};
-  border: 1.5px solid ${p => p.$active ? AE.blue : 'rgba(74, 114, 168, 0.3)'};
-  border-radius: 50px;
-  padding: 0.5rem 1.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: ${AE.blue};
-    color: ${p => p.$active ? 'white' : AE.blue};
-    background: ${p => p.$active ? AE.blue : 'rgba(74, 114, 168, 0.07)'};
-  }
-`;
-
 const EventsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.75rem;
   animation: ${fadeInUp} 0.9s ease both;
-  animation-delay: 0.2s;
+  animation-delay: 0.15s;
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 4rem 2rem;
   animation: ${fadeInUp} 0.8s ease both;
-`;
-
-const EmptyDoodle = styled.div`
-  margin-bottom: 1.5rem;
-  opacity: 0.5;
 `;
 
 const EmptyTitle = styled.p`
@@ -136,26 +122,58 @@ const EmptySubTitle = styled.p`
   margin: 0;
 `;
 
-type FilterType = 'all' | 'myEvents' | 'youAndIPaint';
+const ViewAllWrap = styled.div`
+  text-align: center;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  animation: ${fadeInUp} 0.9s ease both;
+  animation-delay: 0.25s;
+`;
+
+const ViewAllBtn = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: ${AE.blue};
+  background: transparent;
+  border: 2px solid rgba(74, 114, 168, 0.4);
+  border-radius: 50px;
+  padding: 0.85rem 2rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: ${AE.blue};
+    background: rgba(74, 114, 168, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 114, 168, 0.15);
+  }
+`;
+
+const ViewAllHint = styled.p`
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: ${AE.warmLight};
+  margin: 0.85rem 0 0;
+`;
 
 export default function UpcomingEventsSection() {
   const { t, locale } = useTranslation();
-  const [filter, setFilter] = useState<FilterType>('all');
 
-  const filtered = artEvents.filter(e =>
-    filter === 'all' ? true : e.type === filter
-  );
-
-  const filters: { key: FilterType; label: string }[] = [
-    { key: 'all', label: t('artExperiences.upcoming.filterAll') },
-    { key: 'myEvents', label: t('artExperiences.upcoming.filterMyEvents') },
-    { key: 'youAndIPaint', label: t('artExperiences.upcoming.filterYouAndI') },
-  ];
+  const upcoming = artEvents.filter(e => e.type === 'myEvents');
 
   return (
     <Section id="upcoming">
       <Container>
         <SectionHeader>
+          <BrandBadge>
+            <StarSpark size={11} color={AE.blue} />
+            <BrandBadgeText>The Creative Corner</BrandBadgeText>
+          </BrandBadge>
           <Eyebrow>
             <StarSpark size={12} color={AE.blue} />
             {t('artExperiences.upcoming.eyebrow')}
@@ -168,39 +186,32 @@ export default function UpcomingEventsSection() {
           <SectionSubtitle>{t('artExperiences.upcoming.subtitle')}</SectionSubtitle>
         </SectionHeader>
 
-        <FilterRow>
-          {filters.map(f => (
-            <FilterBtn
-              key={f.key}
-              $active={filter === f.key}
-              onClick={() => setFilter(f.key)}
-            >
-              {f.label}
-            </FilterBtn>
-          ))}
-        </FilterRow>
-
-        {filtered.length > 0 ? (
+        {upcoming.length > 0 ? (
           <EventsGrid>
-            {filtered.map(event => (
+            {upcoming.map(event => (
               <EventCard
                 key={event.id}
                 event={event}
                 locale={locale as 'en' | 'es'}
-                featured={false}
+                featured={!!event.featured}
                 t={t}
               />
             ))}
           </EventsGrid>
         ) : (
           <EmptyState>
-            <EmptyDoodle>
-              <SmallFlower size={56} color={AE.blue} />
-            </EmptyDoodle>
+            <SmallFlower size={56} color={AE.blue} style={{ margin: '0 auto 1.5rem', opacity: 0.45 }} />
             <EmptyTitle>{t('artExperiences.upcoming.noEvents')}</EmptyTitle>
             <EmptySubTitle>Follow along on Instagram @camilalonart for updates.</EmptySubTitle>
           </EmptyState>
         )}
+
+        <ViewAllWrap>
+          <ViewAllBtn href="/art-experiences/events">
+            View all events — upcoming & past →
+          </ViewAllBtn>
+          <ViewAllHint>Includes open registrations and events already held by The Creative Corner</ViewAllHint>
+        </ViewAllWrap>
       </Container>
     </Section>
   );
