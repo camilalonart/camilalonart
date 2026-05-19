@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
+import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, StarSpark } from './Doodles';
 import { YOU_AND_I_PAINT_URL } from './data';
 
@@ -317,6 +318,7 @@ const LightboxCounter = styled.p`
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function YouAndIPaintSection() {
+  const { t } = useTranslation();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const closeLightbox = () => setLightboxIndex(null);
@@ -350,18 +352,18 @@ export default function YouAndIPaintSection() {
             <TextCol>
               <Eyebrow>
                 <StarSpark size={12} color={AE.blue} />
-                Also teaching with
+                {t('artExperiences.youAndIPaint.eyebrow')}
               </Eyebrow>
-              <Title>you & i paint</Title>
+              <Title>{t('artExperiences.youAndIPaint.title')}</Title>
               <Body>
-                I am proud to be an instructor for You & I Paint, a luxury paint & sip company known for elegant, elevated art experiences. I have led both public and private events for a wide range of audiences and occasions — from intimate celebrations to corporate events. From stylish venues to cozy private homes, every event is designed to inspire creativity and connection.
+                {t('artExperiences.youAndIPaint.body')}
               </Body>
               <ButtonRow>
                 <PrimaryBtn href={YOU_AND_I_PAINT_URL} target="_blank" rel="noopener noreferrer">
-                  Learn more about You &amp; I Paint ↗
+                  {t('artExperiences.youAndIPaint.learnMore')}
                 </PrimaryBtn>
                 <SecondaryBtn href="/art-experiences/you-and-i-gallery">
-                  See event photos →
+                  {t('artExperiences.youAndIPaint.viewPhotos')}
                 </SecondaryBtn>
               </ButtonRow>
             </TextCol>
@@ -380,8 +382,8 @@ export default function YouAndIPaintSection() {
 
           <GallerySection id="you-and-i-gallery">
             <GalleryHeader>
-              <GalleryTitle>from the events</GalleryTitle>
-              <GalleryCount>{GALLERY_IMAGES.length} photos</GalleryCount>
+              <GalleryTitle>{t('artExperiences.youAndIPaint.galleryTitle')}</GalleryTitle>
+              <GalleryCount>{GALLERY_IMAGES.length} {t('artExperiences.youAndIPaint.photosCount')}</GalleryCount>
             </GalleryHeader>
             <PhotoGrid>
               {GALLERY_IMAGES.map((src, i) => (

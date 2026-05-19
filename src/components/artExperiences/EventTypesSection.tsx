@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, StarSpark, PublicEventIcon, PrivateEventIcon, CorporateEventIcon, WeddingEventIcon } from './Doodles';
 
 const fadeInUp = keyframes`
@@ -109,26 +110,28 @@ const CardDesc = styled.p`
 `;
 
 export default function EventTypesSection() {
+  const { t } = useTranslation();
+
   const types = [
     {
       icon: <PublicEventIcon size={42} color={AE.blue} />,
-      title: 'Public Events',
-      desc: 'Open paint & sip nights at beautiful venues across Vancouver... an evening of creativity for everyone.',
+      title: t('artExperiences.eventTypes.publicTitle'),
+      desc: t('artExperiences.eventTypes.publicDesc'),
     },
     {
       icon: <PrivateEventIcon size={42} color={AE.blue} />,
-      title: 'Private Parties',
-      desc: 'Custom painting sessions for birthdays, bachelorettes, and any celebration that deserves a creative twist.',
+      title: t('artExperiences.eventTypes.privateTitle'),
+      desc: t('artExperiences.eventTypes.privateDesc'),
     },
     {
       icon: <CorporateEventIcon size={42} color={AE.blue} />,
-      title: 'Corporate Events',
-      desc: 'Team-building experiences that spark creativity, connection, and joy across your team.',
+      title: t('artExperiences.eventTypes.corporateTitle'),
+      desc: t('artExperiences.eventTypes.corporateDesc'),
     },
     {
       icon: <WeddingEventIcon size={42} color={AE.blue} />,
-      title: 'Weddings',
-      desc: 'A unique, memorable art activity for wedding receptions, bridal showers, and engagement parties.',
+      title: t('artExperiences.eventTypes.weddingTitle'),
+      desc: t('artExperiences.eventTypes.weddingDesc'),
     },
   ];
 
@@ -138,12 +141,12 @@ export default function EventTypesSection() {
         <SectionHeader>
           <Eyebrow>
             <StarSpark size={12} color={AE.blue} />
-            What I Teach
+            {t('artExperiences.eventTypes.eyebrow')}
             <StarSpark size={12} color={AE.blue} />
           </Eyebrow>
-          <SectionTitle>event types I teach</SectionTitle>
+          <SectionTitle>{t('artExperiences.eventTypes.title')}</SectionTitle>
           <SectionSubtitle>
-            From intimate gatherings to large-scale celebrations... I bring the art, the guidance, and the warmth to every event.
+            {t('artExperiences.eventTypes.subtitle')}
           </SectionSubtitle>
         </SectionHeader>
 

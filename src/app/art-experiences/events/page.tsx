@@ -220,13 +220,13 @@ export default function AllEventsPage() {
       <ArtExpNav />
 
       <Hero>
-        <BackLink href="/art-experiences">← Art Experiences</BackLink>
-        <PageTitle>all events</PageTitle>
+        <BackLink href="/art-experiences">{t('artExperiences.eventsPage.backLink')}</BackLink>
+        <PageTitle>{t('artExperiences.eventsPage.title')}</PageTitle>
         <WavyWrap>
           <WavyUnderline width={90} color={AE.blue} />
         </WavyWrap>
         <PageSubtitle>
-          Upcoming painting sessions you can join, and a look back at the moments we've shared together.
+          {t('artExperiences.eventsPage.subtitle')}
         </PageSubtitle>
       </Hero>
 
@@ -234,7 +234,7 @@ export default function AllEventsPage() {
         {/* Upcoming */}
         <GroupLabel>
           <StarSpark size={11} color={AE.blue} />
-          Open for registration
+          {t('artExperiences.eventsPage.openForRegistration')}
         </GroupLabel>
         {upcoming.length > 0 ? (
           <EventsGrid>
@@ -251,14 +251,14 @@ export default function AllEventsPage() {
         ) : (
           <EmptyBlock>
             <SmallFlower size={44} color={AE.blue} style={{ opacity: 0.4, margin: '0 auto' }} />
-            <EmptyText>New events coming soon — follow along to be the first to know!</EmptyText>
+            <EmptyText>{t('artExperiences.eventsPage.noUpcomingEvents')}</EmptyText>
           </EmptyBlock>
         )}
 
         {/* Past */}
         <GroupLabel>
           <StarSpark size={11} color={AE.warmLight} />
-          Past events
+          {t('artExperiences.eventsPage.pastEvents')}
         </GroupLabel>
         {past.length > 0 ? (
           <EventsGrid>
@@ -275,20 +275,20 @@ export default function AllEventsPage() {
           </EventsGrid>
         ) : (
           <EmptyBlock>
-            <EmptyText>All events have been upcoming so far — check back after the first one!</EmptyText>
+            <EmptyText>{t('artExperiences.eventsPage.noPastEvents')}</EmptyText>
           </EmptyBlock>
         )}
 
         {/* Join CTA */}
         <JoinCTASection>
           <StarSpark size={18} color={AE.blue} style={{ marginBottom: '1rem', opacity: 0.6 }} />
-          <CTATitle>never miss an event</CTATitle>
+          <CTATitle>{t('artExperiences.eventsPage.neverMissEventTitle')}</CTATitle>
           <CTADesc>
-            Join The Creative Corner community on Flock to get notified when new events open up.<br />
-            There is always a seat for you at the table.
+            {t('artExperiences.eventsPage.neverMissEventDesc')}<br />
+            {t('artExperiences.eventsPage.neverMissEventDescLine2')}
           </CTADesc>
           <JoinBtn href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
-            Join The Creative Corner ↗
+            {t('artExperiences.eventsPage.joinCreativeCorner')}
           </JoinBtn>
         </JoinCTASection>
       </Body>

@@ -153,43 +153,42 @@ export default function ArtExpFooter() {
               <LogoText>CamilaLonart</LogoText>
             </LogoWrap>
             <WavyUnderline width={60} color={AE.blueLight} style={{ marginBottom: '1.25rem', opacity: 0.6 }} />
-            <Tagline>"Art is how we connect."</Tagline>
+            <Tagline>{t('artExperiences.footer.tagline')}</Tagline>
             <BrandDesc>
-              Painting experiences, art community, and creative instruction in Vancouver, BC.
-              Building meaningful moments one brushstroke at a time.
+              {t('artExperiences.footer.brandDesc')}
             </BrandDesc>
           </BrandColumn>
 
           <Column>
             <ColTitle>
               <StarSpark size={10} color={AE.blueLight} />
-              Experiences
+              {t('artExperiences.footer.experiencesTitle')}
             </ColTitle>
             <ColLinks>
-              <ColLink onClick={() => scrollTo('my-experiences')}>My Art Events</ColLink>
-              <ColLink onClick={() => scrollTo('creative-corner')}>The Creative Corner</ColLink>
-              <ColLink onClick={() => scrollTo('you-and-i')}>You & I Paint</ColLink>
-              <ColLink onClick={() => scrollTo('upcoming')}>Upcoming Events</ColLink>
+              <ColLink onClick={() => scrollTo('my-experiences')}>{t('artExperiences.footer.myArtEvents')}</ColLink>
+              <ColLink onClick={() => scrollTo('creative-corner')}>{t('artExperiences.footer.creativeCorner')}</ColLink>
+              <ColLink onClick={() => scrollTo('you-and-i')}>{t('artExperiences.footer.youAndIPaint')}</ColLink>
+              <ColLink onClick={() => scrollTo('upcoming')}>{t('artExperiences.footer.upcomingEvents')}</ColLink>
             </ColLinks>
           </Column>
 
           <Column>
             <ColTitle>
               <StarSpark size={10} color={AE.blueLight} />
-              Connect
+              {t('artExperiences.footer.connectTitle')}
             </ColTitle>
             <ColLinks>
               <ColLink href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">
-                Instagram ↗
+                {t('artExperiences.footer.instagram')}
               </ColLink>
               <ColLink href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
-                Join on Flock ↗
+                {t('artExperiences.footer.joinFlock')}
               </ColLink>
               <ColLink href="mailto:camilalonart@gmail.com">
-                Get in Touch ↗
+                {t('artExperiences.footer.getInTouch')}
               </ColLink>
               <ColLink as={Link} href="/">
-                Main Site
+                {t('artExperiences.footer.mainSite')}
               </ColLink>
             </ColLinks>
           </Column>
@@ -197,7 +196,7 @@ export default function ArtExpFooter() {
 
         <BottomRow>
           <Copyright>
-            © 2025 Camila Londoño · camilalonart.com · All rights reserved.
+            {t('artExperiences.footer.copyright')}
           </Copyright>
           <SocialRow>
             <SocialLink href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">@camilalonart</SocialLink>

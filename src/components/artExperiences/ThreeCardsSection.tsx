@@ -3,6 +3,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
+import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, WavyUnderline, SmallFlower, StarSpark, TinyStar, PublicEventIcon, PrivateEventIcon, CorporateEventIcon, WeddingEventIcon } from './Doodles';
 import { FLOCK_COMMUNITY_URL, YOU_AND_I_PAINT_URL } from './data';
 
@@ -535,6 +536,7 @@ const scrollTo = (id: string) => {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ThreeCardsSection() {
+  const { t } = useTranslation();
   const [modalOpen, setModalOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -575,10 +577,10 @@ export default function ThreeCardsSection() {
   }, [modalOpen, lightboxIndex]);
 
   const eventTypes = [
-    { icon: <PublicEventIcon size={36} color={AE.blue} />, title: 'Public Events', desc: 'Open paint & sip nights at beautiful venues around the city.' },
-    { icon: <PrivateEventIcon size={36} color={AE.blue} />, title: 'Private Parties', desc: 'Custom painting sessions for birthdays, bachelorettes, and celebrations.' },
-    { icon: <CorporateEventIcon size={36} color={AE.blue} />, title: 'Corporate', desc: 'Team-building experiences that spark creativity and connection.' },
-    { icon: <WeddingEventIcon size={36} color={AE.blue} />, title: 'Weddings', desc: 'A unique art activity for wedding receptions and bridal showers.' },
+    { icon: <PublicEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.publicEventsTitle'), desc: t('artExperiences.threeCards.publicEventsDesc') },
+    { icon: <PrivateEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.privatePartiesTitle'), desc: t('artExperiences.threeCards.privatePartiesDesc') },
+    { icon: <CorporateEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.corporateTitle'), desc: t('artExperiences.threeCards.corporateDesc') },
+    { icon: <WeddingEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.weddingsTitle'), desc: t('artExperiences.threeCards.weddingsDesc') },
   ];
 
   return (
@@ -606,11 +608,11 @@ export default function ThreeCardsSection() {
                 />
               </CardImageWrap>
               <CardContent>
-                <CardTitle>join the community</CardTitle>
+                <CardTitle>{t('artExperiences.threeCards.card1Title')}</CardTitle>
                 <CardDesc>
-                  A community for everyone who creates or wants to. Guided painting sessions, warmth, no experience needed. Just brushes, colour, and real connection.
+                  {t('artExperiences.threeCards.card1Desc')}
                 </CardDesc>
-                <CardCTA>Join us on Flock <span>↗</span></CardCTA>
+                <CardCTA>{t('artExperiences.threeCards.card1Cta')} <span>↗</span></CardCTA>
               </CardContent>
             </Card>
 
@@ -631,11 +633,11 @@ export default function ThreeCardsSection() {
                 />
               </CardImageWrap>
               <CardContent>
-                <CardTitle>Art experiences</CardTitle>
+                <CardTitle>{t('artExperiences.threeCards.card2Title')}</CardTitle>
                 <CardDesc>
-                  Upcoming art events for all levels to explore creativity in a welcoming, supportive environment.
+                  {t('artExperiences.threeCards.card2Desc')}
                 </CardDesc>
-                <CardCTA>View upcoming events <span>→</span></CardCTA>
+                <CardCTA>{t('artExperiences.threeCards.card2Cta')} <span>→</span></CardCTA>
               </CardContent>
             </Card>
 
@@ -656,11 +658,11 @@ export default function ThreeCardsSection() {
                 />
               </CardImageWrap>
               <CardContent>
-                <CardTitle>Teacher at You & I Paint</CardTitle>
+                <CardTitle>{t('artExperiences.threeCards.card3Title')}</CardTitle>
                 <CardDesc>
-                  I am proud to be an instructor for You & I Paint, a luxury paint & sip company known for elegant, elevated art experiences.
+                  {t('artExperiences.threeCards.card3Desc')}
                 </CardDesc>
-                <CardCTA>Check more <span>→</span></CardCTA>
+                <CardCTA>{t('artExperiences.threeCards.card3Cta')} <span>→</span></CardCTA>
               </CardContent>
             </Card>
           </CardsGrid>
@@ -675,18 +677,18 @@ export default function ThreeCardsSection() {
               <ModalClose onClick={closeModal} aria-label="Close">✕</ModalClose>
               <ModalEyebrow>
                 <StarSpark size={11} color={AE.blue} />
-                Also teaching with
+                {t('artExperiences.threeCards.modalEyebrow')}
               </ModalEyebrow>
-              <ModalTitle>you & i paint</ModalTitle>
+              <ModalTitle>{t('artExperiences.threeCards.modalTitle')}</ModalTitle>
               <div>
-                <ModalBadge>✦ 15+ events taught</ModalBadge>
-                <ModalBadge>✦ 6-50 attendees per event</ModalBadge>
+                <ModalBadge>{t('artExperiences.threeCards.modalBadge1')}</ModalBadge>
+                <ModalBadge>{t('artExperiences.threeCards.modalBadge2')}</ModalBadge>
               </div>
             </ModalHeader>
 
             <ModalBody>
               <ModalDesc>
-                I am a certified painting instructor for You &amp; I Paint... a luxury paint &amp; sip company offering beautifully curated experiences across Vancouver. I have taught and decorated the space for over 15 events, ranging from intimate weddings and public community nights to large-scale corporate gatherings. Each event is guided step by step, beginner-friendly, and designed to leave people with something they're genuinely proud of.
+                {t('artExperiences.threeCards.modalDesc')}
               </ModalDesc>
 
               <EventTypeGrid>
@@ -699,7 +701,7 @@ export default function ThreeCardsSection() {
                 ))}
               </EventTypeGrid>
 
-              <GalleryTitle>from our events</GalleryTitle>
+              <GalleryTitle>{t('artExperiences.threeCards.galleryTitle')}</GalleryTitle>
               <PhotoGrid>
                 {YOU_AND_I_IMAGES.map((src, i) => (
                   <PhotoThumb key={src} onClick={() => openLightbox(i)}>
