@@ -84,11 +84,6 @@ const Card = styled.div`
   padding: 1.75rem 1.4rem;
   border: 1.5px solid rgba(74, 114, 168, 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(74, 114, 168, 0.14);
-  }
 `;
 
 const CardIcon = styled.div`
@@ -118,7 +113,7 @@ export default function EventTypesSection() {
     {
       icon: <PublicEventIcon size={42} color={AE.blue} />,
       title: 'Public Events',
-      desc: 'Open paint & sip nights at beautiful venues across Vancouver — an evening of creativity for everyone.',
+      desc: 'Open paint & sip nights at beautiful venues across Vancouver... an evening of creativity for everyone.',
     },
     {
       icon: <PrivateEventIcon size={42} color={AE.blue} />,
@@ -146,9 +141,9 @@ export default function EventTypesSection() {
             What I Teach
             <StarSpark size={12} color={AE.blue} />
           </Eyebrow>
-          <SectionTitle>event types i teach</SectionTitle>
+          <SectionTitle>event types I teach</SectionTitle>
           <SectionSubtitle>
-            From intimate gatherings to large-scale celebrations — I bring the art, the guidance, and the warmth to every event.
+            From intimate gatherings to large-scale celebrations... I bring the art, the guidance, and the warmth to every event.
           </SectionSubtitle>
         </SectionHeader>
 
