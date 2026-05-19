@@ -57,3 +57,41 @@ export const artEvents: ArtEvent[] = [
     instagramHandles: ['@camilalonart', '@camilonart'],
   },
 ];
+
+const MONTHS_EN_SHORT = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+];
+
+export function getShortEventSlug(dateISO: string) {
+  const [year, month, day] = dateISO.split('-');
+  const monthIndex = Number(month) - 1;
+
+  if (!year || !month || !day || monthIndex < 0 || monthIndex > 11) {
+    return null;
+  }
+
+  const monthName = MONTHS_EN_SHORT[monthIndex];
+  const normalizedDay = String(Number(day));
+
+  if (!monthName || Number.isNaN(Number(normalizedDay))) {
+    return null;
+  }
+
+  return `paint-${monthName}-${normalizedDay}-${year}`;
+}
+
+export function getEventIdFromShortSlug(shortSlug: string) {
+  const event = artEvents.find(e => getShortEventSlug(e.dateISO) === shortSlug);
+  return event?.id;
+}
