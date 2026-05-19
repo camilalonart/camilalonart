@@ -225,10 +225,16 @@ export default function ArtExpNav() {
 
       <NavLinks $open={open}>
         <NavLink onClick={() => handleNav('my-experiences')}>{t('artExperiences.nav.myEvents')}</NavLink>
-        <NavLink onClick={() => handleNav('creative-corner')}>{t('artExperiences.nav.community')}</NavLink>
+        <NavLink
+          href="https://flocksocial.app/flocks/ccb976d0-fadd-47e2-9365-2b90778dfe63"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setOpen(false)}
+        >
+          {t('artExperiences.nav.community')}
+        </NavLink>
         <NavLink onClick={() => handleNav('you-and-i')}>{t('artExperiences.nav.youAndIPaint')}</NavLink>
         <NavLink onClick={() => handleNav('upcoming')}>{t('artExperiences.nav.upcoming')}</NavLink>
-        <NavLink onClick={() => handleNav('memories')}>{t('artExperiences.nav.gallery')}</NavLink>
       </NavLinks>
 
       <NavRight>
