@@ -282,21 +282,6 @@ export default function HomePage() {
             const title = translationKey ? t(`${translationKey}.title`) : section.title;
             const description = translationKey ? t(`${translationKey}.description`) : section.description;
 
-            if (section.id === 'art-experiences') {
-              return (
-                <FeaturedCard key={section.id} href={section.href}>
-                  <FeaturedCardInner>
-                    <FeaturedCardIcon>{section.icon}</FeaturedCardIcon>
-                    <FeaturedCardText>
-                      <FeaturedCardTag>New · Vancouver</FeaturedCardTag>
-                      <FeaturedCardTitle>{title}</FeaturedCardTitle>
-                      <FeaturedCardDesc>{description}</FeaturedCardDesc>
-                    </FeaturedCardText>
-                  </FeaturedCardInner>
-                </FeaturedCard>
-              );
-            }
-
             return (
               <Card key={section.id} href={section.href}>
                 <CardIcon>{section.icon}</CardIcon>
