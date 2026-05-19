@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002Fart-experiences\u002Fevents\u002F[id]","\u002Fart\u002F[collection]","\u002Fart\u002F[collection]\u002F[painting]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
