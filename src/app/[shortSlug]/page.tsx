@@ -1,5 +1,5 @@
 import { getEventIdFromShortSlug, getShortEventSlug, artEvents } from '@/components/artExperiences/data';
-import { notFound, permanentRedirect } from 'next/navigation';
+import ShortEventRedirectClient from '@/components/artExperiences/ShortEventRedirectClient';
 
 interface Props {
   params: Promise<{ shortSlug: string }>;
@@ -15,8 +15,9 @@ export async function generateStaticParams() {
 export default async function ShortEventRedirectPage({ params }: Props) {
   const { shortSlug } = await params;
   const eventId = getEventIdFromShortSlug(shortSlug);
+  const destination = eventId
+    ? `/art-experiences/events/${eventId}`
+    : '/art-experiences/events';
 
-  if (!eventId) notFound();
-
-  permanentRedirect(`/art-experiences/events/${eventId}`);
+  return <ShortEventRedirectClient destination={destination} />;
 }
