@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 import { AE, StarSpark } from './Doodles';
 import { YOU_AND_I_PAINT_URL } from './data';
@@ -133,7 +134,7 @@ const PrimaryBtn = styled.a`
   }
 `;
 
-const SecondaryBtn = styled.button`
+const SecondaryBtn = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -149,6 +150,7 @@ const SecondaryBtn = styled.button`
   cursor: pointer;
   transition: all 0.25s ease;
   white-space: nowrap;
+  text-decoration: none;
 
   &:hover {
     border-color: ${AE.blue};
@@ -340,15 +342,6 @@ export default function YouAndIPaintSection() {
     return () => window.removeEventListener('keydown', handler);
   }, [lightboxIndex, prev, next]);
 
-  const scrollToGallery = () => {
-    if (typeof window === 'undefined') return;
-    const el = document.getElementById('you-and-i-gallery');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  };
-
   return (
     <>
       <Section id="you-and-i">
@@ -367,7 +360,7 @@ export default function YouAndIPaintSection() {
                 <PrimaryBtn href={YOU_AND_I_PAINT_URL} target="_blank" rel="noopener noreferrer">
                   Learn more about You &amp; I Paint ↗
                 </PrimaryBtn>
-                <SecondaryBtn onClick={scrollToGallery}>
+                <SecondaryBtn href="/art-experiences/you-and-i-gallery">
                   See event photos →
                 </SecondaryBtn>
               </ButtonRow>

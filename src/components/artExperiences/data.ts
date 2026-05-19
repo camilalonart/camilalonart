@@ -36,7 +36,7 @@ export const artEvents: ArtEvent[] = [
       es: 'Tarde de Pintura y Sip',
     },
     description: {
-      en: "Join us for a cozy afternoon of painting, conversation, and creativity in a beautiful café setting at Funk Coffee Bar. Guided by artist Camilalonart, this beginner-friendly paint & sip experience is designed for anyone who wants to slow down, create, and enjoy a relaxed creative gathering. We'll paint together step by step while enjoying drinks, music, and a warm atmosphere. No experience needed — all materials are included.",
+      en: "Join us for a cozy afternoon of painting, conversation, and creativity in a beautiful café setting at Funk Coffee Bar. Guided by artist Camilalonart, this beginner-friendly paint & sip experience is designed for anyone who wants to slow down, create, and enjoy a relaxed creative gathering. We'll paint together step by step while enjoying drinks, music, and a warm atmosphere. No experience needed... all materials are included.",
       es: 'Únete a una tarde acogedora de pintura, conversación y creatividad en el hermoso ambiente de Funk Coffee Bar. Guiado por la artista Camilalonart, esta experiencia de pintura y sip apta para principiantes está diseñada para cualquiera que quiera desacelerar, crear y disfrutar de una reunión creativa relajada. Pintaremos juntos paso a paso mientras disfrutamos de bebidas, música y una atmósfera cálida. No se necesita experiencia — todos los materiales están incluidos.',
     },
     date: 'Saturday, June 13, 2026',

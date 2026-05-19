@@ -62,13 +62,14 @@ const EventType = styled.p`
 `;
 
 const EventTitle = styled.h1`
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-railey), 'Cormorant Garamond', serif;
   font-size: clamp(2.4rem, 6vw, 4rem);
   font-weight: 600;
   font-style: italic;
   color: ${AE.ink};
   margin: 0 0 1.25rem;
   line-height: 1.1;
+  text-transform: lowercase;
 `;
 
 const WavyWrap = styled.div`
@@ -77,9 +78,17 @@ const WavyWrap = styled.div`
 
 const HeaderMeta = styled.p`
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  color: ${AE.blue};
+  margin: 0;
+`;
+
+const HeaderMeta2 = styled.p`
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 1.2rem;
   color: ${AE.warmBrown};
   margin: 0;
+  style: italic;
 `;
 
 // ─── Body ──────────────────────────────────────────────────────────────────
@@ -396,46 +405,26 @@ export default function EventDetailPage({ event }: Props) {
     <Page>
       <ArtExpNav />
 
-      <PageHeader>
-        <HeaderInner>
-          <BackLink href="/art-experiences#upcoming">
-            ← {lang === 'en' ? 'Back to Events' : 'Volver a Eventos'}
-          </BackLink>
-
-          <EventType>
-            <StarSpark size={10} color={AE.blue} />
-            {event.type === 'myEvents'
-              ? (lang === 'en' ? 'My Experience' : 'Mi Experiencia')
-              : 'You & I Paint'}
-          </EventType>
-
-          <EventTitle>{title}</EventTitle>
-
-          <WavyWrap>
-            <WavyUnderline width={80} color={AE.blue} />
-          </WavyWrap>
-
-          <HeaderMeta>
-            {event.date} · {event.time} · {event.venue}, {event.city}
-          </HeaderMeta>
-        </HeaderInner>
-      </PageHeader>
-
       <Body>
         <MainColumn>
-          <Description>{description}</Description>
+        <BackLink href="/art-experiences#upcoming">
+          ← {lang === 'en' ? 'Back to Events' : 'Volver a Eventos'}
+        </BackLink>
+        <EventTitle>{title}</EventTitle>
 
-          {event.tags.length > 0 && (
-            <TagRow>
-              {event.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-            </TagRow>
-          )}
+        <WavyWrap>
+          <WavyUnderline width={80} color={AE.blue} />
+        </WavyWrap>
 
-          <MaterialsNote>
-            ✦ {lang === 'en'
-              ? 'All painting materials are included'
-              : 'Todos los materiales de pintura están incluidos'}
-          </MaterialsNote>
+        
+        <Description>{description}</Description>
+
+        <MaterialsNote>
+          ✦ {lang === 'en'
+            ? 'All painting materials are included'
+            : 'Todos los materiales de pintura están incluidos'}
+        </MaterialsNote>
+
         </MainColumn>
 
         <Sidebar>
