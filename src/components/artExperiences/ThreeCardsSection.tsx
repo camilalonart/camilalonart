@@ -631,9 +631,9 @@ export default function ThreeCardsSection() {
                 />
               </CardImageWrap>
               <CardContent>
-                <CardTitle>join art events</CardTitle>
+                <CardTitle>Art experiences</CardTitle>
                 <CardDesc>
-                  Upcoming painting classes and paint & sip sessions in Vancouver. Small groups, beginner-friendly, all materials included. Reserve your spot.
+                  Upcoming art events for all levels to explore creativity in a welcoming, supportive environment.
                 </CardDesc>
                 <CardCTA>View upcoming events <span>→</span></CardCTA>
               </CardContent>
@@ -656,11 +656,11 @@ export default function ThreeCardsSection() {
                 />
               </CardImageWrap>
               <CardContent>
-                <CardTitle>i'm also a teacher</CardTitle>
+                <CardTitle>Teacher at You & I Paint</CardTitle>
                 <CardDesc>
-                  Certified instructor for You & I Paint. Over 15 events taught... from weddings and corporate gatherings to public paint & sip and private celebrations.
+                  I am proud to be an instructor for You & I Paint, a luxury paint & sip company known for elegant, elevated art experiences.
                 </CardDesc>
-                <CardCTA>See my experience <span>→</span></CardCTA>
+                <CardCTA>Check more <span>→</span></CardCTA>
               </CardContent>
             </Card>
           </CardsGrid>

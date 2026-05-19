@@ -18,7 +18,7 @@ const fadeIn = keyframes`
 `;
 
 const GALLERY_IMAGES = [
-  'IMG_9937', 'IMG_9875', 'IMG_6842', 'IMG_7094', 'IMG_5554', 'A7T06214', 'A7T07125'
+  'IMG_9937', 'IMG_9875', 'IMG_6842', 'IMG_7094', 'IMG_5554', 'A7T06214', 'A7T07125', 'IMG_1597', 'IMG_5188', 'IMG_9977'
 ].map(n => `/images/artExperiences/You&I/${n}.webp`);
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
