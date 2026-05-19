@@ -170,10 +170,6 @@ export default function UpcomingEventsSection() {
     <Section id="upcoming">
       <Container>
         <SectionHeader>
-          <BrandBadge>
-            <StarSpark size={11} color={AE.blue} />
-            <BrandBadgeText>The Creative Corner</BrandBadgeText>
-          </BrandBadge>
           <Eyebrow>
             <StarSpark size={12} color={AE.blue} />
             {t('artExperiences.upcoming.eyebrow')}

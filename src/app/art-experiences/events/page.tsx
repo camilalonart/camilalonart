@@ -221,10 +221,6 @@ export default function AllEventsPage() {
 
       <Hero>
         <BackLink href="/art-experiences">← Art Experiences</BackLink>
-        <BrandBadge>
-          <StarSpark size={11} color={AE.blue} />
-          <BrandBadgeText>The Creative Corner</BrandBadgeText>
-        </BrandBadge>
         <PageTitle>all events</PageTitle>
         <WavyWrap>
           <WavyUnderline width={90} color={AE.blue} />
