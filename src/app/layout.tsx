@@ -99,6 +99,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(photographerSchema) }}
         />
+        <link rel="icon" href="/images/favicon.ico" />
       </head>
       <body>
         <StyledComponentsRegistry>
