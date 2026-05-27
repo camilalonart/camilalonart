@@ -506,13 +506,12 @@ export default function EventDetailPage({ event }: Props) {
             </InfoCard>
         </MainColumn>
         <Sidebar>
-          <Description>{description}</Description>
-
           <MaterialsNote>
             ✦ {lang === 'en'
               ? 'All painting materials are included'
               : 'Todos los materiales de pintura están incluidos'}
           </MaterialsNote>
+          <Description>{description}</Description>
         </Sidebar>
       </Body>
 
