@@ -3,7 +3,7 @@ import { generateMetadata as genMeta, SITE_CONFIG } from '../../../lib/seo';
 
 export const metadata: Metadata = genMeta({
   title: 'Wedding Photographer Vancouver BC | Elopement & Couples Photography',
-  description: 'Award-winning Vancouver wedding photographer capturing timeless moments. Specializing in weddings, elopements, and couples photography across BC. Natural, candid style. Book your free consultation today!',
+  description: 'Vancouver wedding photographer capturing timeless moments. Book your free consultation today!',
   path: '/photography/wedding-couples/',
   keywords: [
     'Vancouver wedding photographer',

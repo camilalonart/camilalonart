@@ -17,8 +17,8 @@ export const SITE_CONFIG = {
     },
   },
   contact: {
-    email: 'hello@camilalonart.com',
-    phone: '+1-604-555-0123', // Update with actual phone
+    email: 'bycamilalonart@gmail.com',
+    phone: '+1-672-338-9307',
   },
   social: {
     instagram: 'https://instagram.com/camilalonart',
@@ -31,10 +31,10 @@ export const SITE_CONFIG = {
 export const baseMetadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'Vancouver Wedding & Pet Photographer | Camilalonart',
-    template: '%s | Camilalonart Vancouver',
+    default: 'Camilalonart',
+    template: '%s | Artist, Photographer, Engineer',
   },
-  description: 'Award-winning Vancouver photographer specializing in wedding photography, pet portraits, and professional headshots. Serving Vancouver, Burnaby, Richmond, and the Lower Mainland.',
+  description: 'Fine artist, photographer, engineer',
   keywords: [
     // Primary keywords
     'Vancouver wedding photographer',
@@ -71,22 +71,22 @@ export const baseMetadata: Metadata = {
     locale: 'en_CA',
     url: SITE_CONFIG.url,
     siteName: 'Camilalonart Photography',
-    title: 'Vancouver Wedding & Pet Photographer | Camilalonart',
-    description: 'Award-winning Vancouver photographer specializing in wedding photography, pet portraits, and professional headshots. Serving the Lower Mainland.',
+    title: 'Camilalonart',
+    description: 'Fine artist, photographer, engineer',
     images: [
       {
         url: `${SITE_CONFIG.url}/images/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Camilalonart - Vancouver Wedding & Pet Photographer',
+        alt: 'Camilalonart - Fine Artist, Photographer, Engineer',
         type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vancouver Wedding & Pet Photographer | Camilalonart',
-    description: 'Award-winning Vancouver photographer specializing in wedding photography, pet portraits, and professional headshots.',
+    title: 'Camilalonart',
+    description: 'Fine artist, photographer, engineer',
     images: [`${SITE_CONFIG.url}/images/og-image.jpg`],
     creator: '@camilalonart',
   },
