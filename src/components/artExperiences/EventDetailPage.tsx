@@ -408,10 +408,6 @@ export default function EventDetailPage({ event }: Props) {
 
       <Body>
         <MainColumn>
-          <BackLink href="/art-experiences#upcoming">
-            ← {lang === 'en' ? 'Back to Events' : 'Volver a Eventos'}
-          </BackLink>
-
           <EventTitle>{title}</EventTitle>
 
           <WavyWrap>
