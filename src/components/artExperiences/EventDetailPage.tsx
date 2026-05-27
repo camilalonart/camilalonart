@@ -154,6 +154,7 @@ const MaterialsNote = styled.div`
 const Sidebar = styled.aside`
   animation: ${fadeInUp} 0.8s ease both;
   animation-delay: 0.2s;
+  align-self: center;
 `;
 
 const InfoCard = styled.div`
@@ -407,113 +408,111 @@ export default function EventDetailPage({ event }: Props) {
 
       <Body>
         <MainColumn>
-        <BackLink href="/art-experiences#upcoming">
-          ← {lang === 'en' ? 'Back to Events' : 'Volver a Eventos'}
-        </BackLink>
-        <EventTitle>{title}</EventTitle>
+          <BackLink href="/art-experiences#upcoming">
+            ← {lang === 'en' ? 'Back to Events' : 'Volver a Eventos'}
+          </BackLink>
 
-        <WavyWrap>
-          <WavyUnderline width={80} color={AE.blue} />
-        </WavyWrap>
+          <EventTitle>{title}</EventTitle>
 
-        
-        <Description>{description}</Description>
+          <WavyWrap>
+            <WavyUnderline width={80} color={AE.blue} />
+          </WavyWrap>
 
-        <MaterialsNote>
-          ✦ {lang === 'en'
-            ? 'All painting materials are included'
-            : 'Todos los materiales de pintura están incluidos'}
-        </MaterialsNote>
-
-        </MainColumn>
-
-        <Sidebar>
           <InfoCard>
-            <PriceDisplay>
-              <PriceLabel>{lang === 'en' ? 'Price per person' : 'Precio por persona'}</PriceLabel>
-              <PriceValue>{priceDisplay}</PriceValue>
-            </PriceDisplay>
+              <PriceDisplay>
+                <PriceLabel>{lang === 'en' ? 'Price per person' : 'Precio por persona'}</PriceLabel>
+                <PriceValue>{priceDisplay}</PriceValue>
+              </PriceDisplay>
 
-            {event.ticketsAvailable && (
-              <TicketsAvailableBadge>
-                {lang === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
-              </TicketsAvailableBadge>
-            )}
+              {event.ticketsAvailable && (
+                <TicketsAvailableBadge>
+                  {lang === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
+                </TicketsAvailableBadge>
+              )}
 
-            {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
-              <SpotsChip $low={event.spotsLeft <= 5}>
-                {event.spotsLeft} {lang === 'en' ? 'spots left' : 'lugares disponibles'}
-              </SpotsChip>
-            )}
+              {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
+                <SpotsChip $low={event.spotsLeft <= 5}>
+                  {event.spotsLeft} {lang === 'en' ? 'spots left' : 'lugares disponibles'}
+                </SpotsChip>
+              )}
 
-            <Divider />
+              <Divider />
 
-            <MetaList>
-              <MetaItem>
-                <MetaIcon>📅</MetaIcon>
-                <MetaText>
-                  {event.date}
-                  <MetaSub>{event.time}</MetaSub>
-                </MetaText>
-              </MetaItem>
-              <MetaItem>
-                <MetaIcon>📍</MetaIcon>
-                <MetaText>
-                  {event.venue}
-                  <MetaSub>{event.address}, {event.city}</MetaSub>
-                </MetaText>
-              </MetaItem>
-              {event.spotsTotal && (
+              <MetaList>
                 <MetaItem>
-                  <MetaIcon>👥</MetaIcon>
+                  <MetaIcon>📅</MetaIcon>
                   <MetaText>
-                    {lang === 'en' ? 'Small group' : 'Grupo pequeño'}
-                    <MetaSub>
-                      {lang === 'en'
-                        ? `Max ${event.spotsTotal} participants`
-                        : `Máx. ${event.spotsTotal} participantes`}
-                    </MetaSub>
+                    {event.date}
+                    <MetaSub>{event.time}</MetaSub>
                   </MetaText>
                 </MetaItem>
-              )}
-            </MetaList>
+                <MetaItem>
+                  <MetaIcon>📍</MetaIcon>
+                  <MetaText>
+                    {event.venue}
+                    <MetaSub>{event.address}, {event.city}</MetaSub>
+                  </MetaText>
+                </MetaItem>
+                {event.spotsTotal && (
+                  <MetaItem>
+                    <MetaIcon>👥</MetaIcon>
+                    <MetaText>
+                      {lang === 'en' ? 'Small group' : 'Grupo pequeño'}
+                      <MetaSub>
+                        {lang === 'en'
+                          ? `Max ${event.spotsTotal} participants`
+                          : `Máx. ${event.spotsTotal} participantes`}
+                      </MetaSub>
+                    </MetaText>
+                  </MetaItem>
+                )}
+              </MetaList>
 
-            <Divider />
+              <Divider />
 
-            <CTAStack>
-              {event.eventbriteUrl && (
-                <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer">
-                  {lang === 'en' ? 'Buy Tickets on Eventbrite' : 'Comprar en Eventbrite'} ↗
-                </CTAPrimary>
-              )}
-              {event.flockUrl && (
-                <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer">
-                  {lang === 'en' ? 'Reserve a Spot on Flock' : 'Reservar en Flock'} ↗
-                </CTASecondary>
-              )}
-              {event.artistPortfolioUrl && (
-                <CTAPortfolio href={event.artistPortfolioUrl}>
-                  🎨 {lang === 'en' ? "View Artist's Portfolio" : 'Ver Portafolio de la Artista'}
-                </CTAPortfolio>
-              )}
-            </CTAStack>
+              <CTAStack>
+                {event.eventbriteUrl && (
+                  <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer">
+                    {lang === 'en' ? 'Buy Tickets on Eventbrite' : 'Comprar en Eventbrite'} ↗
+                  </CTAPrimary>
+                )}
+                {event.flockUrl && (
+                  <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer">
+                    {lang === 'en' ? 'Reserve a Spot on Flock' : 'Reservar en Flock'} ↗
+                  </CTASecondary>
+                )}
+                {event.artistPortfolioUrl && (
+                  <CTAPortfolio href={event.artistPortfolioUrl}>
+                    🎨 {lang === 'en' ? "View Artist's Portfolio" : 'Ver Portafolio de la Artista'}
+                  </CTAPortfolio>
+                )}
+              </CTAStack>
 
-            {event.instagramHandles && event.instagramHandles.length > 0 && (
-              <InstagramRow>
-                <InstagramLabel>📸 Instagram</InstagramLabel>
-                {event.instagramHandles.map(handle => (
-                  <InstagramHandle
-                    key={handle}
-                    href={`https://instagram.com/${handle.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {handle}
-                  </InstagramHandle>
-                ))}
-              </InstagramRow>
-            )}
-          </InfoCard>
+              {event.instagramHandles && event.instagramHandles.length > 0 && (
+                <InstagramRow>
+                  <InstagramLabel>📸 Instagram</InstagramLabel>
+                  {event.instagramHandles.map(handle => (
+                    <InstagramHandle
+                      key={handle}
+                      href={`https://instagram.com/${handle.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {handle}
+                    </InstagramHandle>
+                  ))}
+                </InstagramRow>
+              )}
+            </InfoCard>
+        </MainColumn>
+        <Sidebar>
+          <Description>{description}</Description>
+
+          <MaterialsNote>
+            ✦ {lang === 'en'
+              ? 'All painting materials are included'
+              : 'Todos los materiales de pintura están incluidos'}
+          </MaterialsNote>
         </Sidebar>
       </Body>
 

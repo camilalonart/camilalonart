@@ -171,8 +171,7 @@ export default function ArtClassesPage() {
       <Hero>
         <h1>Art Classes</h1>
         <p>
-          Learn, grow, and express yourself through art. Professional art classes
-          for all skill levels in Vancouver.
+          Learn, grow, and express yourself through art.
         </p>
       </Hero>
 
