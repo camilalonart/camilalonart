@@ -45,7 +45,7 @@ export const artEvents: ArtEvent[] = [
     venue: 'FUNK Coffee Bar',
     address: '1025 Dunsmuir St',
     city: 'Vancouver, BC',
-    price: 30,
+    price: 15,
     currency: 'CAD',
     image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Horizontal.webp',
     posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Vertical.webp',
