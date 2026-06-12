@@ -29,6 +29,33 @@ export const YOU_AND_I_PAINT_URL = 'https://youandipaint.com';
 
 export const artEvents: ArtEvent[] = [
   {
+    id: 'art-in-the-park-aug-23-2026',
+    type: 'myEvents',
+    title: {
+      en: 'Art in the Park',
+      es: 'Arte en el Parque',
+    },
+    description: {
+      en: "Join us for an outdoor painting experience surrounded by nature and fresh air at beautiful Vanier Park. Guided by artist Camilalonart, this beginner-friendly session invites you to slow down, breathe in the view, and create something you'll cherish. No experience needed — all materials are included. Bring a friend, bring your curiosity, and let the park inspire your canvas.",
+      es: 'Únete a una experiencia de pintura al aire libre rodeada de naturaleza en el hermoso Vanier Park. Guiada por la artista Camilalonart, esta sesión apta para principiantes te invita a desacelerar, respirar el paisaje y crear algo que atesorarás. No se necesita experiencia — todos los materiales están incluidos. Trae a un amigo, trae tu curiosidad, y deja que el parque inspire tu lienzo.',
+    },
+    date: 'Sunday, August 23, 2026',
+    dateISO: '2026-08-23',
+    time: '3:00 PM',
+    venue: 'Vanier Park',
+    address: '1000 Chestnut St',
+    city: 'Vancouver, BC',
+    price: 15,
+    currency: 'CAD',
+    image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Horizontal.webp',
+    posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Vertical.webp',
+    flockUrl: FLOCK_COMMUNITY_URL,
+    tags: ['art in the park', 'outdoor', 'beginner-friendly', 'social'],
+    featured: true,
+    artistPortfolioUrl: '/art',
+    instagramHandles: ['@camilalonart', '@camilonart'],
+  },
+  {
     id: 'paint-sip-afternoon-june-13-2026',
     type: 'myEvents',
     title: {
