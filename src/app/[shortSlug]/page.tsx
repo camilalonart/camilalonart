@@ -1,4 +1,4 @@
-import { getEventIdFromShortSlug, getShortEventSlug, artEvents } from '@/components/artExperiences/data';
+import { getEventIdFromShortSlug, getAllShortEventSlugs, artEvents } from '@/components/artExperiences/data';
 import ShortEventRedirectClient from '@/components/artExperiences/ShortEventRedirectClient';
 
 interface Props {
@@ -6,10 +6,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return artEvents
-    .map(event => getShortEventSlug(event.dateISO))
-    .filter((slug): slug is string => Boolean(slug))
-    .map(shortSlug => ({ shortSlug }));
+  return artEvents.flatMap(event => getAllShortEventSlugs(event.dateISO)).map(shortSlug => ({ shortSlug }));
 }
 
 export default async function ShortEventRedirectPage({ params }: Props) {

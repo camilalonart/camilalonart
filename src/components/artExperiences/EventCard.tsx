@@ -82,11 +82,11 @@ const PriceBadge = styled.div`
   letter-spacing: 0.02em;
 `;
 
-const SpotsTag = styled.div`
+const SpotsTag = styled.div<{ $soldOut?: boolean }>`
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background: rgba(74, 114, 168, 0.9);
+  background: ${p => p.$soldOut ? 'rgba(139, 60, 40, 0.92)' : 'rgba(74, 114, 168, 0.9)'};
   color: white;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.65rem;
@@ -360,6 +360,9 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
           <ImagePlaceholder>🎨</ImagePlaceholder>
         )}
         <PriceBadge>{priceDisplay}</PriceBadge>
+        {event.spotsTotal !== undefined && event.spotsLeft === 0 && (
+          <SpotsTag $soldOut>{locale === 'en' ? 'Sold Out' : 'Agotado'} · {event.spotsTotal}/{event.spotsTotal}</SpotsTag>
+        )}
         {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
           <SpotsTag>{event.spotsLeft} {t('artExperiences.myExperiences.spotsLeft')}</SpotsTag>
         )}

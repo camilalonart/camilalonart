@@ -249,6 +249,23 @@ const SpotsChip = styled.div<{ $low?: boolean }>`
   margin-bottom: 1.25rem;
 `;
 
+const SoldOutChip = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b3c28;
+  background: rgba(139, 60, 40, 0.08);
+  border: 1.5px solid rgba(139, 60, 40, 0.3);
+  border-radius: 50px;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1.25rem;
+`;
+
 const TicketsAvailableBadge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -420,16 +437,23 @@ export default function EventDetailPage({ event }: Props) {
                 <PriceValue>{priceDisplay}</PriceValue>
               </PriceDisplay>
 
-              {event.ticketsAvailable && (
-                <TicketsAvailableBadge>
-                  {lang === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
-                </TicketsAvailableBadge>
-              )}
-
-              {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
-                <SpotsChip $low={event.spotsLeft <= 5}>
-                  {event.spotsLeft} {lang === 'en' ? 'spots left' : 'lugares disponibles'}
-                </SpotsChip>
+              {event.spotsTotal !== undefined && event.spotsLeft === 0 ? (
+                <SoldOutChip>
+                  ✕ {lang === 'en' ? 'Sold Out' : 'Agotado'} · {event.spotsTotal}/{event.spotsTotal}
+                </SoldOutChip>
+              ) : (
+                <>
+                  {event.ticketsAvailable && (
+                    <TicketsAvailableBadge>
+                      {lang === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
+                    </TicketsAvailableBadge>
+                  )}
+                  {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
+                    <SpotsChip $low={event.spotsLeft <= 5}>
+                      {event.spotsLeft} {lang === 'en' ? 'spots left' : 'lugares disponibles'}
+                    </SpotsChip>
+                  )}
+                </>
               )}
 
               <Divider />

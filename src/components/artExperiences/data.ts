@@ -36,7 +36,7 @@ export const artEvents: ArtEvent[] = [
       es: 'Arte en el Parque',
     },
     description: {
-      en: "Join us for an outdoor painting experience surrounded by nature and fresh air at beautiful Vanier Park. Guided by artist Camilalonart, this beginner-friendly session invites you to slow down, breathe in the view, and create something you'll cherish. No experience needed — all materials are included. Bring a friend, bring your curiosity, and let the park inspire your canvas.",
+      en: "Join us for an outdoor painting experience surrounded by nature and fresh air at beautiful Vanier Park. Guided by artist Camilalonart, this beginner-friendly session invites you to slow down, breathe in the view, and create something you'll cherish. No experience needed... all materials are included. Bring a friend, bring your curiosity, and let the park inspire your canvas.",
       es: 'Únete a una experiencia de pintura al aire libre rodeada de naturaleza en el hermoso Vanier Park. Guiada por la artista Camilalonart, esta sesión apta para principiantes te invita a desacelerar, respirar el paisaje y crear algo que atesorarás. No se necesita experiencia — todos los materiales están incluidos. Trae a un amigo, trae tu curiosidad, y deja que el parque inspire tu lienzo.',
     },
     date: 'Sunday, August 23, 2026',
@@ -49,9 +49,10 @@ export const artEvents: ArtEvent[] = [
     currency: 'CAD',
     image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Horizontal.webp',
     posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Vertical.webp',
-    flockUrl: FLOCK_COMMUNITY_URL,
+    eventbriteUrl: 'https://www.eventbrite.ca/e/art-in-the-park-tickets-1991750652819',
+    flockUrl: 'https://flocksocial.app/e/art-in-the-park-f3b597',
     tags: ['art in the park', 'outdoor', 'beginner-friendly', 'social'],
-    featured: true,
+    featured: false,
     artistPortfolioUrl: '/art',
     instagramHandles: ['@camilalonart', '@camilonart'],
   },
@@ -74,6 +75,8 @@ export const artEvents: ArtEvent[] = [
     city: 'Vancouver, BC',
     price: 15,
     currency: 'CAD',
+    spotsTotal: 24,
+    spotsLeft: 0,
     image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Horizontal.webp',
     posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Vertical.webp',
     flockUrl: FLOCK_COMMUNITY_URL,
@@ -86,18 +89,13 @@ export const artEvents: ArtEvent[] = [
 ];
 
 const MONTHS_EN_SHORT = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
+  'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+  'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+];
+
+const MONTHS_EN_FULL = [
+  'january', 'february', 'march', 'april', 'may', 'june',
+  'july', 'august', 'september', 'october', 'november', 'december',
 ];
 
 export function getShortEventSlug(dateISO: string) {
@@ -118,7 +116,30 @@ export function getShortEventSlug(dateISO: string) {
   return `paint-${monthName}-${normalizedDay}-${year}`;
 }
 
+export function getAllShortEventSlugs(dateISO: string): string[] {
+  const [year, month, day] = dateISO.split('-');
+  const monthIndex = Number(month) - 1;
+
+  if (!year || !month || !day || monthIndex < 0 || monthIndex > 11) {
+    return [];
+  }
+
+  const short = MONTHS_EN_SHORT[monthIndex];
+  const full = MONTHS_EN_FULL[monthIndex];
+  const normalizedDay = String(Number(day));
+
+  if (!short || !full || Number.isNaN(Number(normalizedDay))) {
+    return [];
+  }
+
+  const slugs = [`paint-${short}-${normalizedDay}-${year}`];
+  if (short !== full) {
+    slugs.push(`paint-${full}-${normalizedDay}-${year}`);
+  }
+  return slugs;
+}
+
 export function getEventIdFromShortSlug(shortSlug: string) {
-  const event = artEvents.find(e => getShortEventSlug(e.dateISO) === shortSlug);
+  const event = artEvents.find(e => getAllShortEventSlugs(e.dateISO).includes(shortSlug));
   return event?.id;
 }
