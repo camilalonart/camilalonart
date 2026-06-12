@@ -75,7 +75,7 @@ export const artEvents: ArtEvent[] = [
     city: 'Vancouver, BC',
     price: 15,
     currency: 'CAD',
-    spotsTotal: 24,
+    spotsTotal: 27,
     spotsLeft: 0,
     image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Horizontal.webp',
     posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23June20262PM/EventPoster_Vertical.webp',
