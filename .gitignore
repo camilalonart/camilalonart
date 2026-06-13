@@ -50,6 +50,7 @@ next-env.d.ts
 !/public/images/aboutTheArtist/
 !/public/images/traditionalArt/
 !/public/images/artExperiences/
+!/public/images/uxuidesign/
 
 
 !/public/images/.gitkeep
