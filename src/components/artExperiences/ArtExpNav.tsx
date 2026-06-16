@@ -230,7 +230,9 @@ export default function ArtExpNav() {
       </Logo>
 
       <NavLinks $open={open}>
-        <NavLink onClick={() => handleNav('my-experiences')}>{t('artExperiences.nav.myEvents')}</NavLink>
+        <NavLink as={Link} href="/art-experiences/events" onClick={() => setOpen(false)}>
+          {t('artExperiences.nav.myEvents')}
+        </NavLink>
         <NavLink
           href="https://flocksocial.app/flocks/ccb976d0-fadd-47e2-9365-2b90778dfe63"
           target="_blank"
