@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
-import { AE, WavyUnderline, StarSpark } from './Doodles';
+import { AE, WavyUnderline, StarSpark, SmallFlower } from './Doodles';
 import type { ArtEvent } from './data';
 import { useTranslation } from '../../i18n/TranslationContext';
 import ArtExpNav from './ArtExpNav';
@@ -402,15 +403,240 @@ const InstagramHandle = styled.a`
   &:hover { color: ${AE.blueDark}; text-decoration: underline; }
 `;
 
+// ─── Photo Gallery ─────────────────────────────────────────────────────────
+
+const GallerySection = styled.section`
+  background: ${AE.parchment};
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+`;
+
+const GalleryInner = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const GalleryHeader = styled.div`
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  animation: ${fadeInUp} 0.8s ease both;
+`;
+
+const GalleryEyebrow = styled.p`
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: ${AE.blue};
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+`;
+
+const GalleryTitle = styled.h2`
+  font-family: var(--font-railey), 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: ${AE.ink};
+  margin: 0 0 1.25rem;
+  line-height: 1.1;
+  text-transform: lowercase;
+`;
+
+const GalleryWavyWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const PhotoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  animation: ${fadeInUp} 0.9s ease both;
+  animation-delay: 0.15s;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const PhotoCell = styled.button<{ $tall?: boolean; $wide?: boolean }>`
+  position: relative;
+  background: ${AE.paper};
+  border-radius: 14px;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  aspect-ratio: ${p => p.$tall ? '3/4' : p.$wide ? '16/7' : '4/3'};
+  grid-column: ${p => p.$wide ? 'span 2' : 'span 1'};
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: block;
+  width: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(44, 36, 22, 0.18);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &::after {
+    content: '🔍';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(44, 36, 22, 0.35);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  @media (max-width: 700px) {
+    grid-column: span 1;
+    aspect-ratio: 4/3;
+  }
+`;
+
+// ─── Lightbox ──────────────────────────────────────────────────────────────
+
+const LightboxOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: ${fadeInUp} 0.25s ease both;
+`;
+
+const LightboxContent = styled.div`
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LightboxImg = styled.div`
+  position: relative;
+  max-width: min(90vw, 1000px);
+  max-height: 85vh;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+`;
+
+const LightboxClose = styled.button`
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10000;
+
+  &:hover { background: rgba(255, 255, 255, 0.22); }
+`;
+
+const LightboxNav = styled.button<{ $side: 'left' | 'right' }>`
+  position: fixed;
+  top: 50%;
+  ${p => p.$side}: 1.25rem;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10000;
+
+  &:hover { background: rgba(255, 255, 255, 0.22); }
+`;
+
+const LightboxCounter = styled.p`
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.1em;
+  z-index: 10000;
+`;
+
 // ─── Component ─────────────────────────────────────────────────────────────
 
 interface Props {
   event: ArtEvent;
+  eventPhotos?: string[];
 }
 
-export default function EventDetailPage({ event }: Props) {
+const PHOTO_LAYOUTS: { tall?: boolean; wide?: boolean }[] = [
+  {},
+  { tall: true },
+  {},
+  { wide: true },
+  {},
+  {},
+  {},
+  {},
+  { tall: true },
+  {},
+  {},
+  {},
+];
+
+export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
   const { locale } = useTranslation();
   const lang = locale as 'en' | 'es';
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const photos = eventPhotos;
+  const isPast = new Date(event.dateISO) < new Date();
+
+  const openLightbox = useCallback((i: number) => setLightboxIndex(i), []);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const goPrev = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + photos.length) % photos.length : null), [photos.length]);
+  const goNext = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % photos.length : null), [photos.length]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') goPrev();
+    if (e.key === 'ArrowRight') goNext();
+  }, [closeLightbox, goPrev, goNext]);
 
   const title = event.title[lang];
   const description = event.description[lang];
@@ -420,7 +646,7 @@ export default function EventDetailPage({ event }: Props) {
     : `$${event.price} ${event.currency}`;
 
   return (
-    <Page>
+    <Page onKeyDown={handleKeyDown} tabIndex={-1}>
       <ArtExpNav />
 
       <Body>
@@ -534,6 +760,74 @@ export default function EventDetailPage({ event }: Props) {
           <Description>{description}</Description>
         </Sidebar>
       </Body>
+
+      {isPast && photos.length > 0 && (
+        <GallerySection>
+          <GalleryInner>
+            <GalleryHeader>
+              <GalleryEyebrow>
+                <SmallFlower size={13} color={AE.blue} />
+                {lang === 'en' ? 'Event Memories' : 'Recuerdos del Evento'}
+                <SmallFlower size={13} color={AE.blue} />
+              </GalleryEyebrow>
+              <GalleryTitle>
+                {lang === 'en' ? 'photos from the day' : 'fotos del día'}
+              </GalleryTitle>
+              <GalleryWavyWrap>
+                <WavyUnderline width={80} color={AE.blue} />
+              </GalleryWavyWrap>
+            </GalleryHeader>
+
+            <PhotoGrid>
+              {photos.map((src, i) => {
+                const layout = PHOTO_LAYOUTS[i % PHOTO_LAYOUTS.length];
+                return (
+                  <PhotoCell
+                    key={src}
+                    $tall={layout.tall}
+                    $wide={layout.wide}
+                    onClick={() => openLightbox(i)}
+                    aria-label={`Photo ${i + 1} of ${photos.length}`}
+                  >
+                    <Image
+                      src={src}
+                      alt={`${title} — photo ${i + 1}`}
+                      fill
+                      sizes="(max-width: 480px) 100vw, (max-width: 700px) 50vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </PhotoCell>
+                );
+              })}
+            </PhotoGrid>
+          </GalleryInner>
+        </GallerySection>
+      )}
+
+      {lightboxIndex !== null && photos[lightboxIndex] && (
+        <LightboxOverlay onClick={closeLightbox}>
+          <LightboxContent onClick={e => e.stopPropagation()}>
+            <LightboxImg>
+              <Image
+                src={photos[lightboxIndex]}
+                alt={`${title} — photo ${lightboxIndex + 1}`}
+                width={1200}
+                height={800}
+                style={{ objectFit: 'contain', maxHeight: '85vh', width: 'auto' }}
+                priority
+              />
+            </LightboxImg>
+          </LightboxContent>
+          <LightboxClose onClick={closeLightbox} aria-label="Close">✕</LightboxClose>
+          {photos.length > 1 && (
+            <>
+              <LightboxNav $side="left" onClick={goPrev} aria-label="Previous">‹</LightboxNav>
+              <LightboxNav $side="right" onClick={goNext} aria-label="Next">›</LightboxNav>
+              <LightboxCounter>{lightboxIndex + 1} / {photos.length}</LightboxCounter>
+            </>
+          )}
+        </LightboxOverlay>
+      )}
 
       <ArtExpFooter />
     </Page>
