@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, SmallFlower } from './Doodles';
@@ -186,11 +187,10 @@ const HamburgerBtn = styled.button<{ $open: boolean }>`
   }
 `;
 
-const scrollTo = (id: string) => {
+const smoothScroll = (id: string) => {
   const el = document.getElementById(id);
   if (el) {
-    const offset = 80;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top, behavior: 'smooth' });
   }
 };
@@ -199,6 +199,8 @@ export default function ArtExpNav() {
   const { locale, setLocale, t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => {
@@ -211,7 +213,11 @@ export default function ArtExpNav() {
 
   const handleNav = (id: string) => {
     setOpen(false);
-    scrollTo(id);
+    if (pathname === '/art-experiences') {
+      smoothScroll(id);
+    } else {
+      router.push(`/art-experiences#${id}`);
+    }
   };
 
   return (
