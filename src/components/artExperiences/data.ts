@@ -73,7 +73,7 @@ export const artEvents: ArtEvent[] = [
     venue: 'Vanier Park',
     address: '1000 Chestnut St',
     city: 'Vancouver, BC',
-    price: 15,
+    price: 20,
     currency: 'CAD',
     image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Horizontal.webp',
     posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip23aug20263PM/EventPoster_Vertical.webp',

@@ -165,7 +165,7 @@ export default function ArtExpFooter() {
               {t('artExperiences.footer.experiencesTitle')}
             </ColTitle>
             <ColLinks>
-              <ColLink onClick={() => scrollTo('my-experiences')}>{t('artExperiences.footer.myArtEvents')}</ColLink>
+              <ColLink as={Link} href="/art-experiences/events">{t('artExperiences.footer.myArtEvents')}</ColLink>
               <ColLink onClick={() => scrollTo('creative-corner')}>{t('artExperiences.footer.creativeCorner')}</ColLink>
               <ColLink onClick={() => scrollTo('you-and-i')}>{t('artExperiences.footer.youAndIPaint')}</ColLink>
               <ColLink onClick={() => scrollTo('upcoming')}>{t('artExperiences.footer.upcomingEvents')}</ColLink>
