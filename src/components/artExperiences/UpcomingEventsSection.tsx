@@ -164,7 +164,8 @@ const ViewAllHint = styled.p`
 export default function UpcomingEventsSection() {
   const { t, locale } = useTranslation();
 
-  const upcoming = artEvents.filter(e => e.type === 'myEvents');
+  const today = new Date().toISOString().slice(0, 10);
+  const upcoming = artEvents.filter(e => e.type === 'myEvents' && e.dateISO >= today);
 
   return (
     <Section id="upcoming">
