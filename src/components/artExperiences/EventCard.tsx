@@ -403,16 +403,16 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
           <MaterialsNote>✦ {t('artExperiences.myExperiences.materialsProvided')}</MaterialsNote>
         )}
 
-        <CTARow>
-          {event.flockUrl && (
-            <CTAPrimary href={event.flockUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onFlock')}
+        <CTARow> 
+          {event.eventbriteUrl && (
+            <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onEventbrite')}
               <span>↗</span>
             </CTAPrimary>
           )}
-          {event.eventbriteUrl && (
-            <CTASecondary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onEventbrite')}
+          {event.flockUrl && (
+            <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onFlock')}
               <span>↗</span>
             </CTASecondary>
           )}

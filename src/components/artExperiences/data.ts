@@ -29,6 +29,34 @@ export const YOU_AND_I_PAINT_URL = 'https://youandipaint.com';
 
 export const artEvents: ArtEvent[] = [
   {
+    id: 'art-in-the-park-aug-30-2026',
+    type: 'myEvents',
+    title: {
+      en: 'Reflections: Paint your mirror',
+      es: 'Reflejos: Pinta un espejo',
+    },
+    description: {
+      en: "Join us for a slow creative afternoon in the park where we’ll paint and personalize mirrors instead of traditional canvases. We’ll gather outdoors surrounded by nature and soft summer light. A space to unwind, connect and reflect.",
+      es: 'Únete a una tarde creativa y relajada en el parque donde pintaremos espejos personalizados en lugar de lienzos tradicionales. Nos reuniremos al aire libre rodeados de naturaleza y la suave luz del verano. Un espacio para relajarte, conectar y reflexionar.',
+    },
+    date: 'Sunday, August 30, 2026',
+    dateISO: '2026-08-30',
+    time: '3:00 PM',
+    venue: 'Vanier Park',
+    address: '1000 Chestnut St',
+    city: 'Vancouver, BC',
+    price: 20,
+    currency: 'CAD',
+    image: '/images/artExperiences/CreativeCorner/Events/Paint&Sip30aug20263PM/EventPoster_Horizontal.webp',
+    posterVertical: '/images/artExperiences/CreativeCorner/Events/Paint&Sip30aug20263PM/EventPoster_Vertical.webp',
+    eventbriteUrl: 'https://www.eventbrite.ca/e/reflections-paint-a-mirror-tickets-1991961664962?aff=oddtdtcreator',
+    flockUrl: 'https://flocksocial.app/events/95e5bee9-f49d-4f0c-bea2-8482932aeddc',
+    tags: ['art in the park', 'outdoor', 'beginner-friendly', 'social', 'mirror painting', 'self-reflection', 'personalized art', 'paint sip'],
+    featured: false,
+    artistPortfolioUrl: '/art',
+    instagramHandles: ['@camilalonart', '@camilonart'],
+  },
+  {
     id: 'art-in-the-park-aug-23-2026',
     type: 'myEvents',
     title: {
