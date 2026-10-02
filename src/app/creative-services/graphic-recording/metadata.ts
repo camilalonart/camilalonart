@@ -1,7 +1,7 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Graphic Recording Services | Camilalonart',
-  description: 'Professional graphic recording and visual facilitation services in Vancouver. Transform your meetings and events with real-time visual storytelling.',
-  keywords: 'graphic recording vancouver, visual facilitation, live illustration, event visualization, meeting facilitation, visual storytelling',
-}; 
+export const metadata = generateMetadata({
+  title: 'Graphic Recording in Vancouver',
+  description: 'Explore graphic recording and visual storytelling services for meetings and events with Camila Londoño in Vancouver, BC.',
+  path: '/creative-services/graphic-recording/',
+});

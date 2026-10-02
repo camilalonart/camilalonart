@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Brand Identity Design | Camilalonart',
-  description: 'Professional brand identity design services in Vancouver. Creating distinctive and memorable brand identities that connect with your audience.',
-  keywords: 'brand identity vancouver, logo design, brand guidelines, visual identity, brand development, corporate identity design',
-}; 
+export const metadata = generateMetadata({
+  title: 'Brand Identity Design',
+  description: 'Brand identity design and project inquiries with Camila Londoño.',
+  path: '/creative-services/brand-identity/',
+  noIndex: true,
+});

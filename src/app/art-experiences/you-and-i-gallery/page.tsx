@@ -35,7 +35,7 @@ const ALL_IMAGES = [
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
-const PageWrapper = styled.main`
+const PageWrapper = styled.div`
   background: ${AE.cream};
   min-height: 100vh;
 `;

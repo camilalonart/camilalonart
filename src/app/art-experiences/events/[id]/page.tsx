@@ -12,16 +12,6 @@ export async function generateStaticParams() {
   return artEvents.map(e => ({ id: e.id }));
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { id } = await params;
-  const event = artEvents.find(e => e.id === id);
-  if (!event) return { title: 'Event Not Found' };
-  return {
-    title: `${event.title.en} — Camila Londoño`,
-    description: event.description.en.slice(0, 160),
-  };
-}
-
 function getEventPhotos(eventImagePath: string): string[] {
   const eventDir = path.dirname(eventImagePath);
   const photosDir = path.join(process.cwd(), 'public', eventDir, 'photos');

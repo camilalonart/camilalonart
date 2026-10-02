@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
@@ -178,7 +178,8 @@ const getFormspreeId = (service: string): string => {
 };
 
 export default function ContactForm({ service }: ContactFormProps) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+  const id = useId();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -195,6 +196,7 @@ export default function ContactForm({ service }: ContactFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     if (!formspreeId) {
       setStatus({
@@ -205,18 +207,21 @@ export default function ContactForm({ service }: ContactFormProps) {
     }
 
     setIsSubmitting(true);
+    setStatus(null);
 
     try {
       const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
+          service,
         }),
       });
 
@@ -226,7 +231,6 @@ export default function ContactForm({ service }: ContactFormProps) {
           message: t('forms.success'),
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
-        setTimeout(() => setStatus(null), 5000);
       } else {
         setStatus({
           type: 'error',
@@ -252,14 +256,21 @@ export default function ContactForm({ service }: ContactFormProps) {
 
   return (
     <FormContainer>
-      {status && <Message $type={status.type}>{status.message}</Message>}
+      {status && <Message role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{status.message}</Message>}
+      {(!formspreeId || status?.type === 'error') && (
+        <p>
+          {locale === 'es' ? 'No se ha confirmado el envío. Puedes enviar tu consulta por correo: ' : 'Delivery has not been confirmed. You can email your inquiry: '}
+          <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(service)}&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+        </p>
+      )}
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} aria-busy={isSubmitting}>
         <FormGroup>
-          <Label htmlFor="contact-name">{t('forms.fullName')}</Label>
+          <Label htmlFor={`${id}-name`}>{t('forms.fullName')}</Label>
           <Input
             type="text"
-            id="contact-name"
+            id={`${id}-name`}
+            autoComplete="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -270,10 +281,11 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-email">{t('forms.email')}</Label>
+          <Label htmlFor={`${id}-email`}>{t('forms.email')}</Label>
           <Input
             type="email"
-            id="contact-email"
+            id={`${id}-email`}
+            autoComplete="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -284,10 +296,11 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-phone">{t('forms.phone')}</Label>
+          <Label htmlFor={`${id}-phone`}>{t('forms.phone')}</Label>
           <Input
             type="tel"
-            id="contact-phone"
+            id={`${id}-phone`}
+            autoComplete="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -297,9 +310,9 @@ export default function ContactForm({ service }: ContactFormProps) {
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="contact-message">{t('forms.message')}</Label>
+          <Label htmlFor={`${id}-message`}>{t('forms.message')}</Label>
           <TextArea
-            id="contact-message"
+            id={`${id}-message`}
             name="message"
             value={formData.message}
             onChange={handleChange}

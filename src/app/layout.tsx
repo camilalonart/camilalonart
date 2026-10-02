@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import StyledComponentsRegistry from '../lib/registry';
 import RootLayoutClient from '../components/RootLayoutClient';
 import { TranslationProvider } from '../i18n/TranslationContext';
-import { baseMetadata, generateLocalBusinessSchema, generatePhotographerSchema } from '../lib/seo';
+import { baseMetadata, generateLocalBusinessSchema, generatePhotographerSchema, jsonLdScript } from '../lib/seo';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -93,11 +93,11 @@ export default function RootLayout({
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(localBusinessSchema) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(photographerSchema) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(photographerSchema) }}
         />
         <link rel="icon" href="/favicon.ico" />
       </head>

@@ -7,6 +7,7 @@ import ProtectedImage from '../../../components/ProtectedImage';
 import ImageModal from '../../../components/ImageModal';
 import Link from 'next/link';
 import PhotographyNav from '../../../components/PhotographyNav';
+import { useTranslation } from '@/i18n/TranslationContext';
 
 // Soft animations
 const fadeIn = keyframes`
@@ -1098,6 +1099,8 @@ const StatusMessage = styled.div<{ $type: 'success' | 'error' }>`
 `;
 
 export default function FamilyMaternityPage() {
+  const { locale } = useTranslation();
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_BABY_FAMILY_ID;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>();
   const [selectedImage, setSelectedImage] = useState<string>();
@@ -1126,16 +1129,25 @@ export default function FamilyMaternityPage() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    if (!formspreeId) {
+      setFormStatus({ type: 'error', message: locale === 'es' ? 'El formulario no está disponible. Envía tu consulta por correo.' : 'Online submission is unavailable. Please email your inquiry.' });
+      return;
+    }
     setIsSubmitting(true);
     setFormStatus(null);
 
     try {
-      // Simulate API call - replace with actual submission logic
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...formData, service: 'baby-family' }),
+      });
+      if (!response.ok) throw new Error('Submission not accepted');
       
       setFormStatus({
         type: 'success',
-        message: 'Thank you! Your inquiry has been received. We\'ll be in touch within 24 hours.'
+        message: locale === 'es' ? 'Gracias. Tu consulta se ha enviado; la sesión aún no está confirmada.' : 'Thank you. Your inquiry was sent; your session is not yet confirmed.'
       });
       setFormData({
         name: '',
@@ -1148,7 +1160,7 @@ export default function FamilyMaternityPage() {
     } catch (error) {
       setFormStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again or contact us directly.'
+        message: locale === 'es' ? 'No se ha confirmado el envío. Conservamos tus datos; contacta por correo.' : 'Delivery has not been confirmed. Your details are saved here; please email us.'
       });
     } finally {
       setIsSubmitting(false);
@@ -1444,9 +1456,15 @@ export default function FamilyMaternityPage() {
               <h3>Book Your Session</h3>
               <p>Ready to capture your family's story? Fill out the form below and I'll be in touch within 24 hours.</p>
             </FormHeader>
-            <InlineForm onSubmit={handleFormSubmit}>
+            {(!formspreeId || formStatus?.type === 'error') && (
+              <p>
+                {locale === 'es' ? 'Enviar consulta por correo: ' : 'Email your inquiry: '}
+                <a href={`mailto:bycamilalonart@gmail.com?subject=Family%20photography%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+              </p>
+            )}
+            <InlineForm onSubmit={handleFormSubmit} aria-busy={isSubmitting}>
               {formStatus && (
-                <StatusMessage $type={formStatus.type}>
+                <StatusMessage role={formStatus.type === 'error' ? 'alert' : 'status'} $type={formStatus.type}>
                   {formStatus.message}
                 </StatusMessage>
               )}
@@ -1456,6 +1474,8 @@ export default function FamilyMaternityPage() {
               <FormInput
                 type="text"
                 id="name"
+                autoComplete="name"
+                disabled={isSubmitting}
                 name="name"
                 value={formData.name}
                 onChange={handleFormChange}
@@ -1469,6 +1489,8 @@ export default function FamilyMaternityPage() {
               <FormInput
                 type="email"
                 id="email"
+                autoComplete="email"
+                disabled={isSubmitting}
                 name="email"
                 value={formData.email}
                 onChange={handleFormChange}
@@ -1482,6 +1504,8 @@ export default function FamilyMaternityPage() {
               <FormInput
                 type="tel"
                 id="phone"
+                autoComplete="tel"
+                disabled={isSubmitting}
                 name="phone"
                 value={formData.phone}
                 onChange={handleFormChange}
@@ -1493,6 +1517,7 @@ export default function FamilyMaternityPage() {
               <FormLabel htmlFor="sessionType">Session Type</FormLabel>
               <FormSelect
                 id="sessionType"
+                disabled={isSubmitting}
                 name="sessionType"
                 value={formData.sessionType}
                 onChange={handleFormChange}
@@ -1512,6 +1537,7 @@ export default function FamilyMaternityPage() {
               <FormInput
                 type="date"
                 id="date"
+                disabled={isSubmitting}
                 name="date"
                 value={formData.date}
                 onChange={handleFormChange}
@@ -1524,6 +1550,7 @@ export default function FamilyMaternityPage() {
               <FormLabel htmlFor="message">Tell Me About Your Session</FormLabel>
               <FormTextArea
                 id="message"
+                disabled={isSubmitting}
                 name="message"
                 value={formData.message}
                 onChange={handleFormChange}

@@ -27,7 +27,7 @@ const Site = styled.div`
   }
 `;
 
-const Content = styled.main`
+const Content = styled.div`
   padding-top: 64px;
 `;
 

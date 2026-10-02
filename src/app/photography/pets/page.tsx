@@ -196,7 +196,7 @@ const Section = styled.section<{ $bgColor?: string }>`
   position: relative;
 `;
 
-const SectionTitle = styled.h1`
+const SectionTitle = styled.h2`
   font-size: clamp(2rem, 3vw, 2.8rem);
   color:rgb(255, 255, 255);
   text-align: center;

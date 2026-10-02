@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, SmallFlower } from './Doodles';
@@ -75,8 +74,9 @@ const NavLinks = styled.div<{ $open: boolean }>`
     gap: 0;
     background: rgba(245, 239, 224, 0.98);
     backdrop-filter: blur(16px);
-    max-height: ${p => p.$open ? '480px' : '0'};
-    overflow: hidden;
+    max-height: ${p => p.$open ? 'min(70dvh, 480px)' : '0'};
+    visibility: ${p => p.$open ? 'visible' : 'hidden'};
+    overflow-y: auto;
     transition: max-height 0.35s ease;
     border-bottom: 1px solid rgba(74, 114, 168, 0.12);
     box-shadow: 0 8px 24px rgba(44, 36, 22, 0.08);
@@ -113,7 +113,7 @@ const NavLink = styled.a`
 const NavRight = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.25rem;
   flex-shrink: 0;
 `;
 
@@ -123,7 +123,7 @@ const LangToggle = styled.div`
   gap: 0.25rem;
   border: 1.5px solid rgba(74, 114, 168, 0.3);
   border-radius: 20px;
-  padding: 0.3rem 0.75rem;
+  padding: 0.1rem 0.25rem;
   transition: border-color 0.2s;
   background: rgba(245, 239, 224, 0.5);
 
@@ -133,6 +133,8 @@ const LangToggle = styled.div`
 const LangBtn = styled.button<{ $active: boolean }>`
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.62rem;
+  min-width: 28px;
+  min-height: 40px;
   font-weight: ${p => p.$active ? '600' : '400'};
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -162,8 +164,8 @@ const HamburgerBtn = styled.button<{ $open: boolean }>`
   color: ${AE.ink};
   cursor: pointer;
   padding: 0.5rem;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -187,41 +189,34 @@ const HamburgerBtn = styled.button<{ $open: boolean }>`
   }
 `;
 
-const smoothScroll = (id: string) => {
-  const el = document.getElementById(id);
-  if (el) {
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
-};
-
 export default function ArtExpNav() {
   const { locale, setLocale, t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      if (open) setOpen(false);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [open]);
-
-  const handleNav = (id: string) => {
-    setOpen(false);
-    if (pathname === '/art-experiences') {
-      smoothScroll(id);
-    } else {
-      router.push(`/art-experiences#${id}`);
-    }
-  };
+  }, []);
 
   return (
-    <Nav $scrolled={scrolled} role="navigation" aria-label="Art Experiences navigation">
+    <Nav
+      $scrolled={scrolled}
+      aria-label={locale === 'es' ? 'Navegación de experiencias artísticas' : 'Art Experiences navigation'}
+      onKeyDown={event => {
+        if (event.key === 'Escape' && open) {
+          setOpen(false);
+          menuButtonRef.current?.focus();
+        }
+      }}
+      onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+    >
       <Logo href="/art-experiences">
         <SmallFlower size={20} color={AE.blue} />
         <div>
@@ -229,7 +224,7 @@ export default function ArtExpNav() {
         </div>
       </Logo>
 
-      <NavLinks $open={open}>
+      <NavLinks id="experience-navigation-links" $open={open}>
         <NavLink as={Link} href="/art-experiences/events" onClick={() => setOpen(false)}>
           {t('artExperiences.nav.myEvents')}
         </NavLink>
@@ -241,22 +236,25 @@ export default function ArtExpNav() {
         >
           {t('artExperiences.nav.community')}
         </NavLink>
-        <NavLink onClick={() => handleNav('you-and-i')}>{t('artExperiences.nav.youAndIPaint')}</NavLink>
-        <NavLink onClick={() => handleNav('upcoming')}>{t('artExperiences.nav.upcoming')}</NavLink>
+        <NavLink href="/art-experiences/#you-and-i" onClick={() => setOpen(false)}>{t('artExperiences.nav.youAndIPaint')}</NavLink>
+        <NavLink href="/art-experiences/#upcoming" onClick={() => setOpen(false)}>{t('artExperiences.nav.upcoming')}</NavLink>
       </NavLinks>
 
       <NavRight>
         <LangToggle aria-label={t('common.changeLanguage')}>
-          <LangBtn $active={locale === 'en'} onClick={() => setLocale('en')} aria-label="English">EN</LangBtn>
+          <LangBtn $active={locale === 'en'} aria-pressed={locale === 'en'} lang="en" onClick={() => setLocale('en')} aria-label="English">EN</LangBtn>
           <LangSep>·</LangSep>
-          <LangBtn $active={locale === 'es'} onClick={() => setLocale('es')} aria-label="Español">ES</LangBtn>
+          <LangBtn $active={locale === 'es'} aria-pressed={locale === 'es'} lang="es" onClick={() => setLocale('es')} aria-label="Español">ES</LangBtn>
         </LangToggle>
 
         <HamburgerBtn
+          ref={menuButtonRef}
+          type="button"
+          aria-controls="experience-navigation-links"
           $open={open}
           onClick={() => setOpen(v => !v)}
           aria-expanded={open}
-          aria-label="Toggle navigation"
+          aria-label={locale === 'es' ? 'Abrir o cerrar menú' : 'Toggle navigation'}
         >
           <span />
           <span />

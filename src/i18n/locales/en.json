@@ -26,6 +26,62 @@
     "collaborations": "Collaborations",
     "earlyPaintings": "Early Paintings"
   },
+  "accessibility": {
+    "skipToContent": "Skip to content",
+    "mainContent": "Main content"
+  },
+  "homepage": {
+    "homeLabel": "Camilalonart — home",
+    "navigation": "Homepage navigation",
+    "language": "Language",
+    "servicesNav": "Work with me",
+    "workNav": "Personal work",
+    "location": "Vancouver, BC · Photography & art",
+    "heroTitle": "Stories told",
+    "heroEmphasis": "with feeling.",
+    "intro": "I'm Camila Londoño, a photographer and artist in Vancouver. From the people you love to the ideas you want to bring to life, let's make something meaningful.",
+    "inquire": "Inquire about a project",
+    "findYourWorld": "Find your world",
+    "servicesEyebrow": "01 / Work with me",
+    "servicesTitle": "Made around you.",
+    "servicesIntro": "Photography, creative experiences and design. Choose what brings you here; each space has a story of its own.",
+    "viewService": "Explore this service",
+    "workEyebrow": "02 / Personal work",
+    "workTitle": "A different way of seeing.",
+    "workIntro": "Step into my painting practice and wildlife photography. A space for curiosity, observation and the stories that stay with us.",
+    "exploreCollection": "Explore the collection",
+    "processEyebrow": "03 / Let's connect",
+    "processTitle": "It starts with a conversation.",
+    "processIntro": "Have a session, an artwork or a creative project in mind? Tell me a little about it.",
+    "process": {
+      "share": {
+        "title": "Share your idea",
+        "description": "Email me what you're looking for, your preferred dates and your location, if relevant."
+      },
+      "plan": {
+        "title": "Find the right approach",
+        "description": "We'll discuss the details, availability and what you need before making a plan."
+      },
+      "create": {
+        "title": "Make it personal",
+        "description": "Bring your story, your people or your ideas. We'll shape the next steps around your project."
+      }
+    },
+    "contactTitle": "What would you like to create?",
+    "contactIntro": "For photography inquiries, artwork questions and creative collaborations, get in touch directly.",
+    "emailCamila": "Email Camila",
+    "footer": "Vancouver, BC · Art, photography & connection",
+    "images": {
+      "wedding": "A couple embracing with the Vancouver skyline behind them",
+      "pets": "A black-and-white portrait of a golden retriever",
+      "family": "A black-and-white outdoor portrait of a young child",
+      "headshots": "Studio portrait of a person wearing a black turtleneck",
+      "art-experiences": "Blue line illustration of brushes, paint, a canvas and wine glasses",
+      "ux-ui": "Alfred interface design project with illustrated blue screens",
+      "art": "Carrying Home, a mixed-media portrait layered with palm trees and houses",
+      "wildlife": "A small orange frog among green leaves"
+    }
+  },
   "home": {
     "title": "Camila Londoño",
     "subtitle": "Photographer, Artist & Creative Director. Capturing moments, creating beauty, and telling visual stories across photography, traditional art, and design.",

@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'UX/UI Design Services | Camilalonart',
-  description: 'Professional UX/UI design services in Vancouver. Creating intuitive, beautiful, and user-centered digital experiences that drive engagement.',
-  keywords: 'ux design vancouver, ui design, user experience design, user interface design, web design vancouver, mobile app design, ux ui designer',
-}; 
+export const metadata = generateMetadata({
+  title: 'UX/UI Design Portfolio',
+  description: 'Explore user interface and product design projects by Camila Londoño, including work for Alfred and Cleverlynk.',
+  path: '/creative-services/ux-ui-design/',
+  images: [{ url: '/images/uxuidesign/Alfred/thumbnail.webp', alt: 'Alfred product design project' }],
+});

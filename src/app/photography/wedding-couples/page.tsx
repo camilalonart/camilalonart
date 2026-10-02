@@ -1316,7 +1316,7 @@ export default function WeddingCouplesPage() {
           />
         </HeroImageContainer>
         <HeroContent>
-          <h2>{t(`${w}.hero.title`)}</h2>
+          <h1>{t(`${w}.hero.title`)}</h1>
           <p>{t(`${w}.hero.subtitle`)}</p>
           <HeroButton onClick={() => handleBookClick('Wedding Photography')}>{t(`${w}.hero.cta`)}</HeroButton>
         </HeroContent>

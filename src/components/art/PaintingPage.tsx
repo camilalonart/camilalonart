@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ const C = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#A8A196',
   dim: '#3A3835',
 };
 
@@ -30,7 +30,7 @@ const Site = styled.div`
   }
 `;
 
-const Content = styled.main`
+const Content = styled.div`
   padding-top: 64px;
   min-height: 100vh;
 `;
@@ -301,7 +301,8 @@ const DetailVideoEl = styled.video`
   display: block;
 `;
 
-const PlayButton = styled.div`
+const PlayButton = styled.button`
+  width: 100%;
   position: absolute;
   inset: 0;
   display: flex;
@@ -384,27 +385,18 @@ const NavCounter = styled.span`
 // ─── VideoThumb ────────────────────────────────────────────────────
 function VideoThumb({ src, poster }: DetailVideo) {
   const [active, setActive] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const activate = () => {
-    setActive(true);
-    // play() runs after the video element mounts on next render
-  };
-
-  useEffect(() => {
-    if (active && videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, [active]);
+  const [unavailable, setUnavailable] = useState(false);
+  const { locale } = useTranslation();
 
   return (
-    <DetailVideoWrapper onClick={!active ? activate : undefined}>
-      {active ? (
+    <DetailVideoWrapper>
+      {active && !unavailable ? (
         <DetailVideoEl
-          ref={videoRef}
           src={src}
           poster={poster}
-          preload="auto"
+          preload="metadata"
+          autoPlay
+          onError={() => setUnavailable(true)}
           playsInline
           muted
           loop
@@ -412,10 +404,14 @@ function VideoThumb({ src, poster }: DetailVideo) {
         />
       ) : (
         <>
-          <DetailVideoPoster src={poster} alt="video" draggable={false} onContextMenu={e => e.preventDefault()} />
-          <PlayButton>
-            <PlayIcon>▶</PlayIcon>
-          </PlayButton>
+          <DetailVideoPoster src={poster} alt={locale === 'es' ? 'Detalle de la obra' : 'Detail of the artwork'} draggable={false} onContextMenu={e => e.preventDefault()} />
+          {unavailable ? (
+            <p role="status">{locale === 'es' ? 'El video no está disponible. Puedes ver la imagen del detalle.' : 'This video is unavailable. The detail image is shown instead.'}</p>
+          ) : (
+            <PlayButton type="button" onClick={() => setActive(true)} aria-label={locale === 'es' ? 'Reproducir video del detalle' : 'Play artwork detail video'}>
+              <PlayIcon aria-hidden="true">▶</PlayIcon>
+            </PlayButton>
+          )}
         </>
       )}
     </DetailVideoWrapper>
@@ -440,6 +436,7 @@ export default function PaintingPage({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLElement && e.target.closest('input, textarea, select, video, [contenteditable="true"]')) return;
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
     };
@@ -495,6 +492,7 @@ export default function PaintingPage({
                       $active={i === imageIndex}
                       onClick={() => setImageIndex(i)}
                       aria-label={`View image ${i + 1}`}
+                      aria-pressed={i === imageIndex}
                     >
                       <img src={src} alt="" />
                     </Thumb>

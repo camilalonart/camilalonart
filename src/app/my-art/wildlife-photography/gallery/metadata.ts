@@ -1,22 +1,7 @@
-import { Metadata } from 'next';
+import { getMetadata } from '@/app/metadata';
 
-export const metadata: Metadata = {
-  title: 'Wildlife Photography Gallery | Camilalonart',
-  description: 'A personal collection of wildlife encounters across British Columbia. Explore stunning wildlife photography featuring eagles, bears, whales, and more.',
-  keywords: [
-    'wildlife photography',
-    'British Columbia wildlife',
-    'nature photography',
-    'wildlife portfolio',
-    'eagles',
-    'bears',
-    'whales',
-    'wildlife art',
-    'Camilalonart',
-  ],
-  openGraph: {
-    title: 'Wildlife Photography Gallery | Camilalonart',
-    description: 'A personal collection of wildlife encounters across British Columbia',
-    type: 'website',
-  },
-};
+export const metadata = getMetadata(
+  'Wildlife Photography Gallery',
+  'Browse Camila Londoño’s personal gallery of wildlife photographs and encounters with nature.',
+  '/my-art/wildlife-photography/gallery/',
+);

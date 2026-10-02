@@ -635,17 +635,18 @@ export default function UXUIDesignPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    setFormStatus(null);
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(formData),
       });
       if (res.ok) {
         setFormStatus({ type: 'success', msg: t('forms.success') });
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setFormStatus(null), 5000);
       } else {
         setFormStatus({ type: 'error', msg: t('forms.error') });
       }
@@ -771,13 +772,19 @@ export default function UXUIDesignPage() {
 
           <ContactRight>
             {formStatus && (
-              <FormMsg $type={formStatus.type}>{formStatus.msg}</FormMsg>
+              <FormMsg role={formStatus.type === 'error' ? 'alert' : 'status'} $type={formStatus.type}>{formStatus.msg}</FormMsg>
             )}
-            <form onSubmit={handleSubmit}>
+            {formStatus?.type === 'error' && (
+              <p>
+                {locale === 'es' ? 'No se ha confirmado el envío. Envía tu consulta por correo: ' : 'Delivery has not been confirmed. Email your inquiry: '}
+                <a href={`mailto:bycamilalonart@gmail.com?subject=UX%2FUI%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+              </p>
+            )}
+            <form onSubmit={handleSubmit} aria-busy={isSubmitting}>
               <FormField>
                 <FieldLabel htmlFor="ux-name">{t('forms.fullName')}</FieldLabel>
                 <FieldInput
-                  id="ux-name" name="name" type="text"
+                  id="ux-name" name="name" type="text" autoComplete="name"
                   value={formData.name} onChange={handleChange}
                   required disabled={isSubmitting}
                   placeholder="Your name"
@@ -786,7 +793,7 @@ export default function UXUIDesignPage() {
               <FormField>
                 <FieldLabel htmlFor="ux-email">{t('forms.email')}</FieldLabel>
                 <FieldInput
-                  id="ux-email" name="email" type="email"
+                  id="ux-email" name="email" type="email" autoComplete="email"
                   value={formData.email} onChange={handleChange}
                   required disabled={isSubmitting}
                   placeholder="your@email.com"

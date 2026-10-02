@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import Image from 'next/image';
 import ImageModal from './ImageModal';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const GalleryContainer = styled.div`
   width: 100%;
@@ -68,7 +69,11 @@ const MasonryGrid = styled.div`
   }
 `;
 
-const GalleryItem = styled.div`
+const GalleryItem = styled.button`
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: inherit;
   break-inside: avoid;
   margin-bottom: ${theme.spacing.lg};
   cursor: pointer;
@@ -103,10 +108,12 @@ export interface BaseGalleryProps {
   images: { src: string; alt: string }[];
   backLink: string;
   backText: string;
+  title?: string;
 }
 
-const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText }) => {
+const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText, title }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const { locale } = useTranslation();
 
   const handleImageClick = (index: number) => {
     setSelectedImage(index);
@@ -134,18 +141,26 @@ const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText })
         {backText}
       </BackButton>
       <GalleryContainer>
+        {title && <h1 style={{ color: '#26221e', textAlign: 'center' }}>{title}</h1>}
         <MasonryGrid>
           {images.map((image, index) => (
-            <GalleryItem key={index} onClick={() => handleImageClick(index)}>
+            <GalleryItem
+              key={image.src}
+              type="button"
+              onClick={() => handleImageClick(index)}
+              aria-label={`${locale === 'es' ? 'Ampliar' : 'View larger'}: ${image.alt}`}
+              aria-haspopup="dialog"
+            >
               <Image
                 src={image.src}
                 alt={image.alt}
                 width={800}
                 height={600}
                 quality={85}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 style={{ width: '100%', height: 'auto' }}
               />
-              <Watermark>© Camilalonart</Watermark>
+              <Watermark aria-hidden="true">© Camilalonart</Watermark>
             </GalleryItem>
           ))}
         </MasonryGrid>

@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import ProtectedImage from '../../../../components/ProtectedImage';
 import wildlifeImagesData from '../../../../data/wildlifeImages.json';
 import photoDetailsData from '../photoDetails.json';
+import { useDialog } from '../../../../hooks/useDialog';
+import { useTranslation } from '../../../../i18n/TranslationContext';
 import {
   WildlifeContainer,
   PortfolioPage,
@@ -40,12 +42,11 @@ interface WildlifePhoto {
 
 export default function WildlifeGalleryPage() {
   const [selectedPhoto, setSelectedPhoto] = useState<WildlifePhoto | null>(null);
+  const { locale } = useTranslation();
+  const dialogRef = useDialog(selectedPhoto !== null, () => setSelectedPhoto(null));
   
   // Process photos immediately instead of in useEffect
   const wildlifePhotos = React.useMemo(() => {
-    console.log('=== Processing wildlife photos ===');
-    console.log('Total images:', wildlifeImagesData.length);
-    
     const detailsMap = new Map(
       (photoDetailsData as PhotoDetails[]).map(detail => [detail.filename, detail])
     );
@@ -62,7 +63,6 @@ export default function WildlifeGalleryPage() {
       };
     });
     
-    console.log('Processed photos:', photos.length);
     return photos;
   }, []);
 
@@ -74,6 +74,12 @@ export default function WildlifeGalleryPage() {
     setSelectedPhoto(null);
   };
 
+  const navigatePhoto = (direction: number) => {
+    setSelectedPhoto(current => current
+      ? wildlifePhotos[(current.id - 1 + direction + wildlifePhotos.length) % wildlifePhotos.length]
+      : null);
+  };
+
   return (
     <WildlifeContainer>
       {/* Back to Home Button */}
@@ -81,6 +87,7 @@ export default function WildlifeGalleryPage() {
         <HamburgerButton 
           as="a"
           href="/"
+          aria-label={locale === 'es' ? 'Inicio' : 'Home'}
           $isOpen={false}
           style={{ 
             display: 'flex',
@@ -110,11 +117,11 @@ export default function WildlifeGalleryPage() {
         <PortfolioHeader>
           <Link href="/my-art/wildlife-photography" passHref legacyBehavior>
             <BackButton as="a">
-              Back
+              {locale === 'es' ? 'Volver' : 'Back'}
             </BackButton>
           </Link>
-          <h1>Wildlife Portfolio</h1>
-          <p>A personal collection of wildlife encounters across British Columbia</p>
+          <h1>{locale === 'es' ? 'Fotografía de vida silvestre' : 'Wildlife Portfolio'}</h1>
+          <p>{locale === 'es' ? 'Una colección personal de encuentros con la fauna de Columbia Británica' : 'A personal collection of wildlife encounters across British Columbia'}</p>
         </PortfolioHeader>
 
         <PortfolioGrid>
@@ -125,8 +132,12 @@ export default function WildlifeGalleryPage() {
           ) : (
             wildlifePhotos.map((photo) => (
               <PhotoCard 
+                as="button"
+                type="button"
                 key={photo.id}
                 onClick={() => handlePhotoClick(photo)}
+                aria-haspopup="dialog"
+                aria-label={`${locale === 'es' ? 'Ampliar' : 'View larger'}: ${photo.details?.title || `${locale === 'es' ? 'Fotografía de fauna' : 'Wildlife photograph'} ${photo.id}`}`}
               >
                 <PhotoImageWrapper>
                   <ProtectedImage
@@ -146,10 +157,22 @@ export default function WildlifeGalleryPage() {
 
       {/* Modal de Imagen - Full quality, no download */}
       {selectedPhoto && (
-        <ImageModalContainer>
+        <ImageModalContainer
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedPhoto.details?.title || `${locale === 'es' ? 'Fotografía de fauna' : 'Wildlife photograph'} ${selectedPhoto.id}`}
+          tabIndex={-1}
+          onKeyDown={event => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault();
+              navigatePhoto(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          }}
+        >
           <ModalOverlay onClick={closeModal} />
           <ModalContent>
-            <ModalClose onClick={closeModal}>×</ModalClose>
+            <ModalClose type="button" onClick={closeModal} aria-label={locale === 'es' ? 'Cerrar imagen' : 'Close image'}>×</ModalClose>
             <ModalImage>
               <ProtectedImage
                 src={selectedPhoto.src}
@@ -174,6 +197,15 @@ export default function WildlifeGalleryPage() {
                 )}
               </ModalInfo>
             )}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', color: 'white' }}>
+              <button type="button" onClick={() => navigatePhoto(-1)} style={{ minHeight: 44, padding: '0.5rem', color: 'inherit' }}>
+                {locale === 'es' ? 'Anterior' : 'Previous'}
+              </button>
+              <span aria-live="polite">{selectedPhoto.id} / {wildlifePhotos.length}</span>
+              <button type="button" onClick={() => navigatePhoto(1)} style={{ minHeight: 44, padding: '0.5rem', color: 'inherit' }}>
+                {locale === 'es' ? 'Siguiente' : 'Next'}
+              </button>
+            </div>
           </ModalContent>
         </ImageModalContainer>
       )}
