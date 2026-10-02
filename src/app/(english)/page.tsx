@@ -2,11 +2,13 @@
 
 import React from 'react';
 import Link from '@/i18n/LocalizedLink';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import SecureImage from "@/components/SecureImage";
 import { visibleSections, type Section } from "@/config/sections";
 import { useTranslation } from "@/i18n/TranslationContext";
 import { SITE_CONFIG } from "@/lib/seo";
+import { isExperienceEnabled } from '@/config/experienceRollout';
+import InquiryPlanner from '@/components/InquiryPlanner';
 
 const previews: Record<string, { src: string; accent: string; width: number; height: number }> = {
   wedding: { src: '/images/wedding/A7T00021.webp', accent: '#753F50', width: 2374, height: 3848 },
@@ -259,13 +261,19 @@ const Worlds = styled.div`
   @media (max-width: 900px) { max-width: none; }
 `;
 
-const WorldGrid = styled.div`
+const WorldGrid = styled.div<{ $editorial: boolean }>`
   columns: 2;
   column-gap: 1rem;
   @media (max-width: 560px) { columns: 1; }
+  ${({ $editorial }) => $editorial && css`
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    @media (max-width: 400px) { grid-template-columns: minmax(0, 1fr); }
+  `}
 `;
 
-const ImageTile = styled(Link)`
+const ImageTile = styled(Link)<{ $editorial: boolean; $accent?: string }>`
   position: relative;
   isolation: isolate;
   display: grid;
@@ -310,6 +318,47 @@ const ImageTile = styled(Link)`
     text-decoration: underline;
     text-underline-offset: 0.3em;
   }
+  ${({ $editorial, $accent }) => $editorial && css`
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    height: 100%;
+    background: #fffdf8;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    .tile-image {
+      position: relative;
+      inset: auto;
+      z-index: auto;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      flex-shrink: 0;
+    }
+    .tile-image img { filter: none; transition: transform 350ms ease; }
+    &::after { display: none; }
+    .tile-copy {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+      border-top: 3px solid ${$accent || '#854B39'};
+    }
+    .tile-copy h3 { color: var(--ink); font-size: clamp(1.6rem, 2.2vw, 2rem); }
+    .tile-copy p { color: var(--muted); margin-bottom: 0.85rem; }
+    .tile-action {
+      color: ${$accent || '#854B39'};
+      border-color: currentColor;
+      align-self: start;
+      margin-top: auto;
+      font-size: 0.8125rem;
+    }
+    &:hover .tile-image img { transform: scale(1.035); }
+    @media (prefers-reduced-motion: reduce) {
+      .tile-image img { transition: none; }
+      &:hover .tile-image img { transform: none; }
+    }
+  `}
 `;
 
 const WorldCard = styled(ImageTile)`
@@ -349,7 +398,7 @@ const CardGrid = styled.div<{ $personal?: boolean }>`
 `;
 
 const Card = styled(ImageTile)`
-  min-height: 350px;
+  min-height: ${({ $editorial }) => $editorial ? '0' : '350px'};
   h3 { font-size: 1.85rem; line-height: 1.12; margin-bottom: 0.75rem; }
   .description { font-size: 0.875rem; line-height: 1.8; }
 `;
@@ -410,6 +459,8 @@ const Footer = styled.footer`
 
 export default function HomePage() {
   const { t, locale, setLocale } = useTranslation();
+  const editorial = isExperienceEnabled('editorialDiscovery');
+  const photographyDiscovery = isExperienceEnabled('photographyDiscovery');
   const services = visibleSections.filter(section => section.category === 'photography' && !personalWorkIds.has(section.id));
   const personalWork = visibleSections.filter(section => personalWorkIds.has(section.id));
   const worlds = worldIds.flatMap(id => visibleSections.filter(section => section.id === id));
@@ -423,7 +474,7 @@ export default function HomePage() {
     const preview = previews[section.id];
     const title = titleFor(section);
     return (
-      <Card key={section.id} href={section.href} style={preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
+      <Card key={section.id} href={section.href} $editorial={editorial} $accent={preview?.accent} style={!editorial && preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
         {preview && (
           <div className="preview tile-image">
             <SecureImage
@@ -455,7 +506,10 @@ export default function HomePage() {
         <Header>
           <Brand href="/" aria-label={t('homepage.homeLabel')}>camilalonart<span aria-hidden="true">.</span></Brand>
           <Navigation aria-label={t('homepage.navigation')}>
-            {services.length > 0 && <a href="#work-with-me">{t('homepage.servicesNav')}</a>}
+            {photographyDiscovery
+              ? <Link href="/photography/">{t('homepage.servicesNav')}</Link>
+              : services.length > 0 && <a href="#work-with-me">{t('homepage.servicesNav')}</a>}
+            {editorial && <Link href="/art-experiences/">{t('home.artExperiences.title')}</Link>}
             {personalWork.length > 0 && <a href="#personal-work">{t('homepage.workNav')}</a>}
             <a href="#contact">{t('nav.contact')}</a>
           </Navigation>
@@ -467,17 +521,17 @@ export default function HomePage() {
 
         <Hero aria-labelledby="home-heading">
           <div>
-            <Eyebrow>{t('homepage.location')}</Eyebrow>
+            <Eyebrow>{t(editorial ? 'homepage.studioLocation' : 'homepage.location')}</Eyebrow>
             <h1 id="home-heading">{t('homepage.heroTitle')} <em>{t('homepage.heroEmphasis')}</em></h1>
             <Facets>{t('homepage.facets')}</Facets>
-            <Intro>{t('homepage.intro')}</Intro>
+            <Intro>{t(editorial ? 'homepage.studioIntro' : 'homepage.intro')}</Intro>
             <Actions>
               <PrimaryLink href="#contact">{t('homepage.workWithMe')} <span aria-hidden="true">↓</span></PrimaryLink>
               {worlds.length > 0 && (
                 <TextLink href="#explore">{t('homepage.exploreMyWork')} <span aria-hidden="true">↓</span></TextLink>
               )}
             </Actions>
-            {services.length > 0 && (
+            {!editorial && services.length > 0 && (
               <SessionLinks aria-labelledby="session-links-heading">
                 <h2 id="session-links-heading">{t('homepage.sessionLinksTitle')}</h2>
                 <ul>
@@ -492,14 +546,16 @@ export default function HomePage() {
             <Worlds id="explore" role="region" aria-labelledby="worlds-heading">
               <h2 id="worlds-heading">{t('homepage.exploreMyWork')}</h2>
               <p>{t('homepage.worldsIntro')}</p>
-              <WorldGrid>
+              <WorldGrid $editorial={editorial}>
                 {worlds.map((section, index) => {
                   const preview = previews[section.id];
                   return (
                     <WorldCard
                       key={section.id}
-                      href={section.id === 'pets' ? '#work-with-me' : section.href}
-                      style={{ aspectRatio: `${preview.width} / ${preview.height}` }}
+                      href={section.id === 'pets' ? (photographyDiscovery ? '/photography/' : '#work-with-me') : section.href}
+                      $editorial={editorial}
+                      $accent={preview.accent}
+                      style={editorial ? undefined : { aspectRatio: `${preview.width} / ${preview.height}` }}
                     >
                       <div className="world-image tile-image">
                         <SecureImage
@@ -532,6 +588,7 @@ export default function HomePage() {
               <p>{t('homepage.servicesIntro')}</p>
             </SectionHeading>
             <CardGrid>{services.map(section => renderCard(section, false))}</CardGrid>
+            {photographyDiscovery && <TextLink as={Link} href="/photography/">{t('homepage.compareSessions')} <span aria-hidden="true">↗</span></TextLink>}
           </SectionBlock>
         )}
 
@@ -550,13 +607,13 @@ export default function HomePage() {
             <div><Eyebrow>{t('homepage.processEyebrow')}</Eyebrow><h2 id="contact-heading">{t('homepage.processTitle')}</h2></div>
             <p>{t('homepage.processIntro')}</p>
           </SectionHeading>
-          <Contact>
+          {editorial ? <InquiryPlanner /> : <Contact>
             <div><h3>{t('homepage.contactTitle')}</h3><p>{t('homepage.contactIntro')}</p></div>
             <div className="contact-links">
               <PrimaryLink href={emailHref}>{t('homepage.emailCamila')} <span aria-hidden="true">↗</span></PrimaryLink>
               <p className="email">{SITE_CONFIG.contact.email}</p>
             </div>
-          </Contact>
+          </Contact>}
           <InquiryDetails>
             <div>
               <h3>{t('homepage.aboutTitle')}</h3>

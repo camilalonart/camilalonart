@@ -4,6 +4,7 @@ import { theme } from '../styles/theme';
 import { useTranslation } from '@/i18n/TranslationContext';
 import { useDialog } from '@/hooks/useDialog';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
 import { createInquiryMailto } from '@/lib/inquiryEmail';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -472,7 +473,7 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const pf = 'sharedContent.pet';
-  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
+  const { formRef, validate, onInput, onInvalid, onReset, resetValidation, summaryProps } = useLocalizedForm();
   const id = useId();
   const dialogRef = useDialog(!embedded && isOpen, onClose);
   const [formData, setFormData] = useState({
@@ -520,6 +521,7 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
         const result = await response.json();
         if (result?.ok !== true) throw new Error('Submission not confirmed');
         setSubmitSuccess(true);
+        resetValidation();
         setFormData({
           name: '', email: '', phone: '', petName: '', petType: '', petAge: '',
           package: selectedPackage || '', preferredDate: '', location: '', message: '',
@@ -549,7 +551,8 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   };
 
   const formContent = (
-    <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} $embedded={embedded} onSubmit={handleSubmit} aria-busy={isSubmitting}>
+    <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onReset={onReset} $embedded={embedded} onSubmit={handleSubmit} aria-busy={isSubmitting}>
+      <FormValidationSummary {...summaryProps} />
       <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
       <FormSection>
         <SectionTitle><span className="icon" aria-hidden="true">👤</span> {t(`${pf}.yourInformation`)}</SectionTitle>

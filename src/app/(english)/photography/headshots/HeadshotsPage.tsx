@@ -10,6 +10,8 @@ import { useTranslation } from '@/i18n/TranslationContext';
 import { useDialog } from '@/hooks/useDialog';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
+import ServiceGuide from '@/components/ServiceGuide';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -639,6 +641,8 @@ export default function HeadshotsPage() {
         type: 'success',
         messageKey: 'success',
       });
+      inlineForm.resetValidation();
+      modalForm.resetValidation();
       setFormData({
         name: '',
         email: '',
@@ -704,6 +708,8 @@ export default function HeadshotsPage() {
           </HeroButton>
         </HeroContent>
       </Hero>
+
+      <ServiceGuide service="headshots" />
 
       <Section>
         <SectionTitle>{c('portfolio')}</SectionTitle>
@@ -792,7 +798,8 @@ export default function HeadshotsPage() {
           {status && <StatusMessage role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{c(status.messageKey)}</StatusMessage>}
           {emailFallback}
 
-          <Form ref={inlineForm.formRef} onSubmit={event => handleSubmit(event, inlineForm.validate)} onInput={inlineForm.onInput} onInvalid={inlineForm.onInvalid} aria-busy={isSubmitting} noValidate>
+          <Form ref={inlineForm.formRef} onSubmit={event => handleSubmit(event, inlineForm.validate)} onInput={inlineForm.onInput} onInvalid={inlineForm.onInvalid} onReset={inlineForm.onReset} aria-busy={isSubmitting} noValidate>
+            <FormValidationSummary {...inlineForm.summaryProps} />
             <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
             <FormRow>
               <FormGroup>
@@ -968,7 +975,8 @@ export default function HeadshotsPage() {
             {status && <StatusMessage role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{c(status.messageKey)}</StatusMessage>}
             {emailFallback}
 
-            <Form ref={modalForm.formRef} onSubmit={event => handleSubmit(event, modalForm.validate)} onInput={modalForm.onInput} onInvalid={modalForm.onInvalid} aria-busy={isSubmitting} noValidate>
+            <Form ref={modalForm.formRef} onSubmit={event => handleSubmit(event, modalForm.validate)} onInput={modalForm.onInput} onInvalid={modalForm.onInvalid} onReset={modalForm.onReset} aria-busy={isSubmitting} noValidate>
+              <FormValidationSummary {...modalForm.summaryProps} />
               <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
               <FormRow>
                 <FormGroup>

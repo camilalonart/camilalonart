@@ -34,12 +34,13 @@ import { metadata as metadata26 } from '@/app/(english)/photography/family-mater
 import { metadata as metadata27 } from '@/app/(english)/photography/family-maternity/layout';
 import { metadata as metadata28 } from '@/app/(english)/photography/headshots/gallery/page';
 import { metadata as metadata29 } from '@/app/(english)/photography/headshots/page';
-import { metadata as metadata30 } from '@/app/(english)/photography/pets/gallery/page';
-import { metadata as metadata31 } from '@/app/(english)/photography/pets/layout';
-import { metadata as metadata32 } from '@/app/(english)/photography/wedding-couples/gallery/page';
-import { metadata as metadata33 } from '@/app/(english)/photography/wedding-couples/layout';
-import { metadata as metadata34 } from '@/app/(english)/portfolio/layout';
-import { metadata as metadata35 } from '@/app/(english)/tech/courses/layout';
+import { metadata as metadata30 } from '@/app/(english)/photography/page';
+import { metadata as metadata31 } from '@/app/(english)/photography/pets/gallery/page';
+import { metadata as metadata32 } from '@/app/(english)/photography/pets/layout';
+import { metadata as metadata33 } from '@/app/(english)/photography/wedding-couples/gallery/page';
+import { metadata as metadata34 } from '@/app/(english)/photography/wedding-couples/layout';
+import { metadata as metadata35 } from '@/app/(english)/portfolio/layout';
+import { metadata as metadata36 } from '@/app/(english)/tech/courses/layout';
 
 type MetadataResolver = (props: { params: Record<string, string> }) => Metadata | Promise<Metadata>;
 export interface RouteSource {
@@ -78,10 +79,11 @@ export const routeSources: RouteSource[] = [
   { pattern: "/photography/family-maternity", metadata: () => metadata27, params: undefined },
   { pattern: "/photography/headshots/gallery", metadata: () => metadata28, params: undefined },
   { pattern: "/photography/headshots", metadata: () => metadata29, params: undefined },
-  { pattern: "/photography/pets/gallery", metadata: () => metadata30, params: undefined },
-  { pattern: "/photography/pets", metadata: () => metadata31, params: undefined },
-  { pattern: "/photography/wedding-couples/gallery", metadata: () => metadata32, params: undefined },
-  { pattern: "/photography/wedding-couples", metadata: () => metadata33, params: undefined },
-  { pattern: "/portfolio", metadata: () => metadata34, params: undefined },
-  { pattern: "/tech/courses", metadata: () => metadata35, params: undefined },
+  { pattern: "/photography", metadata: () => metadata30, params: undefined },
+  { pattern: "/photography/pets/gallery", metadata: () => metadata31, params: undefined },
+  { pattern: "/photography/pets", metadata: () => metadata32, params: undefined },
+  { pattern: "/photography/wedding-couples/gallery", metadata: () => metadata33, params: undefined },
+  { pattern: "/photography/wedding-couples", metadata: () => metadata34, params: undefined },
+  { pattern: "/portfolio", metadata: () => metadata35, params: undefined },
+  { pattern: "/tech/courses", metadata: () => metadata36, params: undefined },
 ];

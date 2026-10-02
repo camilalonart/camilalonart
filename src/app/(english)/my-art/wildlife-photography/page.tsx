@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from '@/i18n/LocalizedLink';
 import { useTranslation } from '@/i18n/TranslationContext';
 import SimpleNav from "@/components/SimpleNav";
+import ServiceGuide from '@/components/ServiceGuide';
 import {
   WildlifeContainer,
   LandingPage,
@@ -74,6 +75,7 @@ export default function WildlifePhotographyPage() {
           </Link>
         </LandingContent>
       </LandingPage>
+      <ServiceGuide service="wildlife" />
     </WildlifeContainer>
   );
 }

@@ -10,7 +10,9 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { uxuiProjects, UXUIProject } from '@/data/uxuiProjects';
 import { useDialog } from '@/hooks/useDialog';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
 import content from '@/i18n/locales/creative-content.en.json';
+import ServiceGuide from '@/components/ServiceGuide';
 
 const FORMSPREE_ID = 'xnjwdddj';
 
@@ -604,7 +606,7 @@ export default function UXUIDesignPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<{ type: 'success' | 'error'; key: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
+  const { formRef, validate, onInput, onInvalid, onReset, resetValidation, summaryProps } = useLocalizedForm();
 
   const openProject = useCallback((p: UXUIProject) => setSelectedProject(p), []);
   const closeProject = useCallback(() => setSelectedProject(null), []);
@@ -640,6 +642,7 @@ export default function UXUIDesignPage() {
       });
       if (res.ok) {
         setFormStatus({ type: 'success', key: 'forms.success' });
+        resetValidation();
         setFormData({ name: '', email: '', message: '' });
       } else {
         setFormStatus({ type: 'error', key: 'forms.error' });
@@ -746,6 +749,8 @@ export default function UXUIDesignPage() {
         ))}
       </WorkSection>
 
+      <ServiceGuide service="ux" />
+
       {/* ── CONTACT ─────────────────────────────────────────── */}
       <ContactSection>
         <ContactInner>
@@ -780,7 +785,8 @@ export default function UXUIDesignPage() {
                 <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(t('creativeContent.uxui.inquirySubject'))}&body=${encodeURIComponent(emailBody)}`}>bycamilalonart@gmail.com</a>
               </p>
             )}
-            <form ref={formRef} noValidate onSubmit={handleSubmit} onInput={onInput} onInvalid={onInvalid} aria-busy={isSubmitting}>
+            <form ref={formRef} noValidate onSubmit={handleSubmit} onInput={onInput} onInvalid={onInvalid} onReset={onReset} aria-busy={isSubmitting}>
+              <FormValidationSummary {...summaryProps} />
               <FormField>
                 <FieldLabel htmlFor="ux-name">{t('forms.fullName')}</FieldLabel>
                 <FieldInput

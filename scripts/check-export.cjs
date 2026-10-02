@@ -10,6 +10,24 @@ const decode = text => text.replace(/&amp;/g, '&').replace(/&quot;/g, '"')
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => decode(match[1]));
 const failures = [];
+const ts = require('typescript');
+const vm = require('node:vm');
+const rolloutModule = { exports: {} };
+const rolloutSource = fs.readFileSync(path.join(__dirname, '../src/config/experienceRollout.ts'), 'utf8');
+vm.runInNewContext(ts.transpileModule(rolloutSource, {
+  compilerOptions: { module: ts.ModuleKind.CommonJS },
+}).outputText, { exports: rolloutModule.exports });
+const { experienceRollout, isExperienceEnabled } = rolloutModule.exports;
+for (const [feature, control] of Object.entries(experienceRollout)) {
+  const original = { ...control };
+  for (const flight of [false, true]) {
+    for (const killSwitch of [false, true]) {
+      Object.assign(control, { flight, killSwitch });
+      assert.equal(isExperienceEnabled(feature), flight && !killSwitch, `Incorrect rollout: ${feature}`);
+    }
+  }
+  Object.assign(control, original);
+}
 
 function check(condition, message) {
   if (!condition) failures.push(message);
@@ -82,6 +100,32 @@ for (const route of ['photography/pets', 'photography/headshots', 'photography/f
 }
 
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+for (const prefix of ['', 'es/']) {
+  const home = fs.readFileSync(path.join(root, prefix, 'index.html'), 'utf8');
+  check(home.includes('id="inquiry-interest"') === isExperienceEnabled('editorialDiscovery'), `Inquiry planner gate: ${prefix}`);
+  const directory = fs.readFileSync(path.join(root, prefix, 'photography', 'index.html'), 'utf8');
+  if (isExperienceEnabled('photographyDiscovery')) {
+    check(directory.includes('"@type":"CollectionPage"'), `Missing directory schema: ${prefix}`);
+    check(directory.includes('"@type":"BreadcrumbList"'), `Missing directory breadcrumb schema: ${prefix}`);
+    check(urls.includes(`${origin}/${prefix}photography/`), `Missing directory sitemap entry: ${prefix}`);
+    for (const service of ['wedding-couples', 'pets', 'family-maternity', 'headshots']) {
+      check(directory.includes(`href="/${prefix}photography/${service}/"`), `Missing directory service: ${prefix}${service}`);
+      check(directory.includes(`href="/${prefix}photography/${service}/gallery/"`), `Missing directory gallery: ${prefix}${service}`);
+    }
+  } else {
+    check(!urls.includes(`${origin}/${prefix}photography/`), `Disabled directory in sitemap: ${prefix}`);
+    check(/<meta name="robots" content="[^"]*noindex/.test(directory), `Disabled directory must be noindex: ${prefix}`);
+  }
+  for (const [route, guide] of [
+    ['photography/pets', 'pets'], ['photography/family-maternity', 'family'],
+    ['photography/headshots', 'headshots'], ['photography/wedding-couples', 'wedding'],
+    ['art-experiences', 'experiences'], ['art/contact', 'collector'],
+    ['creative-services/ux-ui-design', 'ux'], ['my-art/wildlife-photography', 'wildlife'],
+  ]) {
+    const html = fs.readFileSync(path.join(root, prefix, route, 'index.html'), 'utf8');
+    check(html.includes(`id="service-guide-${guide}"`) === isExperienceEnabled('serviceGuidance'), `Service guidance gate: ${prefix}${route}`);
+  }
+}
 check(/src[Ss]et="[^"]*\/responsive-images\//.test(homepage), 'Homepage must serve responsive image candidates.');
 check(urls.every(url => url.startsWith(`${origin}/`)), 'Sitemap contains a noncanonical host.');
 if (failures.length) {

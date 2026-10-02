@@ -3,6 +3,7 @@ import type { PageMetadataText } from './metadata-types';
 const entry = (title: string, description: string): PageMetadataText => ({ title, description });
 
 export const spanishSeo: Record<string, PageMetadataText> = {
+  '/photography': entry('Fotografía en Vancouver — Bodas, mascotas, familia y retratos', 'Encuentra tu sesión con Camila Londoño en Vancouver: fotografía de bodas y parejas, mascotas, familia, maternidad y retratos profesionales. Explora cada servicio y sus galerías.'),
   '/': entry('Camila Londoño — Arte y fotografía en Vancouver', 'Explora pinturas originales, fotografía y experiencias creativas de Camila Londoño, artista e ingeniera colombiana en Vancouver, BC.'),
   '/art': entry('Camila Londoño — Pinturas y colecciones de arte', 'Explora pinturas originales, acuarelas y colecciones de técnica mixta de Camila Londoño, artista colombiana en Vancouver, BC.'),
   '/art/about': entry('Sobre Camila Londoño', 'Conoce a Camila Londoño, artista e ingeniera colombiana en Vancouver, y descubre su pintura, sus historias y su recorrido creativo.'),

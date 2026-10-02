@@ -8,6 +8,7 @@ import UpcomingEventsSection from "@/components/artExperiences/UpcomingEventsSec
 import EventTypesSection from "@/components/artExperiences/EventTypesSection";
 import YouAndIPaintSection from "@/components/artExperiences/YouAndIPaintSection";
 import ArtExpFooter from "@/components/artExperiences/ArtExpFooter";
+import ServiceGuide from '@/components/ServiceGuide';
 
 export default function ArtExperiencesPage() {
   return (
@@ -18,6 +19,7 @@ export default function ArtExperiencesPage() {
       <UpcomingEventsSection />
       <EventTypesSection />
       <YouAndIPaintSection />
+      <ServiceGuide service="experiences" />
       <ArtExpFooter />
     </>
   );

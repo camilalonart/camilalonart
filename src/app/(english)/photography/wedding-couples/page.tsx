@@ -11,6 +11,7 @@ import ImageModal from "@/components/ImageModal";
 import { useTranslation } from "@/i18n/TranslationContext";
 import Link from '@/i18n/LocalizedLink';
 import WeddingServices from '@/components/photography/WeddingServices';
+import ServiceGuide from '@/components/ServiceGuide';
 import LocalizedStructuredData from '@/components/LocalizedStructuredData';
 import { SITE_CONFIG } from '@/lib/seo';
 import {
@@ -1108,6 +1109,8 @@ export default function WeddingCouplesPage() {
           - Camila Londono
         </p>
       </IntroSection>
+
+      <ServiceGuide service="wedding" />
 
       <SectionDivider>
         <DividerImage $span={4}>
