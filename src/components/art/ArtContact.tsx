@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ArtNav from './ArtNav';
 import { useTranslation } from '@/i18n/TranslationContext';
+import { useLocalizedForm } from '@/hooks/useLocalizedForm';
 
 const C: Record<string, string> = {
   bg: '#000000ff',
@@ -242,7 +243,8 @@ interface FormData {
 }
 
 export default function ArtContact() {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
+  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -254,6 +256,19 @@ export default function ArtContact() {
   const [statusMessage, setStatusMessage] = useState('');
 
   const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ART_CONTACT_ID || '';
+  const inquiryKeys: Record<string, string> = {
+    general: 'generalInquiry',
+    purchase: 'purchaseInquiry',
+    commission: 'commissionRequest',
+    exhibition: 'exhibitionOpportunity',
+    collaboration: 'collaborationInquiry',
+  };
+  const emailBody = [
+    `${t('art.contact.name')}: ${formData.name}`,
+    `${t('art.contact.email')}: ${formData.email}`,
+    `${t('art.contact.inquiryType')}: ${t(`art.contact.${inquiryKeys[formData.inquiryType]}`)}`,
+    `${t('art.contact.message')}: ${formData.message}`,
+  ].join('\n');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -263,15 +278,16 @@ export default function ArtContact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === 'loading') return;
+    if (!validate()) return;
 
     if (!FORMSPREE_ID) {
       setStatus('error');
-      setStatusMessage(t('art.contact.notConfigured'));
+      setStatusMessage('art.contact.notConfigured');
       return;
     }
 
     setStatus('loading');
-    setStatusMessage(t('art.contact.sending'));
+    setStatusMessage('art.contact.sending');
 
     try {
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -290,15 +306,15 @@ export default function ArtContact() {
 
       if (response.ok) {
         setStatus('success');
-        setStatusMessage(t('art.contact.successMessage'));
+        setStatusMessage('art.contact.successMessage');
         setFormData({ name: '', email: '', inquiryType: 'general', message: '' });
       } else {
         setStatus('error');
-        setStatusMessage(t('art.contact.errorMessage'));
+        setStatusMessage('art.contact.errorMessage');
       }
     } catch (error) {
       setStatus('error');
-      setStatusMessage(t('art.contact.failedMessage'));
+      setStatusMessage('art.contact.failedMessage');
     }
   };
 
@@ -322,18 +338,18 @@ export default function ArtContact() {
                 $type={status === 'success' ? 'success' : 'error'}
                 role={status === 'error' ? 'alert' : undefined}
               >
-                {statusMessage}
+                {t(statusMessage)}
               </Message>
             )}
           </div>
 
           {(!FORMSPREE_ID || status === 'error') && (
             <p>
-              {locale === 'es' ? 'No se ha confirmado el envío. Puedes enviar tu consulta por correo: ' : 'Delivery has not been confirmed. You can email your inquiry: '}
-              <a href={`mailto:bycamilalonart@gmail.com?subject=Art%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+              {t('artContent.contact.emailFallback')}{' '}
+              <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(t('artContent.contact.subject'))}&body=${encodeURIComponent(emailBody)}`}>bycamilalonart@gmail.com</a>
             </p>
           )}
-          <Form onSubmit={handleSubmit} aria-busy={status === 'loading'} aria-label={t('art.contact.heading')}>
+          <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onSubmit={handleSubmit} aria-busy={status === 'loading'} aria-label={t('art.contact.heading')}>
             <FormGroup>
               <Label htmlFor="name">{t('art.contact.name')} *</Label>
               <Input

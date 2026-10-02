@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import data from '@/data/artPortfolio';
 import { artEvents } from '@/components/artExperiences/data';
 import { canonicalUrl } from '@/lib/seo';
+import { localizedPath } from '@/i18n/routing';
 
 export const dynamic = 'force-static';
 
@@ -47,5 +48,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const event of artEvents) {
     paths.push(`/art-experiences/events/${event.id}/`);
   }
-  return Array.from(new Set(paths), path => ({ url: canonicalUrl(path) }));
+  return Array.from(new Set(paths)).flatMap(path => {
+    const en = canonicalUrl(path);
+    const es = canonicalUrl(localizedPath(path, 'es'));
+    const alternates = { languages: { en, es, 'x-default': en } };
+    return [{ url: en, alternates }, { url: es, alternates }];
+  });
 }

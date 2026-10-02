@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import { theme } from '../styles/theme';
+import { useTranslation } from '../i18n/TranslationContext';
 
 interface SecureImageProps {
   src: string;
@@ -121,6 +122,7 @@ export default function SecureImage({
   onLoad,
   onError,
 }: SecureImageProps) {
+  const { t } = useTranslation();
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -147,7 +149,7 @@ export default function SecureImage({
   if (error) {
     return (
       <ErrorContainer className={className}>
-        <span>Image not available</span>
+        <span role="status">{t('sharedContent.images.unavailable')}</span>
       </ErrorContainer>
     );
   }

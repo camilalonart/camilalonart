@@ -8,6 +8,8 @@
     "family": "Family & Maternity",
     "myArt": "My Art",
     "art": "Art",
+    "digitalArt": "Digital Art",
+    "traditionalArt": "Traditional Art",
     "wildlifePhotography": "Wildlife Photography",
     "everydayPhotography": "Everyday Photography",
     "blog": "Blog",
@@ -30,25 +32,75 @@
     "skipToContent": "Skip to content",
     "mainContent": "Main content"
   },
+  "weddingServices": {
+    "intro": "Explore the options and tell me what you have in mind.",
+    "swipeHint": "Swipe to explore",
+    "previous": "Previous service",
+    "next": "Next service",
+    "range": "Services {start}–{end} of {total}",
+    "inquire": "Ask about {service}"
+  },
+  "experienceGallery": {
+    "back": "Back to Art Experiences",
+    "title": "Event gallery",
+    "photos": "photos",
+    "photo": "You & I Paint event photo",
+    "view": "View photo",
+    "close": "Close photo",
+    "previous": "Previous photo",
+    "next": "Next photo"
+  },
+  "routeMessages": {
+    "loading": "Loading",
+    "notFound": "Page Not Found",
+    "lostInGallery": "Lost in the Gallery",
+    "notFoundDescription": "The page you are looking for may have moved, been renamed or no longer exist. Return to the homepage to explore.",
+    "returnHome": "Return Home",
+    "error": "Something Went Wrong",
+    "technicalDifficulties": "Technical Difficulties",
+    "errorDescription": "Sorry, this page encountered an unexpected error. Please try again or return to the homepage.",
+    "tryAgain": "Try Again"
+  },
   "homepage": {
     "homeLabel": "Camilalonart — home",
     "navigation": "Homepage navigation",
     "language": "Language",
-    "servicesNav": "Work with me",
+    "servicesNav": "Photo sessions",
     "workNav": "Personal work",
-    "location": "Vancouver, BC · Photography & art",
-    "heroTitle": "Stories told",
-    "heroEmphasis": "with feeling.",
-    "intro": "I'm Camila Londoño, a photographer and artist in Vancouver. From the people you love to the ideas you want to bring to life, let's make something meaningful.",
-    "inquire": "Inquire about a project",
-    "findYourWorld": "Find your world",
-    "servicesEyebrow": "01 / Work with me",
-    "servicesTitle": "Made around you.",
-    "servicesIntro": "Photography, creative experiences and design. Choose what brings you here; each space has a story of its own.",
+    "location": "My creative corner in Vancouver",
+    "heroTitle": "Hi, I'm",
+    "heroEmphasis": "Camila.",
+    "facets": "Artist · Photographer · Designer · Software engineer",
+    "intro": "I paint, take photos, design and write code. Here, it all comes together. Explore my work, find a photo session or come create with me.",
+    "inquire": "Let's talk",
+    "findYourWorld": "Take a look around",
+    "exploreNav": "Start here",
+    "worldsIntro": "What brings you here? Pick a little corner to explore.",
+    "worlds": {
+      "art": {
+        "title": "Art & stories",
+        "description": "Step into my paintings and the stories behind them."
+      },
+      "pets": {
+        "title": "Photography",
+        "description": "Find a session for you, your people or your pets."
+      },
+      "art-experiences": {
+        "title": "Let's create",
+        "description": "Discover paint & sip and creative experiences."
+      },
+      "ux-ui": {
+        "title": "Design & ideas",
+        "description": "Explore my UX/UI projects and how I solve problems."
+      }
+    },
+    "servicesEyebrow": "01 / Behind the camera",
+    "servicesTitle": "Your people. Your moments.",
+    "servicesIntro": "A love story, a growing family, your favourite furry face or a fresh start. Find the session that feels like you, with details and a way to get in touch.",
     "viewService": "Explore this service",
     "workEyebrow": "02 / Personal work",
-    "workTitle": "A different way of seeing.",
-    "workIntro": "Step into my painting practice and wildlife photography. A space for curiosity, observation and the stories that stay with us.",
+    "workTitle": "Just here to wander? Welcome.",
+    "workIntro": "You don't need a project in mind. Explore my paintings, meet a few wild creatures and see what catches your eye.",
     "exploreCollection": "Explore the collection",
     "processEyebrow": "03 / Let's connect",
     "processTitle": "It starts with a conversation.",
@@ -70,7 +122,7 @@
     "contactTitle": "What would you like to create?",
     "contactIntro": "For photography inquiries, artwork questions and creative collaborations, get in touch directly.",
     "emailCamila": "Email Camila",
-    "footer": "Vancouver, BC · Art, photography & connection",
+    "footer": "Made with curiosity in Vancouver, BC",
     "images": {
       "wedding": "A couple embracing with the Vancouver skyline behind them",
       "pets": "A black-and-white portrait of a golden retriever",

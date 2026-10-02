@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
+import { localizedPath } from '@/i18n/routing';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import data, { type Painting, type Collection, type DetailVideo, localizedMaterials, localizedThoughts } from '../../data/artPortfolio';
@@ -442,14 +443,14 @@ export default function PaintingPage({
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [siblingIndex, collection.id]);
+  }, [siblingIndex, collection.id, locale]);
 
   const navigate = (dir: 1 | -1) => {
     const nextIndex = siblingIndex + dir;
     if (nextIndex < 0 || nextIndex >= collection.paintings.length) return;
 
     const nextPainting = collection.paintings[nextIndex];
-    router.push(`/art/${collection.id}/${nextPainting.id}`);
+    router.push(localizedPath(`/art/${collection.id}/${nextPainting.id}`, locale));
   };
 
   const hasPrev = siblingIndex > 0;
@@ -478,7 +479,7 @@ export default function PaintingPage({
             <ImageContainer>
               <MainImage
                 src={painting.images[imageIndex]}
-                alt={`${painting.title} — ${painting.materials}`}
+                alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
                 draggable={false}
                 onContextMenu={e => e.preventDefault()}
               />
@@ -491,7 +492,7 @@ export default function PaintingPage({
                       key={i}
                       $active={i === imageIndex}
                       onClick={() => setImageIndex(i)}
-                      aria-label={`View image ${i + 1}`}
+                      aria-label={`${t('artContent.common.viewImage')} ${i + 1}`}
                       aria-pressed={i === imageIndex}
                     >
                       <img src={src} alt="" />
@@ -535,7 +536,7 @@ export default function PaintingPage({
                   <DetailImage
                     key={i}
                     src={item}
-                    alt={`Detail ${i + 1}`}
+                    alt={`${t('art.details')} ${i + 1}`}
                     loading="lazy"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
@@ -551,7 +552,7 @@ export default function PaintingPage({
         {/* Navigation */}
         <NavBar>
           {hasPrev && prevPainting ? (
-            <NavBtn href={`/art/${collection.id}/${prevPainting.id}`}>
+            <NavBtn href={`/art/${collection.id}/${prevPainting.id}`} aria-label={t('gallery.previousPainting')}>
               ←
             </NavBtn>
           ) : (
@@ -565,7 +566,7 @@ export default function PaintingPage({
           </NavCounter>
 
           {hasNext && nextPainting ? (
-            <NavBtn href={`/art/${collection.id}/${nextPainting.id}`}>
+            <NavBtn href={`/art/${collection.id}/${nextPainting.id}`} aria-label={t('gallery.nextPainting')}>
               →
             </NavBtn>
           ) : (

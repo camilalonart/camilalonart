@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
-import data, { earlyFirstPaintings_COLLECTIONS_ORDER } from '@/data/artPortfolio';
+import data, { earlyFirstPaintings_COLLECTIONS_ORDER, localizedBio, localizedMaterials } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '@/i18n/TranslationContext';
 
@@ -401,7 +401,7 @@ const SocialLinks = styled.div`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function EarlyPaintingsPage() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const orderLower = earlyFirstPaintings_COLLECTIONS_ORDER.map(s => s.toLowerCase());
   const orderedCollections = [...data.earlyFirstPaintings].sort((a, b) => {
     const aIndex = orderLower.indexOf(a.id.toLowerCase());
@@ -420,7 +420,7 @@ export default function EarlyPaintingsPage() {
         <HeroImgWrap>
           <Image
             src={heroImage}
-            alt="Featured early artwork by Camila Londoño"
+            alt={t('artContent.gallery.earlyArt')}
             fill
             priority
             sizes="100vw"
@@ -454,11 +454,11 @@ export default function EarlyPaintingsPage() {
                 <GalleryCardHover
                   key={p.id}
                   href={`/art/${col.id}/${p.id}`}
-                  aria-label={`View ${p.title}, ${p.year}`}
+                  aria-label={`${t('artContent.common.view')} ${p.title}, ${p.year}`}
                 >
                   <img
                     src={p.images[0]}
-                    alt={`${p.title} — ${p.materials}, ${p.year}`}
+                    alt={`${p.title} — ${localizedMaterials(p.materials, locale)}, ${p.year}`}
                     loading="lazy"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
@@ -490,7 +490,7 @@ export default function EarlyPaintingsPage() {
             </AboutPhotoWrap>
           )}
           <AboutTextWrap>
-            {data.about.bio.slice(0, 2).map((para, i) => (
+            {localizedBio(data.about, locale).slice(0, 2).map((para, i) => (
               <AboutP key={i}>{para}</AboutP>
             ))}
             <ReadMoreLink href="/art/about/">
@@ -503,7 +503,7 @@ export default function EarlyPaintingsPage() {
       {/* Footer */}
       <Footer>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('footer.copyright').replace(`© ${new Date().getFullYear()} Camilalonart. `, '')}
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
         </FooterText>
         <SocialLinks>
           <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">

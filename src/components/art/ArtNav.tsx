@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 

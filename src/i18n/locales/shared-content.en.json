@@ -1,0 +1,96 @@
+{
+  "sharedContent": {
+    "navigation": {
+      "photography": "Photography navigation",
+      "backToTop": "Back to top",
+      "location": "Vancouver, BC, Canada",
+      "behance": "Behance portfolio"
+    },
+    "images": {
+      "unavailable": "Image not available",
+      "viewLarger": "View larger",
+      "close": "Close image",
+      "previous": "Previous image",
+      "next": "Next image"
+    },
+    "form": {
+      "unavailable": "Online submission is unavailable. Please email your inquiry.",
+      "unconfirmed": "We cannot confirm delivery. Your details are saved here; please email before submitting again.",
+      "failed": "Delivery has not been confirmed. Please contact us by email.",
+      "sent": "Thank you. Your inquiry was sent; your session is not yet confirmed.",
+      "emailFallback": "Delivery has not been confirmed. You can email your inquiry:",
+      "emailInquiry": "Email your inquiry:",
+      "choosePackage": "Choose a package to continue.",
+      "step": "Step",
+      "emailPlaceholder": "your@email.com"
+    },
+    "validation": {
+      "required": "Please complete this field.",
+      "requiredSelection": "Please select an option.",
+      "email": "Please enter a valid email address.",
+      "url": "Please enter a valid URL.",
+      "invalid": "Please enter a valid value.",
+      "tooShort": "Please enter at least {min} characters.",
+      "tooLong": "Please enter no more than {max} characters.",
+      "minimum": "Please enter a value of {min} or greater.",
+      "maximum": "Please enter a value of {max} or less."
+    },
+    "email": {
+      "contactSubject": "Website inquiry",
+      "weddingSubject": "Wedding photography inquiry",
+      "petSubject": "Pet photography inquiry",
+      "headshotSubject": "Headshot inquiry",
+      "familySubject": "Family photography inquiry",
+      "artSubject": "Art inquiry",
+      "uxSubject": "UX/UI design inquiry"
+    },
+    "fields": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "message": "Message",
+      "petName": "Pet's name",
+      "petType": "Type of pet",
+      "petAge": "Pet's age",
+      "package": "Package",
+      "preferredDate": "Preferred date and time",
+      "date": "Preferred date",
+      "location": "Location",
+      "about": "About you",
+      "referral": "How you found us",
+      "company": "Company / organization",
+      "preferredTime": "Preferred time",
+      "purpose": "Purpose",
+      "sessionType": "Session type",
+      "inquiryType": "Inquiry type",
+      "service": "Service"
+    },
+    "pet": {
+      "heading": "Pet Photography Inquiry",
+      "subheading": "Let's capture your furry friend's personality!",
+      "yourInformation": "Your Information",
+      "name": "Your Name",
+      "namePlaceholder": "Your full name",
+      "details": "Your Pet's Details",
+      "petName": "Pet's Name",
+      "petNamePlaceholder": "What's your pet called?",
+      "petType": "Type of Pet",
+      "petTypePlaceholder": "e.g. Dog, Cat, Rabbit...",
+      "petAge": "Pet's Age",
+      "petAgePlaceholder": "e.g. 3 years old",
+      "sessionDetails": "Session Details",
+      "package": "Preferred Package",
+      "selectPackage": "Select a package",
+      "atHome": "At Home Sessions",
+      "outdoor": "Outdoor Session",
+      "photobooks": "Pet Photobooks",
+      "preferredDate": "Preferred Date & Time",
+      "location": "Preferred Location",
+      "locationPlaceholder": "Your home, park, etc.",
+      "additionalInformation": "Additional Information",
+      "message": "Tell Us About Your Pet",
+      "messagePlaceholder": "Tell us about your pet's personality, any specific shots you'd like, favorite treats, or anything else that would help us capture their unique spirit!",
+      "submit": "Submit Inquiry"
+    }
+  }
+}

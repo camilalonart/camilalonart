@@ -79,14 +79,14 @@ const LanguageOption = styled.button<{ $isActive: boolean }>`
   }
 `;
 
-const Flag = styled.span`
+const LanguageCode = styled.span`
   font-size: 16px;
   line-height: 1;
 `;
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
 ] as const;
 
 // Globe icon component
@@ -129,11 +129,21 @@ export default function LanguageSwitcher({ isDark = false }: LanguageSwitcherPro
   return (
     <LanguageSwitcherContainer
       ref={containerRef}
-      onKeyDown={event => {
+      onKeyDownCapture={event => {
         if (event.key === 'Escape' && isOpen) {
+          event.preventDefault();
           setIsOpen(false);
           buttonRef.current?.focus();
           event.stopPropagation();
+        }
+        if (isOpen && ['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+          event.preventDefault();
+          event.stopPropagation();
+          const options = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[aria-pressed]'));
+          const index = options.indexOf(document.activeElement as HTMLButtonElement);
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? options.length - 1
+            : (index + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
+          options[next]?.focus();
         }
       }}
       onBlur={event => {
@@ -154,17 +164,18 @@ export default function LanguageSwitcher({ isDark = false }: LanguageSwitcherPro
         <GlobeIcon />
       </IconButton>
 
-      <Dropdown id={dropdownId} $isOpen={isOpen}>
+      <Dropdown id={dropdownId} $isOpen={isOpen} hidden={!isOpen}>
         {languages.map(lang => (
           <LanguageOption
             key={lang.code}
             type="button"
+            disabled={!isOpen}
             lang={lang.code}
             aria-pressed={lang.code === locale}
             onClick={() => handleLanguageChange(lang.code)}
             $isActive={lang.code === locale}
           >
-            <Flag aria-hidden="true">{lang.flag}</Flag>
+            <LanguageCode aria-hidden="true">{lang.code.toUpperCase()}</LanguageCode>
             <span>{lang.name}</span>
           </LanguageOption>
         ))}

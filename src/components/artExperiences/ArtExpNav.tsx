@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, SmallFlower } from './Doodles';
@@ -236,8 +236,8 @@ export default function ArtExpNav() {
         >
           {t('artExperiences.nav.community')}
         </NavLink>
-        <NavLink href="/art-experiences/#you-and-i" onClick={() => setOpen(false)}>{t('artExperiences.nav.youAndIPaint')}</NavLink>
-        <NavLink href="/art-experiences/#upcoming" onClick={() => setOpen(false)}>{t('artExperiences.nav.upcoming')}</NavLink>
+        <NavLink as={Link} href="/art-experiences/#you-and-i" onClick={() => setOpen(false)}>{t('artExperiences.nav.youAndIPaint')}</NavLink>
+        <NavLink as={Link} href="/art-experiences/#upcoming" onClick={() => setOpen(false)}>{t('artExperiences.nav.upcoming')}</NavLink>
       </NavLinks>
 
       <NavRight>

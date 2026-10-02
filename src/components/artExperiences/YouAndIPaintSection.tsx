@@ -2,9 +2,11 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useDialog } from '@/hooks/useDialog';
 import { AE, StarSpark } from './Doodles';
 import { YOU_AND_I_PAINT_URL } from './data';
 
@@ -322,6 +324,7 @@ export default function YouAndIPaintSection() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const closeLightbox = () => setLightboxIndex(null);
+  const lightboxRef = useDialog(lightboxIndex !== null, closeLightbox);
 
   const prev = useCallback(() => {
     if (lightboxIndex === null) return;
@@ -352,11 +355,11 @@ export default function YouAndIPaintSection() {
             <TextCol>
               <Eyebrow>
                 <StarSpark size={12} color={AE.blue} />
-                {t('artExperiences.youAndIPaint.eyebrow')}
+                {t('artContent.experiences.teachingWith')}
               </Eyebrow>
               <Title>{t('artExperiences.youAndIPaint.title')}</Title>
               <Body>
-                {t('artExperiences.youAndIPaint.body')}
+                {t('artContent.experiences.teachingBody')}
               </Body>
               <ButtonRow>
                 <PrimaryBtn href={YOU_AND_I_PAINT_URL} target="_blank" rel="noopener noreferrer">
@@ -371,7 +374,7 @@ export default function YouAndIPaintSection() {
             <ImageCol>
               <Image
                 src="/images/artExperiences/You&I/A7T06088.webp"
-                alt="You & I Paint event — Camila teaching a painting class"
+                alt={t('artContent.experiences.teachingImage')}
                 fill
                 sizes="(max-width: 860px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
@@ -382,7 +385,7 @@ export default function YouAndIPaintSection() {
 
           <GallerySection id="you-and-i-gallery">
             <GalleryHeader>
-              <GalleryTitle>{t('artExperiences.youAndIPaint.galleryTitle')}</GalleryTitle>
+              <GalleryTitle>{t('artContent.experiences.teachingGallery')}</GalleryTitle>
               <GalleryCount>{GALLERY_IMAGES.length} {t('artExperiences.youAndIPaint.photosCount')}</GalleryCount>
             </GalleryHeader>
             <PhotoGrid>
@@ -390,7 +393,7 @@ export default function YouAndIPaintSection() {
                 <PhotoThumb key={src} onClick={() => setLightboxIndex(i)}>
                   <Image
                     src={src}
-                    alt={`You & I Paint event photo ${i + 1}`}
+                    alt={`${t('artContent.experiences.eventPhoto')} ${i + 1}`}
                     fill
                     sizes="(max-width: 380px) 50vw, (max-width: 600px) 33vw, (max-width: 900px) 25vw, 20vw"
                     style={{ objectFit: 'cover' }}
@@ -404,14 +407,17 @@ export default function YouAndIPaintSection() {
       </Section>
 
       {lightboxIndex !== null && (
-        <LightboxOverlay onClick={closeLightbox}>
-          <LightboxClose onClick={closeLightbox} aria-label="Close">✕</LightboxClose>
-          <LightboxNav $side="left" onClick={e => { e.stopPropagation(); prev(); }} aria-label="Previous">‹</LightboxNav>
-          <LightboxNav $side="right" onClick={e => { e.stopPropagation(); next(); }} aria-label="Next">›</LightboxNav>
+        <LightboxOverlay ref={lightboxRef} tabIndex={-1} onClick={closeLightbox} role="dialog" aria-modal="true" aria-label={t('artExperiences.threeCards.galleryTitle')}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'fixed', top: '1.25rem', right: '5rem', zIndex: 10001 }}>
+            <LanguageSwitcher isDark />
+          </div>
+          <LightboxClose onClick={closeLightbox} aria-label={t('artContent.common.close')}>✕</LightboxClose>
+          <LightboxNav $side="left" onClick={e => { e.stopPropagation(); prev(); }} aria-label={t('artContent.common.previous')}>‹</LightboxNav>
+          <LightboxNav $side="right" onClick={e => { e.stopPropagation(); next(); }} aria-label={t('artContent.common.next')}>›</LightboxNav>
           <LightboxInner onClick={e => e.stopPropagation()}>
             <Image
               src={GALLERY_IMAGES[lightboxIndex]}
-              alt={`You & I Paint event photo ${lightboxIndex + 1}`}
+              alt={`${t('artContent.experiences.eventPhoto')} ${lightboxIndex + 1}`}
               width={900}
               height={900}
               style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', borderRadius: '8px' }}

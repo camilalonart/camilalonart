@@ -1,6 +1,9 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
+import { useTranslation } from '../i18n/TranslationContext';
 
 interface BackToTopProps {
   showAt?: number;
@@ -62,6 +65,7 @@ export default function BackToTop({
   position = 'right',
   offset = 40,
 }: BackToTopProps) {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -93,8 +97,8 @@ export default function BackToTop({
       position={position}
       offset={offset}
       onClick={scrollToTop}
-      aria-label="Back to top"
-      title="Back to top"
+      aria-label={t('sharedContent.navigation.backToTop')}
+      title={t('sharedContent.navigation.backToTop')}
     >
       <svg
         viewBox="0 0 24 24"

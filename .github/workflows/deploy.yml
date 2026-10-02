@@ -49,6 +49,9 @@ jobs:
       - name: Check for accidentally committed credentials
         run: node scripts/check-secrets.js
 
+      - name: Check bilingual translation coverage
+        run: npm run check:translations
+
       - name: Create images directory
         run: mkdir -p public/images
 

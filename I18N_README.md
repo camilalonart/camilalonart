@@ -1,310 +1,103 @@
-# Sistema de Internacionalización (i18n)
+# English and Spanish
 
-Este proyecto ahora soporta **múltiples idiomas** (Inglés y Español) con un sistema completo de internacionalización.
+The existing URLs remain English. Spanish pages use the same path under `/es/`,
+for example `/photography/pets/` and `/es/photography/pets/`. Both versions are
+static HTML, including their initial content, document language and SEO metadata.
 
-## 🌍 Idiomas Disponibles
+## Source files
 
-- 🇺🇸 **English** (en) - Idioma por defecto
-- 🇪🇸 **Español** (es)
+- `src/app/(english)/`: the shared page implementations. Edit content here.
+- `src/app/(spanish)/es/`: generated Spanish adapters, not duplicated page bodies.
+- `scripts/generate-locale-routes.cjs`: creates adapters and the metadata registry.
+- `src/components/LocaleDocument.tsx`: shared document with the initial locale.
+- `src/i18n/TranslationContext.tsx`: translation lookup and in-place switching.
+- `src/i18n/route-metadata.ts` and `seo-es.ts`: localized metadata and descriptions.
+- `src/i18n/locales/`: English/Spanish dictionary pairs.
 
-## 📁 Estructura de Archivos
+`npm run generate-locales` regenerates adapters. `npm run build` runs it
+automatically through `prebuild`. Do not edit generated adapters directly.
 
-```
-src/
-├── i18n/
-│   ├── TranslationContext.tsx    # Context provider y hook
-│   └── locales/
-│       ├── en.json                # Traducciones en inglés
-│       └── es.json                # Traducciones en español
-└── components/
-    └── LanguageSwitcher.tsx       # Selector de idioma UI
-```
+## Adding or editing copy
 
-## 🎨 Selector de Idioma
+Common text lives in `en.json` / `es.json`. Additional dictionary namespaces:
 
-El selector de idioma es un componente elegante y moderno que:
+| Files | Namespace | Shape |
+|---|---|---|
+| `art-content.en.json` / `.es.json` | `artContent` | Raw content; provider adds the namespace |
+| `creative-content.en.json` / `.es.json` | `creativeContent` | Raw content; provider adds the namespace |
+| `photography-content.en.json` / `.es.json` | `photographyContent` | Namespace already present in each file |
+| `shared-content.en.json` / `.es.json` | `sharedContent` | Namespace already present in each file |
 
-✨ **Características:**
-- Dropdown animado con banderas
-- Persiste la selección en localStorage
-- Detecta automáticamente el idioma del navegador
-- Responsive (oculta el nombre del idioma en móviles pequeños)
-- Diseño glassmorphism con blur
-- Transiciones suaves
-
-📍 **Ubicación:**
-- Aparece en el navigation bar (esquina superior derecha)
-- Visible en todas las páginas del sitio
-
-## 🔧 Cómo Usar las Traducciones
-
-### En un Componente React
+Keep both languages' keys, arrays and interpolation placeholders aligned.
+Translate prose, labels, errors, image descriptions and accessibility labels;
+preserve original artwork/project titles, people, prices and backend option values.
 
 ```tsx
-'use client';
+import { useTranslation } from '@/i18n/TranslationContext';
 
-import { useTranslation } from '../i18n/TranslationContext';
-
-export default function MiComponente() {
-  const { t, locale, setLocale } = useTranslation();
-
-  return (
-    <div>
-      <h1>{t('home.title')}</h1>
-      <p>{t('home.subtitle')}</p>
-      <button onClick={() => setLocale('es')}>
-        Cambiar a Español
-      </button>
-    </div>
-  );
-}
+const { t, locale, setLocale } = useTranslation();
+// Derive displayed text on every render, including existing status messages.
+return <button onClick={() => setLocale('es')}>{t('common.changeLanguage')}</button>;
 ```
 
-### Funciones Disponibles
+Store a status code or translation key, not the translated message in React state.
+Otherwise an existing notification will stay in its previous language.
 
-- **`t(key)`**: Traduce una clave
-  ```tsx
-  t('home.title') // "Camilalonart"
-  t('home.petPhotography.title') // "Pet Photography" o "Fotografía de Mascotas"
-  ```
+## Navigation and switching
 
-- **`locale`**: Idioma actual ('en' o 'es')
-  ```tsx
-  console.log(locale); // "es"
-  ```
+Use `@/i18n/LocalizedLink` instead of `next/link` for internal page links.
+Use `useLocalizedRouter` from `@/i18n/navigation` for imperative page navigation.
+Use `localizedPath(path, locale)` for native anchors. Assets, API paths, downloads,
+external URLs and same-page fragments are left unchanged.
 
-- **`setLocale(newLocale)`**: Cambia el idioma
-  ```tsx
-  setLocale('en'); // Cambia a inglés
-  setLocale('es'); // Cambia a español
-  ```
+Switching updates the URL through Next.js's native History integration without
+remounting the page. Form fields, package selections, filters, lightboxes,
+query parameters and fragments remain intact. The title, metadata and document
+language update to match. Reloading loads the corresponding static locale page.
 
-## 📝 Estructura de las Traducciones
+The explicit URL always controls the language. A saved preference never overrides
+a deep link. At the English homepage, a saved Spanish choice or Spanish browser
+language offers a small optional suggestion; it does not silently redirect.
+Choosing either language saves that preference. No form drafts are stored.
 
-Las traducciones están organizadas por secciones:
+`LanguageSwitcher` uses language names and EN/ES codes, not national flags.
+Pages with no header language control receive a floating control. Active dialogs
+include their own control inside the focus trap. Escape closes an open language
+menu first, then the dialog.
 
-```json
-{
-  "nav": {
-    "home": "Home",
-    "photography": "Photography",
-    ...
-  },
-  "home": {
-    "title": "Camilalonart",
-    "subtitle": "Professional photographer...",
-    "petPhotography": {
-      "title": "Pet Photography",
-      "description": "Capturing the unique..."
-    },
-    ...
-  },
-  "common": {
-    "learnMore": "Learn More",
-    "bookNow": "Book Now",
-    ...
-  }
-}
+## Forms
+
+`useLocalizedForm()` provides `formRef`, `validate`, `onInput` and `onInvalid`.
+Attach them to a form with `noValidate`, then call `validate()` before sending.
+Use separate hook instances for separate forms. Locale changes update existing
+validation messages without clearing values.
+
+`createInquiryMailto()` translates draft subjects, labels and displayed option
+values without changing the stable values sent to configured form providers.
+Changing language does not submit a form or send an email.
+
+## SEO and new routes
+
+English and Spanish pages have their own canonical URLs and reciprocal
+`en`, `es` and `x-default` alternates. The sitemap includes both versions of
+published content; unfinished pages remain `noindex`.
+
+When adding a page, add its English metadata, Spanish SEO copy in `seo-es.ts`
+(or an appropriate data-backed resolver), both-language UI copy, and an entry in
+the published sitemap when ready. Regenerate adapters and build.
+
+## Checks
+
+```sh
+npm run check:translations
+npm run build
 ```
 
-## ➕ Agregar Nuevas Traducciones
+The translation check compares dictionary keys and placeholders and catches
+missing literal `t('...')` references. It does not replace reviewing dynamic keys,
+translated prose or browser flows. Test switching inside populated forms and
+galleries, back/forward navigation, reload, and Spanish HTML without JavaScript.
 
-### 1. Agregar a `en.json`:
-
-```json
-{
-  "home": {
-    ...existing keys...,
-    "newSection": {
-      "title": "New Section",
-      "description": "This is a new section"
-    }
-  }
-}
-```
-
-### 2. Agregar la traducción en `es.json`:
-
-```json
-{
-  "home": {
-    ...existing keys...,
-    "newSection": {
-      "title": "Nueva Sección",
-      "description": "Esta es una nueva sección"
-    }
-  }
-}
-```
-
-### 3. Usar en tu componente:
-
-```tsx
-<h2>{t('home.newSection.title')}</h2>
-<p>{t('home.newSection.description')}</p>
-```
-
-## 🌐 Agregar un Nuevo Idioma
-
-### 1. Crear archivo de traducción:
-
-```bash
-touch src/i18n/locales/fr.json
-```
-
-### 2. Agregar traducciones:
-
-```json
-{
-  "nav": {
-    "home": "Accueil",
-    "photography": "Photographie",
-    ...
-  },
-  ...
-}
-```
-
-### 3. Actualizar `TranslationContext.tsx`:
-
-```tsx
-import fr from './locales/fr.json';
-
-type Locale = 'en' | 'es' | 'fr';
-
-const translations = {
-  en,
-  es,
-  fr,
-};
-```
-
-### 4. Actualizar `LanguageSwitcher.tsx`:
-
-```tsx
-const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-];
-```
-
-## 🎯 Páginas Traducidas
-
-Las siguientes páginas ya están traducidas:
-
-- ✅ **Homepage** (`/`) - Completamente traducida
-  - Hero section
-  - Photography Services (5 tarjetas)
-  - My Art (4 tarjetas)
-  - Creative Services (4 tarjetas)
-  - Tech (2 tarjetas)
-
-### Próximas Páginas a Traducir:
-
-- 📝 Pet Photography page
-- 📝 Wedding & Couples page
-- 📝 Headshots page
-- 📝 Family & Maternity page
-- 📝 Wildlife Photography page
-- 📝 Otras secciones de My Art
-- 📝 Creative Services pages
-- 📝 Tech pages
-- 📝 Footer
-
-## 💡 Tips
-
-### Claves de Traducción
-
-- Usa nombres descriptivos: `home.petPhotography.title` en vez de `pp1`
-- Organiza por sección/página
-- Usa estructura anidada para mantener orden
-- Sé consistente con los nombres
-
-### Valores por Defecto
-
-Si una clave no existe, el sistema devuelve la clave misma:
-
-```tsx
-t('non.existent.key') // Devuelve "non.existent.key"
-// Y muestra un warning en consola
-```
-
-### Persistencia
-
-El idioma seleccionado se guarda en `localStorage` y persiste entre sesiones.
-
-### Detección Automática
-
-Al cargar la página por primera vez, el sistema:
-1. Verifica si hay un idioma guardado en localStorage
-2. Si no, detecta el idioma del navegador
-3. Si es español, usa 'es', sino usa 'en' (default)
-
-## 🚀 Ejemplos de Uso
-
-### Texto Simple
-
-```tsx
-<h1>{t('home.title')}</h1>
-```
-
-### Texto Anidado
-
-```tsx
-<h3>{t('home.petPhotography.title')}</h3>
-<p>{t('home.petPhotography.description')}</p>
-```
-
-### Botones
-
-```tsx
-<button>{t('common.bookNow')}</button>
-<button>{t('common.learnMore')}</button>
-```
-
-### Condicional por Idioma
-
-```tsx
-const { locale } = useTranslation();
-
-{locale === 'es' && <p>Contenido solo en español</p>}
-{locale === 'en' && <p>English-only content</p>}
-```
-
-## 🎨 Estilos del Selector
-
-El `LanguageSwitcher` tiene estos estilos personalizables:
-
-- **Botón**: Glassmorphism con blur
-- **Dropdown**: Fondo blanco con sombra
-- **Hover**: Animaciones suaves
-- **Active**: Resaltado en color dorado (#A97D1E)
-- **Responsive**: Se adapta a móviles
-
-## 📱 Responsive Design
-
-- **Desktop**: Muestra bandera + nombre + icono
-- **Mobile** (< 480px): Solo bandera + icono
-- **El dropdown siempre muestra nombre completo**
-
-## 🔍 Debugging
-
-Para ver el idioma actual y keys disponibles:
-
-```tsx
-const { locale, t } = useTranslation();
-
-console.log('Current locale:', locale);
-console.log('Translation:', t('home.title'));
-```
-
-## 📚 Recursos
-
-- [React Context API](https://react.dev/reference/react/useContext)
-- [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-- [Navigator.language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language)
-
----
-
-**Nota**: Este sistema es escalable y puede soportar tantos idiomas como necesites. Solo agrega nuevos archivos JSON en `/src/i18n/locales/` y actualiza los componentes correspondientes.
+Adding another language requires corresponding routes, document initialization,
+metadata, sitemap alternates, helpers and dictionaries; adding a JSON file alone
+is not sufficient.

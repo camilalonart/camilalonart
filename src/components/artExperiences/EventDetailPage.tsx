@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
 import { AE, WavyUnderline, StarSpark, SmallFlower } from './Doodles';
-import type { ArtEvent } from './data';
+import { type ArtEvent, localizedEventDate, localizedEventTime } from './data';
 import { useTranslation } from '../../i18n/TranslationContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useDialog } from '@/hooks/useDialog';
 import ArtExpNav from './ArtExpNav';
 import ArtExpFooter from './ArtExpFooter';
 
@@ -619,7 +621,7 @@ const PHOTO_LAYOUTS: { tall?: boolean; wide?: boolean }[] = [
 ];
 
 export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
   const lang = locale as 'en' | 'es';
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -629,6 +631,7 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
 
   const openLightbox = useCallback((i: number) => setLightboxIndex(i), []);
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const lightboxRef = useDialog(lightboxIndex !== null, closeLightbox);
   const goPrev = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + photos.length) % photos.length : null), [photos.length]);
   const goNext = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % photos.length : null), [photos.length]);
 
@@ -642,7 +645,7 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
   const description = event.description[lang];
 
   const priceDisplay = event.price === 'free'
-    ? 'Free'
+    ? t('artExperiences.upcoming.free')
     : `$${event.price} ${event.currency}`;
 
   return (
@@ -659,24 +662,24 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
 
           <InfoCard>
               <PriceDisplay>
-                <PriceLabel>{lang === 'en' ? 'Price per person' : 'Precio por persona'}</PriceLabel>
+                <PriceLabel>{t('artContent.experiences.perPerson')}</PriceLabel>
                 <PriceValue>{priceDisplay}</PriceValue>
               </PriceDisplay>
 
               {event.spotsTotal !== undefined && event.spotsLeft === 0 ? (
                 <SoldOutChip>
-                  ✕ {lang === 'en' ? 'Sold Out' : 'Agotado'} · {event.spotsTotal}/{event.spotsTotal}
+                  ✕ {t('artExperiences.upcoming.soldOut')} · {event.spotsTotal}/{event.spotsTotal}
                 </SoldOutChip>
               ) : (
                 <>
                   {event.ticketsAvailable && (
                     <TicketsAvailableBadge>
-                      {lang === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
+                      {t('artContent.experiences.ticketsAvailable')}
                     </TicketsAvailableBadge>
                   )}
                   {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
                     <SpotsChip $low={event.spotsLeft <= 5}>
-                      {event.spotsLeft} {lang === 'en' ? 'spots left' : 'lugares disponibles'}
+                      {event.spotsLeft} {t('artExperiences.upcoming.spotsLeft')}
                     </SpotsChip>
                   )}
                 </>
@@ -688,8 +691,8 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
                 <MetaItem>
                   <MetaIcon>📅</MetaIcon>
                   <MetaText>
-                    {event.date}
-                    <MetaSub>{event.time}</MetaSub>
+                    {localizedEventDate(event.dateISO, locale)}
+                    <MetaSub>{localizedEventTime(event.time, locale)}</MetaSub>
                   </MetaText>
                 </MetaItem>
                 <MetaItem>
@@ -703,11 +706,9 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
                   <MetaItem>
                     <MetaIcon>👥</MetaIcon>
                     <MetaText>
-                      {lang === 'en' ? 'Small group' : 'Grupo pequeño'}
+                      {t('artContent.experiences.smallGroup')}
                       <MetaSub>
-                        {lang === 'en'
-                          ? `Max ${event.spotsTotal} participants`
-                          : `Máx. ${event.spotsTotal} participantes`}
+                        {t('artContent.experiences.maxParticipants').replace('{count}', String(event.spotsTotal))}
                       </MetaSub>
                     </MetaText>
                   </MetaItem>
@@ -719,17 +720,17 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
               <CTAStack>
                 {event.eventbriteUrl && (
                   <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer">
-                    {lang === 'en' ? 'Buy Tickets on Eventbrite' : 'Comprar en Eventbrite'} ↗
+                    {t('artContent.experiences.eventbriteTickets')} ↗
                   </CTAPrimary>
                 )}
                 {event.flockUrl && (
                   <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer">
-                    {lang === 'en' ? 'Reserve a Spot on Flock' : 'Reservar en Flock'} ↗
+                    {t('artContent.experiences.flockReservation')} ↗
                   </CTASecondary>
                 )}
                 {event.artistPortfolioUrl && (
                   <CTAPortfolio href={event.artistPortfolioUrl}>
-                    🎨 {lang === 'en' ? "View Artist's Portfolio" : 'Ver Portafolio de la Artista'}
+                    🎨 {t('artContent.experiences.artistPortfolio')}
                   </CTAPortfolio>
                 )}
               </CTAStack>
@@ -753,9 +754,7 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
         </MainColumn>
         <Sidebar>
           <MaterialsNote>
-            ✦ {lang === 'en'
-              ? 'All painting materials are included'
-              : 'Todos los materiales de pintura están incluidos'}
+            ✦ {t('artExperiences.myExperiences.materialsProvided')}
           </MaterialsNote>
           <Description>{description}</Description>
         </Sidebar>
@@ -767,11 +766,11 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
             <GalleryHeader>
               <GalleryEyebrow>
                 <SmallFlower size={13} color={AE.blue} />
-                {lang === 'en' ? 'Event Memories' : 'Recuerdos del Evento'}
+                {t('artContent.experiences.eventMemories')}
                 <SmallFlower size={13} color={AE.blue} />
               </GalleryEyebrow>
               <GalleryTitle>
-                {lang === 'en' ? 'photos from the day' : 'fotos del día'}
+                {t('artContent.experiences.photosFromDay')}
               </GalleryTitle>
               <GalleryWavyWrap>
                 <WavyUnderline width={80} color={AE.blue} />
@@ -787,11 +786,11 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
                     $tall={layout.tall}
                     $wide={layout.wide}
                     onClick={() => openLightbox(i)}
-                    aria-label={`Photo ${i + 1} of ${photos.length}`}
+                    aria-label={`${t('artContent.common.photo')} ${i + 1} ${t('artContent.common.of')} ${photos.length}`}
                   >
                     <Image
                       src={src}
-                      alt={`${title} — photo ${i + 1}`}
+                      alt={`${title} — ${t('artContent.common.photo')} ${i + 1}`}
                       fill
                       sizes="(max-width: 480px) 100vw, (max-width: 700px) 50vw, 33vw"
                       style={{ objectFit: 'cover' }}
@@ -805,12 +804,15 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
       )}
 
       {lightboxIndex !== null && photos[lightboxIndex] && (
-        <LightboxOverlay onClick={closeLightbox}>
+        <LightboxOverlay ref={lightboxRef} tabIndex={-1} onClick={closeLightbox} role="dialog" aria-modal="true" aria-label={title}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'fixed', top: '1.25rem', right: '5rem', zIndex: 10001 }}>
+            <LanguageSwitcher isDark />
+          </div>
           <LightboxContent onClick={e => e.stopPropagation()}>
             <LightboxImg>
               <Image
                 src={photos[lightboxIndex]}
-                alt={`${title} — photo ${lightboxIndex + 1}`}
+                alt={`${title} — ${t('artContent.common.photo')} ${lightboxIndex + 1}`}
                 width={1200}
                 height={800}
                 style={{ objectFit: 'contain', maxHeight: '85vh', width: 'auto' }}
@@ -818,11 +820,11 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
               />
             </LightboxImg>
           </LightboxContent>
-          <LightboxClose onClick={closeLightbox} aria-label="Close">✕</LightboxClose>
+          <LightboxClose onClick={closeLightbox} aria-label={t('artContent.common.close')}>✕</LightboxClose>
           {photos.length > 1 && (
             <>
-              <LightboxNav $side="left" onClick={goPrev} aria-label="Previous">‹</LightboxNav>
-              <LightboxNav $side="right" onClick={goNext} aria-label="Next">›</LightboxNav>
+              <LightboxNav $side="left" onClick={goPrev} aria-label={t('artContent.common.previous')}>‹</LightboxNav>
+              <LightboxNav $side="right" onClick={goNext} aria-label={t('artContent.common.next')}>›</LightboxNav>
               <LightboxCounter>{lightboxIndex + 1} / {photos.length}</LightboxCounter>
             </>
           )}

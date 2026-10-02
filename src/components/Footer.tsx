@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import { theme } from '../styles/theme';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from '../i18n/TranslationContext';
@@ -119,11 +119,10 @@ const LanguageWrapper = styled.div`
 
 interface FooterProps {
   aboutText?: string;
+  aboutTextKey?: string;
 }
 
-const defaultAboutText = "Professional photographer and creative artist specializing in weddings, wildlife, portraits, and commercial photography. Based in Vancouver, BC, available worldwide.";
-
-export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
+export default function Footer({ aboutTextKey = 'footer.aboutText' }: FooterProps) {
   const { t } = useTranslation();
 
   return (
@@ -131,7 +130,7 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
       <FooterContent>
         <FooterSection>
           <h3>{t('footer.about')}</h3>
-          <p>{t('footer.aboutText')}</p>
+          <p>{t(aboutTextKey)}</p>
         </FooterSection>
 
         <FooterSection>
@@ -167,12 +166,12 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
           <ul>
             <li>{t('footer.email')}: <a href="mailto:bycamilalonart@gmail.com">bycamilalonart@gmail.com</a></li>
             <li>{t('footer.phone')}: <a href="tel:+16723389307">+1 (672) 338 - 9307</a></li>
-            <li>{t('footer.location')}: Vancouver, BC, Canada</li>
+            <li>{t('footer.location')}: {t('sharedContent.navigation.location')}</li>
           </ul>
           <SocialLinks>
             <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Instagram @camilalonart">📷</a>
             <a href="https://instagram.com/camilonart" target="_blank" rel="noopener noreferrer" aria-label="Instagram @camilonart">📸</a>
-            <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Behance Portfolio">🎨</a>
+            <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer" aria-label={t('sharedContent.navigation.behance')}>🎨</a>
           </SocialLinks>
         </FooterSection>
       </FooterContent>

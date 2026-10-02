@@ -328,12 +328,12 @@ export default function HeroSection() {
         <TextSide>
           <Eyebrow>
             <EyebrowDot />
-            {t('artExperiences.hero.eyebrow')}
+            {t('artContent.experiences.allLevels')}
           </Eyebrow>
 
-          <Title>art experiences</Title>
+          <Title>{t('artContent.experiences.title')}</Title>
 
-          <TitleTagline>create. connect. belong.</TitleTagline>
+          <TitleTagline>{t('artContent.experiences.tagline')}</TitleTagline>
 
           <WavyWrap>
             <WavyUnderline width={120} color={AE.blue} />
@@ -352,7 +352,7 @@ export default function HeroSection() {
           <IllustrationFrame>
             <Image
               src="/images/artExperiences/CreativeCorner/Illustration1.webp"
-              alt="Art experiences illustration — flowers, easel, coffee, wine glass and paint palette"
+              alt={t('artContent.experiences.illustration')}
               width={560}
               height={380}
               priority

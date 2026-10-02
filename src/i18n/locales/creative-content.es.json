@@ -1,0 +1,185 @@
+{
+  "common": {
+    "services": "Servicios",
+    "duration": "Duración:",
+    "schedule": "Horario:",
+    "image": "Imagen"
+  },
+  "index": {
+    "title": "Servicios creativos",
+    "intro": "Servicios creativos profesionales a tu medida para potenciar tu marca y dar vida a tu visión. Desde el diseño de identidad de marca hasta la fotografía comercial, ofrecemos resultados excepcionales a clientes de toda Norteamérica.",
+    "location": "En Vancouver, Canadá • Disponible para proyectos locales y a distancia",
+    "projects": [
+      { "title": "Diseño de identidad de marca", "description": "Identidad de marca completa que incluye logotipo, paleta de colores y manual de marca" },
+      { "title": "Fotografía editorial", "description": "Sesiones editoriales de moda y estilo de vida para revistas y publicaciones" },
+      { "title": "Fotografía comercial", "description": "Fotografía de productos y publicidad para grandes marcas" },
+      { "title": "Impresiones artísticas", "description": "Impresiones de alta calidad de mis obras, impresas profesionalmente y enviadas a todo el mundo" },
+      { "title": "Gráficos en movimiento", "description": "Logotipos y elementos de marca animados" }
+    ]
+  },
+  "artClasses": {
+    "title": "Clases de arte",
+    "intro": "Aprende, crece y exprésate a través del arte.",
+    "coursesTitle": "Cursos disponibles",
+    "infoTitle": "Información de las clases",
+    "courses": [
+      {
+        "title": "Fundamentos del arte digital",
+        "items": ["Introducción a las herramientas digitales", "Teoría del color y composición", "Técnicas de pintura digital", "Conceptos básicos del diseño de personajes", "Desarrollo de portafolio"],
+        "duration": "8 semanas",
+        "schedule": "Una vez a la semana, 2 horas"
+      },
+      {
+        "title": "Taller de arte tradicional",
+        "items": ["Fundamentos del dibujo", "Técnicas de acuarela", "Conceptos básicos de pintura al óleo", "Exploración de técnicas mixtas", "Sesiones con modelo en vivo"],
+        "duration": "6 semanas",
+        "schedule": "Dos veces a la semana, 2 horas"
+      },
+      {
+        "title": "Fundamentos del negocio del arte",
+        "items": ["Creación de portafolio", "Marketing en redes sociales", "Estrategias de precios", "Comunicación con clientes", "Consideraciones legales"],
+        "duration": "4 semanas",
+        "schedule": "Una vez a la semana, 2 horas"
+      }
+    ],
+    "info": [
+      { "title": "Grupos pequeños", "description": "Máximo de 8 estudiantes por clase para ofrecer atención y comentarios personalizados." },
+      { "title": "Horario flexible", "description": "Clases disponibles por la mañana y por la noche para adaptarse a distintos horarios." },
+      { "title": "Todos los niveles", "description": "Cursos diseñados tanto para principiantes como para artistas avanzados que buscan ampliar sus habilidades." },
+      { "title": "Ubicación en Vancouver", "description": "Clases en nuestro estudio de Vancouver con todo el equipo necesario incluido." }
+    ]
+  },
+  "graphicRecording": {
+    "title": "Relatoría gráfica",
+    "intro": "Transformamos conversaciones e ideas en historias visuales cautivadoras. Facilitación visual en tiempo real para reuniones, eventos y talleres.",
+    "benefitsTitle": "Beneficios",
+    "services": [
+      { "title": "Relatoría de eventos en vivo", "items": ["Conferencias y seminarios", "Reuniones corporativas", "Talleres y capacitaciones", "Mesas redondas", "Visualización en tiempo real"] },
+      { "title": "Relatoría gráfica digital", "items": ["Reuniones virtuales", "Conferencias en línea", "Talleres a distancia", "Entrega de archivos digitales", "Elementos interactivos"] },
+      { "title": "Soluciones a medida", "items": ["Planificación estratégica", "Mapeo de la visión", "Visualización de procesos", "Mapeo de historias", "Registro de conocimientos"] }
+    ],
+    "benefits": [
+      { "title": "Mayor participación", "description": "La narrativa visual mantiene la atención de los participantes y les ayuda a retener mejor la información." },
+      { "title": "Comunicación clara", "description": "Las ideas complejas se vuelven accesibles mediante la representación y la síntesis visual." },
+      { "title": "Impacto duradero", "description": "Los registros visuales sirven como potentes recordatorios y materiales de consulta después del evento." },
+      { "title": "Procesamiento en tiempo real", "description": "La visualización inmediata ayuda a los participantes a procesar y comprender la información a medida que se comparte." }
+    ]
+  },
+  "brandIdentity": {
+    "title": "Diseño de identidad de marca",
+    "intro": "Creamos identidades de marca distintivas y memorables que conectan con tu público y perduran en el tiempo.",
+    "processTitle": "Proceso de diseño",
+    "caseStudies": [
+      {
+        "title": "Marca de moda sostenible",
+        "description": "Identidad de marca completa para una firma de moda sostenible, centrada en el diseño minimalista y la conciencia ambiental.",
+        "details": [
+          { "title": "Estrategia de marca", "description": "Desarrollé una estrategia de marca coherente que destaca la sostenibilidad, la calidad y el minimalismo moderno." },
+          { "title": "Identidad visual", "description": "Creé un sistema de logotipos versátil, una paleta de colores inspirada en la sostenibilidad y una tipografía personalizada." },
+          { "title": "Implementación", "description": "Diseñé empaques, etiquetas, materiales de marketing y recursos digitales." }
+        ]
+      },
+      {
+        "title": "Renovación de marca de una startup tecnológica",
+        "description": "Renovación estratégica de marca para una empresa tecnológica en crecimiento, transformando su identidad para reflejar innovación y escalabilidad.",
+        "details": [
+          { "title": "Investigación y análisis", "description": "Realicé una investigación de mercado y un análisis de la competencia para posicionar la marca de manera eficaz." },
+          { "title": "Evolución de marca", "description": "Actualicé el lenguaje visual manteniendo el reconocimiento y la confianza en la marca." },
+          { "title": "Enfoque digital", "description": "Creé un sistema de diseño adaptable para plataformas y aplicaciones digitales." }
+        ]
+      }
+    ],
+    "services": [
+      { "title": "Diseño de logotipos", "items": ["Creación de logotipos personalizados", "Variaciones y formatos de logotipos", "Desarrollo del símbolo de marca", "Diseño de iconos y símbolos", "Selección tipográfica"] },
+      { "title": "Manual de marca", "items": ["Desarrollo de la paleta de colores", "Sistema tipográfico", "Elementos de diseño", "Pautas de uso", "Voz y tono de marca"] },
+      { "title": "Materiales de marca", "items": ["Tarjetas de presentación", "Membretes y papelería", "Recursos para redes sociales", "Materiales de marketing", "Plantillas digitales"] }
+    ],
+    "process": [
+      { "title": "Descubrimiento", "description": "Comprendemos los valores de tu marca, tu público objetivo y tus metas comerciales mediante una consulta en profundidad." },
+      { "title": "Investigación", "description": "Analizamos tendencias del mercado, competidores y oportunidades para posicionar tu marca de manera eficaz." },
+      { "title": "Diseño", "description": "Creamos elementos visuales únicos que capturan la esencia de tu marca y conectan con tu público." },
+      { "title": "Implementación", "description": "Entregamos un manual de marca completo y recursos para aplicar la identidad de forma coherente." }
+    ]
+  },
+  "uxui": {
+    "design": "Diseño",
+    "ticker": ["Diseño UX", "Diseño UI", "Diseño de producto", "Identidad de marca", "Móvil", "Interfaz", "Figma", "Prototipado", "Investigación de usuarios"],
+    "acquisition": "Adquisición por un unicornio",
+    "location": "Vancouver, Canadá",
+    "workTitle": "Proyectos seleccionados",
+    "contact": "Contacto",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu@correo.com",
+    "deliveryUnconfirmed": "No se ha confirmado el envío. Envía tu consulta por correo:",
+    "inquirySubject": "Consulta de UX/UI",
+    "emailName": "nombre",
+    "emailEmail": "correo",
+    "emailMessage": "mensaje",
+    "cleverlynkTags": "Logotipo · Identidad de marca · UX/UI · Adquirida por Rappi",
+    "alfredTags": "Pantallas de producto · Empresa colombiana",
+    "defaultTags": "Diseño UX/UI",
+    "projectImage": "Imagen del proyecto",
+    "projectPreview": "Vista previa del proyecto"
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Historias, reflexiones y una mirada entre bastidores a mi recorrido creativo en Vancouver y más allá. Exploramos el arte, la fotografía y el proceso creativo.",
+    "readMore": "Leer más →",
+    "posts": [
+      { "title": "Explorando Vancouver a través de una lente", "excerpt": "Un recorrido fotográfico por los rincones escondidos y los lugares emblemáticos de Vancouver...", "tags": ["Fotografía", "Vancouver", "Vida urbana"] },
+      { "title": "La evolución de mi proceso de arte digital", "excerpt": "Cómo se ha transformado mi flujo de trabajo artístico con los años, de lo tradicional a lo digital...", "tags": ["Arte digital", "Proceso creativo", "Tecnología"] }
+    ]
+  },
+  "everyday": {
+    "title": "Fotografía cotidiana",
+    "intro": "Encuentro belleza en lo cotidiano y capturo la poesía del día a día con una mirada que transforma lo habitual en algo extraordinario.",
+    "galleries": [
+      { "title": "Vida en las calles", "description": "Momentos espontáneos en las animadas calles de Vancouver", "captions": ["Prisa matutina", "Cultura de café", "Ciudad de lluvia", "Mercados nocturnos"] },
+      { "title": "Detalles urbanos", "description": "Encuentro arte en la arquitectura y las texturas de la ciudad", "captions": ["Vidrio y acero", "Patrones ocultos", "Luces de la ciudad", "Naturaleza urbana"] },
+      { "title": "Momentos de calma", "description": "La poesía de la vida cotidiana", "captions": ["Luz de la mañana", "Pausa para el café", "Rincón de lectura", "Ventana lluviosa"] }
+    ]
+  },
+  "techCourses": {
+    "title": "Cursos de tecnología",
+    "intro": "Mejora tus habilidades tecnológicas con cursos prácticos impartidos por profesionales del sector. Grupos pequeños, proyectos prácticos y comentarios personalizados.",
+    "detailsTitle": "Detalles del curso",
+    "learnTitle": "Qué aprenderás",
+    "register": "Me interesa",
+    "courses": [
+      {
+        "title": "Desarrollo web moderno",
+        "description": "Aprende a crear aplicaciones web modernas y adaptables con React, Next.js y TypeScript.",
+        "duration": "8 semanas",
+        "schedule": "Dos veces a la semana, 2 horas por sesión",
+        "topics": ["Fundamentos de React y hooks", "Funciones de Next.js 13+", "Conceptos esenciales de TypeScript", "Styled-components y CSS-in-JS", "Integración de API y obtención de datos", "Optimización del rendimiento"]
+      },
+      {
+        "title": "Fundamentos de arquitectura en la nube",
+        "description": "Domina los conceptos de computación en la nube y aprende a diseñar infraestructura escalable en AWS.",
+        "duration": "6 semanas",
+        "schedule": "Una vez a la semana, 3 horas por sesión",
+        "topics": ["Servicios principales de AWS", "Infraestructura como código", "Arquitectura sin servidor", "Diseño de microservicios", "Buenas prácticas de seguridad", "Optimización de costos"]
+      },
+      {
+        "title": "Curso intensivo de desarrollo full-stack",
+        "description": "Programa integral que abarca el desarrollo tanto de frontend como de backend.",
+        "duration": "12 semanas",
+        "schedule": "Tres veces a la semana, 3 horas por sesión",
+        "topics": ["HTML, CSS y JavaScript", "React y Next.js", "Node.js y Express", "Diseño de bases de datos y MongoDB", "API RESTful", "Autenticación y autorización"]
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Portafolio",
+    "intro": "Una colección de fotografía profesional y trabajo creativo que muestra el arte de contar historias visuales en distintos géneros y medios.",
+    "heroAlt": "Imagen de portada del portafolio",
+    "viewGallery": "Ver galería",
+    "sections": [
+      { "title": "Bodas y parejas", "description": "Capturo momentos íntimos y emociones genuinas. Cada foto cuenta una historia de amor única y conserva recuerdos que durarán toda la vida." },
+      { "title": "Fotografía de vida silvestre", "description": "Documento la belleza natural de la vida silvestre. Desde safaris africanos hasta proyectos locales de conservación, cada imagen fomenta la conciencia y el aprecio por la naturaleza." },
+      { "title": "Fotografía de mascotas", "description": "Retratos profesionales de mascotas que capturan la personalidad y el espíritu únicos de tus queridos compañeros en un ambiente cómodo y divertido." },
+      { "title": "Retratos profesionales", "description": "Retratos modernos y profesionales para particulares y empresas. Muestro tu mejor versión sin perder autenticidad." },
+      { "title": "Servicios creativos", "description": "Identidad de marca, fotografía editorial y arte digital. Creación de contenido visual atractivo que cuenta tu historia y conecta con tu público." }
+    ]
+  }
+}

@@ -3,6 +3,15 @@
 Sitio web portafolio construido con Next.js 14, TypeScript y Styled Components.
 Alojado en GitHub Pages en [camilalonart.com](https://www.camilalonart.com).
 
+## Ingles y espanol
+
+Las URLs actuales se conservan en ingles; las versiones en espanol estan bajo
+`/es/`. Edita las paginas compartidas en `src/app/(english)/` y sus diccionarios
+EN/ES, no los adaptadores generados de `src/app/(spanish)/es/`.
+`npm run build` regenera las rutas y `npm run check:translations` comprueba
+claves y referencias. Consulta [I18N_README.md](I18N_README.md) para agregar
+contenido, enlaces y metadatos sin perder el idioma ni los datos de formularios.
+
 ## Publicacion segura
 
 Las pull requests ejecutan una compilacion del sitio estatico y una comprobacion

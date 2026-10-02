@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import Image from 'next/image';
 import styled, { keyframes, css } from 'styled-components';
-import data from '../../data/artPortfolio';
+import data, { localizedBio, localizedDescription, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -512,7 +512,7 @@ const SocialLinks = styled.div`
 
 // ─── Component ─────────────────────────────────────────────────────
 export default function ArtHome() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const heroImage = '/images/art/traditionalArt/Carrying Home/Moving.webp';
 
   // Featured paintings: first painting from first 3 collections
@@ -530,7 +530,7 @@ export default function ArtHome() {
         <HeroImgWrap>
           <Image
             src={heroImage}
-            alt="Featured artwork by Camila Londoño"
+            alt={t('artContent.gallery.featuredArt')}
             fill
             priority
             sizes="100vw"
@@ -541,20 +541,20 @@ export default function ArtHome() {
         <HeroContent>
           <ArtistName>CamilaLonart</ArtistName>
           <HeroRule />
-          <HeroTagline>Artist</HeroTagline>
+          <HeroTagline>{t('artContent.gallery.artist')}</HeroTagline>
         </HeroContent>
         <ScrollCue aria-hidden="true">
           <ScrollLine />
-          <span>Scroll</span>
+          <span>{t('art.scroll')}</span>
         </ScrollCue>
       </Hero>
 
       {/* Featured Works */}
       <Section>
-        <SectionEyebrow>Featured</SectionEyebrow>
-        <SectionTitle>Selected Works</SectionTitle>
+        <SectionEyebrow>{t('artContent.gallery.featured')}</SectionEyebrow>
+        <SectionTitle>{t('artContent.gallery.selectedWorks')}</SectionTitle>
         <SectionDesc>
-          A curated selection from recent collections.
+          {t('artContent.gallery.selectedDescription')}
         </SectionDesc>
         <FeaturedGrid>
           {featured.map(({ painting, collection }) => (
@@ -565,7 +565,7 @@ export default function ArtHome() {
               <FeaturedImgWrap>
                 <img
                   src={painting.images[0]}
-                  alt={`${painting.title} — ${painting.materials}`}
+                  alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}
                 />
@@ -582,7 +582,7 @@ export default function ArtHome() {
       {/* Collections */}
       <Section id="collections">
         <SectionEyebrow>{t('nav.collections')}</SectionEyebrow>
-        <SectionTitle>Explore</SectionTitle>
+        <SectionTitle>{t('art.explore')}</SectionTitle>
         <SectionDesc>
           {t('art.traditional.subtitle')}
         </SectionDesc>
@@ -602,8 +602,8 @@ export default function ArtHome() {
               </CollectionImgWrap>
               <CollectionOverlay>
                 <CollectionName>{col.name}</CollectionName>
-                <CollectionMeta>{col.period} · {col.paintings.length} works</CollectionMeta>
-                <CollectionDesc>{col.description}</CollectionDesc>
+                <CollectionMeta>{col.period} · {col.paintings.length} {t(col.paintings.length === 1 ? 'art.work' : 'art.works')}</CollectionMeta>
+                <CollectionDesc>{localizedDescription(col, locale)}</CollectionDesc>
               </CollectionOverlay>
             </CollectionCard>
           ))}
@@ -626,7 +626,7 @@ export default function ArtHome() {
             </AboutPhotoWrap>
           )}
           <AboutTextWrap>
-            {data.about.bio.slice(0, 2).map((para, i) => (
+            {localizedBio(data.about, locale).slice(0, 2).map((para, i) => (
               <AboutP key={i}>{para}</AboutP>
             ))}
             <ReadMoreLink href="/art/about/">
@@ -639,7 +639,7 @@ export default function ArtHome() {
       {/* Footer */}
       <Footer>
         <FooterText>
-          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('footer.copyright').replace(`© ${new Date().getFullYear()} Camilalonart. `, '')}
+          © {new Date().getFullYear()} <FooterGold>Camila Londoño</FooterGold>. {t('art.allRightsReserved')}
         </FooterText>
         <SocialLinks>
           <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">

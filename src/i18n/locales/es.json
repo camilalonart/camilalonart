@@ -8,6 +8,8 @@
     "family": "Familia y Maternidad",
     "myArt": "Mi Arte",
     "art": "Arte",
+    "digitalArt": "Arte Digital",
+    "traditionalArt": "Arte Tradicional",
     "wildlifePhotography": "Fotografía de Vida Salvaje",
     "everydayPhotography": "Fotografía Cotidiana",
     "blog": "Blog",
@@ -30,25 +32,75 @@
     "skipToContent": "Saltar al contenido",
     "mainContent": "Contenido principal"
   },
+  "weddingServices": {
+    "intro": "Explora las opciones y cuéntame qué tienes en mente.",
+    "swipeHint": "Desliza para explorar",
+    "previous": "Servicio anterior",
+    "next": "Servicio siguiente",
+    "range": "Servicios {start}–{end} de {total}",
+    "inquire": "Consultar sobre {service}"
+  },
+  "experienceGallery": {
+    "back": "Volver a experiencias artísticas",
+    "title": "Galería del evento",
+    "photos": "fotos",
+    "photo": "Fotografía del evento You & I Paint",
+    "view": "Ampliar foto",
+    "close": "Cerrar foto",
+    "previous": "Foto anterior",
+    "next": "Foto siguiente"
+  },
+  "routeMessages": {
+    "loading": "Cargando",
+    "notFound": "Página no encontrada",
+    "lostInGallery": "Un desvío por la galería",
+    "notFoundDescription": "La página que buscas puede haber cambiado de ubicación o nombre, o ya no estar disponible. Vuelve al inicio para seguir explorando.",
+    "returnHome": "Volver al inicio",
+    "error": "Algo salió mal",
+    "technicalDifficulties": "Problemas técnicos",
+    "errorDescription": "Lo sentimos, esta página encontró un error inesperado. Inténtalo de nuevo o vuelve al inicio.",
+    "tryAgain": "Intentar de nuevo"
+  },
   "homepage": {
     "homeLabel": "Camilalonart — inicio",
     "navigation": "Navegación de inicio",
     "language": "Idioma",
-    "servicesNav": "Trabajemos juntos",
+    "servicesNav": "Sesiones de fotos",
     "workNav": "Obra personal",
-    "location": "Vancouver, BC · Fotografía y arte",
-    "heroTitle": "Historias contadas",
-    "heroEmphasis": "con emoción.",
-    "intro": "Soy Camila Londoño, fotógrafa y artista en Vancouver. Desde las personas que amas hasta las ideas que quieres hacer realidad, creemos algo con significado.",
-    "inquire": "Cuéntame tu proyecto",
-    "findYourWorld": "Encuentra tu espacio",
-    "servicesEyebrow": "01 / Trabajemos juntos",
-    "servicesTitle": "Creado en torno a ti.",
-    "servicesIntro": "Fotografía, experiencias creativas y diseño. Elige lo que te trae aquí; cada espacio tiene su propia historia.",
+    "location": "Mi rincón creativo en Vancouver",
+    "heroTitle": "Hola, soy",
+    "heroEmphasis": "Camila.",
+    "facets": "Artista · Fotógrafa · Diseñadora · Ingeniera de software",
+    "intro": "Pinto, tomo fotos, diseño y escribo código. Aquí comparto lo que creo: explora mi trabajo o encuentra algo que podamos hacer juntos.",
+    "inquire": "Conversemos",
+    "findYourWorld": "Ven a explorar",
+    "exploreNav": "Empieza aquí",
+    "worldsIntro": "¿Qué te trae por aquí? Elige un rincón para explorar.",
+    "worlds": {
+      "art": {
+        "title": "Arte e historias",
+        "description": "Conoce mis pinturas y las historias que las acompañan."
+      },
+      "pets": {
+        "title": "Fotografía",
+        "description": "Encuentra una sesión para ti, los tuyos o tu mascota."
+      },
+      "art-experiences": {
+        "title": "Creemos juntos",
+        "description": "Descubre paint & sip y experiencias creativas."
+      },
+      "ux-ui": {
+        "title": "Diseño e ideas",
+        "description": "Explora mis proyectos UX/UI y cómo resuelvo problemas."
+      }
+    },
+    "servicesEyebrow": "01 / Detrás de la cámara",
+    "servicesTitle": "Tu gente. Tus momentos.",
+    "servicesIntro": "Una historia de amor, una familia que crece, tu mascota o una nueva etapa. Encuentra tu sesión, con todos los detalles y una forma de contactarme.",
     "viewService": "Explorar este servicio",
     "workEyebrow": "02 / Obra personal",
-    "workTitle": "Otra forma de mirar.",
-    "workIntro": "Descubre mi pintura y fotografía de vida silvestre. Un espacio para la curiosidad, la observación y las historias que nos acompañan.",
+    "workTitle": "¿Solo vienes a curiosear? Pasa.",
+    "workIntro": "No necesitas tener un proyecto en mente. Recorre mis pinturas, conoce a algunos animales en su mundo y déjate llevar por lo que te llame la atención.",
     "exploreCollection": "Explorar la colección",
     "processEyebrow": "03 / Conversemos",
     "processTitle": "Todo empieza con una conversación.",
@@ -70,7 +122,7 @@
     "contactTitle": "¿Qué te gustaría crear?",
     "contactIntro": "Para consultas de fotografía, preguntas sobre obras y colaboraciones creativas, escríbeme directamente.",
     "emailCamila": "Escríbele a Camila",
-    "footer": "Vancouver, BC · Arte, fotografía y conexión",
+    "footer": "Hecho con curiosidad en Vancouver, BC",
     "images": {
       "wedding": "Una pareja abrazándose con los edificios de Vancouver al fondo",
       "pets": "Retrato en blanco y negro de un golden retriever",

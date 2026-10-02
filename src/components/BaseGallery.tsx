@@ -6,6 +6,7 @@ import { theme } from '../styles/theme';
 import Image from 'next/image';
 import ImageModal from './ImageModal';
 import { useTranslation } from '../i18n/TranslationContext';
+import LocalizedLink from '@/i18n/LocalizedLink';
 
 const GalleryContainer = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const BackButton = styled.a`
+const BackButton = styled(LocalizedLink)`
   position: fixed;
   top: ${theme.spacing.xl};
   left: ${theme.spacing.sm};
@@ -113,7 +114,7 @@ export interface BaseGalleryProps {
 
 const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText, title }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const { locale } = useTranslation();
+  const { t } = useTranslation();
 
   const handleImageClick = (index: number) => {
     setSelectedImage(index);
@@ -148,7 +149,7 @@ const BaseGallery: React.FC<BaseGalleryProps> = ({ images, backLink, backText, t
               key={image.src}
               type="button"
               onClick={() => handleImageClick(index)}
-              aria-label={`${locale === 'es' ? 'Ampliar' : 'View larger'}: ${image.alt}`}
+              aria-label={`${t('sharedContent.images.viewLarger')}: ${image.alt}`}
               aria-haspopup="dialog"
             >
               <Image

@@ -4,6 +4,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useDialog } from '@/hooks/useDialog';
 import { AE, WavyUnderline, SmallFlower, StarSpark, TinyStar, PublicEventIcon, PrivateEventIcon, CorporateEventIcon, WeddingEventIcon } from './Doodles';
 import { FLOCK_COMMUNITY_URL, YOU_AND_I_PAINT_URL } from './data';
 
@@ -540,11 +542,13 @@ export default function ThreeCardsSection() {
   const [modalOpen, setModalOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const openModal = () => { setModalOpen(true); document.body.style.overflow = 'hidden'; };
-  const closeModal = () => { setModalOpen(false); document.body.style.overflow = ''; };
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const openLightbox = (i: number) => { setLightboxIndex(i); };
   const closeLightbox = () => setLightboxIndex(null);
+  const modalRef = useDialog(modalOpen && lightboxIndex === null, closeModal);
+  const lightboxRef = useDialog(lightboxIndex !== null, closeLightbox);
 
   const prev = useCallback(() => {
     if (lightboxIndex === null) return;
@@ -577,9 +581,9 @@ export default function ThreeCardsSection() {
   }, [modalOpen, lightboxIndex]);
 
   const eventTypes = [
-    { icon: <PublicEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.publicEventsTitle'), desc: t('artExperiences.threeCards.publicEventsDesc') },
+    { icon: <PublicEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.publicEventsTitle'), desc: t('artContent.experiences.publicSummary') },
     { icon: <PrivateEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.privatePartiesTitle'), desc: t('artExperiences.threeCards.privatePartiesDesc') },
-    { icon: <CorporateEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.corporateTitle'), desc: t('artExperiences.threeCards.corporateDesc') },
+    { icon: <CorporateEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.corporateTitle'), desc: t('artContent.experiences.corporateSummary') },
     { icon: <WeddingEventIcon size={36} color={AE.blue} />, title: t('artExperiences.threeCards.weddingsTitle'), desc: t('artExperiences.threeCards.weddingsDesc') },
   ];
 
@@ -600,7 +604,7 @@ export default function ThreeCardsSection() {
               <CardImageWrap $accent={AE.blue}>
                 <Image
                   src="/images/artExperiences/CreativeCorner/Logo.webp"
-                  alt="Creative Corner... community painting session"
+                  alt={t('artContent.experiences.communityImage')}
                   fill
                   sizes="(max-width: 860px) 100vw, 33vw"
                   style={{ objectFit: 'cover' }}
@@ -625,7 +629,7 @@ export default function ThreeCardsSection() {
               <CardImageWrap $accent={AE.blueDark}>
                 <Image
                   src="/images/artExperiences/CreativeCorner/paintsip.webp"
-                  alt="Art event poster... painting class in Vancouver"
+                  alt={t('artContent.experiences.posterImage')}
                   fill
                   sizes="(max-width: 860px) 100vw, 33vw"
                   style={{ objectFit: 'cover' }}
@@ -650,7 +654,7 @@ export default function ThreeCardsSection() {
               <CardImageWrap $accent="#7FA4C7">
                 <Image
                   src="/images/artExperiences/CreativeCorner/you&i.webp"
-                  alt="You & I Paint event... Camila teaching a painting class"
+                  alt={t('artContent.experiences.teachingImage')}
                   fill
                   sizes="(max-width: 860px) 100vw, 33vw"
                   style={{ objectFit: 'cover' }}
@@ -660,7 +664,7 @@ export default function ThreeCardsSection() {
               <CardContent>
                 <CardTitle>{t('artExperiences.threeCards.card3Title')}</CardTitle>
                 <CardDesc>
-                  {t('artExperiences.threeCards.card3Desc')}
+                  {t('artContent.experiences.teachingSummary')}
                 </CardDesc>
                 <CardCTA>{t('artExperiences.threeCards.card3Cta')} <span>→</span></CardCTA>
               </CardContent>
@@ -672,23 +676,26 @@ export default function ThreeCardsSection() {
       {/* You & I Paint Modal */}
       {modalOpen && (
         <ModalOverlay onClick={closeModal}>
-          <ModalPanel onClick={e => e.stopPropagation()}>
+          <ModalPanel ref={modalRef} tabIndex={-1} onClick={e => e.stopPropagation()} role="dialog" aria-modal={lightboxIndex === null ? 'true' : undefined} aria-label={t('artExperiences.threeCards.modalTitle')}>
             <ModalHeader>
-              <ModalClose onClick={closeModal} aria-label="Close">✕</ModalClose>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '3rem' }}>
+                <LanguageSwitcher />
+              </div>
+              <ModalClose onClick={closeModal} aria-label={t('artContent.common.close')}>✕</ModalClose>
               <ModalEyebrow>
                 <StarSpark size={11} color={AE.blue} />
-                {t('artExperiences.threeCards.modalEyebrow')}
+                {t('artContent.experiences.teachingWith')}
               </ModalEyebrow>
               <ModalTitle>{t('artExperiences.threeCards.modalTitle')}</ModalTitle>
               <div>
-                <ModalBadge>{t('artExperiences.threeCards.modalBadge1')}</ModalBadge>
+                <ModalBadge>{t('artContent.experiences.eventsTaught')}</ModalBadge>
                 <ModalBadge>{t('artExperiences.threeCards.modalBadge2')}</ModalBadge>
               </div>
             </ModalHeader>
 
             <ModalBody>
               <ModalDesc>
-                {t('artExperiences.threeCards.modalDesc')}
+                {t('artContent.experiences.teachingDescription')}
               </ModalDesc>
 
               <EventTypeGrid>
@@ -707,7 +714,7 @@ export default function ThreeCardsSection() {
                   <PhotoThumb key={src} onClick={() => openLightbox(i)}>
                     <Image
                       src={src}
-                      alt={`You & I Paint event photo ${i + 1}`}
+                      alt={`${t('artContent.experiences.eventPhoto')} ${i + 1}`}
                       fill
                       sizes="(max-width: 420px) 50vw, (max-width: 640px) 33vw, 20vw"
                       style={{ objectFit: 'cover' }}
@@ -718,9 +725,9 @@ export default function ThreeCardsSection() {
               </PhotoGrid>
 
               <ModalFooter>
-                <PhotoCount>{YOU_AND_I_IMAGES.length} photos from events I've taught</PhotoCount>
+                <PhotoCount>{YOU_AND_I_IMAGES.length} {t('artContent.experiences.teachingPhotos')}</PhotoCount>
                 <VisitBtn href={YOU_AND_I_PAINT_URL} target="_blank" rel="noopener noreferrer">
-                  Visit You &amp; I Paint ↗
+                  {t('artContent.experiences.visit')}
                 </VisitBtn>
               </ModalFooter>
             </ModalBody>
@@ -730,14 +737,17 @@ export default function ThreeCardsSection() {
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
-        <LightboxOverlay onClick={closeLightbox}>
-          <LightboxClose onClick={closeLightbox} aria-label="Close">✕</LightboxClose>
-          <LightboxNav $side="left" onClick={e => { e.stopPropagation(); prev(); }} aria-label="Previous">‹</LightboxNav>
-          <LightboxNav $side="right" onClick={e => { e.stopPropagation(); next(); }} aria-label="Next">›</LightboxNav>
+        <LightboxOverlay ref={lightboxRef} tabIndex={-1} onClick={closeLightbox} role="dialog" aria-modal="true" aria-label={t('artExperiences.threeCards.galleryTitle')}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'fixed', top: '1.25rem', right: '5rem', zIndex: 10001 }}>
+            <LanguageSwitcher isDark />
+          </div>
+          <LightboxClose onClick={closeLightbox} aria-label={t('artContent.common.close')}>✕</LightboxClose>
+          <LightboxNav $side="left" onClick={e => { e.stopPropagation(); prev(); }} aria-label={t('artContent.common.previous')}>‹</LightboxNav>
+          <LightboxNav $side="right" onClick={e => { e.stopPropagation(); next(); }} aria-label={t('artContent.common.next')}>›</LightboxNav>
           <LightboxInner onClick={e => e.stopPropagation()}>
             <Image
               src={YOU_AND_I_IMAGES[lightboxIndex]}
-              alt={`You & I Paint event photo ${lightboxIndex + 1}`}
+              alt={`${t('artContent.experiences.eventPhoto')} ${lightboxIndex + 1}`}
               width={900}
               height={900}
               style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', borderRadius: '8px' }}

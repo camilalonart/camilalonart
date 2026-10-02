@@ -116,7 +116,7 @@ export default function EventTypesSection() {
     {
       icon: <PublicEventIcon size={42} color={AE.blue} />,
       title: t('artExperiences.eventTypes.publicTitle'),
-      desc: t('artExperiences.eventTypes.publicDesc'),
+      desc: t('artContent.experiences.publicDescription'),
     },
     {
       icon: <PrivateEventIcon size={42} color={AE.blue} />,
@@ -126,7 +126,7 @@ export default function EventTypesSection() {
     {
       icon: <CorporateEventIcon size={42} color={AE.blue} />,
       title: t('artExperiences.eventTypes.corporateTitle'),
-      desc: t('artExperiences.eventTypes.corporateDesc'),
+      desc: t('artContent.experiences.corporateDescription'),
     },
     {
       icon: <WeddingEventIcon size={42} color={AE.blue} />,
@@ -144,7 +144,7 @@ export default function EventTypesSection() {
             {t('artExperiences.eventTypes.eyebrow')}
             <StarSpark size={12} color={AE.blue} />
           </Eyebrow>
-          <SectionTitle>{t('artExperiences.eventTypes.title')}</SectionTitle>
+          <SectionTitle>{t('artContent.experiences.teachingTypes')}</SectionTitle>
           <SectionSubtitle>
             {t('artExperiences.eventTypes.subtitle')}
           </SectionSubtitle>

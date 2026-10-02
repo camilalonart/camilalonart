@@ -1,0 +1,185 @@
+{
+  "common": {
+    "services": "Services",
+    "duration": "Duration:",
+    "schedule": "Schedule:",
+    "image": "Image"
+  },
+  "index": {
+    "title": "Creative Services",
+    "intro": "Professional creative services tailored to elevate your brand and bring your vision to life. From brand identity design to commercial photography, we deliver exceptional results for clients across North America.",
+    "location": "Based in Vancouver, Canada • Available for Local & Remote Projects",
+    "projects": [
+      { "title": "Brand Identity Design", "description": "Complete brand identity including logo, color palette, and brand guidelines" },
+      { "title": "Editorial Photography", "description": "Fashion and lifestyle editorial shoots for magazines and publications" },
+      { "title": "Commercial Photography", "description": "Product and advertising photography for major brands" },
+      { "title": "Art Prints", "description": "High-quality prints of my artwork, professionally printed and shipped worldwide" },
+      { "title": "Motion Graphics", "description": "Animated logos and brand elements" }
+    ]
+  },
+  "artClasses": {
+    "title": "Art Classes",
+    "intro": "Learn, grow, and express yourself through art.",
+    "coursesTitle": "Available Courses",
+    "infoTitle": "Class Information",
+    "courses": [
+      {
+        "title": "Digital Art Fundamentals",
+        "items": ["Introduction to digital tools", "Color theory and composition", "Digital painting techniques", "Character design basics", "Portfolio development"],
+        "duration": "8 weeks",
+        "schedule": "Once a week, 2 hours"
+      },
+      {
+        "title": "Traditional Art Workshop",
+        "items": ["Drawing fundamentals", "Watercolor techniques", "Oil painting basics", "Mixed media exploration", "Live model sessions"],
+        "duration": "6 weeks",
+        "schedule": "Twice a week, 2 hours"
+      },
+      {
+        "title": "Art Business Essentials",
+        "items": ["Portfolio building", "Social media marketing", "Pricing strategies", "Client communication", "Legal considerations"],
+        "duration": "4 weeks",
+        "schedule": "Once a week, 2 hours"
+      }
+    ],
+    "info": [
+      { "title": "Small Class Sizes", "description": "Maximum of 8 students per class for personalized attention and feedback." },
+      { "title": "Flexible Schedule", "description": "Morning and evening classes available to accommodate different schedules." },
+      { "title": "All Skill Levels", "description": "Courses designed for beginners to advanced artists looking to expand their skills." },
+      { "title": "Vancouver Location", "description": "Classes held in our Vancouver studio with all necessary equipment provided." }
+    ]
+  },
+  "graphicRecording": {
+    "title": "Graphic Recording",
+    "intro": "Transforming conversations and ideas into engaging visual stories. Real-time visual facilitation for meetings, events, and workshops.",
+    "benefitsTitle": "Benefits",
+    "services": [
+      { "title": "Live Event Recording", "items": ["Conferences and seminars", "Corporate meetings", "Workshops and training", "Panel discussions", "Real-time visualization"] },
+      { "title": "Digital Graphic Recording", "items": ["Virtual meetings", "Online conferences", "Remote workshops", "Digital file delivery", "Interactive elements"] },
+      { "title": "Custom Solutions", "items": ["Strategic planning", "Vision mapping", "Process visualization", "Story mapping", "Knowledge capture"] }
+    ],
+    "benefits": [
+      { "title": "Enhanced Engagement", "description": "Visual storytelling keeps participants engaged and helps them retain information better." },
+      { "title": "Clear Communication", "description": "Complex ideas become accessible through visual representation and synthesis." },
+      { "title": "Lasting Impact", "description": "Visual records serve as powerful reminders and reference materials after the event." },
+      { "title": "Real-time Processing", "description": "Immediate visualization helps participants process and understand information as it's shared." }
+    ]
+  },
+  "brandIdentity": {
+    "title": "Brand Identity Design",
+    "intro": "Creating distinctive and memorable brand identities that connect with your audience and stand the test of time.",
+    "processTitle": "Design Process",
+    "caseStudies": [
+      {
+        "title": "Eco-Friendly Fashion Brand",
+        "description": "Complete brand identity for a sustainable fashion label, focusing on minimalist design and environmental consciousness.",
+        "details": [
+          { "title": "Brand Strategy", "description": "Developed a cohesive brand strategy emphasizing sustainability, quality, and modern minimalism." },
+          { "title": "Visual Identity", "description": "Created a versatile logo system, eco-friendly color palette, and custom typography." },
+          { "title": "Implementation", "description": "Designed packaging, labels, marketing materials, and digital assets." }
+        ]
+      },
+      {
+        "title": "Tech Startup Rebrand",
+        "description": "Strategic rebranding for a growing tech company, transforming their identity to reflect innovation and scalability.",
+        "details": [
+          { "title": "Research & Analysis", "description": "Conducted market research and competitor analysis to position the brand effectively." },
+          { "title": "Brand Evolution", "description": "Updated visual language while maintaining brand recognition and trust." },
+          { "title": "Digital Focus", "description": "Created responsive design system for digital platforms and applications." }
+        ]
+      }
+    ],
+    "services": [
+      { "title": "Logo Design", "items": ["Custom logo creation", "Logo variations and formats", "Brand mark development", "Icon and symbol design", "Typography selection"] },
+      { "title": "Brand Guidelines", "items": ["Color palette development", "Typography system", "Design elements", "Usage guidelines", "Brand voice and tone"] },
+      { "title": "Brand Collateral", "items": ["Business cards", "Letterheads and stationery", "Social media assets", "Marketing materials", "Digital templates"] }
+    ],
+    "process": [
+      { "title": "Discovery", "description": "Understanding your brand values, target audience, and business goals through in-depth consultation." },
+      { "title": "Research", "description": "Analyzing market trends, competitors, and opportunities to position your brand effectively." },
+      { "title": "Design", "description": "Creating unique visual elements that capture your brand essence and resonate with your audience." },
+      { "title": "Implementation", "description": "Delivering comprehensive brand guidelines and assets for consistent brand application." }
+    ]
+  },
+  "uxui": {
+    "design": "Design",
+    "ticker": ["UX Design", "UI Design", "Product Design", "Branding", "Mobile", "Interface", "Figma", "Prototyping", "User Research"],
+    "acquisition": "Unicorn Acquisition",
+    "location": "Vancouver, Canada",
+    "workTitle": "Selected Work",
+    "contact": "Contact",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "deliveryUnconfirmed": "Delivery has not been confirmed. Email your inquiry:",
+    "inquirySubject": "UX/UI inquiry",
+    "emailName": "name",
+    "emailEmail": "email",
+    "emailMessage": "message",
+    "cleverlynkTags": "Logo · Branding · UX/UI · Acquired by Rappi",
+    "alfredTags": "Product Screens · Colombian Company",
+    "defaultTags": "UX/UI Design",
+    "projectImage": "Project image",
+    "projectPreview": "Project preview"
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Stories, insights, and behind-the-scenes looks at my creative journey in Vancouver and beyond. Exploring art, photography, and the creative process.",
+    "readMore": "Read More →",
+    "posts": [
+      { "title": "Exploring Vancouver Through a Lens", "excerpt": "A photographic journey through the hidden gems and iconic locations of Vancouver...", "tags": ["Photography", "Vancouver", "City Life"] },
+      { "title": "The Evolution of My Digital Art Process", "excerpt": "How my digital art workflow has transformed over the years, from traditional to digital...", "tags": ["Digital Art", "Creative Process", "Technology"] }
+    ]
+  },
+  "everyday": {
+    "title": "Everyday Photography",
+    "intro": "Finding beauty in the ordinary, capturing the poetry of daily life through a lens that transforms the mundane into the extraordinary.",
+    "galleries": [
+      { "title": "Street Life", "description": "Candid moments from Vancouver's vibrant streets", "captions": ["Morning Rush", "Cafe Culture", "Rain City", "Night Markets"] },
+      { "title": "Urban Details", "description": "Finding art in architecture and city textures", "captions": ["Glass & Steel", "Hidden Patterns", "City Lights", "Urban Nature"] },
+      { "title": "Quiet Moments", "description": "The poetry of ordinary life", "captions": ["Morning Light", "Coffee Break", "Reading Corner", "Rainy Window"] }
+    ]
+  },
+  "techCourses": {
+    "title": "Tech Courses",
+    "intro": "Level up your tech skills with hands-on courses taught by industry professionals. Small class sizes, practical projects, and personalized feedback.",
+    "detailsTitle": "Course Details",
+    "learnTitle": "What You'll Learn",
+    "register": "Register Interest",
+    "courses": [
+      {
+        "title": "Modern Web Development",
+        "description": "Learn to build modern, responsive web applications using React, Next.js, and TypeScript.",
+        "duration": "8 weeks",
+        "schedule": "Twice a week, 2 hours per session",
+        "topics": ["React fundamentals and hooks", "Next.js 13+ features", "TypeScript essentials", "Styled-components and CSS-in-JS", "API integration and data fetching", "Performance optimization"]
+      },
+      {
+        "title": "Cloud Architecture Fundamentals",
+        "description": "Master cloud computing concepts and learn to design scalable infrastructure on AWS.",
+        "duration": "6 weeks",
+        "schedule": "Once a week, 3 hours per session",
+        "topics": ["AWS core services", "Infrastructure as Code", "Serverless architecture", "Microservices design", "Security best practices", "Cost optimization"]
+      },
+      {
+        "title": "Full-Stack Development Bootcamp",
+        "description": "Comprehensive program covering both frontend and backend development.",
+        "duration": "12 weeks",
+        "schedule": "Three times a week, 3 hours per session",
+        "topics": ["HTML, CSS, and JavaScript", "React and Next.js", "Node.js and Express", "Database design and MongoDB", "RESTful APIs", "Authentication and authorization"]
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "intro": "A collection of professional photography and creative work, showcasing the art of visual storytelling across different genres and mediums.",
+    "heroAlt": "Portfolio hero image",
+    "viewGallery": "View Gallery",
+    "sections": [
+      { "title": "Wedding & Couples", "description": "Capturing intimate moments and genuine emotions. Each photo tells a unique love story, preserving memories that will last a lifetime." },
+      { "title": "Wildlife Photography", "description": "Documenting the raw beauty of nature and wildlife. From African safaris to local conservation projects, each image promotes awareness and appreciation." },
+      { "title": "Pet Photography", "description": "Professional pet portraits that capture the unique personality and spirit of your beloved companions in a comfortable, fun environment." },
+      { "title": "Professional Headshots", "description": "Modern, professional portraits for individuals and corporate clients. Making you look your best while maintaining authenticity." },
+      { "title": "Creative Services", "description": "Brand identity, editorial photography, and digital art. Creating compelling visual content that tells your story and connects with your audience." }
+    ]
+  }
+}

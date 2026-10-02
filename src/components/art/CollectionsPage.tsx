@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled from 'styled-components';
 import data, { COLLECTIONS_ORDER, type Collection } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';

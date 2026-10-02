@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { AE, StarSpark, TinyStar } from './Doodles';
-import type { ArtEvent } from './data';
+import { type ArtEvent, localizedEventDate, localizedEventTime } from './data';
 
 const shimmer = keyframes`
   0% { background-position: -200% 0; }
@@ -361,7 +361,7 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
         )}
         <PriceBadge>{priceDisplay}</PriceBadge>
         {event.spotsTotal !== undefined && event.spotsLeft === 0 && (
-          <SpotsTag $soldOut>{locale === 'en' ? 'Sold Out' : 'Agotado'} · {event.spotsTotal}/{event.spotsTotal}</SpotsTag>
+          <SpotsTag $soldOut>{t('artExperiences.upcoming.soldOut')} · {event.spotsTotal}/{event.spotsTotal}</SpotsTag>
         )}
         {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
           <SpotsTag>{event.spotsLeft} {t('artExperiences.myExperiences.spotsLeft')}</SpotsTag>
@@ -371,7 +371,7 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
       <CardBody $featured={featured}>
         {event.ticketsAvailable && (
           <TicketsAvailableBadge>
-            {locale === 'en' ? 'Tickets Available' : 'Boletas Disponibles'}
+            {t('artContent.experiences.ticketsAvailable')}
           </TicketsAvailableBadge>
         )}
 
@@ -391,7 +391,7 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
         <EventMeta>
           <MetaRow>
             <MetaIcon>📅</MetaIcon>
-            <MetaText>{event.date} · {event.time}</MetaText>
+            <MetaText>{localizedEventDate(event.dateISO, locale)} · {localizedEventTime(event.time, locale)}</MetaText>
           </MetaRow>
           <MetaRow>
             <MetaIcon>📍</MetaIcon>
@@ -418,11 +418,11 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
           )}
           {event.artistPortfolioUrl && (
             <ArtistPortfolioBtn href={event.artistPortfolioUrl} onClick={e => e.stopPropagation()}>
-              🎨 {locale === 'en' ? "View Artist's Work" : 'Ver Obra de la Artista'}
+              🎨 {t('artContent.experiences.artistWork')}
             </ArtistPortfolioBtn>
           )}
           {!event.eventbriteUrl && !event.flockUrl && !event.artistPortfolioUrl && (
-            <CTAPrimary href={`/art-experiences/events/${event.id}`} onClick={e => e.stopPropagation()}>
+            <CTAPrimary as={Link} href={`/art-experiences/events/${event.id}`} onClick={e => e.stopPropagation()}>
               {t('artExperiences.myExperiences.learnMore')}
             </CTAPrimary>
           )}
