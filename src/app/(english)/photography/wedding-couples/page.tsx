@@ -11,6 +11,13 @@ import ImageModal from "@/components/ImageModal";
 import { useTranslation } from "@/i18n/TranslationContext";
 import Link from '@/i18n/LocalizedLink';
 import WeddingServices from '@/components/photography/WeddingServices';
+import LocalizedStructuredData from '@/components/LocalizedStructuredData';
+import {
+  weddingServiceSchema,
+  weddingBreadcrumbSchema,
+  spanishWeddingServiceSchema,
+  spanishWeddingBreadcrumbSchema,
+} from './metadata';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -1049,6 +1056,10 @@ export default function WeddingCouplesPage() {
 
   return (
     <PageContainer>
+      <LocalizedStructuredData
+        en={[weddingServiceSchema, weddingBreadcrumbSchema]}
+        es={[spanishWeddingServiceSchema, spanishWeddingBreadcrumbSchema]}
+      />
       <PhotographyNav />
       <Hero>
         <HeroImageContainer>

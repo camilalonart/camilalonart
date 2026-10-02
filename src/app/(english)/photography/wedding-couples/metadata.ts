@@ -16,3 +16,14 @@ export const weddingBreadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Home', path: '/' },
   { name: 'Wedding & Couples', path: '/photography/wedding-couples/' },
 ]);
+
+export const spanishWeddingServiceSchema = generateServiceSchema({
+  type: 'Fotografía de bodas',
+  name: 'Fotografía de bodas y parejas en Vancouver',
+  description: 'Fotografía de bodas, elopements y parejas en Vancouver, BC.',
+});
+
+export const spanishWeddingBreadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Inicio', path: '/es/' },
+  { name: 'Bodas y parejas', path: '/es/photography/wedding-couples/' },
+]);
