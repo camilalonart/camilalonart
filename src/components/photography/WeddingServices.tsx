@@ -110,7 +110,7 @@ const Card = styled.article`
   letter-spacing: 0;
 
   .service-number {
-    color: #94735e;
+    color: #85634e;
     font: 500 0.75rem var(--font-montserrat), sans-serif;
     letter-spacing: 0.14em;
     margin-bottom: 0.7rem;

@@ -1,4 +1,43 @@
 {
+  "unpublished": {
+    "home": "Volver al inicio",
+    "signature": "Camilalonart · Vancouver",
+    "relatedTitle": "Sigue explorando",
+    "directoryTitle": "Elige por dónde empezar",
+    "pages": {
+      "brandIdentity": {
+        "title": "Identidad de marca",
+        "message": "No he publicado un portafolio de identidad de marca aquí. Puedes explorar mis proyectos UX/UI, pinturas y experiencias artísticas."
+      },
+      "creativeServices": {
+        "title": "Servicios creativos",
+        "message": "Explora mi trabajo UX/UI, descubre experiencias artísticas o encuentra una sesión de fotos. Cada uno tiene su propio espacio, con trabajo y detalles para explorar."
+      },
+      "everyday": {
+        "title": "Fotografía cotidiana",
+        "message": "Esta colección de fotografía aún no está publicada aquí. Por ahora, puedes explorar mis fotografías de vida salvaje, pinturas y fotografías de mascotas."
+      },
+      "portfolio": {
+        "title": "Explora mi trabajo",
+        "message": "Este portafolio conjunto aún no está publicado aquí. Mis pinturas, fotografías y proyectos de diseño tienen sus propias páginas a continuación."
+      },
+      "blog": {
+        "title": "Historias y notas",
+        "message": "Aún no hay artículos publicados aquí. Puedes explorar las historias que acompañan mis pinturas, recorrer mis fotografías de vida salvaje o conocer mi práctica artística."
+      }
+    },
+    "links": {
+      "art": { "title": "Pinturas y colecciones", "description": "Explora mis pinturas y las historias que las acompañan." },
+      "wildlife": { "title": "Fotografía de vida salvaje", "description": "Conoce a los animales a través de mi lente." },
+      "design": { "title": "Diseño UX/UI", "description": "Explora mis proyectos de diseño digital." },
+      "experiences": { "title": "Experiencias de arte", "description": "Descubre paint & sip y encuentros creativos." },
+      "wedding": { "title": "Bodas y parejas", "description": "Explora la fotografía para sus momentos compartidos." },
+      "pets": { "title": "Fotografía de mascotas", "description": "Explora retratos de mascotas y detalles de las sesiones." },
+      "family": { "title": "Familia y maternidad", "description": "Explora la fotografía de familias, bebés y maternidad." },
+      "headshots": { "title": "Retratos profesionales", "description": "Explora retratos y detalles de las sesiones profesionales." },
+      "about": { "title": "Sobre Camila", "description": "Conoce a la artista detrás de las obras." }
+    }
+  },
   "nav": {
     "home": "Inicio",
     "photographyServices": "Servicios de Fotografía",
@@ -71,7 +110,16 @@
     "heroTitle": "Hola, soy",
     "heroEmphasis": "Camila.",
     "facets": "Artista · Fotógrafa · Diseñadora · Ingeniera de software",
-    "intro": "Pinto, tomo fotos, diseño y escribo código. Aquí comparto lo que creo: explora mi trabajo o encuentra algo que podamos hacer juntos.",
+    "intro": "Te doy la bienvenida a mi rincón creativo. Creo pinturas, fotografías y experiencias digitales. Encuentra una sesión de fotos, participa en una experiencia artística o cuéntame qué te gustaría crear conmigo.",
+    "workWithMe": "Trabajemos juntos",
+    "exploreMyWork": "Explora mi trabajo",
+    "sessionLinksTitle": "Encuentra tu sesión de fotos",
+    "sessionLinks": {
+      "wedding": "Bodas y parejas",
+      "pets": "Mascotas",
+      "family": "Familia y maternidad",
+      "headshots": "Retratos profesionales"
+    },
     "inquire": "Conversemos",
     "findYourWorld": "Ven a explorar",
     "exploreNav": "Empieza aquí",
@@ -124,8 +172,32 @@
       }
     },
     "contactTitle": "¿Qué te gustaría crear?",
-    "contactIntro": "Para consultas de fotografía, preguntas sobre obras y colaboraciones creativas, escríbeme directamente.",
+    "contactIntro": "Cuéntame sobre tu sesión, tu pregunta sobre una obra o tu proyecto creativo. Incluye tus fechas preferidas y ubicación, si corresponde, para que conversemos sobre los detalles.",
     "emailCamila": "Escríbele a Camila",
+    "aboutTitle": "Un poco sobre Camila",
+    "aboutIntro": "Soy una artista e ingeniera colombiana que vive en Vancouver. Las historias cotidianas, el sentido de pertenencia y los pequeños detalles que suelen pasar desapercibidos aparecen en mis pinturas. Este es un espacio para esa curiosidad, a través del arte, la fotografía y el diseño.",
+    "aboutLink": "Conoce a la artista",
+    "instagramLink": "Instagram · @camilalonart",
+    "faqTitle": "Antes de escribirme",
+    "faq": {
+      "inquiry": {
+        "question": "¿Cómo organizamos una sesión o proyecto?",
+        "answer": "Envíame un correo con tu idea, tus fechas preferidas y la ubicación. Conversaremos sobre la disponibilidad y los detalles; enviar una consulta no confirma una reserva."
+      },
+      "location": {
+        "question": "¿Dónde estás?",
+        "answer": "Vivo en Vancouver, BC. Incluye la ubicación que prefieres cuando me escribas para que conversemos sobre tu proyecto."
+      },
+      "languages": {
+        "question": "¿Puedo explorar el sitio en español?",
+        "answer": "Sí. El sitio está disponible en inglés y español. Usa EN o ES en la parte superior de la página para cambiar de idioma."
+      },
+      "events": {
+        "question": "¿Dónde encuentro eventos de arte?",
+        "answer": "Visita Experiencias de Arte para explorar paint & sip, encuentros creativos y la lista actual de eventos. Revisa los detalles de cada evento para conocer las fechas y cómo participar.",
+        "link": "Explorar Experiencias de Arte"
+      }
+    },
     "footer": "Hecho con curiosidad en Vancouver, BC",
     "images": {
       "wedding": "Una pareja abrazándose con los edificios de Vancouver al fondo",

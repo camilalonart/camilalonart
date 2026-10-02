@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import data, { type Painting, type Collection, type DetailVideo, localizedMaterials, localizedThoughts } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
@@ -49,7 +50,8 @@ const Breadcrumbs = styled.nav`
 
 const BreadcrumbLink = styled(Link)`
   color: ${C.gold};
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
   margin-right: 0.5rem;
 
   &:hover {
@@ -94,7 +96,9 @@ const ImageContainer = styled.div`
   gap: 1rem;
 `;
 
-const MainImage = styled.img`
+const MainImage = styled(ResponsiveImage)`
+  width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 70vh;
   object-fit: contain;
@@ -264,8 +268,9 @@ const DetailsGrid = styled.div`
   @media (max-width: 600px) { columns: 1; }
 `;
 
-const DetailImage = styled.img`
+const DetailImage = styled(ResponsiveImage)`
   width: 100%;
+  height: auto;
   margin-bottom: 1rem;
   display: block;
   break-inside: avoid;
@@ -290,8 +295,9 @@ const DetailVideoWrapper = styled.div`
   }
 `;
 
-const DetailVideoPoster = styled.img`
+const DetailVideoPoster = styled(ResponsiveImage)`
   width: 100%;
+  height: auto;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
@@ -344,8 +350,9 @@ const NavBtn = styled(Link)<{ $disabled?: boolean }>`
   background: none;
   border: 1px solid ${p => p.$disabled ? C.dim : C.border};
   color: ${p => p.$disabled ? C.dim : C.muted};
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   cursor: ${p => p.$disabled ? 'not-allowed' : 'pointer'};
   display: flex;
   align-items: center;
@@ -364,8 +371,9 @@ const NavDisabledBtn = styled.button<{ $disabled: boolean }>`
   background: none;
   border: 1px solid ${C.dim};
   color: ${C.dim};
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   cursor: not-allowed;
   display: flex;
   align-items: center;
@@ -405,7 +413,7 @@ function VideoThumb({ src, poster }: DetailVideo) {
         />
       ) : (
         <>
-          <DetailVideoPoster src={poster} alt={locale === 'es' ? 'Detalle de la obra' : 'Detail of the artwork'} draggable={false} onContextMenu={e => e.preventDefault()} />
+          <DetailVideoPoster src={poster} alt={locale === 'es' ? 'Detalle de la obra' : 'Detail of the artwork'} loading="lazy" sizes="auto, (max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw" draggable={false} onContextMenu={e => e.preventDefault()} />
           {unavailable ? (
             <p role="status">{locale === 'es' ? 'El video no está disponible. Puedes ver la imagen del detalle.' : 'This video is unavailable. The detail image is shown instead.'}</p>
           ) : (
@@ -480,6 +488,7 @@ export default function PaintingPage({
               <MainImage
                 src={painting.images[imageIndex]}
                 alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 draggable={false}
                 onContextMenu={e => e.preventDefault()}
               />
@@ -495,7 +504,7 @@ export default function PaintingPage({
                       aria-label={`${t('artContent.common.viewImage')} ${i + 1}`}
                       aria-pressed={i === imageIndex}
                     >
-                      <img src={src} alt="" />
+                      <ResponsiveImage src={src} alt="" sizes="56px" />
                     </Thumb>
                   ))}
                 </ThumbnailRow>
@@ -538,6 +547,7 @@ export default function PaintingPage({
                     src={item}
                     alt={`${t('art.details')} ${i + 1}`}
                     loading="lazy"
+                    sizes="auto, (max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
                   />

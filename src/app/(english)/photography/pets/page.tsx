@@ -9,14 +9,31 @@ import ProtectedImage from "@/components/ProtectedImage";
 import ImageModal from "@/components/ImageModal";
 import Link from '@/i18n/LocalizedLink';
 import { useTranslation } from '@/i18n/TranslationContext';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 
 const PageContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
   background-color:rgba(0, 0, 0, 1);
   color: #2C3E50;
+
+  button[aria-haspopup="dialog"] {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  button[aria-haspopup="dialog"]:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 3px solid white;
+    outline: 3px solid #1A1A1A;
+    z-index: 20;
+    pointer-events: none;
+  }
 `;
 
 const Hero = styled.section`
@@ -51,6 +68,7 @@ const Hero = styled.section`
 `;
 
 const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
+  display: block;
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
@@ -145,7 +163,7 @@ const HeroImageContainer = styled.div`
 `;
 
 const ActionButton = styled.button`
-  background: rgb(176, 126, 18);
+  background: #87600E;
   color: white;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   font-size: 1.2rem;
@@ -159,7 +177,7 @@ const ActionButton = styled.button`
   
   &:hover {
     transform: translateY(-3px);
-    background: rgba(212, 166, 68, 0.24);
+    background: #71500B;
   }
 
   &:active {
@@ -168,7 +186,7 @@ const ActionButton = styled.button`
 `;
 
 const ServiceCardButton = styled.button`
-  background: rgb(176, 126, 18);
+  background: #87600E;
   color: white;
   border: 1px solid white;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
@@ -183,7 +201,7 @@ const ServiceCardButton = styled.button`
   
   &:hover {
     transform: translateY(-3px);
-    background: rgb(231, 189, 99);
+    background: #71500B;
   }
 
   &:active {
@@ -239,7 +257,14 @@ const ServicesSection = styled.div`
 
 const ServiceCard = styled.div`
   background: white;
-  padding: ${theme.spacing.xl};
+  padding: clamp(1rem, 3vw, 2rem);
+  min-width: 0;
+
+  button {
+    max-width: 100%;
+    padding-inline: clamp(0.75rem, 2vw, 2rem);
+    overflow-wrap: anywhere;
+  }
   box-shadow: ${theme.shadows.md};
   height: auto;
   min-height: 600px;
@@ -281,7 +306,7 @@ const ServiceCard = styled.div`
 
   h3 {
     font-size: 2rem;
-    color: rgb(169, 125, 30);
+    color: #87600E;
     font-weight: 800;
     margin-top: ${theme.spacing.xl};
     margin-bottom: ${theme.spacing.md};
@@ -408,7 +433,7 @@ const GalleryPreview = styled.div`
 `;
 
 const ViewGalleryButton = styled(Link)`
-  background: rgb(169, 125, 30);
+  background: #87600E;
   color: white;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   font-size: 1.2rem;
@@ -421,7 +446,8 @@ const ViewGalleryButton = styled(Link)`
 
   &:hover {
     transform: translateY(-3px);
-    background: rgb(231, 189, 99);
+    background: #71500B;
+    color: white;
   }
 `;
 
@@ -471,97 +497,6 @@ const FooterContent = styled.div`
   }
 `;
 
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 1600 },
-    items: 3,
-    partialVisibilityGutter: 40
-  },
-  desktop: {
-    breakpoint: { max: 1600, min: 1024 },
-    items: 3,
-    partialVisibilityGutter: 30
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 640 },
-    items: 1,
-    partialVisibilityGutter: 20
-  },
-  mobile: {
-    breakpoint: { max: 640, min: 0 },
-    items: 1,
-    partialVisibilityGutter: 10
-  }
-};
-
-const CarouselStyles = styled.div`
-  .carousel-container {
-    padding: ${theme.spacing['2xl']} 0;
-  }
-
-  .react-multi-carousel-track {
-    display: flex;
-    align-items: stretch;
-    padding: ${theme.spacing.md} 0;
-  }
-
-  .react-multi-carousel-item {
-    display: flex;
-    align-items: stretch;
-  }
-
-  .custom-dot-list-style {
-    bottom: -40px;
-  }
-
-  .react-multi-carousel-dot button {
-    border: 1px solid ${theme.colors.primary.main};
-    border-radius: 0;
-    margin: 0 4px;
-    width: 24px;
-    height: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .react-multi-carousel-dot--active button {
-    background: ${theme.colors.primary.main};
-    width: 32px;
-  }
-
-  .react-multi-carousel-arrow {
-    background: transparent;
-    border: 1px solid ${theme.colors.primary.main};
-    color: ${theme.colors.primary.main};
-    min-width: 45px;
-    min-height: 45px;
-    border-radius: ${theme.borderRadius.md};
-    transition: all 0.3s ease;
-    top: 50%;
-    transform: translateY(-50%);
-
-    &:hover {
-      background: ${theme.colors.primary.main};
-      color: white;
-    }
-
-    &::before {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    .react-multi-carousel-arrow {
-      min-width: 35px;
-      min-height: 35px;
-      
-      &::before {
-        font-size: 1.2rem;
-      }
-    }
-  }
-`;
-
 const FAQSection = styled.section`
   padding: ${theme.spacing['4xl']} ${theme.spacing['2xl']};
   background: rgb(26, 20, 15);
@@ -600,7 +535,7 @@ const FAQItem = styled.div`
   transition: all 0.3s ease;
 
   h3 {
-    color: rgb(169, 125, 30);
+    color: #E5C675;
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: ${theme.spacing.md};
     font-weight: 500;
@@ -843,7 +778,7 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={6} onClick={() => setSelectedImage('/images/pets/A7T02596.webp')}>
             <ProtectedImage
               src="/images/pets/A7T02596.webp"
               alt={p('portrait')}
@@ -852,7 +787,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.webp')} $isMiddle>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={6} onClick={() => setSelectedImage('/images/pets/A7T02565.webp')} $isMiddle>
             <ProtectedImage
               src="/images/pets/A7T02565.webp"
               alt={p('portrait')}
@@ -926,7 +861,7 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575-2.webp')} $isMiddle>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06575-2.webp')} $isMiddle>
             <ProtectedImage
               src="/images/pets/gallery/A7T06575-2.webp"
               alt={p('portrait')}
@@ -934,7 +869,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06581.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06581.webp')}>
             <ProtectedImage
               src="/images/pets/gallery/A7T06581.webp"
               alt={p('portrait')}
@@ -942,7 +877,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875-2.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06875-2.webp')}>
             <ProtectedImage
               src="/images/pets/gallery/A7T06875-2.webp"
               alt={p('portrait')}
@@ -950,7 +885,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06602.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T06602.webp')}>
             <ProtectedImage
               src="/images/pets/gallery/A7T06602.webp"
               alt={p('portrait')}
@@ -1006,7 +941,7 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.webp')} $isMiddle>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/A7T05911.webp')} $isMiddle>
             <ProtectedImage
               src="/images/pets/A7T05911.webp"
               alt={p('portrait')}
@@ -1015,7 +950,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T05654.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={6} onClick={() => setSelectedImage('/images/pets/A7T05654.webp')}>
             <ProtectedImage
               src="/images/pets/A7T05654.webp"
               alt={p('portrait')}
@@ -1024,7 +959,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T09275-2.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/gallery/A7T09275-2.webp')}>
             <ProtectedImage
               src="/images/pets/gallery/A7T09275-2.webp"
               alt={p('portrait')}
@@ -1048,7 +983,7 @@ export default function PetsPage() {
 
       <Section>
         <SectionDivider>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/A7T02365.webp')}>
             <ProtectedImage
               src="/images/pets/A7T02365.webp"
               alt={p('portrait')}
@@ -1057,7 +992,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={6} onClick={() => setSelectedImage('/images/pets/A7T02388.webp')}>
             <ProtectedImage
               src="/images/pets/A7T02388.webp"
               alt={p('portrait')}
@@ -1066,7 +1001,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => setSelectedImage('/images/pets/A7T02378.webp')}>
             <ProtectedImage
               src="/images/pets/A7T02378.webp"
               alt={p('portrait')}
@@ -1167,7 +1102,7 @@ export default function PetsPage() {
       </Section>
       <Section>
         <SectionDivider>
-          <DividerImage $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={4} onClick={() => setSelectedImage('/images/pets/A7T09768.webp')}>
             <ProtectedImage
               src="/images/pets/A7T09768.webp"
               alt={p('portrait')}
@@ -1176,7 +1111,7 @@ export default function PetsPage() {
               quality={100}
             />
           </DividerImage>
-          <DividerImage $span={8} onClick={() => setSelectedImage('/images/pets/A7T09762-2.webp')}>
+          <DividerImage as="button" type="button" aria-haspopup="dialog" $span={8} onClick={() => setSelectedImage('/images/pets/A7T09762-2.webp')}>
             <ProtectedImage
               src="/images/pets/A7T09762-2.webp"
               alt={p('portrait')}

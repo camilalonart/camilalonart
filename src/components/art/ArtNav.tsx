@@ -9,7 +9,7 @@ const C = {
   bg: '#080808',
   text: '#F0EDE8',
   gold: '#C8A87A',
-  muted: '#6E6B65',
+  muted: '#9A958D',
   border: '#1E1E1E',
   dim: '#3A3835',
 };
@@ -24,12 +24,13 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   padding: 0 clamp(1rem, 4vw, 3rem);
   min-height: 64px;
   transition: background 0.4s ease, border-color 0.4s ease;
-  background: ${p => p.$scrolled ? 'rgba(8,8,8,0.98)' : 'transparent'};
+  background: rgba(8,8,8,0.98);
   border-bottom: 1px solid ${p => p.$scrolled ? C.border : 'transparent'};
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
 `;
 
 const NavLogo = styled(Link)`
+  min-height: 44px;
   font-size: clamp(0.8rem, 2vw, 1.05rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -90,6 +91,9 @@ const NavLinkA = styled(Link)`
   cursor: pointer;
   transition: color 0.2s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
 
   &:hover { color: ${C.gold}; }
 
@@ -125,8 +129,8 @@ const LangToggle = styled.div`
 const LangOpt = styled.button<{ $active: boolean }>`
   font-family: var(--font-montserrat), sans-serif;
   font-size: 0.65rem;
-  min-width: 28px;
-  min-height: 40px;
+  min-width: 44px;
+  min-height: 44px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${p => p.$active ? C.gold : C.text};

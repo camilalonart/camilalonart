@@ -20,10 +20,10 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1.25rem, 5vw, 3.5rem);
+  padding: 0 clamp(0.75rem, 4vw, 3.5rem);
   min-height: 68px;
   transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-  background: ${p => p.$scrolled ? `rgba(245, 239, 224, 0.97)` : 'transparent'};
+  background: rgba(245, 239, 224, 0.98);
   box-shadow: ${p => p.$scrolled ? `0 2px 20px rgba(44, 36, 22, 0.08)` : 'none'};
   border-bottom: 1px solid ${p => p.$scrolled ? `rgba(74, 114, 168, 0.15)` : 'transparent'};
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
@@ -31,6 +31,7 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
 `;
 
 const Logo = styled(Link)`
+  min-height: 44px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -48,6 +49,8 @@ const LogoText = styled.span`
   transition: color 0.2s;
 
   &:hover { color: ${AE.blue}; }
+
+  @media (max-width: 360px) { font-size: 1rem; }
 `;
 
 const LogoSub = styled.span`
@@ -94,6 +97,9 @@ const NavLink = styled.a`
   cursor: pointer;
   transition: color 0.2s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
 
   &:hover { color: ${AE.blue}; }
 
@@ -133,8 +139,8 @@ const LangToggle = styled.div`
 const LangBtn = styled.button<{ $active: boolean }>`
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.62rem;
-  min-width: 28px;
-  min-height: 40px;
+  min-width: 44px;
+  min-height: 44px;
   font-weight: ${p => p.$active ? '600' : '400'};
   letter-spacing: 0.15em;
   text-transform: uppercase;

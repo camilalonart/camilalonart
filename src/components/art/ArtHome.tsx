@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styled, { keyframes, css } from 'styled-components';
 import data, { localizedBio, localizedDescription, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '../../i18n/TranslationContext';
 
 const C: Record<string, string> = {
@@ -15,7 +16,7 @@ const C: Record<string, string> = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
   dim: '#3A3835',
 };
 
@@ -563,9 +564,11 @@ export default function ArtHome() {
               href={`/art/${collection.id}/${painting.id}`}
             >
               <FeaturedImgWrap>
-                <img
+                <ResponsiveImage
                   src={painting.images[0]}
                   alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
+                  loading="lazy"
+                  sizes="auto, (max-width: 640px) 25vw, (max-width: 768px) 20vw, (max-width: 1024px) 17vw, (max-width: 1280px) 13vw, 10vw"
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}
                 />
@@ -593,9 +596,11 @@ export default function ArtHome() {
               href={`/art/${col.id}`}
             >
               <CollectionImgWrap>
-                <img
+                <ResponsiveImage
                   src={col.paintings[0]?.images[0] || ''}
                   alt={col.name}
+                  loading="lazy"
+                  sizes="auto, (max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}
                 />

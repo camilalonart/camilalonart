@@ -103,14 +103,16 @@ const ModalContent = styled.div<{ $embedded?: boolean }>`
 `;
 
 const ModalHeader = styled.div`
-  padding: ${theme.spacing.xl} ${theme.spacing['2xl']};
-  background: linear-gradient(135deg, rgba(176, 126, 18, 0.15) 0%, rgba(176, 126, 18, 0.05) 100%);
+  padding: clamp(1rem, 4vw, 2rem);
+  background: #2D241D;
   border-bottom: 1px solid rgba(176, 126, 18, 0.3);
   position: sticky;
   top: 0;
   border-radius: 20px 20px 0 0;
   z-index: 1;
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-between;
   align-items: center;
   
@@ -210,7 +212,7 @@ const SectionTitle = styled.h3`
 
 const FormRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: ${theme.spacing.lg};
   
   @media (min-width: ${theme.breakpoints.lg}) {
@@ -219,6 +221,7 @@ const FormRow = styled.div`
 `;
 
 const FormGroup = styled.div<{ $fullWidth?: boolean }>`
+  min-width: 0;
   margin-bottom: ${theme.spacing.lg};
   position: relative;
   grid-column: ${props => props.$fullWidth ? '1 / -1' : 'auto'};
@@ -242,7 +245,7 @@ const FormGroup = styled.div<{ $fullWidth?: boolean }>`
   select {
     width: 100%;
     padding: ${theme.spacing.md} ${theme.spacing.lg};
-    border: 2px solid rgba(176, 126, 18, 0.3);
+    border: 2px solid #A28C73;
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -251,18 +254,19 @@ const FormGroup = styled.div<{ $fullWidth?: boolean }>`
     font-family: ${theme.typography.fontFamily.primary};
     
     &::placeholder {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.75);
     }
     
     &:focus {
-      outline: none;
+      outline: 2px solid #D4A84B;
+      outline-offset: 3px;
       border-color: #D4A84B;
       box-shadow: 0 0 0 4px rgba(176, 126, 18, 0.2), 0 4px 15px rgba(0, 0, 0, 0.2);
       background: rgba(72, 58, 47, 0.9);
     }
     
     &:hover:not(:focus) {
-      border-color: rgba(176, 126, 18, 0.5);
+      border-color: #D4A84B;
       background: rgba(72, 58, 47, 0.75);
     }
   }
@@ -283,7 +287,7 @@ const FormGroup = styled.div<{ $fullWidth?: boolean }>`
     
     option {
       background: #2D241D;
-      color: white;
+      color: #21180C;
     }
   }
 `;

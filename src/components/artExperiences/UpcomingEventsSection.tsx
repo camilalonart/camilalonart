@@ -7,6 +7,7 @@ import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, WavyUnderline, SmallFlower, StarSpark } from './Doodles';
 import EventCard from './EventCard';
 import { artEvents } from './data';
+import { useVancouverDate, eventDateStatus } from '@/hooks/useVancouverDate';
 
 const fadeInUp = keyframes`
   from { opacity: 0; transform: translateY(24px); }
@@ -95,7 +96,7 @@ const SectionSubtitle = styled.p`
 
 const EventsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 1.75rem;
   animation: ${fadeInUp} 0.9s ease both;
   animation-delay: 0.15s;
@@ -164,8 +165,8 @@ const ViewAllHint = styled.p`
 export default function UpcomingEventsSection() {
   const { t, locale } = useTranslation();
 
-  const today = new Date().toISOString().slice(0, 10);
-  const upcoming = artEvents.filter(e => e.type === 'myEvents' && e.dateISO >= today);
+  const today = useVancouverDate();
+  const upcoming = artEvents.filter(e => e.type === 'myEvents' && eventDateStatus(e.dateISO, today) === 'upcoming');
 
   return (
     <Section id="upcoming">
@@ -176,14 +177,18 @@ export default function UpcomingEventsSection() {
             {t('artExperiences.upcoming.eyebrow')}
             <StarSpark size={12} color={AE.blue} />
           </Eyebrow>
-          <SectionTitle>{t('artExperiences.upcoming.title')}</SectionTitle>
+          <SectionTitle>{t(today === null ? 'artContent.experiences.eventSchedule' : 'artExperiences.upcoming.title')}</SectionTitle>
           <WavyWrap>
             <WavyUnderline width={90} color={AE.blue} />
           </WavyWrap>
-          <SectionSubtitle>{t('artExperiences.upcoming.subtitle')}</SectionSubtitle>
+          {today !== null && upcoming.length > 0 && (
+            <SectionSubtitle>{t('artExperiences.upcoming.subtitle')}</SectionSubtitle>
+          )}
         </SectionHeader>
 
-        {upcoming.length > 0 ? (
+        {today === null ? (
+          <EmptyState><EmptyTitle role="status">{t('artContent.experiences.checkingDates')}</EmptyTitle></EmptyState>
+        ) : upcoming.length > 0 ? (
           <EventsGrid>
             {upcoming.map(event => (
               <EventCard
@@ -198,7 +203,7 @@ export default function UpcomingEventsSection() {
         ) : (
           <EmptyState>
             <SmallFlower size={56} color={AE.blue} style={{ margin: '0 auto 1.5rem', opacity: 0.45 }} />
-            <EmptyTitle>{t('artExperiences.upcoming.noEvents')}</EmptyTitle>
+            <EmptyTitle>{t('artContent.experiences.noUpcomingEvents')}</EmptyTitle>
             <EmptySubTitle>{t('artContent.experiences.instagramUpdates')}</EmptySubTitle>
           </EmptyState>
         )}

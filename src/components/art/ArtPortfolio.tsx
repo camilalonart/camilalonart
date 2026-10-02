@@ -10,6 +10,7 @@ import { useTranslation } from '../../i18n/TranslationContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useDialog } from '@/hooks/useDialog';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C = {
@@ -19,7 +20,7 @@ const C = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
   dim: '#3A3835',
   white: '#FFFFFF',
 };
@@ -380,7 +381,9 @@ const LightboxImgInner = styled.div`
   justify-content: center;
 `;
 
-const LightboxImgActual = styled.img`
+const LightboxImgActual = styled(ResponsiveImage)`
+  width: auto;
+  height: auto;
   max-width: min(70vw, 900px);
   max-height: 80vh;
   object-fit: contain;
@@ -546,8 +549,9 @@ const NavBtn = styled.button<{ $disabled?: boolean }>`
   background: none;
   border: 1px solid ${p => p.$disabled ? C.dim : C.border};
   color: ${p => p.$disabled ? C.dim : C.muted};
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   cursor: ${p => p.$disabled ? 'not-allowed' : 'pointer'};
   display: flex;
   align-items: center;
@@ -799,7 +803,7 @@ const FooterArtistFullName = styled.p`
   font-size: 0.54rem;
   letter-spacing: 0.12em;
   color: ${C.gold};
-  opacity: 0.6;
+  opacity: 0.85;
   margin: 0 0 0.6rem;
   font-style: italic;
 `;
@@ -810,7 +814,7 @@ const FooterKeywordsStrip = styled.div`
   font-family: var(--font-montserrat), sans-serif;
   font-size: 0.5rem;
   letter-spacing: 0.14em;
-  color: ${C.dim};
+  color: ${C.muted};
   line-height: 1.8;
 `;
 
@@ -837,7 +841,7 @@ const FooterMediums = styled.p`
   font-size: 0.54rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: ${C.dim};
+  color: ${C.muted};
   margin: 1rem 0 0;
 `;
 
@@ -1044,10 +1048,11 @@ export default function ArtPortfolio() {
               key={work.id}
               href={`/art/${work.collectionId}/${work.paintingId}`}
             >
-              <img
+              <ResponsiveImage
                 src={work.image}
                 alt={t('artContent.gallery.selectedWork')}
                 loading="lazy"
+                sizes="auto, (max-width: 500px) 33vw, (max-width: 768px) 25vw, (max-width: 1200px) 17vw, 15vw"
                 draggable={false}
                 onContextMenu={e => e.preventDefault()}
               />
@@ -1090,10 +1095,11 @@ export default function ArtPortfolio() {
                   href={`/art/${col.id}/${p.id}`}
                   aria-label={`${t('artContent.common.view')} ${p.title}, ${p.year}`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={p.images[0]}
                     alt={`${p.title} — ${localizedMaterials(p.materials, locale)}`}
                     loading="lazy"
+                    sizes="auto, (max-width: 768px) 33vw, 25vw"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
                   />
@@ -1189,8 +1195,8 @@ export default function ArtPortfolio() {
 
           <FooterCol>
             <FooterColHeading>{t('nav.contact')}</FooterColHeading>
-            <FooterEmailLink href="mailto:camilalonart@gmail.com">
-              camilalonart@gmail.com
+            <FooterEmailLink href="mailto:bycamilalonart@gmail.com">
+              bycamilalonart@gmail.com
             </FooterEmailLink>
             <FooterNavList>
               <li>
@@ -1251,6 +1257,7 @@ export default function ArtPortfolio() {
               <LightboxImgActual
                 src={modal.painting.images[modal.imageIndex]}
                 alt={`${modal.painting.title} — ${localizedMaterials(modal.painting.materials, locale)}, ${modal.painting.year}`}
+                sizes="(max-width: 800px) 90vw, (max-width: 1286px) 70vw, 900px"
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
               />
@@ -1266,7 +1273,7 @@ export default function ArtPortfolio() {
                     onClick={() => setModal(m => m ? { ...m, imageIndex: i } : m)}
                     aria-label={`${t('artContent.common.viewImage')} ${i + 1}`}
                   >
-                    <img src={src} alt="" />
+                    <ResponsiveImage src={src} alt="" sizes="44px" />
                   </Thumb>
                 ))}
               </ThumbnailRow>

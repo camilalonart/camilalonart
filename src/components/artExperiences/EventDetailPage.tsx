@@ -9,6 +9,7 @@ import { type ArtEvent, localizedEventDate, localizedEventTime } from './data';
 import { useTranslation } from '../../i18n/TranslationContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useDialog } from '@/hooks/useDialog';
+import { useVancouverDate, eventDateStatus } from '@/hooks/useVancouverDate';
 import ArtExpNav from './ArtExpNav';
 import ArtExpFooter from './ArtExpFooter';
 
@@ -53,9 +54,9 @@ const BackLink = styled(Link)`
 
 const EventType = styled.p`
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: ${AE.blue};
   margin: 0 0 1rem;
@@ -101,12 +102,12 @@ const Body = styled.div`
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: minmax(0, 1fr) 340px;
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: start;
 
   @media (max-width: 860px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 `;
 
@@ -244,7 +245,7 @@ const SpotsChip = styled.div<{ $low?: boolean }>`
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: ${p => p.$low ? '#b85c1a' : '#2E7D52'};
+  color: ${p => p.$low ? '#8F4310' : '#256440'};
   background: ${p => p.$low ? 'rgba(184, 92, 26, 0.08)' : 'rgba(46, 125, 82, 0.08)'};
   border: 1.5px solid ${p => p.$low ? 'rgba(184, 92, 26, 0.25)' : 'rgba(46, 125, 82, 0.25)'};
   border-radius: 50px;
@@ -278,7 +279,7 @@ const TicketsAvailableBadge = styled.div`
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #2E7D52;
+  color: #256440;
   background: rgba(46, 125, 82, 0.1);
   border: 1.5px solid rgba(46, 125, 82, 0.3);
   border-radius: 50px;
@@ -393,7 +394,10 @@ const InstagramLabel = styled.p`
 `;
 
 const InstagramHandle = styled.a`
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
@@ -627,7 +631,11 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const photos = eventPhotos;
-  const isPast = new Date(event.dateISO) < new Date();
+  const today = useVancouverDate();
+  const status = eventDateStatus(event.dateISO, today);
+  const isPast = status === 'past';
+  const isUpcoming = status === 'upcoming';
+  const canReserve = isUpcoming && event.spotsLeft !== 0;
 
   const openLightbox = useCallback((i: number) => setLightboxIndex(i), []);
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
@@ -661,18 +669,21 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
           </WavyWrap>
 
           <InfoCard>
+              {!isUpcoming && (
+                <EventType>{t(isPast ? 'artContent.experiences.archivedEvent' : 'artContent.experiences.eventSchedule')}</EventType>
+              )}
               <PriceDisplay>
                 <PriceLabel>{t('artContent.experiences.perPerson')}</PriceLabel>
                 <PriceValue>{priceDisplay}</PriceValue>
               </PriceDisplay>
 
-              {event.spotsTotal !== undefined && event.spotsLeft === 0 ? (
+              {isUpcoming && (event.spotsTotal !== undefined && event.spotsLeft === 0 ? (
                 <SoldOutChip>
                   ✕ {t('artExperiences.upcoming.soldOut')} · {event.spotsTotal}/{event.spotsTotal}
                 </SoldOutChip>
               ) : (
                 <>
-                  {event.ticketsAvailable && (
+                  {canReserve && event.ticketsAvailable && (
                     <TicketsAvailableBadge>
                       {t('artContent.experiences.ticketsAvailable')}
                     </TicketsAvailableBadge>
@@ -683,7 +694,7 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
                     </SpotsChip>
                   )}
                 </>
-              )}
+              ))}
 
               <Divider />
 
@@ -720,12 +731,12 @@ export default function EventDetailPage({ event, eventPhotos = [] }: Props) {
               <CTAStack>
                 {event.eventbriteUrl && (
                   <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer">
-                    {t('artContent.experiences.eventbriteTickets')} ↗
+                    {t(canReserve ? 'artContent.experiences.eventbriteTickets' : 'artContent.experiences.eventbriteListing')} ↗
                   </CTAPrimary>
                 )}
                 {event.flockUrl && (
                   <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer">
-                    {t('artContent.experiences.flockReservation')} ↗
+                    {t(canReserve ? 'artContent.experiences.flockReservation' : 'artContent.experiences.flockListing')} ↗
                   </CTASecondary>
                 )}
                 {event.artistPortfolioUrl && (

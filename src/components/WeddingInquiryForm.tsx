@@ -54,8 +54,8 @@ const CloseButton = styled.button`
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.05);
   border: none;
@@ -89,7 +89,7 @@ const FormHeader = styled.div`
   }
   
   p {
-    color: #8A7B6D;
+    color: #69594C;
     font-size: 1rem;
     font-weight: 300;
   }
@@ -103,16 +103,22 @@ const StepIndicator = styled.div`
 `;
 
 const StepDot = styled.button<{ $active: boolean; $completed: boolean }>`
-  width: ${props => props.$active ? '32px' : '10px'};
-  height: 10px;
-  border-radius: 5px;
+  width: 44px;
+  height: 44px;
   border: none;
-  background: ${props => 
-    props.$completed ? '#C9A050' : 
-    props.$active ? 'linear-gradient(90deg, #C9A050, #D4B76A)' : 
-    '#E5DED6'};
+  background: transparent;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    display: block;
+    margin: auto;
+    width: ${props => props.$active ? '32px' : '10px'};
+    height: 10px;
+    border-radius: 5px;
+    background: ${props => props.$completed || props.$active ? '#85634E' : '#998776'};
+  }
   
   &:hover {
     transform: scale(1.1);
@@ -138,7 +144,7 @@ const StepContent = styled.fieldset<{ $active: boolean }>`
 
 const StepTitle = styled.h3`
   font-size: 1.1rem;
-  color: #C9A050;
+  color: #85634E;
   font-weight: 500;
   margin-bottom: 24px;
   text-transform: uppercase;
@@ -163,7 +169,7 @@ const InputGroup = styled.div`
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #8A7B6D;
+    color: #69594C;
     margin-bottom: 8px;
     font-weight: 500;
   }
@@ -173,7 +179,7 @@ const Input = styled.input`
   width: 100%;
   padding: 16px 0;
   border: none;
-  border-bottom: 1px solid #E5DED6;
+  border-bottom: 1px solid #998776;
   font-size: 1.1rem;
   color: #4A4039;
   background: transparent;
@@ -181,19 +187,20 @@ const Input = styled.input`
   font-family: inherit;
   
   &::placeholder {
-    color: #C5B9AC;
+    color: #766455;
   }
   
   &:focus {
-    outline: none;
-    border-bottom-color: #C9A050;
+    outline: 2px solid #85634E;
+    outline-offset: 3px;
+    border-bottom-color: #85634E;
   }
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
   padding: 16px;
-  border: 1px solid #E5DED6;
+  border: 1px solid #998776;
   border-radius: 12px;
   font-size: 1rem;
   color: #4A4039;
@@ -204,12 +211,13 @@ const TextArea = styled.textarea`
   resize: vertical;
   
   &::placeholder {
-    color: #C5B9AC;
+    color: #766455;
   }
   
   &:focus {
-    outline: none;
-    border-color: #C9A050;
+    outline: 2px solid #85634E;
+    outline-offset: 3px;
+    border-color: #85634E;
     background: white;
     box-shadow: 0 0 0 4px rgba(201, 160, 80, 0.1);
   }
@@ -237,7 +245,7 @@ const Select = styled.select`
   width: 100%;
   padding: 16px 0;
   border: none;
-  border-bottom: 1px solid #E5DED6;
+  border-bottom: 1px solid #998776;
   font-size: 1.1rem;
   color: #4A4039;
   background: transparent;
@@ -247,8 +255,9 @@ const Select = styled.select`
   font-family: inherit;
   
   &:focus {
-    outline: none;
-    border-bottom-color: #C9A050;
+    outline: 2px solid #85634E;
+    outline-offset: 3px;
+    border-bottom-color: #85634E;
   }
   
   option {
@@ -295,7 +304,7 @@ const PackageCard = styled.button<{ $selected: boolean }>`
   
   .desc {
     font-size: 0.85rem;
-    color: #8A7B6D;
+    color: #69594C;
   }
 `;
 
@@ -311,13 +320,15 @@ const TwoColumn = styled.div`
 
 const ButtonRow = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 32px;
 `;
 
 const Button = styled.button<{ $primary?: boolean; $loading?: boolean }>`
-  flex: 1;
-  padding: 18px 32px;
+  flex: 1 1 8rem;
+  min-width: 0;
+  padding: 18px clamp(12px, 4vw, 32px);
   border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -342,12 +353,12 @@ const Button = styled.button<{ $primary?: boolean; $loading?: boolean }>`
     }
   ` : `
     background: transparent;
-    color: #8A7B6D;
-    border: 1px solid #E5DED6;
+    color: #69594C;
+    border: 1px solid #998776;
     
     &:hover:not(:disabled) {
       border-color: #C9A050;
-      color: #C9A050;
+      color: #85634E;
     }
   `}
   
@@ -404,7 +415,7 @@ const SuccessContent = styled.div`
   }
   
   p {
-    color: #8A7B6D;
+    color: #69594C;
     font-size: 1.05rem;
     line-height: 1.6;
     max-width: 400px;
@@ -417,7 +428,7 @@ const Notification = styled.div<{ $type: 'success' | 'error' }>`
   top: 24px;
   right: 24px;
   padding: 16px 24px;
-  background: ${props => props.$type === 'success' ? '#4CAF50' : '#E53935'};
+  background: ${props => props.$type === 'success' ? '#256B2A' : '#B32622'};
   color: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);

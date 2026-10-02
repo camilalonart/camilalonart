@@ -58,7 +58,7 @@ const Page = styled.div`
 
   p { margin: 0; font-weight: 400; }
   a { color: inherit; }
-  a:focus-visible, button:focus-visible {
+  a:focus-visible, button:focus-visible, summary:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 5px;
   }
@@ -104,7 +104,7 @@ const Navigation = styled.nav`
   flex-wrap: wrap;
   gap: 0.35rem 1.75rem;
   margin-left: auto;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 
   a {
     display: inline-flex;
@@ -129,7 +129,7 @@ const Languages = styled.div`
     min-width: 44px;
     min-height: 44px;
     color: var(--muted);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     letter-spacing: 0.04em;
     border: 1px solid transparent;
   }
@@ -139,7 +139,7 @@ const Languages = styled.div`
 
 const Hero = styled.section`
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   align-items: start;
   gap: clamp(2rem, 5vw, 5rem);
   padding-block: clamp(2rem, 4vw, 4rem);
@@ -161,7 +161,7 @@ const Hero = styled.section`
 
 const Eyebrow = styled.p`
   color: var(--accent);
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   line-height: 1.7;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -177,7 +177,7 @@ const Intro = styled.p`
 const Facets = styled.p`
   margin: 0 0 1rem !important;
   max-width: 40ch;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 500 !important;
   line-height: 1.8;
   color: var(--accent);
@@ -197,12 +197,13 @@ const PrimaryLink = styled.a`
   justify-content: center;
   gap: 1.25rem;
   min-height: 48px;
-  padding-block: 0.65rem;
-  border-bottom: 1px solid var(--accent);
-  color: var(--accent) !important;
-  font-size: 0.8rem;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff !important;
+  font-size: 0.875rem;
   font-weight: 500;
-  &:hover { color: #673829 !important; border-bottom-color: #673829; }
+  &:hover { background: #673829; border-color: #673829; }
 `;
 
 const TextLink = styled.a`
@@ -210,10 +211,36 @@ const TextLink = styled.a`
   align-items: center;
   gap: 0.85rem;
   min-height: 48px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   text-decoration: underline;
   text-underline-offset: 0.35em;
   &:hover { color: var(--accent); }
+`;
+
+const SessionLinks = styled.nav`
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  h2 { font-size: 1.6rem; line-height: 1.2; }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0.85rem 0 0;
+    padding: 0;
+  }
+  li { min-width: 0; max-width: 100%; }
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--line);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  a:hover { border-color: var(--accent); color: var(--accent); }
 `;
 
 const Worlds = styled.div`
@@ -222,10 +249,12 @@ const Worlds = styled.div`
   max-width: 560px;
   margin-left: auto;
   scroll-margin-top: 2rem;
+  > h2 { font-size: 1.6rem; line-height: 1.2; margin-bottom: 0.5rem; }
   > p {
     color: var(--muted);
-    font-size: 0.75rem;
-    margin-bottom: 0.8rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
   }
   @media (max-width: 900px) { max-width: none; }
 `;
@@ -273,7 +302,7 @@ const ImageTile = styled(Link)`
     margin-top: 0.85rem;
     border-bottom: 1px solid #fff;
     color: #fff;
-    font-size: 0.72rem;
+    font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.6;
   }
@@ -286,12 +315,12 @@ const ImageTile = styled(Link)`
 const WorldCard = styled(ImageTile)`
   break-inside: avoid;
   margin-bottom: 1rem;
-  h2 {
+  h3 {
     font-size: clamp(1.85rem, 2.5vw, 2.3rem);
     line-height: 1.15;
     margin: 0 0 0.65rem;
   }
-  .world-copy p { font-size: 0.76rem; line-height: 1.7; }
+  .world-copy p { font-size: 0.875rem; line-height: 1.7; }
 `;
 
 const SectionBlock = styled.section`
@@ -306,7 +335,7 @@ const SectionHeading = styled.div`
   gap: 1.5rem 3rem;
   margin-bottom: 2rem;
   h2 { margin-top: 0.7rem; font-size: clamp(2.4rem, 4vw, 3.5rem); line-height: 1.1; }
-  > p { max-width: 38ch; color: var(--muted); font-size: 0.8rem; line-height: 1.9; }
+  > p { max-width: 38ch; color: var(--muted); font-size: 0.9375rem; line-height: 1.8; }
   @media (max-width: 760px) { flex-direction: column; align-items: start; gap: 1rem; }
 `;
 
@@ -322,25 +351,36 @@ const CardGrid = styled.div<{ $personal?: boolean }>`
 const Card = styled(ImageTile)`
   min-height: 350px;
   h3 { font-size: 1.85rem; line-height: 1.12; margin-bottom: 0.75rem; }
-  .description { font-size: 0.76rem; line-height: 1.8; }
+  .description { font-size: 0.875rem; line-height: 1.8; }
 `;
 
-const Process = styled.ol`
-  list-style: none;
+const InquiryDetails = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin: 2.5rem 0 0;
-  padding: 0;
-  li { border-top: 1px solid var(--line); padding-top: 1.25rem; }
-  .number { color: var(--accent); font-size: 0.7rem; }
-  h3 { font-size: 1.8rem; margin-block: 0.75rem; }
-  p { color: var(--muted); font-size: 0.78rem; line-height: 1.85; }
-  @media (max-width: 760px) { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem 4rem;
+  margin-top: 2.5rem;
+  h3 { font-size: 2rem; line-height: 1.2; margin-bottom: 1rem; }
+  p { color: var(--muted); font-size: 0.9375rem; line-height: 1.8; }
+  .about-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1rem; }
+  @media (max-width: 760px) { grid-template-columns: minmax(0, 1fr); }
+`;
+
+const FAQ = styled.div`
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    min-height: 44px;
+    padding-block: 0.85rem;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  summary::marker { color: var(--accent); }
+  details > p { padding-bottom: 1rem; }
 `;
 
 const Contact = styled.div`
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: clamp(1.5rem, 4vw, 3rem);
   background: #EEE7DD;
   border: 1px solid var(--line);
@@ -350,8 +390,8 @@ const Contact = styled.div`
   justify-content: space-between;
   gap: 1.5rem 3rem;
   h3 { font-size: clamp(2rem, 3vw, 2.75rem); }
-  p { margin-top: 0.75rem; max-width: 50ch; color: var(--muted); font-size: 0.8rem; }
-  .email { margin-top: 0.5rem; font-size: 0.72rem; overflow-wrap: anywhere; }
+  p { margin-top: 0.75rem; max-width: 50ch; color: var(--muted); font-size: 0.9375rem; line-height: 1.8; }
+  .email { margin-top: 0.5rem; font-size: 0.875rem; overflow-wrap: anywhere; }
   .contact-links { flex-shrink: 0; max-width: 100%; }
   @media (max-width: 760px) { flex-direction: column; align-items: start; }
 `;
@@ -364,7 +404,8 @@ const Footer = styled.footer`
   justify-content: space-between;
   gap: 0.75rem 2rem;
   color: var(--muted);
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
+  line-height: 1.7;
 `;
 
 export default function HomePage() {
@@ -431,14 +472,25 @@ export default function HomePage() {
             <Facets>{t('homepage.facets')}</Facets>
             <Intro>{t('homepage.intro')}</Intro>
             <Actions>
+              <PrimaryLink href="#contact">{t('homepage.workWithMe')} <span aria-hidden="true">↓</span></PrimaryLink>
               {worlds.length > 0 && (
-                <PrimaryLink href="#explore">{t('homepage.findYourWorld')} <span aria-hidden="true">↓</span></PrimaryLink>
+                <TextLink href="#explore">{t('homepage.exploreMyWork')} <span aria-hidden="true">↓</span></TextLink>
               )}
-              <TextLink href="#contact">{t('homepage.inquire')} <span aria-hidden="true">↗</span></TextLink>
             </Actions>
+            {services.length > 0 && (
+              <SessionLinks aria-labelledby="session-links-heading">
+                <h2 id="session-links-heading">{t('homepage.sessionLinksTitle')}</h2>
+                <ul>
+                  {services.map(section => (
+                    <li key={section.id}><Link href={section.href}>{t(`homepage.sessionLinks.${section.id}`)}</Link></li>
+                  ))}
+                </ul>
+              </SessionLinks>
+            )}
           </div>
           {worlds.length > 0 && (
-            <Worlds id="explore" role="region" aria-label={t('homepage.exploreNav')}>
+            <Worlds id="explore" role="region" aria-labelledby="worlds-heading">
+              <h2 id="worlds-heading">{t('homepage.exploreMyWork')}</h2>
               <p>{t('homepage.worldsIntro')}</p>
               <WorldGrid>
                 {worlds.map((section, index) => {
@@ -461,7 +513,7 @@ export default function HomePage() {
                         />
                       </div>
                       <div className="world-copy tile-copy">
-                        <h2>{t(`homepage.worlds.${section.id}.title`)}</h2>
+                        <h3>{t(`homepage.worlds.${section.id}.title`)}</h3>
                         <p>{t(`homepage.worlds.${section.id}.description`)}</p>
                         <span className="tile-action">{t(`homepage.worlds.${section.id}.action`)}<span aria-hidden="true">↗</span></span>
                       </div>
@@ -498,15 +550,6 @@ export default function HomePage() {
             <div><Eyebrow>{t('homepage.processEyebrow')}</Eyebrow><h2 id="contact-heading">{t('homepage.processTitle')}</h2></div>
             <p>{t('homepage.processIntro')}</p>
           </SectionHeading>
-          <Process>
-            {['share', 'plan', 'create'].map((step, index) => (
-              <li key={step}>
-                <span className="number" aria-hidden="true">0{index + 1}</span>
-                <h3>{t(`homepage.process.${step}.title`)}</h3>
-                <p>{t(`homepage.process.${step}.description`)}</p>
-              </li>
-            ))}
-          </Process>
           <Contact>
             <div><h3>{t('homepage.contactTitle')}</h3><p>{t('homepage.contactIntro')}</p></div>
             <div className="contact-links">
@@ -514,6 +557,28 @@ export default function HomePage() {
               <p className="email">{SITE_CONFIG.contact.email}</p>
             </div>
           </Contact>
+          <InquiryDetails>
+            <div>
+              <h3>{t('homepage.aboutTitle')}</h3>
+              <p>{t('homepage.aboutIntro')}</p>
+              <div className="about-links">
+                <TextLink as={Link} href="/art/about/">{t('homepage.aboutLink')} <span aria-hidden="true">↗</span></TextLink>
+                <TextLink href={SITE_CONFIG.social.instagram}>{t('homepage.instagramLink')} <span aria-hidden="true">↗</span></TextLink>
+              </div>
+            </div>
+            <FAQ>
+              <h3>{t('homepage.faqTitle')}</h3>
+              {['inquiry', 'location', 'languages', 'events'].map(question => (
+                <details key={question}>
+                  <summary>{t(`homepage.faq.${question}.question`)}</summary>
+                  <p>{t(`homepage.faq.${question}.answer`)}</p>
+                  {question === 'events' && (
+                    <TextLink as={Link} href="/art-experiences/">{t('homepage.faq.events.link')} <span aria-hidden="true">↗</span></TextLink>
+                  )}
+                </details>
+              ))}
+            </FAQ>
+          </InquiryDetails>
         </SectionBlock>
         <Footer><span>© Camilalonart · {t('home.title')}</span><span>{t('homepage.footer')}</span></Footer>
       </Container>

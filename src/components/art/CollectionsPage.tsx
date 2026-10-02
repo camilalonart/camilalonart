@@ -5,6 +5,7 @@ import Link from '@/i18n/LocalizedLink';
 import styled from 'styled-components';
 import data, { COLLECTIONS_ORDER, type Collection } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '@/i18n/TranslationContext';
 
 const C = {
@@ -13,7 +14,7 @@ const C = {
   border: '#1E1E1E',
   gold: '#C8A87A',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
 };
 
 const Site = styled.div`
@@ -78,7 +79,7 @@ const CollectionCardLink = styled(Link)`
   }
 `;
 
-const CardImage = styled.img`
+const CardImage = styled(ResponsiveImage)`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -139,6 +140,7 @@ export default function CollectionsPage() {
                 src={col.paintings[0]?.images[0] || '/placeholder.webp'}
                 alt={col.name}
                 loading="lazy"
+                sizes="auto, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                 draggable={false}
                 onContextMenu={e => e.preventDefault()}
               />

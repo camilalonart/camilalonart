@@ -6,13 +6,13 @@ export const AE = {
   cream: '#F5EFE0',
   paper: '#EDE5D0',
   parchment: '#E5D9C0',
-  blue: '#4A72A8',
+  blue: '#365F93',
   blueDark: '#2D4F7A',
   blueLight: '#7FA4C7',
   blueTint: '#EBF1F7',
   ink: '#2C2416',
-  warmBrown: '#8B7D6B',
-  warmLight: '#B5A898',
+  warmBrown: '#635647',
+  warmLight: '#675847',
 } as const;
 
 interface DoodleProps {

@@ -34,7 +34,7 @@ const FooterSection = styled.div`
   h3 {
     font-size: ${theme.typography.fontSize.lg};
     margin-bottom: ${theme.spacing.lg};
-    color: ${theme.colors.primary.light};
+    color: ${theme.colors.secondary.light};
   }
   
   ul {
@@ -54,8 +54,11 @@ const FooterSection = styled.div`
     
     &:hover {
       opacity: 1;
-      color: ${theme.colors.primary.light};
+      color: ${theme.colors.secondary.light};
+      text-decoration: underline;
     }
+
+    a:focus-visible { opacity: 1; }
   }
 `;
 

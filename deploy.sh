@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# Build the project
+set -e
+
+# Local validation does not publish uncommitted changes.
 echo "Building project..."
 npm run build
-
-# Check if build was successful
-if [ $? -ne 0 ]; then
-    echo "Build failed!"
-    exit 1
-fi
+npm run check:site
+command -v gh >/dev/null || { echo "Install GitHub CLI to request a deployment."; exit 1; }
 
 # Ask for deployment confirmation
-read -p "Do you want to deploy to GitHub Pages? (y/n) " -n 1 -r
+echo "Deployment publishes the committed main branch on GitHub, not local changes."
+read -p "Run the GitHub Pages workflow for main? (y/n) " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
@@ -19,10 +18,5 @@ then
     exit 1
 fi
 
-# Deploy to GitHub Pages
-echo "Deploying to GitHub Pages..."
-git add out/
-git commit -m "Deploy to GitHub Pages"
-git subtree push --prefix out origin gh-pages
-
-echo "Deployment completed!" 
+gh workflow run deploy.yml --ref main --repo camilalonart/camilalonart
+echo "Deployment requested. Follow its progress in GitHub Actions."

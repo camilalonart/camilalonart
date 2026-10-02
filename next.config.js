@@ -2,7 +2,10 @@
 const nextConfig = {
   output: 'export',  // Enable static exports
   images: {
-    unoptimized: true, // GitHub Pages serves the optimized WebP assets directly.
+    loader: 'custom',
+    loaderFile: './src/lib/imageLoader.ts',
+    deviceSizes: [480, 960, 1600, 2048],
+    imageSizes: [160, 320],
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },

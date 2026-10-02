@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from '@/i18n/LocalizedLink';
 import data, { COLLECTIONS_ORDER, earlyFirstPaintings_COLLECTIONS_ORDER, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '../../i18n/TranslationContext';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
@@ -15,7 +16,7 @@ const C = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
   dim: '#3A3835',
 };
 
@@ -59,7 +60,7 @@ const PageSubtitle = styled.p`
 // ─── Toolbar (sticky) ─────────────────────────────────────────────────────────
 const Toolbar = styled.div`
   position: sticky;
-  top: 0;
+  top: 64px;
   z-index: 100;
   background: rgba(8, 8, 8, 0.97);
   backdrop-filter: blur(12px);
@@ -69,6 +70,8 @@ const Toolbar = styled.div`
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+
+  @media (max-width: 600px) { position: static; }
 `;
 
 const SearchInput = styled.input`
@@ -76,17 +79,18 @@ const SearchInput = styled.input`
   min-width: 140px;
   max-width: 260px;
   background: transparent;
-  border: 1px solid ${C.border};
+  border: 1px solid ${C.muted};
   color: ${C.text};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   padding: 0.5rem 0.75rem;
-  outline: none;
+  min-height: 44px;
   transition: border-color 0.2s;
 
-  &::placeholder { color: ${C.dim}; }
+  &::placeholder { color: ${C.muted}; opacity: 1; }
   &:focus { border-color: ${C.gold}; }
+  &:focus-visible { outline: 2px solid ${C.gold}; outline-offset: 3px; }
 `;
 
 const Divider = styled.div`
@@ -127,7 +131,11 @@ const SortButton = styled.button<{ $active: boolean }>`
   gap: 0.35rem;
   transition: background 0.18s, color 0.18s;
   white-space: normal;
-  outline: none;
+  &:focus-visible {
+    outline: 2px solid ${({ $active }) => ($active ? C.bg : C.gold)};
+    outline-offset: -4px;
+    box-shadow: none;
+  }
 
   &:last-child { border-right: none; }
 
@@ -155,6 +163,12 @@ const Count = styled.span`
 // ─── Gallery ─────────────────────────────────────────────────────────────────
 const GalleryContainer = styled.section`
   padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 5rem);
+
+  a { scroll-margin-top: 14rem; }
+
+  @media (max-width: 600px) {
+    a { scroll-margin-top: 6rem; }
+  }
 `;
 
 const CollectionGroup = styled.div`
@@ -163,7 +177,7 @@ const CollectionGroup = styled.div`
 
 const CollectionGroupTitle = styled.h2`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -351,7 +365,7 @@ const DropdownTrigger = styled.button<{ $active: boolean }>`
   border: 1px solid ${({ $active }) => ($active ? C.gold : C.border)};
   color: ${({ $active }) => ($active ? C.gold : C.text)};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.65rem;
   letter-spacing: 0.12em;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
@@ -360,7 +374,9 @@ const DropdownTrigger = styled.button<{ $active: boolean }>`
   gap: 0.5rem;
   white-space: nowrap;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
-  outline: none;
+  min-height: 44px;
+
+  &:focus-visible { outline: 2px solid ${C.gold}; outline-offset: 3px; }
 
   &:hover {
     border-color: ${C.gold};
@@ -623,7 +639,7 @@ export default function AllPaintingsPage() {
             <CollectionGroup key={group.id}>
               <CollectionGroupTitle>
                 {group.id === 'early-first-paintings' ? t('art.earlyPaintings') : group.name}
-                <span style={{ color: C.dim }}>{group.items.length}</span>
+                <span style={{ color: C.muted }}>{group.items.length}</span>
               </CollectionGroupTitle>
               <MasonryGrid>
                 {group.items.map(p => <PaintingCard key={p.id} painting={p} />)}
@@ -653,10 +669,11 @@ function PaintingCard({ painting }: { painting: PaintingEntry }) {
       href={`/art/${painting.collectionId}/${painting.paintingId}`}
       aria-label={`${t('artContent.common.view')} ${painting.title}, ${painting.year}`}
     >
-      <img
+      <ResponsiveImage
         src={painting.image}
         alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}, ${painting.year}`}
         loading="lazy"
+        sizes="auto, (max-width: 500px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 350px"
         draggable={false}
         onContextMenu={e => e.preventDefault()}
       />

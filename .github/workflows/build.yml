@@ -1,31 +1,37 @@
-name: Build and Deploy
+name: Manual website build
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Check for accidentally committed credentials
+        run: node scripts/check-secrets.js
+
+      - name: Check bilingual translation coverage
+        run: npm run check:translations
+
       - name: Build
         run: npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: out
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check exported pages
+        run: npm run check:site

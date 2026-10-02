@@ -109,7 +109,7 @@ const BottomRow = styled.div`
 const Copyright = styled.p`
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.72rem;
-  color: rgba(245, 239, 224, 0.4);
+  color: rgba(245, 239, 224, 0.7);
   margin: 0;
 `;
 
@@ -124,7 +124,7 @@ const SocialLink = styled.a`
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: rgba(245, 239, 224, 0.5);
+  color: rgba(245, 239, 224, 0.7);
   text-decoration: none;
   transition: color 0.2s;
 
@@ -175,7 +175,7 @@ export default function ArtExpFooter() {
               <ColLink href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
                 {t('artExperiences.footer.joinFlock')}
               </ColLink>
-              <ColLink href="mailto:camilalonart@gmail.com">
+              <ColLink href="mailto:bycamilalonart@gmail.com">
                 {t('artExperiences.footer.getInTouch')}
               </ColLink>
               <ColLink as={Link} href="/">
