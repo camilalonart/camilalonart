@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { generateMetadata, SEO_IMAGES } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Wildlife Photography in Vancouver | Camilalonart',
-  description: 'Professional wildlife photography services based in Vancouver, BC. Capturing the beauty of British Columbia\'s diverse wildlife through expert photography.',
-  keywords: 'wildlife photography vancouver, nature photographer vancouver, bc wildlife photos, vancouver wildlife photographer, british columbia wildlife, professional wildlife photography',
-}; 
+export const metadata = generateMetadata({
+  title: 'Wildlife Photography',
+  description: 'A personal wildlife photography portfolio by Camila Londoño. Discover photographs of animals, birds and encounters with the natural world.',
+  path: '/my-art/wildlife-photography/',
+  images: [{ url: SEO_IMAGES.wildlife, alt: 'Wildlife photography by Camila Londoño' }],
+});

@@ -140,50 +140,39 @@ export default function Footer({ aboutText = defaultAboutText }: FooterProps) {
             <li><Link href="/photography/wedding-couples">{t('nav.wedding')}</Link></li>
             <li><Link href="/photography/pets">{t('nav.pets')}</Link></li>
             <li><Link href="/photography/headshots">{t('nav.headshots')}</Link></li>
+            <li><Link href="/photography/family-maternity">{t('nav.family')}</Link></li>
             <li><Link href="/my-art/wildlife-photography">{t('nav.wildlifePhotography')}</Link></li>
-          </ul>
-        </FooterSection>
-
-        <FooterSection>
-          <h3>{t('footer.tech')}</h3>
-          <ul>
-            <li><Link href="/tech/engineering">{t('nav.softwareEngineering')}</Link></li>
-            <li><Link href="/tech/cloud">Cloud Architecture</Link></li>
-            <li><Link href="/tech/writing">Technical Writing</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
           <h3>{t('footer.creativeServices')}</h3>
           <ul>
-            <li><Link href="/creative-services/brand-identity">{t('nav.brandIdentity')}</Link></li>
-            <li><Link href="/creative-services/editorial">Editorial</Link></li>
-            <li><Link href="/creative-services/commercial">Commercial</Link></li>
-            <li><Link href="/creative-services/art-prints">Art Prints</Link></li>
+            <li><Link href="/art-experiences/">{t('home.artExperiences.title')}</Link></li>
+            <li><Link href="/creative-services/ux-ui-design/">{t('nav.uxUiDesign')}</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
           <h3>{t('footer.myArt')}</h3>
           <ul>
-            <li><Link href="/my-art/digital-art">{t('nav.digitalArt')}</Link></li>
-            <li><Link href="/my-art/traditional-art">{t('nav.traditionalArt')}</Link></li>
-            <li><Link href="/my-art/everyday-photography">{t('nav.everydayPhotography')}</Link></li>
-            <li><Link href="/my-art/blog">{t('nav.blog')}</Link></li>
+            <li><Link href="/art/">{t('nav.art')}</Link></li>
+            <li><Link href="/art/collections/">{t('nav.collections')}</Link></li>
+            <li><Link href="/art/about/">{t('nav.about')}</Link></li>
           </ul>
         </FooterSection>
 
         <FooterSection>
           <h3>{t('footer.contact')}</h3>
           <ul>
-            <li>{t('footer.email')}: bycamilalonart@gmail.com</li>
-            <li>{t('footer.phone')}: +1 (672) 338 - 9307</li>
+            <li>{t('footer.email')}: <a href="mailto:bycamilalonart@gmail.com">bycamilalonart@gmail.com</a></li>
+            <li>{t('footer.phone')}: <a href="tel:+16723389307">+1 (672) 338 - 9307</a></li>
             <li>{t('footer.location')}: Vancouver, BC, Canada</li>
           </ul>
           <SocialLinks>
-            <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" title="Instagram @camilalonart">📷</a>
-            <a href="https://instagram.com/camilonart" target="_blank" rel="noopener noreferrer" title="Instagram @camilonart">📸</a>
-            <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer" title="Behance Portfolio">🎨</a>
+            <a href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Instagram @camilalonart">📷</a>
+            <a href="https://instagram.com/camilonart" target="_blank" rel="noopener noreferrer" aria-label="Instagram @camilonart">📸</a>
+            <a href="https://www.behance.net/camilalonart" target="_blank" rel="noopener noreferrer" aria-label="Behance Portfolio">🎨</a>
           </SocialLinks>
         </FooterSection>
       </FooterContent>

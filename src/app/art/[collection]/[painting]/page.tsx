@@ -13,21 +13,6 @@ export async function generateStaticParams() {
   );
 }
 
-export async function generateMetadata({ params }: PaintingRouteProps) {
-  const { collection: collectionId, painting: paintingId } = await params;
-  const collection = allCollections().find(c => c.id === collectionId);
-  const painting = collection?.paintings.find(p => p.id === paintingId);
-
-  if (!painting) {
-    return { title: 'Not Found' };
-  }
-
-  return {
-    title: `${painting.title} — Camila Londoño`,
-    description: `${painting.title}, ${painting.year}. ${painting.materials}.`,
-  };
-}
-
 export default async function PaintingRoute({ params }: PaintingRouteProps) {
   const { collection: collectionId, painting: paintingId } = await params;
   const collection = allCollections().find(c => c.id === collectionId);

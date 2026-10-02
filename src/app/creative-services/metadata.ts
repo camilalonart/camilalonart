@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Creative Services in Vancouver | Camilalonart',
-  description: 'Professional creative services in Vancouver, BC. Offering brand identity design, editorial photography, commercial photography, and art prints. Available for local and remote projects.',
-  keywords: 'creative services vancouver, brand identity vancouver, editorial photography vancouver, commercial photography vancouver, art prints, professional services, vancouver photographer, vancouver designer',
-}; 
+export const metadata = generateMetadata({
+  title: 'Creative Services',
+  description: 'Creative services and project inquiries with Camila Londoño.',
+  path: '/creative-services/',
+  noIndex: true,
+});

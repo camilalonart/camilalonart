@@ -25,7 +25,7 @@ const Site = styled.div`
   * { box-sizing: border-box; }
 `;
 
-const Content = styled.main`
+const Content = styled.div`
   padding-top: 64px;
   min-height: 100vh;
   padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem);

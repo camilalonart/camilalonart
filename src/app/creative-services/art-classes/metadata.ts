@@ -1,7 +1,7 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Art Classes in Vancouver | Camilalonart',
-  description: 'Professional art classes and workshops in Vancouver. Learn digital art, traditional techniques, and art business essentials in small group settings.',
-  keywords: 'art classes vancouver, digital art classes, traditional art workshop, art business course, art lessons vancouver, drawing classes',
-}; 
+export const metadata = generateMetadata({
+  title: 'Art Classes in Vancouver',
+  description: 'Explore art classes and workshops with Camila Londoño in Vancouver, including digital art and traditional painting techniques.',
+  path: '/creative-services/art-classes/',
+});

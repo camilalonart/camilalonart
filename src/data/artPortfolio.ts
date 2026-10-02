@@ -977,7 +977,9 @@ const data: ArtPortfolioData = {
           materials: "Mixed media",
           size: "11.7x8.26in",
           year: 2025,
-          images: ["/images/art/traditionalArt/Otros/Detalles/Azul.webp"],
+          images: ["/images/art/traditionalArt/Otros/Detalles/Azul_Proceso4.webp"],
+          thoughts: "The image shown documents Azul in progress, not the finished work.",
+          thoughtsEs: "La imagen muestra Azul en proceso, no la obra terminada.",
           details: [
             "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso1.webp",
             "/images/art/traditionalArt/Otros/Detalles/Azul_Proceso2.webp",
@@ -1578,7 +1580,7 @@ const data: ArtPortfolioData = {
           "size": "18x24in",
           "year": 2016,
           "images": [
-            "/images/art/oldArt/OleosAdolescente/EllaSeBañaEnIlusionesParaLimpiarLasImpurezas_18x24in_Aug2016_Oil.webp"
+            "/images/art/oldArt/OleosAdolescente/EllaSeBañaEnIlusionesParaLimpiarLasImpurezas_18x24in_Aug2016_Oil.webp"
           ]
         },
         {
@@ -1714,7 +1716,7 @@ const data: ArtPortfolioData = {
       ]
     },
     {
-      "id": "otros",
+      "id": "otros-early-work",
       "name": "Otros",
       "period": "2017",
       "description": "Something",

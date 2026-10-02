@@ -6,6 +6,8 @@ import { theme } from '../../../styles/theme';
 import SecureImage from '../../../components/SecureImage';
 import Footer from '../../../components/Footer';
 import PhotographyNav from '../../../components/PhotographyNav';
+import { useTranslation } from '@/i18n/TranslationContext';
+import { useDialog } from '@/hooks/useDialog';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -383,6 +385,12 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.lg};
+
+  > fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: ${theme.spacing.lg};
+  }
 `;
 
 const FormRow = styled.div`
@@ -547,7 +555,10 @@ const PackageSelector = styled.div`
 `;
 
 export default function HeadshotsPage() {
+  const { locale } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dialogRef = useDialog(isModalOpen, () => setIsModalOpen(false));
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_HEADSHOTS_ID;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -576,16 +587,25 @@ export default function HeadshotsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    if (!formspreeId) {
+      setStatus({ type: 'error', message: locale === 'es' ? 'El formulario no está disponible. Envía tu consulta por correo.' : 'Online submission is unavailable. Please email your inquiry.' });
+      return;
+    }
     setIsSubmitting(true);
     setStatus(null);
 
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...formData, service: 'headshots' }),
+      });
+      if (!response.ok) throw new Error('Submission not accepted');
       
       setStatus({
         type: 'success',
-        message: '🎉 Thank you for your inquiry! We\'ll get back to you within 24 hours to confirm your session.',
+        message: locale === 'es' ? 'Gracias. Tu consulta se ha enviado; la sesión aún no está confirmada.' : 'Thank you. Your inquiry was sent; your session is not yet confirmed.',
       });
       setFormData({
         name: '',
@@ -599,20 +619,21 @@ export default function HeadshotsPage() {
         message: '',
       });
       
-      // Close modal after success (with delay to show message)
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setStatus(null);
-      }, 3000);
     } catch (error) {
       setStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again or contact us directly.',
+        message: locale === 'es' ? 'No se ha confirmado el envío. Conservamos tus datos; contacta por correo.' : 'Delivery has not been confirmed. Your details are saved here; please email us.',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
+  const emailFallback = (!formspreeId || status?.type === 'error') && (
+    <p>
+      {locale === 'es' ? 'Enviar consulta por correo: ' : 'Email your inquiry: '}
+      <a href={`mailto:bycamilalonart@gmail.com?subject=Headshot%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+    </p>
+  );
 
   return (
     <PageContainer>
@@ -722,13 +743,17 @@ export default function HeadshotsPage() {
             <p>Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
           </FormHeader>
 
-          {status && <StatusMessage $type={status.type}>{status.message}</StatusMessage>}
+          {status && <StatusMessage role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{status.message}</StatusMessage>}
+          {emailFallback}
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} aria-busy={isSubmitting}>
+            <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
             <FormRow>
               <FormGroup>
-                <Label>Full Name <span>*</span></Label>
+                <Label htmlFor="headshot-name">Full Name <span>*</span></Label>
                 <Input
+                  id="headshot-name"
+                  autoComplete="name"
                   type="text"
                   name="name"
                   value={formData.name}
@@ -738,8 +763,10 @@ export default function HeadshotsPage() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Email <span>*</span></Label>
+                <Label htmlFor="headshot-email">Email <span>*</span></Label>
                 <Input
+                  id="headshot-email"
+                  autoComplete="email"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -752,8 +779,10 @@ export default function HeadshotsPage() {
 
             <FormRow>
               <FormGroup>
-                <Label>Phone Number <span>*</span></Label>
+                <Label htmlFor="headshot-phone">Phone Number <span>*</span></Label>
                 <Input
+                  id="headshot-phone"
+                  autoComplete="tel"
                   type="tel"
                   name="phone"
                   value={formData.phone}
@@ -763,8 +792,10 @@ export default function HeadshotsPage() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Company / Organization</Label>
+                <Label htmlFor="headshot-company">Company / Organization</Label>
                 <Input
+                  id="headshot-company"
+                  autoComplete="organization"
                   type="text"
                   name="company"
                   value={formData.company}
@@ -775,8 +806,8 @@ export default function HeadshotsPage() {
             </FormRow>
 
             <FormGroup>
-              <Label>Select Package <span>*</span></Label>
-              <PackageSelector>
+              <Label as="div" id="headshot-package-label">Select Package <span>*</span></Label>
+              <PackageSelector role="group" aria-labelledby="headshot-package-label">
                 <PackageOption $selected={formData.package === 'plain'}>
                   <input
                     type="radio"
@@ -804,8 +835,9 @@ export default function HeadshotsPage() {
 
             <FormRow>
               <FormGroup>
-                <Label>Preferred Date <span>*</span></Label>
+                <Label htmlFor="headshot-date">Preferred Date <span>*</span></Label>
                 <Input
+                  id="headshot-date"
                   type="date"
                   name="preferredDate"
                   value={formData.preferredDate}
@@ -814,8 +846,9 @@ export default function HeadshotsPage() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Preferred Time</Label>
+                <Label htmlFor="headshot-time">Preferred Time</Label>
                 <Select
+                  id="headshot-time"
                   name="preferredTime"
                   value={formData.preferredTime}
                   onChange={handleChange}
@@ -829,8 +862,9 @@ export default function HeadshotsPage() {
             </FormRow>
 
             <FormGroup>
-              <Label>What will these headshots be used for?</Label>
+              <Label htmlFor="headshot-purpose">What will these headshots be used for?</Label>
               <Select
+                id="headshot-purpose"
                 name="purpose"
                 value={formData.purpose}
                 onChange={handleChange}
@@ -846,8 +880,9 @@ export default function HeadshotsPage() {
             </FormGroup>
 
             <FormGroup>
-              <Label>Additional Details or Questions</Label>
+              <Label htmlFor="headshot-message">Additional Details or Questions</Label>
               <TextArea
+                id="headshot-message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
@@ -855,6 +890,7 @@ export default function HeadshotsPage() {
               />
             </FormGroup>
 
+            </fieldset>
             <SubmitButton type="submit" $isSubmitting={isSubmitting} disabled={isSubmitting}>
               {isSubmitting ? (
                 <>
@@ -873,22 +909,26 @@ export default function HeadshotsPage() {
       <Footer aboutText="Specializing in professional headshots. Crafting images that convey confidence and authenticity. Based in Vancouver, BC." />
 
       {/* Modal with Form */}
-      <ModalOverlay $isOpen={isModalOpen} onClick={() => setIsModalOpen(false)}>
-        <ModalContent onClick={(e) => e.stopPropagation()}>
+      {isModalOpen && <ModalOverlay $isOpen={isModalOpen} onClick={() => setIsModalOpen(false)}>
+        <ModalContent ref={dialogRef} role="dialog" aria-modal="true" aria-label={locale === 'es' ? 'Consulta de retrato profesional' : 'Headshot session inquiry'} tabIndex={-1} onClick={(e) => e.stopPropagation()}>
           <FormContainer>
-            <CloseButton onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
+            <CloseButton type="button" aria-label={locale === 'es' ? 'Cerrar' : 'Close'} onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
             <FormHeader>
               <h3>Schedule Your Headshot Session</h3>
               <p>Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
             </FormHeader>
 
-            {status && <StatusMessage $type={status.type}>{status.message}</StatusMessage>}
+            {status && <StatusMessage role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{status.message}</StatusMessage>}
+            {emailFallback}
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} aria-busy={isSubmitting}>
+              <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
               <FormRow>
                 <FormGroup>
-                  <Label>Full Name <span>*</span></Label>
+                  <Label htmlFor="headshot-modal-name">Full Name <span>*</span></Label>
                   <Input
+                    id="headshot-modal-name"
+                    autoComplete="name"
                     type="text"
                     name="name"
                     value={formData.name}
@@ -898,8 +938,10 @@ export default function HeadshotsPage() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Email <span>*</span></Label>
+                  <Label htmlFor="headshot-modal-email">Email <span>*</span></Label>
                   <Input
+                    id="headshot-modal-email"
+                    autoComplete="email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -912,8 +954,10 @@ export default function HeadshotsPage() {
 
               <FormRow>
                 <FormGroup>
-                  <Label>Phone Number <span>*</span></Label>
+                  <Label htmlFor="headshot-modal-phone">Phone Number <span>*</span></Label>
                   <Input
+                    id="headshot-modal-phone"
+                    autoComplete="tel"
                     type="tel"
                     name="phone"
                     value={formData.phone}
@@ -923,8 +967,10 @@ export default function HeadshotsPage() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Company / Organization</Label>
+                  <Label htmlFor="headshot-modal-company">Company / Organization</Label>
                   <Input
+                    id="headshot-modal-company"
+                    autoComplete="organization"
                     type="text"
                     name="company"
                     value={formData.company}
@@ -935,8 +981,8 @@ export default function HeadshotsPage() {
               </FormRow>
 
               <FormGroup>
-                <Label>Select Package <span>*</span></Label>
-                <PackageSelector>
+                <Label as="div" id="headshot-modal-package-label">Select Package <span>*</span></Label>
+                <PackageSelector role="group" aria-labelledby="headshot-modal-package-label">
                   <PackageOption $selected={formData.package === 'plain'}>
                     <input
                       type="radio"
@@ -964,8 +1010,9 @@ export default function HeadshotsPage() {
 
               <FormRow>
                 <FormGroup>
-                  <Label>Preferred Date <span>*</span></Label>
+                  <Label htmlFor="headshot-modal-date">Preferred Date <span>*</span></Label>
                   <Input
+                    id="headshot-modal-date"
                     type="date"
                     name="preferredDate"
                     value={formData.preferredDate}
@@ -974,8 +1021,9 @@ export default function HeadshotsPage() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label>Preferred Time</Label>
+                  <Label htmlFor="headshot-modal-time">Preferred Time</Label>
                   <Select
+                    id="headshot-modal-time"
                     name="preferredTime"
                     value={formData.preferredTime}
                     onChange={handleChange}
@@ -989,8 +1037,9 @@ export default function HeadshotsPage() {
               </FormRow>
 
               <FormGroup>
-                <Label>What will these headshots be used for?</Label>
+                <Label htmlFor="headshot-modal-purpose">What will these headshots be used for?</Label>
                 <Select
+                  id="headshot-modal-purpose"
                   name="purpose"
                   value={formData.purpose}
                   onChange={handleChange}
@@ -1006,8 +1055,9 @@ export default function HeadshotsPage() {
               </FormGroup>
 
               <FormGroup>
-                <Label>Additional Details or Questions</Label>
+                <Label htmlFor="headshot-modal-message">Additional Details or Questions</Label>
                 <TextArea
+                  id="headshot-modal-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -1015,6 +1065,7 @@ export default function HeadshotsPage() {
                 />
               </FormGroup>
 
+              </fieldset>
               <SubmitButton type="submit" $isSubmitting={isSubmitting} disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
@@ -1029,7 +1080,7 @@ export default function HeadshotsPage() {
             </Form>
           </FormContainer>
         </ModalContent>
-      </ModalOverlay>
+      </ModalOverlay>}
     </PageContainer>
   );
 } 

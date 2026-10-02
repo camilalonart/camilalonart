@@ -27,7 +27,7 @@ const Site = styled.div`
   * { box-sizing: border-box; }
 `;
 
-const Content = styled.main`
+const Content = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
@@ -242,7 +242,7 @@ interface FormData {
 }
 
 export default function ArtContact() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -262,6 +262,7 @@ export default function ArtContact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === 'loading') return;
 
     if (!FORMSPREE_ID) {
       setStatus('error');
@@ -270,12 +271,14 @@ export default function ArtContact() {
     }
 
     setStatus('loading');
+    setStatusMessage(t('art.contact.sending'));
 
     try {
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
@@ -289,7 +292,6 @@ export default function ArtContact() {
         setStatus('success');
         setStatusMessage(t('art.contact.successMessage'));
         setFormData({ name: '', email: '', inquiryType: 'general', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
         setStatusMessage(t('art.contact.errorMessage'));
@@ -315,7 +317,7 @@ export default function ArtContact() {
             aria-live="polite"
             aria-atomic="true"
           >
-            {status !== 'idle' && (
+            {(status === 'success' || status === 'error') && (
               <Message
                 $type={status === 'success' ? 'success' : 'error'}
                 role={status === 'error' ? 'alert' : undefined}
@@ -325,7 +327,13 @@ export default function ArtContact() {
             )}
           </div>
 
-          <Form onSubmit={handleSubmit} noValidate aria-label={t('art.contact.heading')}>
+          {(!FORMSPREE_ID || status === 'error') && (
+            <p>
+              {locale === 'es' ? 'No se ha confirmado el envío. Puedes enviar tu consulta por correo: ' : 'Delivery has not been confirmed. You can email your inquiry: '}
+              <a href={`mailto:bycamilalonart@gmail.com?subject=Art%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+            </p>
+          )}
+          <Form onSubmit={handleSubmit} aria-busy={status === 'loading'} aria-label={t('art.contact.heading')}>
             <FormGroup>
               <Label htmlFor="name">{t('art.contact.name')} *</Label>
               <Input
@@ -338,6 +346,7 @@ export default function ArtContact() {
                 required
                 aria-required="true"
                 autoComplete="name"
+                disabled={status === 'loading'}
               />
             </FormGroup>
 
@@ -353,6 +362,7 @@ export default function ArtContact() {
                 required
                 aria-required="true"
                 autoComplete="email"
+                disabled={status === 'loading'}
               />
             </FormGroup>
 
@@ -361,6 +371,8 @@ export default function ArtContact() {
               <Select
                 id="inquiryType"
                 name="inquiryType"
+                required
+                disabled={status === 'loading'}
                 value={formData.inquiryType}
                 onChange={handleChange}
                 aria-required="true"
@@ -378,6 +390,7 @@ export default function ArtContact() {
               <Textarea
                 id="message"
                 name="message"
+                disabled={status === 'loading'}
                 placeholder={t('forms.message')}
                 value={formData.message}
                 onChange={handleChange}

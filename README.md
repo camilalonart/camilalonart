@@ -3,6 +3,26 @@
 Sitio web portafolio construido con Next.js 14, TypeScript y Styled Components.
 Alojado en GitHub Pages en [camilalonart.com](https://www.camilalonart.com).
 
+## Publicacion segura
+
+Las pull requests ejecutan una compilacion del sitio estatico y una comprobacion
+de bloques de claves privadas y tokens de GitHub antes de publicar. Tambien puedes
+ejecutar `node scripts/check-secrets.js` localmente. Esta comprobacion es limitada:
+no sustituye la revision de secretos ni garantiza que no existan otros tipos de credenciales.
+
+Una clave privada incluida alguna vez en Git debe considerarse expuesta: quitar
+el archivo no la revoca ni elimina el historial. Revocala donde este autorizada,
+revisa sus accesos y coordina la limpieza del historial antes de reutilizar clones.
+Nunca guardes claves privadas en este repositorio.
+
+El sitio usa exportacion estatica: GitHub Pages no ejecuta rutas POST de Next.js.
+Los formularios deben usar un proveedor externo configurado o permitir abrir un
+borrador de correo. Abrir el correo no equivale a enviar una consulta.
+
+Los metadatos se definen en los layouts de cada ruta. `src/app/sitemap.ts` genera
+el sitemap a partir de las paginas publicadas, las colecciones y los eventos;
+las paginas pendientes y los alias no se anuncian como paginas canonicas.
+
 ---
 
 ## Gestionar secciones en la página principal

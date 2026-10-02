@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useId } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from '../i18n/TranslationContext';
 import { theme } from '../styles/theme';
@@ -14,8 +14,8 @@ const IconButton = styled.button<{ $isOpen: boolean; $isDark?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   background: ${props => props.$isOpen 
     ? (props.$isDark ? 'rgba(255,255,255,0.1)' : theme.colors.background.light) 
@@ -54,6 +54,7 @@ const Dropdown = styled.div<{ $isOpen: boolean }>`
 
 const LanguageOption = styled.button<{ $isActive: boolean }>`
   width: 100%;
+  min-height: 44px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -86,7 +87,7 @@ const Flag = styled.span`
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
-];
+] as const;
 
 // Globe icon component
 const GlobeIcon = () => (
@@ -105,6 +106,8 @@ export default function LanguageSwitcher({ isDark = false }: LanguageSwitcherPro
   const { locale, setLocale } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const dropdownId = useId();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -117,31 +120,51 @@ export default function LanguageSwitcher({ isDark = false }: LanguageSwitcherPro
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleLanguageChange = (code: string) => {
-    setLocale(code as 'en' | 'es');
+  const handleLanguageChange = (code: 'en' | 'es') => {
+    setLocale(code);
     setIsOpen(false);
+    buttonRef.current?.focus();
   };
 
   return (
-    <LanguageSwitcherContainer ref={containerRef}>
+    <LanguageSwitcherContainer
+      ref={containerRef}
+      onKeyDown={event => {
+        if (event.key === 'Escape' && isOpen) {
+          setIsOpen(false);
+          buttonRef.current?.focus();
+          event.stopPropagation();
+        }
+      }}
+      onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false);
+      }}
+    >
       <IconButton
+        ref={buttonRef}
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         $isOpen={isOpen}
         $isDark={isDark}
-        aria-label="Change language"
-        title="Change language"
+        aria-label={locale === 'es' ? 'Cambiar idioma' : 'Change language'}
+        title={locale === 'es' ? 'Cambiar idioma' : 'Change language'}
+        aria-expanded={isOpen}
+        aria-controls={dropdownId}
       >
         <GlobeIcon />
       </IconButton>
 
-      <Dropdown $isOpen={isOpen}>
+      <Dropdown id={dropdownId} $isOpen={isOpen}>
         {languages.map(lang => (
           <LanguageOption
             key={lang.code}
+            type="button"
+            lang={lang.code}
+            aria-pressed={lang.code === locale}
             onClick={() => handleLanguageChange(lang.code)}
             $isActive={lang.code === locale}
           >
-            <Flag>{lang.flag}</Flag>
+            <Flag aria-hidden="true">{lang.flag}</Flag>
             <span>{lang.name}</span>
           </LanguageOption>
         ))}

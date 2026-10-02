@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { generateMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Tech Courses & Workshops | Camilalonart',
-  description: 'Online courses and workshops on web development, cloud computing, and software engineering. Learn from Vancouver-based tech professional.',
-  keywords: 'tech courses vancouver, web development courses, cloud computing workshop, software engineering training, coding bootcamp vancouver, tech workshops bc',
-}; 
+export const metadata = generateMetadata({
+  title: 'Tech Courses',
+  description: 'Technology course information from Camila Londoño.',
+  path: '/tech/courses/',
+  noIndex: true,
+});

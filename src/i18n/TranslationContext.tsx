@@ -26,7 +26,13 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Load saved locale from localStorage after hydration
-    const savedLocale = localStorage.getItem('locale') as Locale | null;
+    let savedLocale: string | null = null;
+    try {
+      savedLocale = localStorage.getItem('locale');
+    } catch (error) {
+      if (!(error instanceof DOMException)) throw error;
+      console.warn('Language preference storage is unavailable.', error.name);
+    }
     if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
       setLocaleState(savedLocale);
     } else {
@@ -34,15 +40,24 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
       const browserLang = navigator.language.split('-')[0];
       if (browserLang === 'es') {
         setLocaleState('es');
-        localStorage.setItem('locale', 'es');
       }
     }
     setIsHydrated(true);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem('locale', locale);
+    } catch (error) {
+      if (!(error instanceof DOMException)) throw error;
+      console.warn('Language preference could not be saved.', error.name);
+    }
+  }, [locale, isHydrated]);
+
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem('locale', newLocale);
   }, []);
 
   const t = useCallback((key: string): string => {

@@ -53,11 +53,12 @@ const LoadingSkeleton = styled.div`
   );
   background-size: 200% 100%;
   animation: ${shimmer} 1.5s infinite;
-  z-index: 1;
+  z-index: 0;
 `;
 
 const StyledImage = styled(Image)<{ $loaded: boolean }>`
-  opacity: ${props => props.$loaded ? 1 : 0};
+  position: relative;
+  z-index: 1;
   transition: opacity 0.3s ease;
   pointer-events: none;
   user-drag: none;
@@ -157,8 +158,9 @@ export default function SecureImage({
 
   // When using fill, we cannot set width/height in style
   // Only pass objectFit to style when using fill
-  const imageStyle: React.CSSProperties = shouldFill 
-    ? { objectFit } 
+  const { width: styleWidth, height: styleHeight, ...fillStyle } = style ?? {};
+  const imageStyle: React.CSSProperties = shouldFill
+    ? { ...fillStyle, objectFit }
     : { objectFit, ...style };
 
   return (

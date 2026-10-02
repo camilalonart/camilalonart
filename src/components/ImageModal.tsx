@@ -4,6 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import Image from 'next/image';
+import { useDialog } from '../hooks/useDialog';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -21,6 +23,7 @@ const ModalContent = styled.div`
   position: relative;
   width: 90vw;
   height: 90vh;
+  height: 90dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,8 +62,8 @@ const CloseButton = styled.button`
   font-size: 2rem;
   cursor: pointer;
   padding: ${theme.spacing.sm};
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -112,8 +115,8 @@ const NavigationButton = styled.button`
   }
   
   @media (max-width: ${theme.breakpoints.md}) {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     font-size: 1.5rem;
     
     &.prev {
@@ -143,6 +146,8 @@ const ImageModal: React.FC<ImageModalProps> = ({
   src,
   alt
 }) => {
+  const dialogRef = useDialog(isOpen, onClose);
+  const { locale } = useTranslation();
   if (!isOpen) return null;
 
   const handleContentClick = (e: React.MouseEvent) => {
@@ -150,13 +155,29 @@ const ImageModal: React.FC<ImageModalProps> = ({
   };
 
   return (
-    <ModalOverlay onClick={onClose}>
-      <CloseButton onClick={onClose} aria-label="Close modal">×</CloseButton>
+    <ModalOverlay
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+      tabIndex={-1}
+      onClick={onClose}
+      onKeyDown={event => {
+        if (event.key === 'ArrowLeft' && onPrevious) {
+          event.preventDefault();
+          onPrevious();
+        } else if (event.key === 'ArrowRight' && onNext) {
+          event.preventDefault();
+          onNext();
+        }
+      }}
+    >
+      <CloseButton type="button" onClick={onClose} aria-label={locale === 'es' ? 'Cerrar imagen' : 'Close image'}>×</CloseButton>
       {onPrevious && (
-        <NavigationButton className="prev" onClick={(e) => {
+        <NavigationButton type="button" className="prev" onClick={(e) => {
           e.stopPropagation();
           onPrevious();
-        }} aria-label="Previous image">
+        }} aria-label={locale === 'es' ? 'Imagen anterior' : 'Previous image'}>
           ‹
         </NavigationButton>
       )}
@@ -175,10 +196,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
         </ImageWrapper>
       </ModalContent>
       {onNext && (
-        <NavigationButton className="next" onClick={(e) => {
+        <NavigationButton type="button" className="next" onClick={(e) => {
           e.stopPropagation();
           onNext();
-        }} aria-label="Next image">
+        }} aria-label={locale === 'es' ? 'Imagen siguiente' : 'Next image'}>
           ›
         </NavigationButton>
       )}

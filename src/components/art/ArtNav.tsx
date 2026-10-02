@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
@@ -30,9 +29,9 @@ const Nav = styled.nav<{ $scrolled: boolean }>`
   backdrop-filter: ${p => p.$scrolled ? 'blur(12px)' : 'none'};
 `;
 
-const NavLogo = styled.button`
-  font-size: 1.05rem;
-  letter-spacing: 0.25em;
+const NavLogo = styled(Link)`
+  font-size: clamp(0.8rem, 2vw, 1.05rem);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${C.text};
   cursor: pointer;
@@ -63,7 +62,7 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
   gap: 2.5rem;
   align-items: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     position: absolute;
     top: 64px;
     left: 0;
@@ -73,8 +72,9 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
     gap: 0;
     background: rgba(8, 8, 8, 0.98);
     backdrop-filter: blur(12px);
-    max-height: ${p => p.$isOpen ? '600px' : '0'};
-    overflow: hidden;
+    max-height: ${p => p.$isOpen ? 'min(70dvh, 600px)' : '0'};
+    visibility: ${p => p.$isOpen ? 'visible' : 'hidden'};
+    overflow-y: auto;
     transition: max-height 0.35s ease;
     padding: ${p => p.$isOpen ? '0.5rem 0' : '0'};
   }
@@ -82,7 +82,7 @@ const NavLinks = styled.div<{ $isOpen: boolean }>`
 
 const NavLinkA = styled(Link)`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${C.text};
@@ -93,7 +93,7 @@ const NavLinkA = styled(Link)`
 
   &:hover { color: ${C.gold}; }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     display: block;
     padding: 0.85rem clamp(1.5rem, 4vw, 4rem);
     white-space: normal;
@@ -105,7 +105,7 @@ const NavLinkA = styled(Link)`
 const NavRight = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.25rem;
   flex-shrink: 0;
 `;
 
@@ -116,7 +116,7 @@ const LangToggle = styled.div`
   background: #080808;
   border: 1px solid ${C.dim};
   border-radius: 2px;
-  padding: 0.35rem 0.6rem;
+  padding: 0.1rem 0.25rem;
   transition: border-color 0.2s;
 
   &:hover { border-color: ${C.gold}; }
@@ -124,7 +124,9 @@ const LangToggle = styled.div`
 
 const LangOpt = styled.button<{ $active: boolean }>`
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.65rem;
+  min-width: 28px;
+  min-height: 40px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${p => p.$active ? C.gold : C.text};
@@ -153,10 +155,12 @@ const HamburgerBtn = styled.button`
   color: ${C.text};
   cursor: pointer;
   padding: 0.75rem;
+  min-width: 44px;
+  min-height: 44px;
   z-index: 201;
   transition: color 0.2s ease;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -189,15 +193,14 @@ const HamburgerBtn = styled.button`
 `;
 
 export default function ArtNav() {
-  const router = useRouter();
   const { locale, setLocale, t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      setMobileMenuOpen(false);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -206,23 +209,29 @@ export default function ArtNav() {
   const close = () => setMobileMenuOpen(false);
 
   return (
-    <Nav $scrolled={scrolled} role="navigation" aria-label="Art site navigation">
-      <NavLogo
-        title={t('art.traditional.backToHome')}
-        onClick={() => {
+    <Nav
+      $scrolled={scrolled}
+      aria-label={locale === 'es' ? 'Navegación de arte' : 'Art site navigation'}
+      onKeyDown={event => {
+        if (event.key === 'Escape' && mobileMenuOpen) {
           close();
-          if (window.location.pathname !== '/art/') {
-            router.push('/art/');
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
+          menuButtonRef.current?.focus();
+        }
+      }}
+      onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) close();
+      }}
+    >
+      <NavLogo
+        href="/art/"
+        title={t('art.traditional.backToHome')}
+        onClick={close}
       >
         <Dot />
         CamilaLonart
       </NavLogo>
 
-      <NavLinks $isOpen={mobileMenuOpen}>
+      <NavLinks id="art-navigation-links" $isOpen={mobileMenuOpen}>
         <NavLinkA href="/art/" onClick={close}>{t('nav.home')}</NavLinkA>
         <NavLinkA href="/art/collections/" onClick={close}>{t('nav.collections')}</NavLinkA>
         <NavLinkA href="/art/all-paintings/" onClick={close}>{t('nav.allPaintings')}</NavLinkA>
@@ -238,6 +247,8 @@ export default function ArtNav() {
             $active={locale === 'en'}
             onClick={() => setLocale('en')}
             aria-label="English"
+            aria-pressed={locale === 'en'}
+            lang="en"
           >
             EN
           </LangOpt>
@@ -246,15 +257,20 @@ export default function ArtNav() {
             $active={locale === 'es'}
             onClick={() => setLocale('es')}
             aria-label="Español"
+            aria-pressed={locale === 'es'}
+            lang="es"
           >
             ES
           </LangOpt>
         </LangToggle>
 
         <HamburgerBtn
+          ref={menuButtonRef}
+          type="button"
+          aria-controls="art-navigation-links"
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen(v => !v)}
-          aria-label="Toggle navigation menu"
+          aria-label={locale === 'es' ? 'Abrir o cerrar menú' : 'Toggle navigation menu'}
         >
           <span />
           <span />
