@@ -3,10 +3,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import data, { type Collection, type Painting, COLLECTIONS_ORDER, localizedMaterials, localizedThoughts, localizedDescription, localizedBio } from '../../data/artPortfolio';
 import ContactForm from '../ContactForm';
 import { useTranslation } from '../../i18n/TranslationContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useDialog } from '@/hooks/useDialog';
 import ArtNav from './ArtNav';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
@@ -955,6 +957,7 @@ interface ModalState {
 export default function ArtPortfolio() {
   const { t, locale } = useTranslation();
   const [modal, setModal] = useState<ModalState | null>(null);
+  const dialogRef = useDialog(modal !== null, () => setModal(null));
 
   // Keyboard navigation
   useEffect(() => {
@@ -967,12 +970,6 @@ export default function ArtPortfolio() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [modal]);
-
-  // Lock scroll when modal open
-  useEffect(() => {
-    document.body.style.overflow = modal ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [!!modal]);
 
   const openPainting = useCallback(
     (painting: Painting, siblings: Painting[]) => {
@@ -1019,7 +1016,7 @@ export default function ArtPortfolio() {
         <HeroImgWrap>
           <Image
             src={heroImage}
-            alt="Featured artwork by Camila Londoño"
+            alt={t('artContent.gallery.featuredArt')}
             fill
             priority
             sizes="100vw"
@@ -1049,7 +1046,7 @@ export default function ArtPortfolio() {
             >
               <img
                 src={work.image}
-                alt="Selected work"
+                alt={t('artContent.gallery.selectedWork')}
                 loading="lazy"
                 draggable={false}
                 onContextMenu={e => e.preventDefault()}
@@ -1091,11 +1088,11 @@ export default function ArtPortfolio() {
                 <CollectionCard
                   key={p.id}
                   href={`/art/${col.id}/${p.id}`}
-                  aria-label={`Open ${p.title}, ${p.year}`}
+                  aria-label={`${t('artContent.common.view')} ${p.title}, ${p.year}`}
                 >
                   <img
                     src={p.images[0]}
-                    alt={`${p.title} — ${p.materials}`}
+                    alt={`${p.title} — ${localizedMaterials(p.materials, locale)}`}
                     loading="lazy"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
@@ -1154,14 +1151,14 @@ export default function ArtPortfolio() {
       </AboutSection>
 
       {/* ── Contact ── */}
-      <ContactSection id="contact-section" role="region" aria-label="Contact Camila">
+      <ContactSection id="contact-section" role="region" aria-label={t('artContent.contact.camila')}>
         <ContactContent>
           <SectionEyebrow>{t('nav.contact')}</SectionEyebrow>
           <ContactTitle>{t('art.contact.heading')}</ContactTitle>
           <ContactDescription>
             {t('art.contact.portfolioDescription')}
           </ContactDescription>
-          <ContactFormWrapper role="form" aria-label="Contact form">
+          <ContactFormWrapper role="form" aria-label={t('artContent.contact.form')}>
             <ContactForm service="art-inquiry" />
           </ContactFormWrapper>
         </ContactContent>
@@ -1232,11 +1229,16 @@ export default function ArtPortfolio() {
       {/* ── Lightbox ── */}
       {modal && (
         <LightboxBackdrop
+          ref={dialogRef}
+          tabIndex={-1}
           $open
           role="dialog"
           aria-modal
           aria-label={modal.painting.title}
         >
+          <div style={{ position: 'absolute', top: '1rem', right: '5rem', zIndex: 2 }}>
+            <LanguageSwitcher isDark />
+          </div>
           <CloseBtn
             onClick={() => setModal(null)}
             aria-label={t('common.close')}
@@ -1248,7 +1250,7 @@ export default function ArtPortfolio() {
             <LightboxImgInner>
               <LightboxImgActual
                 src={modal.painting.images[modal.imageIndex]}
-                alt={`${modal.painting.title} — ${modal.painting.materials}, ${modal.painting.year}`}
+                alt={`${modal.painting.title} — ${localizedMaterials(modal.painting.materials, locale)}, ${modal.painting.year}`}
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
               />
@@ -1262,7 +1264,7 @@ export default function ArtPortfolio() {
                     key={i}
                     $active={i === modal.imageIndex}
                     onClick={() => setModal(m => m ? { ...m, imageIndex: i } : m)}
-                    aria-label={`View image ${i + 1}`}
+                    aria-label={`${t('artContent.common.viewImage')} ${i + 1}`}
                   >
                     <img src={src} alt="" />
                   </Thumb>

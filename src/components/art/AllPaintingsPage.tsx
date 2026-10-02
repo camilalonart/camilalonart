@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import data, { COLLECTIONS_ORDER, earlyFirstPaintings_COLLECTIONS_ORDER } from '../../data/artPortfolio';
+import Link from '@/i18n/LocalizedLink';
+import data, { COLLECTIONS_ORDER, earlyFirstPaintings_COLLECTIONS_ORDER, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -100,27 +100,33 @@ const Divider = styled.div`
 // ─── Sort segmented control ────────────────────────────────────────────────────
 const SortGroup = styled.div`
   display: flex;
-  flex-shrink: 0;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  max-width: 100%;
   border: 1px solid ${C.border};
   overflow: hidden;
 `;
 
 const SortButton = styled.button<{ $active: boolean }>`
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
   background: ${({ $active }) => ($active ? C.gold : 'transparent')};
   color: ${({ $active }) => ($active ? C.bg : C.muted)};
   border: none;
   border-right: 1px solid ${C.border};
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 0.45rem;
+  font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0.5rem 0.7rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
   transition: background 0.18s, color 0.18s;
-  white-space: nowrap;
+  white-space: normal;
   outline: none;
 
   &:last-child { border-right: none; }
@@ -516,7 +522,7 @@ export default function AllPaintingsPage() {
   }
   const years = allYears.current;
 
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [search, setSearch] = useState('');
   const [selectedMediums, setSelectedMediums] = useState<Set<string>>(new Set());
   const [selectedYears, setSelectedYears] = useState<Set<string>>(new Set());
@@ -528,7 +534,7 @@ export default function AllPaintingsPage() {
     if (selectedYears.size > 0 && !selectedYears.has(String(p.year))) return false;
     if (search.trim()) {
       const q = search.trim().toLowerCase();
-      if (!p.title.toLowerCase().includes(q) && !p.materials.toLowerCase().includes(q)) return false;
+      if (!p.title.toLowerCase().includes(q) && !localizedMaterials(p.materials, locale).toLowerCase().includes(q)) return false;
     }
     return true;
   });
@@ -569,6 +575,7 @@ export default function AllPaintingsPage() {
         <SearchInput
           type="search"
           placeholder={t('art.searchPlaceholder')}
+          aria-label={t('art.searchPlaceholder')}
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -577,7 +584,7 @@ export default function AllPaintingsPage() {
 
         <MultiSelect
           label={t('art.allMedia')}
-          options={MEDIUM_OPTIONS}
+          options={MEDIUM_OPTIONS.map(option => ({ ...option, label: t(`artContent.gallery.${option.value}`) }))}
           selected={selectedMediums}
           onChange={setSelectedMediums}
         />
@@ -640,14 +647,15 @@ export default function AllPaintingsPage() {
 }
 
 function PaintingCard({ painting }: { painting: PaintingEntry }) {
+  const { t, locale } = useTranslation();
   return (
     <GalleryCardHover
       href={`/art/${painting.collectionId}/${painting.paintingId}`}
-      aria-label={`View ${painting.title}, ${painting.year}`}
+      aria-label={`${t('artContent.common.view')} ${painting.title}, ${painting.year}`}
     >
       <img
         src={painting.image}
-        alt={`${painting.title} — ${painting.materials}, ${painting.year}`}
+        alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}, ${painting.year}`}
         loading="lazy"
         draggable={false}
         onContextMenu={e => e.preventDefault()}

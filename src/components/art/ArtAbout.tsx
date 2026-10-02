@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import Image from 'next/image';
 import styled from 'styled-components';
 import data, { localizedBio } from '../../data/artPortfolio';

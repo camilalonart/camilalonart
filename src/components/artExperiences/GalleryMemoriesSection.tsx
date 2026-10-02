@@ -192,16 +192,6 @@ const galleryLayout = [
   { tall: false, wide: false, delay: 0.3 },
 ];
 
-const placeholderLabels = [
-  { title: 'Painting Session', sub: 'Past event memory' },
-  { title: 'Creative Corner', sub: 'Community gathering' },
-  { title: 'Paint & Sip', sub: 'FUNK Coffee Bar' },
-  { title: 'Community Moments', sub: 'Brushes & laughter' },
-  { title: 'Art in Progress', sub: 'Canvas & colour' },
-  { title: 'Together We Create', sub: 'Vancouver, BC' },
-  { title: 'Your Next Memory', sub: 'Join us soon' },
-];
-
 export default function GalleryMemoriesSection() {
   const { t } = useTranslation();
 
@@ -234,15 +224,15 @@ export default function GalleryMemoriesSection() {
                 )}
               </GalleryPlaceholderIcon>
               <GalleryPlaceholderText>
-                <PlaceholderTitle>{placeholderLabels[i]?.title}</PlaceholderTitle>
-                <PlaceholderSub>{placeholderLabels[i]?.sub}</PlaceholderSub>
+                <PlaceholderTitle>{t(`artContent.memories.title${i}`)}</PlaceholderTitle>
+                <PlaceholderSub>{t(`artContent.memories.sub${i}`)}</PlaceholderSub>
               </GalleryPlaceholderText>
             </GalleryCell>
           ))}
         </MasonryGrid>
 
         <CTAWrap>
-          <CTATitle>Ready to make your own memories?</CTATitle>
+          <CTATitle>{t('artContent.experiences.memoriesInvitation')}</CTATitle>
           <JoinBtn href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
             {t('artExperiences.memories.cta')} ↗
           </JoinBtn>

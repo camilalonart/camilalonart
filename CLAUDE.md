@@ -51,7 +51,7 @@ node scripts/generate-updated-portfolio.js # Group missing images by folder
 
 **Next.js 14 App Router**, TypeScript, Styled Components, static export (`output: 'export'`). GitHub Pages at camilalonart.com.
 
-### Routes (`src/app`)
+### Routes (`src/app/(english)`; Spanish adapters in `src/app/(spanish)/es`)
 - `/` — Hub homepage
 - `/art/` — Traditional art portfolio (standalone painter site) — also at `/my-art/traditional-art/`
 - `/photography/*` — Client galleries: pets, wedding-couples, family-maternity, headshots
@@ -61,10 +61,10 @@ node scripts/generate-updated-portfolio.js # Group missing images by folder
 
 ### Traditional Art Portfolio (`/art`)
 The main painter portfolio — a fully standalone site with its own nav, hero, and footer. Accessible at two URLs:
-- `src/app/art/page.tsx` → `camilalonart.com/art/`
-- `src/app/my-art/traditional-art/page.tsx` → `camilalonart.com/my-art/traditional-art/`
+- `src/app/(english)/art/page.tsx` → `camilalonart.com/art/`
+- `src/app/(english)/my-art/traditional-art/page.tsx` → legacy URL redirect
 
-Both render `src/components/art/ArtPortfolio.tsx`. Data lives in `src/data/artPortfolio.ts` — edit this file to add/edit paintings and collections. Structure:
+The canonical `/art/` page renders `src/components/art/ArtPortfolio.tsx`; the legacy URL redirects to it in the current language. Data lives in `src/data/artPortfolio.ts` — edit this file to add/edit paintings and collections. Structure:
 - `collections[]` — named series (e.g. "Silencio 2023–2024"), each with `paintings[]`
 - `otherProjects[]` — works outside the main collections
 - `about` — bio paragraphs + 2 Instagram URLs (`@camilalonart`, `@camilonart`)
@@ -74,10 +74,10 @@ Each painting has: `id`, `title`, `materials`, `size`, `year`, `images[]` (1+ ph
 The lightbox modal always shows `@camilalonart` watermark. Keyboard: ← → to navigate collection, ESC to close.
 
 ### Section layouts
-Sections with dark backgrounds have their own `layout.tsx` (server component, inline `style` wrapper) to prevent white flash. Examples: `src/app/art/layout.tsx`, `src/app/my-art/traditional-art/layout.tsx`.
+Sections with dark backgrounds have their own `layout.tsx` (server component, inline `style` wrapper) to prevent white flash. Examples: `src/app/(english)/art/layout.tsx`, `src/app/(english)/my-art/traditional-art/layout.tsx`.
 
 ### Fonts (3 — do not add more)
-Loaded in `src/app/layout.tsx` with `display: 'swap'`:
+Loaded in `src/components/LocaleDocument.tsx` with `display: 'swap'`:
 - `--font-cormorant` — Cormorant Garamond (art, photography sections)
 - `--font-montserrat` — Montserrat (UI text, headshots, tech)
 - `--font-poppins` — Poppins (body copy, pets, creative services)
@@ -98,9 +98,15 @@ Image protection: watermark + right-click/drag block (implemented). True downloa
 
 ### i18n (EN/ES)
 - Provider: `src/i18n/TranslationContext.tsx`
-- Strings: `src/i18n/locales/en.json` and `es.json`
+- Strings: `src/i18n/locales/en.json`, `es.json` and domain-specific `*-content.en/es.json` dictionaries.
 - Usage: `const { t } = useTranslation()` → `t('key')`
-- Defaults to Spanish if browser language is ES. Known issue: language switch forces full page reload.
+- The URL determines the initial language: existing unprefixed URLs are English; `/es/…` URLs prerender Spanish with `html lang="es"`. Saved preference never overrides an explicit URL.
+- Language switching uses Next's native History integration, preserving page state, query and hash. Only the language preference is stored; form fields are not persisted.
+- Internal links use `@/i18n/LocalizedLink` (compatible with `next/link` and styled components). Imperative navigation uses `useLocalizedRouter` from `@/i18n/navigation`. Raw anchors use `localizedPath(href, locale)` from `@/i18n/routing`; assets, downloads, fragments and external URLs are not prefixed.
+- Edit page implementations only in `(english)`. `npm run generate-locales` regenerates thin Spanish adapters and the metadata source registry; it also runs before production builds. Dynamic route patterns and `generateStaticParams` are reused, not copied per artwork.
+- Spanish SEO text is in `src/i18n/seo-es.ts`; artwork metadata uses localized art data. Both locales expose reciprocal canonical/hreflang and sitemap entries. Keep unfinished pages noindex.
+- Run `npm run check:translations` to check EN/ES keys, placeholders and literal references; see `I18N_README.md`.
+- Store status message keys, not translated strings. Keep language controls inside active dialogs so inputs and gallery state survive switching.
 
 ### Forms & API
 `/api/submit-wedding-inquiry/` — Google APIs form submission. Credentials via env vars in `next.config.js`.

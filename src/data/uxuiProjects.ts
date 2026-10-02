@@ -15,12 +15,12 @@ export const uxuiProjects: UXUIProject[] = [
     id: 'Alfred',
     imageCount: 7,
     descriptionEn: 'Product screen design for Alfred, a Colombian company.',
-    descriptionEs: 'Diseño de pantallas del producto para Alfred, empresa colombiana.',
+    descriptionEs: 'Diseño de pantallas de producto para Alfred, una empresa colombiana.',
   },
   {
     id: 'Cleverlynk',
     imageCount: 2,
     descriptionEn: 'Designed everything for this Colombian startup — logo, branding, UX/UI, and product screens. Cleverlynk was later acquired by Rappi, Latin America\'s unicorn.',
-    descriptionEs: 'Diseñé todo para esta startup colombiana — logo, branding, UX/UI y pantallas del producto. Cleverlynk fue adquirida por Rappi, el unicornio latinoamericano.',
+    descriptionEs: 'Diseñé todo para esta startup colombiana: logotipo, identidad de marca, UX/UI y pantallas de producto. Más adelante, Cleverlynk fue adquirida por Rappi, el unicornio de Latinoamérica.',
   },
 ];

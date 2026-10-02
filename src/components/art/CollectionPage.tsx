@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled from 'styled-components';
-import data, { type Collection, localizedDescription } from '../../data/artPortfolio';
+import data, { type Collection, localizedDescription, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
 import { useTranslation } from '../../i18n/TranslationContext';
 
@@ -268,14 +268,14 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
                 <PaintingImgWrap>
                   <img
                     src={painting.images[0]}
-                    alt={`${painting.title} — ${painting.materials}`}
+                    alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
                     loading="lazy"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
                   />
                   <PaintingOverlay className="painting-overlay">
                     <PaintingTitle>{painting.title}</PaintingTitle>
-                    <PaintingMeta>{painting.year} · {painting.materials}</PaintingMeta>
+                    <PaintingMeta>{painting.year} · {localizedMaterials(painting.materials, locale)}</PaintingMeta>
                   </PaintingOverlay>
                 </PaintingImgWrap>
               </PaintingCard>

@@ -2856,6 +2856,40 @@ const data: ArtPortfolioData = {
 
 // ─── Material translations ────────────────────────────────────────────────────
 const MATERIALS_ES: Record<string, string> = {
+  "Color pencil": "Lápiz de color",
+  "Color Pencil": "Lápiz de color",
+  "Color Pencilwebp": "Lápiz de color",
+  "Markers": "Marcadores",
+  "Pencil, Watercolor": "Lápiz y acuarela",
+  "Pencil, watercolor": "Lápiz y acuarela",
+  "Pencil": "Lápiz",
+  "Pencil.webp": "Lápiz",
+  "Ink": "Tinta",
+  "Ink Watercolor": "Tinta y acuarela",
+  "Pastels Yellow Paper Watercolor": "Pastel y acuarela sobre papel amarillo",
+  "Collage Pastels Yellow Paper": "Collage y pastel sobre papel amarillo",
+  "Pastels Yellow Paper": "Pastel sobre papel amarillo",
+  "Pastels Watercolor Yellow Paper": "Pastel y acuarela sobre papel amarillo",
+  "Pastel Watercolor Yellow Paper": "Pastel y acuarela sobre papel amarillo",
+  "Pastels Yellow Paper Watercolor Pen.webp": "Pastel, acuarela y pluma sobre papel amarillo",
+  "Yellow Paper Watercolor Pen": "Acuarela y pluma sobre papel amarillo",
+  "Pen Watercolor Pastels Yellow Paper": "Pluma, acuarela y pastel sobre papel amarillo",
+  "Oil": "Óleo",
+  "Oil.": "Óleo",
+  "Ink Watercolor Yellow Paper": "Tinta y acuarela sobre papel amarillo",
+  "Pastels Oil": "Pastel al óleo",
+  "Pastels Oil.webp": "Pastel al óleo",
+  "Oil Pastels": "Pastel al óleo",
+  "Pastels": "Pastel",
+  "Watercolor.webp": "Acuarela",
+  "Fabric Color Ink Watercolor": "Color para tela, tinta y acuarela",
+  "Watercolor Color": "Acuarela a color",
+  "Pen Paper": "Pluma sobre papel",
+  "Pen Watercolor": "Pluma y acuarela",
+  "Watercolor Pen": "Acuarela y pluma",
+  "Watercolor Pen.": "Acuarela y pluma",
+  "Pencil Watercolor Ink Pen": "Lápiz, acuarela, tinta y pluma",
+  "Pencil Pen": "Lápiz y pluma",
   "Mixed media on paper": "Técnica mixta sobre papel",
   "Oil painting, oil pastels and acrylic on canvas": "Óleo, pasteles al óleo y acrílico sobre lienzo",
   "Watercolor on paper": "Acuarela sobre papel",
@@ -2876,14 +2910,49 @@ const MATERIALS_ES: Record<string, string> = {
   "Variable": "Variable",
 };
 
+const MATERIALS_EN: Record<string, string> = {
+  "Color Pencilwebp": "Color pencil",
+  "Pencil.webp": "Pencil",
+  "Pastels Yellow Paper Watercolor": "Pastels and watercolor on yellow paper",
+  "Collage Pastels Yellow Paper": "Collage and pastels on yellow paper",
+  "Pastels Yellow Paper": "Pastels on yellow paper",
+  "Pastels Watercolor Yellow Paper": "Pastels and watercolor on yellow paper",
+  "Pastel Watercolor Yellow Paper": "Pastel and watercolor on yellow paper",
+  "Pastels Yellow Paper Watercolor Pen.webp": "Pastels, watercolor and pen on yellow paper",
+  "Yellow Paper Watercolor Pen": "Watercolor and pen on yellow paper",
+  "Pen Watercolor Pastels Yellow Paper": "Pen, watercolor and pastels on yellow paper",
+  "Ink Watercolor Yellow Paper": "Ink and watercolor on yellow paper",
+  "Pastels Oil": "Oil pastels",
+  "Pastels Oil.webp": "Oil pastels",
+  "Watercolor.webp": "Watercolor",
+  "Oil.": "Oil",
+  "Fabric Color Ink Watercolor": "Fabric color, ink and watercolor",
+  "Watercolor Color": "Color watercolor",
+  "Pen Paper": "Pen on paper",
+  "Pen Watercolor": "Pen and watercolor",
+  "Watercolor Pen": "Watercolor and pen",
+  "Watercolor Pen.": "Watercolor and pen",
+  "Ink Watercolor": "Ink and watercolor",
+  "Pencil Watercolor Ink Pen": "Pencil, watercolor, ink and pen",
+  "Pencil Pen": "Pencil and pen",
+};
+
+// These statements were originally written in Spanish; retain the artist's text in ES.
+const THOUGHTS_EN: Record<string, string> = {
+  "carrying-home-02": "A tribute to those who live far from where they were born… to those who left one day and had to learn how to be themselves again.",
+  "carrying-home-03": "Always in transition, always changing, always moving.",
+  "carrying-home-04": "We were not born with wings of our own… those who came before us wove flight into our skin. I carry the pulse of my homeland, of work, of families who faced hard times and still kept going, who walked with honesty and the dignity of moving forward without harming others. As I painted, I thought of them… I also thought of everyone who, by choice or necessity, has started over. Of those who have rebuilt themselves from scratch: sometimes in new lands, sometimes by becoming a different person without even leaving the place they have always known. At the same time, I was thinking of something bigger… of the idea that each of us is a complex and different universe… and yet, deep down, we are all the same. We are human, we are animals, we are finite. We go through life creating stories, carrying sorrows and joys… entire worlds that are almost never seen. There is so much to tell, so much to remember, so much that is lost over time without anyone noticing… I thought about how all those unfamiliar faces walking beside me in the street are entire universes, as complex as my own… it is incredible how little we can grasp of all the reality each of us holds… Millions of strangers full of dreams, trying to find their way, silent griefs no one else knows, small victories that sustain the impossible. So many stories, so many voices that deserve to be seen, heard and remembered. And in the end, however different we may seem, we are all the same… finite animals, human beings searching for a little meaning as we keep moving forward. And it is in that silent crowd, in those footsteps moving onward without looking at each other, that we sense something we all share: the certainty that we do not walk alone, that we are part of something greater, something that stays alive every time someone decides to try once more and keep going.",
+  "carrying-home-05": "Learning to feel at home within myself while everything around me changes… Walking forward accompanied by the women I have been… Leaving fragments at every invisible border.",
+};
+
 export function localizedMaterials(materials: string, locale: string): string {
-  if (locale !== 'es') return materials;
+  if (locale !== 'es') return MATERIALS_EN[materials] ?? materials;
   return MATERIALS_ES[materials] ?? materials;
 }
 
 export function localizedThoughts(painting: Painting, locale: string): string | undefined {
   if (locale === 'es') return painting.thoughtsEs ?? painting.thoughts;
-  return painting.thoughts;
+  return THOUGHTS_EN[painting.id] ?? painting.thoughts;
 }
 
 export function localizedDescription(collection: Collection, locale: string): string {

@@ -4,6 +4,8 @@ import React, { useId, useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
+import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import { createInquiryMailto } from '@/lib/inquiryEmail';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 const C: Record<string, string> = {
@@ -178,7 +180,8 @@ const getFormspreeId = (service: string): string => {
 };
 
 export default function ContactForm({ service }: ContactFormProps) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
+  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
   const id = useId();
   const [formData, setFormData] = useState({
     name: '',
@@ -188,20 +191,33 @@ export default function ContactForm({ service }: ContactFormProps) {
   });
   const [status, setStatus] = useState<{
     type: 'success' | 'error';
-    message: string;
+    messageKey: string;
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formspreeId = getFormspreeId(service);
+  const serviceKeys: Record<string, string> = {
+    weddings: 'nav.wedding',
+    'baby-family': 'nav.family',
+    headshots: 'nav.headshots',
+    pets: 'nav.pets',
+    'art-inquiry': 'nav.art',
+    'Brand Identity': 'nav.brandIdentity',
+    'Creative Services': 'nav.creativeServices',
+    'Art Classes': 'nav.artClasses',
+    'Graphic Recording': 'nav.graphicRecording',
+    'Tech Courses': 'nav.techCourses',
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (!validate()) return;
 
     if (!formspreeId) {
       setStatus({
         type: 'error',
-        message: t('art.contact.notConfigured'),
+        messageKey: 'sharedContent.form.unavailable',
       });
       return;
     }
@@ -228,19 +244,19 @@ export default function ContactForm({ service }: ContactFormProps) {
       if (response.ok) {
         setStatus({
           type: 'success',
-          message: t('forms.success'),
+          messageKey: 'forms.success',
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
         setStatus({
           type: 'error',
-          message: t('forms.error'),
+          messageKey: 'sharedContent.form.failed',
         });
       }
     } catch (error) {
       setStatus({
         type: 'error',
-        message: t('forms.failed'),
+        messageKey: 'sharedContent.form.failed',
       });
     } finally {
       setIsSubmitting(false);
@@ -256,15 +272,18 @@ export default function ContactForm({ service }: ContactFormProps) {
 
   return (
     <FormContainer>
-      {status && <Message role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{status.message}</Message>}
+      {status && <Message role={status.type === 'error' ? 'alert' : 'status'} $type={status.type}>{t(status.messageKey)}</Message>}
       {(!formspreeId || status?.type === 'error') && (
         <p>
-          {locale === 'es' ? 'No se ha confirmado el envío. Puedes enviar tu consulta por correo: ' : 'Delivery has not been confirmed. You can email your inquiry: '}
-          <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(service)}&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+          {t('sharedContent.form.emailFallback')}{' '}
+          <a href={createInquiryMailto(t, 'sharedContent.email.contactSubject', {
+            ...formData,
+            ...(serviceKeys[service] ? { service: t(serviceKeys[service]) } : {}),
+          })}>bycamilalonart@gmail.com</a>
         </p>
       )}
 
-      <Form onSubmit={handleSubmit} aria-busy={isSubmitting}>
+      <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onSubmit={handleSubmit} aria-busy={isSubmitting}>
         <FormGroup>
           <Label htmlFor={`${id}-name`}>{t('forms.fullName')}</Label>
           <Input

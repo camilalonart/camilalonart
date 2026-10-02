@@ -6,6 +6,7 @@ import { theme } from '../styles/theme';
 import Image from 'next/image';
 import { useDialog } from '../hooks/useDialog';
 import { useTranslation } from '../i18n/TranslationContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -129,6 +130,18 @@ const NavigationButton = styled.button`
   }
 `;
 
+const LanguageControl = styled.div`
+  position: fixed;
+  top: ${theme.spacing.xl};
+  right: calc(${theme.spacing.xl} + 60px);
+  z-index: 1002;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    top: ${theme.spacing.md};
+    right: calc(${theme.spacing.md} + 60px);
+  }
+`;
+
 interface ImageModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -147,7 +160,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
   alt
 }) => {
   const dialogRef = useDialog(isOpen, onClose);
-  const { locale } = useTranslation();
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   const handleContentClick = (e: React.MouseEvent) => {
@@ -172,12 +185,15 @@ const ImageModal: React.FC<ImageModalProps> = ({
         }
       }}
     >
-      <CloseButton type="button" onClick={onClose} aria-label={locale === 'es' ? 'Cerrar imagen' : 'Close image'}>×</CloseButton>
+      <LanguageControl onClick={event => event.stopPropagation()}>
+        <LanguageSwitcher isDark />
+      </LanguageControl>
+      <CloseButton type="button" onClick={onClose} aria-label={t('sharedContent.images.close')}>×</CloseButton>
       {onPrevious && (
         <NavigationButton type="button" className="prev" onClick={(e) => {
           e.stopPropagation();
           onPrevious();
-        }} aria-label={locale === 'es' ? 'Imagen anterior' : 'Previous image'}>
+        }} aria-label={t('sharedContent.images.previous')}>
           ‹
         </NavigationButton>
       )}
@@ -199,7 +215,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         <NavigationButton type="button" className="next" onClick={(e) => {
           e.stopPropagation();
           onNext();
-        }} aria-label={locale === 'es' ? 'Imagen siguiente' : 'Next image'}>
+        }} aria-label={t('sharedContent.images.next')}>
           ›
         </NavigationButton>
       )}

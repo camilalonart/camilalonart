@@ -1,0 +1,96 @@
+{
+  "sharedContent": {
+    "navigation": {
+      "photography": "Navegación de fotografía",
+      "backToTop": "Volver arriba",
+      "location": "Vancouver, Columbia Británica, Canadá",
+      "behance": "Portafolio en Behance"
+    },
+    "images": {
+      "unavailable": "Imagen no disponible",
+      "viewLarger": "Ampliar",
+      "close": "Cerrar imagen",
+      "previous": "Imagen anterior",
+      "next": "Imagen siguiente"
+    },
+    "form": {
+      "unavailable": "El formulario no está disponible. Envía tu consulta por correo.",
+      "unconfirmed": "No podemos confirmar la entrega. Conservamos tus datos aquí; contacta por correo antes de reenviar.",
+      "failed": "No se ha confirmado el envío. Puedes contactar por correo.",
+      "sent": "Gracias. Tu consulta se ha enviado; la sesión aún no está confirmada.",
+      "emailFallback": "No se ha confirmado el envío. Puedes enviar tu consulta por correo:",
+      "emailInquiry": "Enviar consulta por correo:",
+      "choosePackage": "Selecciona un paquete para continuar.",
+      "step": "Paso",
+      "emailPlaceholder": "tu@correo.com"
+    },
+    "validation": {
+      "required": "Completa este campo.",
+      "requiredSelection": "Selecciona una opción.",
+      "email": "Introduce una dirección de correo válida.",
+      "url": "Introduce una URL válida.",
+      "invalid": "Introduce un valor válido.",
+      "tooShort": "Introduce al menos {min} caracteres.",
+      "tooLong": "Introduce como máximo {max} caracteres.",
+      "minimum": "Introduce un valor igual o superior a {min}.",
+      "maximum": "Introduce un valor igual o inferior a {max}."
+    },
+    "email": {
+      "contactSubject": "Consulta desde el sitio web",
+      "weddingSubject": "Consulta de fotografía de bodas",
+      "petSubject": "Consulta de fotografía de mascotas",
+      "headshotSubject": "Consulta de retrato profesional",
+      "familySubject": "Consulta de fotografía familiar",
+      "artSubject": "Consulta sobre arte",
+      "uxSubject": "Consulta de diseño UX/UI"
+    },
+    "fields": {
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "phone": "Número de teléfono",
+      "message": "Mensaje",
+      "petName": "Nombre de la mascota",
+      "petType": "Tipo de mascota",
+      "petAge": "Edad de la mascota",
+      "package": "Paquete",
+      "preferredDate": "Fecha y hora preferidas",
+      "date": "Fecha preferida",
+      "location": "Ubicación",
+      "about": "Sobre ti",
+      "referral": "Cómo nos conociste",
+      "company": "Empresa / organización",
+      "preferredTime": "Horario preferido",
+      "purpose": "Uso",
+      "sessionType": "Tipo de sesión",
+      "inquiryType": "Tipo de consulta",
+      "service": "Servicio"
+    },
+    "pet": {
+      "heading": "Consulta de fotografía de mascotas",
+      "subheading": "¡Capturemos la personalidad de tu compañero peludo!",
+      "yourInformation": "Tus datos",
+      "name": "Tu nombre",
+      "namePlaceholder": "Tu nombre completo",
+      "details": "Datos de tu mascota",
+      "petName": "Nombre de la mascota",
+      "petNamePlaceholder": "¿Cómo se llama tu mascota?",
+      "petType": "Tipo de mascota",
+      "petTypePlaceholder": "Por ejemplo: perro, gato, conejo...",
+      "petAge": "Edad de la mascota",
+      "petAgePlaceholder": "Por ejemplo: 3 años",
+      "sessionDetails": "Detalles de la sesión",
+      "package": "Paquete preferido",
+      "selectPackage": "Selecciona un paquete",
+      "atHome": "Sesiones en casa",
+      "outdoor": "Sesión al aire libre",
+      "photobooks": "Fotolibros de mascotas",
+      "preferredDate": "Fecha y hora preferidas",
+      "location": "Lugar preferido",
+      "locationPlaceholder": "Tu casa, un parque, etc.",
+      "additionalInformation": "Información adicional",
+      "message": "Cuéntanos sobre tu mascota",
+      "messagePlaceholder": "Cuéntanos sobre su personalidad, las fotos que te gustaría tener, sus premios favoritos o cualquier detalle que nos ayude a capturar su esencia.",
+      "submit": "Enviar consulta"
+    }
+  }
+}

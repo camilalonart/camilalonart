@@ -3,6 +3,9 @@ import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
 import { useDialog } from '@/hooks/useDialog';
+import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import { createInquiryMailto } from '@/lib/inquiryEmail';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -441,10 +444,10 @@ interface WeddingInquiryFormProps {
 }
 
 export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, embedded = false }: WeddingInquiryFormProps) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const id = useId();
   const dialogRef = useDialog(!embedded && isOpen, onClose);
-  const formRef = useRef<HTMLFormElement>(null);
+  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
   const wf = 'photography.wedding.form';
   const ws = 'photography.wedding.services';
 
@@ -470,7 +473,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorKey, setErrorKey] = useState('');
 
   const totalSteps = 3;
   const previousStep = useRef(step);
@@ -487,10 +490,10 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   }, [selectedPackage]);
 
   const handleNext = () => {
-    if (isSubmitting || !formRef.current?.reportValidity()) return;
+    if (isSubmitting || !validate()) return;
     if (step === 2 && !packages.some(pkg => pkg.id === formData.package)) {
       setSubmitStatus('error');
-      setErrorMessage(locale === 'es' ? 'Selecciona un paquete para continuar.' : 'Choose a package to continue.');
+      setErrorKey('sharedContent.form.choosePackage');
       return;
     }
     setSubmitStatus('idle');
@@ -508,11 +511,11 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       handleNext();
       return;
     }
-    if (!formRef.current?.reportValidity()) return;
+    if (!validate()) return;
     
     if (!FORMSPREE_ID && !WEDDING_SCRIPT_URL) {
       setSubmitStatus('error');
-      setErrorMessage(locale === 'es' ? 'El formulario no está disponible. Envía tu consulta por correo.' : 'Online submission is unavailable. Please email your inquiry.');
+      setErrorKey('sharedContent.form.unavailable');
       return;
     }
 
@@ -547,10 +550,10 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
 
       // A no-cors response cannot confirm whether the service accepted the inquiry.
       setSubmitStatus('error');
-      setErrorMessage(locale === 'es' ? 'No podemos confirmar la entrega. Conservamos tus datos; contacta por correo antes de reenviar.' : 'We cannot confirm delivery. Your details are saved here; please email before submitting again.');
+      setErrorKey('sharedContent.form.unconfirmed');
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(locale === 'es' ? 'No se ha confirmado el envío. Puedes contactar por correo.' : 'Delivery has not been confirmed. Please contact us by email.');
+      setErrorKey('sharedContent.form.failed');
     } finally {
       setIsSubmitting(false);
     }
@@ -559,7 +562,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   if (!isOpen) return null;
 
   const formContent = (
-    <Form ref={formRef} onSubmit={handleSubmit} noValidate aria-busy={isSubmitting}>
+    <Form ref={formRef} onSubmit={handleSubmit} noValidate onInput={onInput} onInvalid={onInvalid} aria-busy={isSubmitting}>
       <StepContent $active={step === 1} disabled={step !== 1 || isSubmitting}>
         <StepTitle>{t(`${wf}.step1Title`)}</StepTitle>
         <InputGroup>
@@ -581,7 +584,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
               id={`${id}-email`}
               autoComplete="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder={t('sharedContent.form.emailPlaceholder')}
               required
               value={formData.email}
               onChange={e => setFormData({...formData, email: e.target.value})}
@@ -702,8 +705,11 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
       </ButtonRow>
       {((!FORMSPREE_ID && !WEDDING_SCRIPT_URL) || submitStatus === 'error') && (
         <p>
-          {locale === 'es' ? 'Enviar consulta por correo: ' : 'Email your inquiry: '}
-          <a href={`mailto:bycamilalonart@gmail.com?subject=Wedding%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+          {t('sharedContent.form.emailInquiry')}{' '}
+          <a href={createInquiryMailto(t, 'sharedContent.email.weddingSubject', formData, {
+            package: Object.fromEntries(packages.map(pkg => [pkg.id, pkg.name])),
+            referral: { Friend: t(`${wf}.friendReferral`), Other: t(`${wf}.other`) },
+          })}>bycamilalonart@gmail.com</a>
         </p>
       )}
     </Form>
@@ -712,8 +718,8 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   const notification = submitStatus !== 'idle' && (
     <Notification role={submitStatus === 'error' ? 'alert' : 'status'} $type={submitStatus}>
       {submitStatus === 'success'
-        ? (locale === 'es' ? 'Gracias. Tu consulta se ha enviado; la sesión aún no está confirmada.' : 'Thank you. Your inquiry was sent; your session is not yet confirmed.')
-        : errorMessage || t(`${wf}.failedSend`)}
+        ? t('sharedContent.form.sent')
+        : t(errorKey || `${wf}.failedSend`)}
     </Notification>
   );
 
@@ -731,7 +737,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
               $active={s === step}
               $completed={s < step}
               type="button"
-              aria-label={`${locale === 'es' ? 'Paso' : 'Step'} ${s}`}
+              aria-label={`${t('sharedContent.form.step')} ${s}`}
               aria-current={s === step ? 'step' : undefined}
               disabled={isSubmitting || s > step + 1}
               onClick={() => s > step ? handleNext() : setStep(s)}
@@ -747,6 +753,9 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContent ref={dialogRef} role="dialog" aria-modal="true" aria-label={t(`${wf}.heading`)} tabIndex={-1} onClick={e => e.stopPropagation()}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '16px 72px 0 24px' }}>
+          <LanguageSwitcher />
+        </div>
         <CloseButton type="button" aria-label={t(`${wf}.close`)} onClick={onClose}>×</CloseButton>
         <FormHeader>
           <h2>{t(`${wf}.heading`)}</h2>
@@ -759,7 +768,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
               $active={s === step}
               $completed={s < step}
               type="button"
-              aria-label={`${locale === 'es' ? 'Paso' : 'Step'} ${s}`}
+              aria-label={`${t('sharedContent.form.step')} ${s}`}
               aria-current={s === step ? 'step' : undefined}
               disabled={isSubmitting || s > step + 1}
               onClick={() => s > step ? handleNext() : setStep(s)}

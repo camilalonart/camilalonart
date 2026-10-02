@@ -3,6 +3,9 @@ import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
 import { useTranslation } from '@/i18n/TranslationContext';
 import { useDialog } from '@/hooks/useDialog';
+import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import { createInquiryMailto } from '@/lib/inquiryEmail';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const fadeIn = keyframes`
   from {
@@ -463,7 +466,9 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   selectedPackage,
   embedded = false
 }) => {
-  const { locale } = useTranslation();
+  const { t } = useTranslation();
+  const pf = 'sharedContent.pet';
+  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
   const id = useId();
   const dialogRef = useDialog(!embedded && isOpen, onClose);
   const [formData, setFormData] = useState({
@@ -480,7 +485,7 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string>();
+  const [errorKey, setErrorKey] = useState<string>();
   const [submitSuccess, setSubmitSuccess] = useState(false);
   useEffect(() => {
     if (selectedPackage) setFormData(data => ({ ...data, package: selectedPackage }));
@@ -489,12 +494,13 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (!validate()) return;
     setIsSubmitting(true);
-    setError(undefined);
+    setErrorKey(undefined);
     setSubmitSuccess(false);
 
     if (!FORMSPREE_ID && !GOOGLE_SCRIPT_URL) {
-      setError(locale === 'es' ? 'El formulario no está disponible. Envía tu consulta por correo.' : 'Online submission is unavailable. Please email your inquiry.');
+      setErrorKey('sharedContent.form.unavailable');
       setIsSubmitting(false);
       return;
     }
@@ -530,48 +536,48 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       });
 
       // A no-cors response cannot confirm whether the service accepted the inquiry.
-      setError(locale === 'es' ? 'No podemos confirmar la entrega. Conservamos tus datos; contacta por correo antes de reenviar.' : 'We cannot confirm delivery. Your details are saved here; please email before submitting again.');
+      setErrorKey('sharedContent.form.unconfirmed');
     } catch (err) {
-      setError(locale === 'es' ? 'No se ha confirmado el envío. Puedes contactar por correo.' : 'Delivery has not been confirmed. Please contact us by email.');
+      setErrorKey('sharedContent.form.failed');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const formContent = (
-    <Form $embedded={embedded} onSubmit={handleSubmit} aria-busy={isSubmitting}>
+    <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} $embedded={embedded} onSubmit={handleSubmit} aria-busy={isSubmitting}>
       <fieldset disabled={isSubmitting} style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
       <FormSection>
-        <SectionTitle><span className="icon">👤</span> Your Information</SectionTitle>
+        <SectionTitle><span className="icon" aria-hidden="true">👤</span> {t(`${pf}.yourInformation`)}</SectionTitle>
         <FormRow>
           <FormGroup>
-            <label htmlFor={`${id}-name`}>Your Name<RequiredStar>*</RequiredStar></label>
+            <label htmlFor={`${id}-name`}>{t(`${pf}.name`)}<RequiredStar>*</RequiredStar></label>
             <input
               type="text"
               id={`${id}-name`}
               autoComplete="name"
               required
-              placeholder="Your full name"
+              placeholder={t(`${pf}.namePlaceholder`)}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-email`}>Email<RequiredStar>*</RequiredStar></label>
+            <label htmlFor={`${id}-email`}>{t('forms.email')}<RequiredStar>*</RequiredStar></label>
             <input
               type="email"
               id={`${id}-email`}
               autoComplete="email"
               required
-              placeholder="your@email.com"
+              placeholder={t('sharedContent.form.emailPlaceholder')}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-phone`}>Phone Number</label>
+            <label htmlFor={`${id}-phone`}>{t('forms.phone')}</label>
             <input
               type="tel"
               id={`${id}-phone`}
@@ -585,38 +591,38 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       </FormSection>
 
       <FormSection>
-        <SectionTitle><span className="icon">🐾</span> Your Pet's Details</SectionTitle>
+        <SectionTitle><span className="icon" aria-hidden="true">🐾</span> {t(`${pf}.details`)}</SectionTitle>
         <FormRow>
           <FormGroup>
-            <label htmlFor={`${id}-petName`}>Pet's Name<RequiredStar>*</RequiredStar></label>
+            <label htmlFor={`${id}-petName`}>{t(`${pf}.petName`)}<RequiredStar>*</RequiredStar></label>
             <input
               type="text"
               id={`${id}-petName`}
               required
-              placeholder="What's your pet called?"
+              placeholder={t(`${pf}.petNamePlaceholder`)}
               value={formData.petName}
               onChange={(e) => setFormData({ ...formData, petName: e.target.value })}
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-petType`}>Type of Pet<RequiredStar>*</RequiredStar></label>
+            <label htmlFor={`${id}-petType`}>{t(`${pf}.petType`)}<RequiredStar>*</RequiredStar></label>
             <input
               type="text"
               id={`${id}-petType`}
               required
-              placeholder="e.g. Dog, Cat, Rabbit..."
+              placeholder={t(`${pf}.petTypePlaceholder`)}
               value={formData.petType}
               onChange={(e) => setFormData({ ...formData, petType: e.target.value })}
             />
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-petAge`}>Pet's Age</label>
+            <label htmlFor={`${id}-petAge`}>{t(`${pf}.petAge`)}</label>
             <input
               type="text"
               id={`${id}-petAge`}
-              placeholder="e.g. 3 years old"
+              placeholder={t(`${pf}.petAgePlaceholder`)}
               value={formData.petAge}
               onChange={(e) => setFormData({ ...formData, petAge: e.target.value })}
             />
@@ -625,25 +631,25 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       </FormSection>
 
       <FormSection>
-        <SectionTitle><span className="icon">📅</span> Session Details</SectionTitle>
+        <SectionTitle><span className="icon" aria-hidden="true">📅</span> {t(`${pf}.sessionDetails`)}</SectionTitle>
         <FormRow>
           <FormGroup>
-            <label htmlFor={`${id}-package`}>Preferred Package<RequiredStar>*</RequiredStar></label>
+            <label htmlFor={`${id}-package`}>{t(`${pf}.package`)}<RequiredStar>*</RequiredStar></label>
             <select
               id={`${id}-package`}
               required
               value={formData.package}
               onChange={(e) => setFormData({ ...formData, package: e.target.value })}
             >
-              <option value="">Select a package</option>
-              <option value="At Home Sessions">🏠 At Home Sessions</option>
-              <option value="Outdoor Session">🌳 Outdoor Session</option>
-              <option value="Pet Photobooks">📷 Pet Photobooks</option>
+              <option value="">{t(`${pf}.selectPackage`)}</option>
+              <option value="At Home Sessions">🏠 {t(`${pf}.atHome`)}</option>
+              <option value="Outdoor Session">🌳 {t(`${pf}.outdoor`)}</option>
+              <option value="Pet Photobooks">📷 {t(`${pf}.photobooks`)}</option>
             </select>
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-preferredDate`}>Preferred Date & Time</label>
+            <label htmlFor={`${id}-preferredDate`}>{t(`${pf}.preferredDate`)}</label>
             <input
               type="datetime-local"
               id={`${id}-preferredDate`}
@@ -653,11 +659,11 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor={`${id}-location`}>Preferred Location</label>
+            <label htmlFor={`${id}-location`}>{t(`${pf}.location`)}</label>
             <input
               type="text"
               id={`${id}-location`}
-              placeholder="Your home, park, etc."
+              placeholder={t(`${pf}.locationPlaceholder`)}
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             />
@@ -666,12 +672,12 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       </FormSection>
 
       <FormSection>
-        <SectionTitle><span className="icon">💬</span> Additional Information</SectionTitle>
+        <SectionTitle><span className="icon" aria-hidden="true">💬</span> {t(`${pf}.additionalInformation`)}</SectionTitle>
         <FormGroup $fullWidth>
-          <label htmlFor={`${id}-message`}>Tell Us About Your Pet</label>
+          <label htmlFor={`${id}-message`}>{t(`${pf}.message`)}</label>
           <textarea
             id={`${id}-message`}
-            placeholder="Tell us about your pet's personality, any specific shots you'd like, favorite treats, or anything else that would help us capture their unique spirit!"
+            placeholder={t(`${pf}.messagePlaceholder`)}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           />
@@ -681,14 +687,20 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       </fieldset>
       {submitSuccess && (
         <p role="status">
-          {locale === 'es' ? 'Gracias. Tu consulta se ha enviado; la sesión aún no está confirmada.' : 'Thank you. Your inquiry was sent; your session is not yet confirmed.'}
+          {t('sharedContent.form.sent')}
         </p>
       )}
-      {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
-      {((!FORMSPREE_ID && !GOOGLE_SCRIPT_URL) || error) && (
+      {errorKey && <ErrorMessage role="alert">{t(errorKey)}</ErrorMessage>}
+      {((!FORMSPREE_ID && !GOOGLE_SCRIPT_URL) || errorKey) && (
         <p>
-          {locale === 'es' ? 'Enviar consulta por correo: ' : 'Email your inquiry: '}
-          <a href={`mailto:bycamilalonart@gmail.com?subject=Pet%20photography%20inquiry&body=${encodeURIComponent(Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n'))}`}>bycamilalonart@gmail.com</a>
+          {t('sharedContent.form.emailInquiry')}{' '}
+          <a href={createInquiryMailto(t, 'sharedContent.email.petSubject', formData, {
+            package: {
+              'At Home Sessions': t(`${pf}.atHome`),
+              'Outdoor Session': t(`${pf}.outdoor`),
+              'Pet Photobooks': t(`${pf}.photobooks`),
+            },
+          })}>bycamilalonart@gmail.com</a>
         </p>
       )}
 
@@ -696,11 +708,11 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
         {isSubmitting ? (
           <>
             <LoadingSpinner />
-            Submitting...
+            {t('forms.submitting')}
           </>
         ) : (
           <>
-            🐾 Submit Inquiry
+            <span aria-hidden="true">🐾</span> {t(`${pf}.submit`)}
           </>
         )}
       </SubmitButton>
@@ -712,8 +724,8 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
       <ModalContent $embedded={true}>
         <ModalHeader>
           <div>
-            <h2>Pet Photography Inquiry</h2>
-            <p className="subtitle">Let's capture your furry friend's personality!</p>
+            <h2>{t(`${pf}.heading`)}</h2>
+            <p className="subtitle">{t(`${pf}.subheading`)}</p>
           </div>
         </ModalHeader>
         {formContent}
@@ -723,16 +735,19 @@ const PetInquiryForm: React.FC<PetInquiryFormProps> = ({
 
   return isOpen ? (
     <ModalOverlay onClick={onClose}>
-      <ModalContent ref={dialogRef} role="dialog" aria-modal="true" aria-label={locale === 'es' ? 'Consulta de fotografía de mascotas' : 'Pet Photography Inquiry'} tabIndex={-1} onClick={e => e.stopPropagation()}>
+      <ModalContent ref={dialogRef} role="dialog" aria-modal="true" aria-label={t(`${pf}.heading`)} tabIndex={-1} onClick={e => e.stopPropagation()}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '16px 24px 0' }}>
+          <LanguageSwitcher isDark />
+        </div>
         <ModalHeader>
           <div>
-            <h2>Pet Photography Inquiry</h2>
-            <p className="subtitle">Let's capture your furry friend's personality!</p>
+            <h2>{t(`${pf}.heading`)}</h2>
+            <p className="subtitle">{t(`${pf}.subheading`)}</p>
           </div>
           <button 
             className="close-button" 
             onClick={onClose} 
-            aria-label="Close modal"
+            aria-label={t('gallery.closeModal')}
             type="button"
           >
             ×

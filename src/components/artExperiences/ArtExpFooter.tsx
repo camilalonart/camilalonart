@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, SmallFlower, WavyUnderline, StarSpark } from './Doodles';
 import { FLOCK_COMMUNITY_URL } from './data';
@@ -131,15 +131,6 @@ const SocialLink = styled.a`
   &:hover { color: ${AE.blueLight}; }
 `;
 
-const scrollTo = (id: string) => {
-  if (typeof window === 'undefined') return;
-  const el = document.getElementById(id);
-  if (el) {
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
-};
-
 export default function ArtExpFooter() {
   const { t } = useTranslation();
 
@@ -166,9 +157,9 @@ export default function ArtExpFooter() {
             </ColTitle>
             <ColLinks>
               <ColLink as={Link} href="/art-experiences/events">{t('artExperiences.footer.myArtEvents')}</ColLink>
-              <ColLink onClick={() => scrollTo('creative-corner')}>{t('artExperiences.footer.creativeCorner')}</ColLink>
-              <ColLink onClick={() => scrollTo('you-and-i')}>{t('artExperiences.footer.youAndIPaint')}</ColLink>
-              <ColLink onClick={() => scrollTo('upcoming')}>{t('artExperiences.footer.upcomingEvents')}</ColLink>
+              <ColLink as={Link} href="/art-experiences/#creative-corner">{t('artExperiences.footer.creativeCorner')}</ColLink>
+              <ColLink as={Link} href="/art-experiences/#you-and-i">{t('artExperiences.footer.youAndIPaint')}</ColLink>
+              <ColLink as={Link} href="/art-experiences/#upcoming">{t('artExperiences.footer.upcomingEvents')}</ColLink>
             </ColLinks>
           </Column>
 
@@ -200,7 +191,7 @@ export default function ArtExpFooter() {
           </Copyright>
           <SocialRow>
             <SocialLink href="https://instagram.com/camilalonart" target="_blank" rel="noopener noreferrer">@camilalonart</SocialLink>
-            <SocialLink href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">Flock Community</SocialLink>
+            <SocialLink href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">{t('artContent.experiences.flockCommunity')}</SocialLink>
           </SocialRow>
         </BottomRow>
       </Container>

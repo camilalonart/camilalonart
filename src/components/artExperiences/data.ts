@@ -89,11 +89,11 @@ export const artEvents: ArtEvent[] = [
     type: 'myEvents',
     title: {
       en: 'Paint & Sip Afternoon',
-      es: 'Tarde de Pintura y Sip',
+      es: 'Tarde de pintura y bebidas',
     },
     description: {
       en: "Join us for a cozy afternoon of painting, conversation, and creativity in a beautiful café setting at Funk Coffee Bar. Guided by artist Camilalonart, this beginner-friendly paint & sip experience is designed for anyone who wants to slow down, create, and enjoy a relaxed creative gathering. We'll paint together step by step while enjoying drinks, music, and a warm atmosphere. No experience needed... all materials are included.",
-      es: 'Únete a una tarde acogedora de pintura, conversación y creatividad en el hermoso ambiente de Funk Coffee Bar. Guiado por la artista Camilalonart, esta experiencia de pintura y sip apta para principiantes está diseñada para cualquiera que quiera desacelerar, crear y disfrutar de una reunión creativa relajada. Pintaremos juntos paso a paso mientras disfrutamos de bebidas, música y una atmósfera cálida. No se necesita experiencia — todos los materiales están incluidos.',
+      es: 'Únete a una tarde acogedora de pintura, conversación y creatividad en Funk Coffee Bar. Esta experiencia de pintura y bebidas, guiada por la artista Camilalonart y pensada también para principiantes, es una invitación a bajar el ritmo, crear y disfrutar de un encuentro relajado. Pintaremos juntos paso a paso entre bebidas, música y un ambiente cálido. No necesitas experiencia: todos los materiales están incluidos.',
     },
     date: 'Saturday, June 13, 2026',
     dateISO: '2026-06-13',
@@ -115,6 +115,21 @@ export const artEvents: ArtEvent[] = [
     instagramHandles: ['@camilalonart', '@camilonart'],
   },
 ];
+
+export function localizedEventDate(dateISO: string, locale: 'en' | 'es'): string {
+  return new Intl.DateTimeFormat(locale === 'es' ? 'es-CO' : 'en-CA', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+  }).format(new Date(`${dateISO}T12:00:00Z`));
+}
+
+export function localizedEventTime(time: string, locale: 'en' | 'es'): string {
+  const match = time.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!match) return time;
+  const hours = Number(match[1]) % 12 + (match[3].toUpperCase() === 'PM' ? 12 : 0);
+  return new Intl.DateTimeFormat(locale === 'es' ? 'es-CO' : 'en-CA', {
+    hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC',
+  }).format(new Date(Date.UTC(2000, 0, 1, hours, Number(match[2]))));
+}
 
 const MONTHS_EN_SHORT = [
   'jan', 'feb', 'mar', 'apr', 'may', 'jun',

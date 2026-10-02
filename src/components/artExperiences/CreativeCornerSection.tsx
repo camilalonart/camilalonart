@@ -358,10 +358,10 @@ export default function CreativeCornerSection() {
           <TestimonialsHeader>
             <Eyebrow style={{ justifyContent: 'center' }}>
               <StarSpark size={12} color={AE.blue} />
-              Voices from the community
+              {t('artContent.experiences.voices')}
               <StarSpark size={12} color={AE.blue} />
             </Eyebrow>
-            <SectionSmallTitle>What people are saying</SectionSmallTitle>
+            <SectionSmallTitle>{t('artContent.experiences.testimonials')}</SectionSmallTitle>
           </TestimonialsHeader>
           <TestimonialsGrid>
             <TestimonialCard>
@@ -383,11 +383,11 @@ export default function CreativeCornerSection() {
             <SmallFlower size={32} color={AE.blue} />
           </FloatDoodle>
           <TinyStar size={14} color={AE.blue} style={{ display: 'inline-block', marginBottom: '1rem' }} />
-          <CTATitle>Come paint with us.</CTATitle>
+          <CTATitle>{t('artContent.experiences.comePaint')}</CTATitle>
           <CTASubtitle>
-            The Creative Corner is where Vancouver comes to slow down, create, and connect.
+            {t('artContent.experiences.communityInvitation')}
             <br />
-            There is always a seat for you at the table.
+            {t('artContent.experiences.seat')}
           </CTASubtitle>
           <JoinButton href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
             {t('artExperiences.creativeCorner.joinCta')} ↗

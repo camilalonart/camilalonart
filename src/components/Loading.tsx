@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '../styles/theme';
+import { useTranslation } from '../i18n/TranslationContext';
 
 interface LoadingProps {
   size?: 'small' | 'medium' | 'large';
@@ -78,10 +81,11 @@ export default function Loading({
   dark = false,
   fullScreen = false,
 }: LoadingProps) {
+  const { t } = useTranslation();
   return (
-    <LoadingContainer fullScreen={fullScreen}>
+    <LoadingContainer fullScreen={fullScreen} role="status" aria-label={t('common.loading')}>
       <Spinner size={size} dark={dark} />
-      {size !== 'small' && <LoadingText dark={dark}>Loading...</LoadingText>}
+      {size !== 'small' && <LoadingText dark={dark}>{t('common.loading')}</LoadingText>}
     </LoadingContainer>
   );
 } 

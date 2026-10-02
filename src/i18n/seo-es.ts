@@ -1,0 +1,38 @@
+import type { PageMetadataText } from './metadata-types';
+
+const entry = (title: string, description: string): PageMetadataText => ({ title, description });
+
+export const spanishSeo: Record<string, PageMetadataText> = {
+  '/': entry('Camila Londoño — Arte, fotografía y experiencias creativas', 'Explora pinturas originales, fotografía y experiencias creativas de Camila Londoño, artista e ingeniera colombiana en Vancouver, BC.'),
+  '/art': entry('Camila Londoño — Pinturas y colecciones de arte', 'Explora pinturas originales, acuarelas y colecciones de técnica mixta de Camila Londoño, artista colombiana en Vancouver, BC.'),
+  '/art/about': entry('Sobre Camila Londoño', 'Conoce a Camila Londoño, artista e ingeniera colombiana en Vancouver, y descubre su pintura, sus historias y su recorrido creativo.'),
+  '/art/all-paintings': entry('Todas las pinturas — Camila Londoño', 'Descubre las pinturas de Camila Londoño, desde sus colecciones contemporáneas hasta las obras de sus primeros años.'),
+  '/art/collaborations': entry('Colaboraciones artísticas — Camila Londoño', 'Descubre colaboraciones creativas y proyectos por encargo de la artista Camila Londoño.'),
+  '/art/collections': entry('Colecciones de arte — Camila Londoño', 'Explora las colecciones de pintura de Camila Londoño: obras originales sobre la memoria, la pertenencia y los momentos cotidianos.'),
+  '/art/contact': entry('Contacta a Camila Londoño', 'Contacta a Camila Londoño para conversar sobre sus pinturas, encargos artísticos y colaboraciones creativas.'),
+  '/art/early-first-paintings': entry('Primeras pinturas — Camila Londoño', 'Explora las primeras pinturas y colecciones del archivo que muestran el desarrollo artístico de Camila Londoño.'),
+  '/art-experiences': entry('Experiencias artísticas en Vancouver', 'Descubre encuentros creativos, eventos de pintura y experiencias artísticas con Camila Londoño en Vancouver, BC.'),
+  '/art-experiences/events': entry('Eventos de pintura y encuentros creativos', 'Descubre los próximos eventos y encuentros pasados con Camila Londoño: pintura y tardes creativas en Vancouver.'),
+  '/art-experiences/you-and-i-gallery': entry('You & I Paint — Galería de eventos', 'Explora las fotografías de las experiencias You & I Paint, encuentros para disfrutar de la pintura, la creatividad y el tiempo compartido.'),
+  '/photography/wedding-couples': entry('Fotografía de bodas y parejas en Vancouver', 'Fotografía de bodas íntimas y parejas con Camila Londoño en Vancouver, BC. Explora celebraciones, retratos de compromiso e información sobre las sesiones.'),
+  '/photography/wedding-couples/gallery': entry('Galería de bodas y parejas', 'Explora la galería de fotografías de bodas, celebraciones íntimas y parejas de Camila Londoño en Vancouver.'),
+  '/photography/pets': entry('Fotografía de mascotas en Vancouver', 'Retratos de mascotas con Camila Londoño en Vancouver, BC. Descubre fotografías de perros y gatos, información sobre las sesiones y una galería llena de personalidad.'),
+  '/photography/pets/gallery': entry('Galería de fotografía de mascotas', 'Explora retratos de perros, gatos y sus personalidades en la galería de fotografía de mascotas de Camila Londoño.'),
+  '/photography/family-maternity': entry('Fotografía familiar, de maternidad y bebés en Vancouver', 'Fotografía familiar, de maternidad y de recién nacidos en Vancouver. Conserva recuerdos del embarazo, los primeros días de tu bebé y los momentos en familia.'),
+  '/photography/family-maternity/gallery': entry('Galería de fotografía familiar y de maternidad', 'Explora fotografías familiares, de maternidad y de bebés de Camila Londoño en Vancouver, BC.'),
+  '/photography/headshots': entry('Retratos profesionales en Vancouver', 'Retratos profesionales con Camila Londoño en Vancouver, BC. Explora el portafolio y las sesiones para tu perfil, tu trabajo y tu marca personal.'),
+  '/photography/headshots/gallery': entry('Galería de retratos profesionales', 'Explora la galería de retratos profesionales y fotografías de perfil de Camila Londoño en Vancouver.'),
+  '/my-art/wildlife-photography': entry('Fotografía de vida silvestre', 'El portafolio personal de fotografía de vida silvestre de Camila Londoño. Descubre animales, aves y encuentros con la naturaleza.'),
+  '/my-art/wildlife-photography/gallery': entry('Galería de vida silvestre', 'Explora la galería personal de Camila Londoño: fotografías de vida silvestre y encuentros con la naturaleza.'),
+  '/creative-services': entry('Servicios creativos', 'Servicios creativos y consultas sobre proyectos con Camila Londoño.'),
+  '/creative-services/art-classes': entry('Clases de arte en Vancouver', 'Explora clases y talleres de arte con Camila Londoño en Vancouver, con técnicas de arte digital y pintura tradicional.'),
+  '/creative-services/brand-identity': entry('Diseño de identidad de marca', 'Diseño de identidad de marca y consultas sobre proyectos con Camila Londoño.'),
+  '/creative-services/graphic-recording': entry('Relatoría gráfica en Vancouver', 'Explora servicios de relatoría gráfica y narración visual para reuniones y eventos con Camila Londoño en Vancouver, BC.'),
+  '/creative-services/ux-ui-design': entry('Portafolio de diseño UX/UI', 'Explora proyectos de diseño de interfaces y productos de Camila Londoño, incluidos sus trabajos para Alfred y Cleverlynk.'),
+  '/my-art/blog': entry('Blog de arte y fotografía', 'Notas sobre arte y fotografía de Camila Londoño.'),
+  '/my-art/digital-art': entry('Arte de Camila Londoño', 'Explora el portafolio artístico de Camila Londoño.'),
+  '/my-art/traditional-art': entry('Arte de Camila Londoño', 'Explora el portafolio artístico de Camila Londoño.'),
+  '/my-art/everyday-photography': entry('Fotografía cotidiana', 'Fotografía de la vida cotidiana de Camila Londoño.'),
+  '/portfolio': entry('Portafolio', 'Fotografía y trabajo creativo de Camila Londoño.'),
+  '/tech/courses': entry('Cursos de tecnología', 'Información sobre cursos de tecnología de Camila Londoño.'),
+};

@@ -15,13 +15,17 @@ export function useDialog(isOpen: boolean, onClose: () => void) {
     const previousFocus = document.activeElement;
     const previousOverflow = document.body.style.overflow;
     const focusableElements = () => Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector))
-      .filter(element => element.getClientRects().length > 0 && !element.closest('[hidden], [inert]'));
+      .filter(element => element.getClientRects().length > 0
+        && getComputedStyle(element).visibility === 'visible'
+        && !element.matches(':disabled')
+        && !element.closest('[hidden], [inert]'));
     const focusFirst = () => (focusableElements()[0] ?? dialog).focus();
 
     document.body.style.overflow = 'hidden';
     focusFirst();
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || !(event.target instanceof Node) || !dialog.contains(event.target)) return;
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
@@ -47,10 +51,10 @@ export function useDialog(isOpen: boolean, onClose: () => void) {
       if (event.target instanceof Node && !dialog.contains(event.target)) focusFirst();
     };
 
-    dialog.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('focusin', handleFocus);
     return () => {
-      dialog.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('focusin', handleFocus);
       document.body.style.overflow = previousOverflow;
       if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus();

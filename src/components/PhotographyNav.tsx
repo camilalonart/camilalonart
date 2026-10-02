@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from '../i18n/TranslationContext';
 
 const Nav = styled.nav`
   position: fixed;
@@ -19,8 +20,9 @@ const Nav = styled.nav`
 `;
 
 export default function PhotographyNav() {
+  const { t } = useTranslation();
   return (
-    <Nav role="navigation" aria-label="Photography navigation">
+    <Nav role="navigation" aria-label={t('sharedContent.navigation.photography')}>
       <LanguageSwitcher isDark />
     </Nav>
   );

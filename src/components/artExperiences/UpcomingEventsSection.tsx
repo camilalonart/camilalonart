@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from '../../i18n/TranslationContext';
 import { AE, WavyUnderline, SmallFlower, StarSpark } from './Doodles';
@@ -199,15 +199,15 @@ export default function UpcomingEventsSection() {
           <EmptyState>
             <SmallFlower size={56} color={AE.blue} style={{ margin: '0 auto 1.5rem', opacity: 0.45 }} />
             <EmptyTitle>{t('artExperiences.upcoming.noEvents')}</EmptyTitle>
-            <EmptySubTitle>Follow along on Instagram @camilalonart for updates.</EmptySubTitle>
+            <EmptySubTitle>{t('artContent.experiences.instagramUpdates')}</EmptySubTitle>
           </EmptyState>
         )}
 
         <ViewAllWrap>
           <ViewAllBtn href="/art-experiences/events">
-            View all events — upcoming & past →
+            {t('artContent.experiences.allEvents')}
           </ViewAllBtn>
-          <ViewAllHint>Includes open registrations and events already held by The Creative Corner</ViewAllHint>
+          <ViewAllHint>{t('artContent.experiences.allEventsHint')}</ViewAllHint>
         </ViewAllWrap>
       </Container>
     </Section>

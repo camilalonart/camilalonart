@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { localeFromPath, localizedPath, stripLocale, type Locale } from '@/i18n/routing';
 
 export const SITE_CONFIG = {
   name: 'Camilalonart',
@@ -44,6 +45,7 @@ export const baseMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: SITE_CONFIG.locale,
+    alternateLocale: 'es_CA',
     url: canonicalUrl('/'),
     siteName: SITE_CONFIG.name,
     title: defaultTitle,
@@ -67,7 +69,10 @@ export const baseMetadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: { canonical: canonicalUrl('/') },
+  alternates: {
+    canonical: canonicalUrl('/'),
+    languages: { en: canonicalUrl('/'), es: canonicalUrl('/es/'), 'x-default': canonicalUrl('/') },
+  },
 };
 
 export function generateMetadata({
@@ -77,6 +82,7 @@ export function generateMetadata({
   keywords = [],
   images,
   noIndex = false,
+  locale = localeFromPath(path),
 }: {
   title: string;
   description: string;
@@ -84,8 +90,9 @@ export function generateMetadata({
   keywords?: string[];
   images?: { url: string; alt: string }[];
   noIndex?: boolean;
+  locale?: Locale;
 }): Metadata {
-  const url = canonicalUrl(path);
+  const url = canonicalUrl(localizedPath(path, locale));
   const fullTitle = /camilalonart|camila londoño/i.test(title) ? title : `${title} | ${SITE_CONFIG.name}`;
   const ogImages = images?.map(image => ({
     ...image,
@@ -96,27 +103,34 @@ export function generateMetadata({
     title: { absolute: fullTitle },
     description,
     keywords,
-    openGraph: { ...baseMetadata.openGraph, title: fullTitle, description, url, images: ogImages },
+    openGraph: { ...baseMetadata.openGraph, locale: locale === 'es' ? 'es_CA' : 'en_CA', alternateLocale: locale === 'es' ? 'en_CA' : 'es_CA', title: fullTitle, description, url, images: ogImages },
     twitter: {
       ...baseMetadata.twitter,
       title: fullTitle,
       description,
       images: images?.map(image => new URL(image.url, SITE_CONFIG.url).href) ?? baseMetadata.twitter?.images,
     },
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        en: canonicalUrl(stripLocale(path)),
+        es: canonicalUrl(localizedPath(path, 'es')),
+        'x-default': canonicalUrl(stripLocale(path)),
+      },
+    },
     robots: noIndex ? { index: false, follow: true } : baseMetadata.robots,
   };
 }
 
-export function generateLocalBusinessSchema() {
+export function generateLocalBusinessSchema(locale: Locale = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': `${SITE_CONFIG.url}/#business`,
     name: 'Camilalonart Photography',
     image: [new URL(SEO_IMAGES.artist, SITE_CONFIG.url).href],
-    description: 'Photography in Vancouver, BC: weddings and couples, pets, family and maternity portraits, and professional headshots.',
-    url: canonicalUrl('/'),
+    description: locale === 'es' ? 'Fotografía en Vancouver, BC: bodas y parejas, mascotas, retratos familiares y de maternidad y retratos profesionales.' : 'Photography in Vancouver, BC: weddings and couples, pets, family and maternity portraits, and professional headshots.',
+    url: canonicalUrl(localizedPath('/', locale)),
     telephone: SITE_CONFIG.contact.phone,
     email: SITE_CONFIG.contact.email,
     address: {
@@ -131,17 +145,17 @@ export function generateLocalBusinessSchema() {
 
 export type LocalBusinessSchema = ReturnType<typeof generateLocalBusinessSchema>;
 
-export function generatePhotographerSchema() {
+export function generatePhotographerSchema(locale: Locale = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': `${SITE_CONFIG.url}/#person`,
     name: 'Camila Londoño',
     alternateName: 'Camilalonart',
-    jobTitle: 'Artist and photographer',
-    url: canonicalUrl('/'),
+    jobTitle: locale === 'es' ? 'Artista y fotógrafa' : 'Artist and photographer',
+    url: canonicalUrl(localizedPath('/', locale)),
     image: new URL(SEO_IMAGES.artist, SITE_CONFIG.url).href,
-    description: 'Colombian artist, photographer and engineer based in Vancouver, BC.',
+    description: locale === 'es' ? 'Artista, fotógrafa e ingeniera colombiana en Vancouver, BC.' : 'Colombian artist, photographer and engineer based in Vancouver, BC.',
     sameAs: [SITE_CONFIG.social.instagram],
   };
 }

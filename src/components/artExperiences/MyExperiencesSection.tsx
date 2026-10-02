@@ -140,7 +140,7 @@ export default function MyExperiencesSection() {
             {t('artExperiences.myExperiences.eyebrow')}
             <StarSpark size={12} color={AE.blue} />
           </Eyebrow>
-          <SectionTitle>{t('artExperiences.myExperiences.title')}</SectionTitle>
+          <SectionTitle>{t('artContent.experiences.curatedEvents')}</SectionTitle>
           <WavyWrap>
             <WavyUnderline width={100} color={AE.blue} />
           </WavyWrap>
