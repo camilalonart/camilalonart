@@ -1,4 +1,43 @@
 {
+  "unpublished": {
+    "home": "Back to home",
+    "signature": "Camilalonart · Vancouver",
+    "relatedTitle": "Explore something else",
+    "directoryTitle": "Choose a place to start",
+    "pages": {
+      "brandIdentity": {
+        "title": "Brand identity",
+        "message": "I haven't published a brand identity portfolio here. You can explore my UX/UI projects, paintings and art experiences instead."
+      },
+      "creativeServices": {
+        "title": "Creative services",
+        "message": "Explore my UX/UI work, discover art experiences or find a photo session. Each has its own space, with work and details to explore."
+      },
+      "everyday": {
+        "title": "Everyday photography",
+        "message": "This photography collection isn't published here yet. For now, you can explore my wildlife photography, paintings and pet photography."
+      },
+      "portfolio": {
+        "title": "Explore my work",
+        "message": "This combined portfolio isn't published here yet. My paintings, photography and design projects have their own pages below."
+      },
+      "blog": {
+        "title": "Stories & notes",
+        "message": "There are no published articles here yet. You can explore the stories alongside my paintings, browse wildlife photography or read about my practice."
+      }
+    },
+    "links": {
+      "art": { "title": "Paintings & collections", "description": "Explore my paintings and the stories behind them." },
+      "wildlife": { "title": "Wildlife photography", "description": "Meet animals through my lens." },
+      "design": { "title": "UX/UI design", "description": "Explore my digital design projects." },
+      "experiences": { "title": "Art experiences", "description": "Discover paint & sip and creative gatherings." },
+      "wedding": { "title": "Weddings & couples", "description": "Explore photography for your shared moments." },
+      "pets": { "title": "Pet photography", "description": "Browse pet portraits and session details." },
+      "family": { "title": "Family & maternity", "description": "Explore family, baby and maternity photography." },
+      "headshots": { "title": "Professional headshots", "description": "Browse portraits and headshot session details." },
+      "about": { "title": "About Camila", "description": "Meet the artist behind the work." }
+    }
+  },
   "nav": {
     "home": "Home",
     "photographyServices": "Photography Services",
@@ -71,7 +110,16 @@
     "heroTitle": "Hi, I'm",
     "heroEmphasis": "Camila.",
     "facets": "Artist · Photographer · Designer · Software engineer",
-    "intro": "I paint, take photos, design and write code. Here, it all comes together. Explore my work, find a photo session or come create with me.",
+    "intro": "Welcome to my creative corner. I make paintings, photographs and digital experiences. Find a photo session, join an art experience or tell me what you'd like to create together.",
+    "workWithMe": "Work with me",
+    "exploreMyWork": "Explore my work",
+    "sessionLinksTitle": "Find your photo session",
+    "sessionLinks": {
+      "wedding": "Weddings & couples",
+      "pets": "Pets",
+      "family": "Family & maternity",
+      "headshots": "Professional headshots"
+    },
     "inquire": "Let's talk",
     "findYourWorld": "Take a look around",
     "exploreNav": "Start here",
@@ -124,8 +172,32 @@
       }
     },
     "contactTitle": "What would you like to create?",
-    "contactIntro": "For photography inquiries, artwork questions and creative collaborations, get in touch directly.",
+    "contactIntro": "Tell me about your session, artwork question or creative project. Include your preferred dates and location, if relevant, so we can discuss the details.",
     "emailCamila": "Email Camila",
+    "aboutTitle": "A little about Camila",
+    "aboutIntro": "I'm a Colombian artist and engineer based in Vancouver. Everyday stories, belonging and the small things we often miss find their way into my paintings. This is a space for that curiosity, through art, photography and design.",
+    "aboutLink": "Meet the artist",
+    "instagramLink": "Instagram · @camilalonart",
+    "faqTitle": "Before you get in touch",
+    "faq": {
+      "inquiry": {
+        "question": "How do I arrange a session or project?",
+        "answer": "Email me your idea, preferred dates and location. We'll discuss availability and the details together; sending an inquiry does not confirm a booking."
+      },
+      "location": {
+        "question": "Where are you based?",
+        "answer": "I'm based in Vancouver, BC. Include your preferred location when you get in touch so we can discuss your project."
+      },
+      "languages": {
+        "question": "Can I explore the site in Spanish?",
+        "answer": "Yes. The site is available in English and Spanish. Use EN or ES at the top of the page to switch languages."
+      },
+      "events": {
+        "question": "Where can I find art events?",
+        "answer": "Visit Art Experiences to explore paint & sip, creative gatherings and the current event listings. Check each event's details for dates and how to take part.",
+        "link": "Explore Art Experiences"
+      }
+    },
     "footer": "Made with curiosity in Vancouver, BC",
     "images": {
       "wedding": "A couple embracing with the Vancouver skyline behind them",

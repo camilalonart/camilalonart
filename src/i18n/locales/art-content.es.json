@@ -30,6 +30,12 @@
     "subject": "Consulta sobre arte"
   },
   "experiences": {
+    "eventSchedule": "Calendario de eventos",
+    "checkingDates": "Consultando las fechas… Explora todos los eventos a continuación.",
+    "noUpcomingEvents": "No hay próximos eventos publicados. Puedes explorar los eventos anteriores a continuación.",
+    "archivedEvent": "Evento pasado · archivo",
+    "eventbriteListing": "Ver publicación en Eventbrite",
+    "flockListing": "Ver publicación en Flock",
     "allLevels": "Todos los niveles son bienvenidos ✦ Vancouver, BC",
     "curatedEvents": "Encuentros de pintura preparados con cuidado",
     "teachingWith": "También doy clases con",

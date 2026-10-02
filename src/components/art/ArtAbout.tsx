@@ -15,7 +15,7 @@ const C = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
 };
 
 const Site = styled.div`
@@ -46,7 +46,8 @@ const Breadcrumb = styled.nav`
 
 const BreadcrumbLink = styled(Link)`
   color: ${C.gold};
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 
   &:hover {
     text-decoration: underline;

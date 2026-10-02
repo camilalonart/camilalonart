@@ -133,7 +133,6 @@ const PlaceholderTitle = styled.p`
   font-style: italic;
   color: ${AE.warmBrown};
   margin: 0 0 0.25rem;
-  opacity: 0.7;
 `;
 
 const PlaceholderSub = styled.p`

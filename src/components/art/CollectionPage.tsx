@@ -5,6 +5,7 @@ import Link from '@/i18n/LocalizedLink';
 import styled from 'styled-components';
 import data, { type Collection, localizedDescription, localizedMaterials } from '../../data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '../../i18n/TranslationContext';
 
 const C = {
@@ -13,7 +14,7 @@ const C = {
   border: '#1E1E1E',
   gold: '#C8A87A',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
 };
 
 const Site = styled.div`
@@ -43,7 +44,8 @@ const Breadcrumbs = styled.nav`
 
 const BreadcrumbLink = styled(Link)`
   color: ${C.gold};
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
   margin-right: 0.5rem;
 
   &:hover {
@@ -200,7 +202,7 @@ const NavLink = styled(Link)`
 
   &:hover {
     border-color: ${C.gold};
-    color: '#E5D4B3';
+    color: #E5D4B3;
   }
 
   &:disabled {
@@ -266,10 +268,11 @@ export default function CollectionPage({ collection }: CollectionPageProps) {
                 href={`/art/${collection.id}/${painting.id}`}
               >
                 <PaintingImgWrap>
-                  <img
+                  <ResponsiveImage
                     src={painting.images[0]}
                     alt={`${painting.title} — ${localizedMaterials(painting.materials, locale)}`}
                     loading="lazy"
+                    sizes="auto, (max-width: 768px) 100vw, 50vw"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
                   />

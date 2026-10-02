@@ -6,6 +6,7 @@ import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { AE, StarSpark, TinyStar } from './Doodles';
 import { type ArtEvent, localizedEventDate, localizedEventTime } from './data';
+import { useVancouverDate, eventDateStatus } from '@/hooks/useVancouverDate';
 
 const shimmer = keyframes`
   0% { background-position: -200% 0; }
@@ -98,6 +99,7 @@ const SpotsTag = styled.div<{ $soldOut?: boolean }>`
 `;
 
 const CardBody = styled.div<{ $featured?: boolean }>`
+  min-width: 0;
   padding: ${p => p.$featured ? '2rem 2.5rem' : '1.5rem'};
   display: flex;
   flex-direction: column;
@@ -187,7 +189,7 @@ const TicketsAvailableBadge = styled.div`
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #2E7D52;
+  color: #256440;
   background: rgba(46, 125, 82, 0.1);
   border: 1.5px solid rgba(46, 125, 82, 0.3);
   border-radius: 50px;
@@ -213,6 +215,7 @@ const TicketsAvailableBadge = styled.div`
 const ArtistPortfolioBtn = styled(Link)`
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.4rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.76rem;
@@ -226,7 +229,7 @@ const ArtistPortfolioBtn = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   transition: all 0.22s ease;
-  white-space: nowrap;
+  white-space: normal;
 
   &:hover {
     border-color: ${AE.blue};
@@ -258,6 +261,10 @@ const InstagramLabel = styled.span`
 `;
 
 const InstagramHandle = styled.a`
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
@@ -280,6 +287,8 @@ const CTARow = styled.div`
 const CTAPrimary = styled.a`
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
+  max-width: 100%;
   gap: 0.4rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.78rem;
@@ -293,7 +302,7 @@ const CTAPrimary = styled.a`
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  white-space: nowrap;
+  white-space: normal;
 
   &:hover {
     background: ${AE.blueDark};
@@ -306,6 +315,8 @@ const CTAPrimary = styled.a`
 const CTASecondary = styled.a`
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
+  max-width: 100%;
   gap: 0.4rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.78rem;
@@ -319,7 +330,7 @@ const CTASecondary = styled.a`
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  white-space: nowrap;
+  white-space: normal;
 
   &:hover {
     border-color: ${AE.blue};
@@ -336,6 +347,10 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, locale, featured = false, t }: EventCardProps) {
+  const today = useVancouverDate();
+  const status = eventDateStatus(event.dateISO, today);
+  const isUpcoming = status === 'upcoming';
+  const canReserve = isUpcoming && event.spotsLeft !== 0;
   const title = event.title[locale];
   const description = event.description[locale];
 
@@ -360,16 +375,19 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
           <ImagePlaceholder>🎨</ImagePlaceholder>
         )}
         <PriceBadge>{priceDisplay}</PriceBadge>
-        {event.spotsTotal !== undefined && event.spotsLeft === 0 && (
+        {isUpcoming && event.spotsTotal !== undefined && event.spotsLeft === 0 && (
           <SpotsTag $soldOut>{t('artExperiences.upcoming.soldOut')} · {event.spotsTotal}/{event.spotsTotal}</SpotsTag>
         )}
-        {event.spotsLeft !== undefined && event.spotsLeft > 0 && (
+        {isUpcoming && event.spotsLeft !== undefined && event.spotsLeft > 0 && (
           <SpotsTag>{event.spotsLeft} {t('artExperiences.myExperiences.spotsLeft')}</SpotsTag>
         )}
       </ImageWrap>
 
       <CardBody $featured={featured}>
-        {event.ticketsAvailable && (
+        {!isUpcoming && (
+          <EventDescription>{t(status === 'past' ? 'artContent.experiences.archivedEvent' : 'artContent.experiences.eventSchedule')}</EventDescription>
+        )}
+        {canReserve && event.ticketsAvailable && (
           <TicketsAvailableBadge>
             {t('artContent.experiences.ticketsAvailable')}
           </TicketsAvailableBadge>
@@ -406,13 +424,17 @@ export default function EventCard({ event, locale, featured = false, t }: EventC
         <CTARow> 
           {event.eventbriteUrl && (
             <CTAPrimary href={event.eventbriteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onEventbrite')}
+              {canReserve
+                ? `${t('artExperiences.myExperiences.reserveSpot')} ${t('artExperiences.myExperiences.onEventbrite')}`
+                : t('artContent.experiences.eventbriteListing')}
               <span>↗</span>
             </CTAPrimary>
           )}
           {event.flockUrl && (
             <CTASecondary href={event.flockUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-              {t('artExperiences.myExperiences.reserveSpot')} {t('artExperiences.myExperiences.onFlock')}
+              {canReserve
+                ? `${t('artExperiences.myExperiences.reserveSpot')} ${t('artExperiences.myExperiences.onFlock')}`
+                : t('artContent.experiences.flockListing')}
               <span>↗</span>
             </CTASecondary>
           )}

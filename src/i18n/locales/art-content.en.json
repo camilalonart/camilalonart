@@ -30,6 +30,12 @@
     "subject": "Art inquiry"
   },
   "experiences": {
+    "eventSchedule": "Event schedule",
+    "checkingDates": "Checking event dates… Explore all event listings below.",
+    "noUpcomingEvents": "No upcoming events are listed. You can explore past events below.",
+    "archivedEvent": "Past event · archive",
+    "eventbriteListing": "View Eventbrite listing",
+    "flockListing": "View Flock listing",
     "allLevels": "All levels welcome ✦ Vancouver, BC",
     "curatedEvents": "Curated Painting Events",
     "teachingWith": "Also teaching with",

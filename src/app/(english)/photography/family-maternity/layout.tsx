@@ -1,3 +1,5 @@
+import PhotographyStructuredData from '@/components/PhotographyStructuredData';
+
 export { metadata } from './metadata';
 
 export default function FamilyMaternityLayout({
@@ -5,5 +7,5 @@ export default function FamilyMaternityLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <><PhotographyStructuredData service="family-maternity" />{children}</>;
 }

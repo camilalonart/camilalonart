@@ -56,7 +56,7 @@ const HeroContent = styled.div`
   color: white;
   max-width: 900px;
   margin-left: ${theme.spacing.xl};
-  background-color: rgba(219, 162, 40, 0.59);
+  background-color: rgba(26, 20, 15, 0.85);
   padding: ${theme.spacing.lg};
 
   h1 {
@@ -207,7 +207,7 @@ const SectionTitle = styled.h2`
 
 const PortfolioGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: ${theme.spacing.md};
   padding: ${theme.spacing.xl};
   max-width: 1400px;
@@ -259,7 +259,8 @@ const ServicesSection = styled.div`
 
 const ServiceCard = styled.div`
   background: white;
-  padding: ${theme.spacing.xl};
+  padding: clamp(1rem, 3vw, 2rem);
+  min-width: 0;
   box-shadow: ${theme.shadows.md};
   height: auto;
   min-height: 600px;
@@ -310,9 +311,9 @@ const ServiceCardFeatures = styled.ul`
 `;
 
 const BookNowButton = styled.button`
-  background: rgb(176, 126, 18);
+  background: #87600E;
   color: white;
-  padding: ${theme.spacing.lg} ${theme.spacing.xl};
+  padding: ${theme.spacing.lg} clamp(0.75rem, 2vw, 2rem);
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
@@ -325,7 +326,7 @@ const BookNowButton = styled.button`
   
   &:hover {
     transform: translateY(-3px);
-    background: rgb(231, 189, 99);
+    background: #71500B;
   }
 
   &:active {
@@ -363,6 +364,29 @@ const FormContainer = styled.div`
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
+
+  :is(input, select, textarea) {
+    width: 100%;
+    min-width: 0;
+    border-color: #80766B;
+    color: #2C3E50;
+  }
+
+  input[type="radio"] { width: 18px; flex-shrink: 0; }
+
+  input::placeholder, textarea::placeholder {
+    color: #666;
+    opacity: 1;
+  }
+
+  :is(input, select, textarea):focus-visible {
+    outline: 2px solid #71500B;
+    outline-offset: 3px;
+  }
+
+  :is(input, select, textarea)[aria-invalid="true"] {
+    border-color: #A52B20;
+  }
 `;
 
 const FormHeader = styled.div`
@@ -406,6 +430,7 @@ const FormRow = styled.div`
 `;
 
 const FormGroup = styled.div`
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.xs};
@@ -484,7 +509,7 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button<{ $isSubmitting?: boolean }>`
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
-  background: ${props => props.$isSubmitting ? '#ccc' : 'linear-gradient(135deg, rgb(176, 126, 18) 0%, rgb(169, 125, 30) 100%)'};
+  background: ${props => props.$isSubmitting ? '#666' : 'linear-gradient(135deg, #87600E 0%, #71500B 100%)'};
   color: white;
   border: none;
   border-radius: 10px;
@@ -513,7 +538,7 @@ const StatusMessage = styled.div<{ $type: 'success' | 'error' }>`
   background: ${({ $type }) => $type === 'success' 
     ? 'linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.15) 100%)' 
     : 'linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.15) 100%)'};
-  color: ${({ $type }) => $type === 'success' ? '#27ae60' : '#c0392b'};
+  color: ${({ $type }) => $type === 'success' ? '#196B3A' : '#A52B20'};
   border: 1px solid ${({ $type }) => $type === 'success' ? 'rgba(46, 204, 113, 0.3)' : 'rgba(231, 76, 60, 0.3)'};
 `;
 
@@ -544,7 +569,7 @@ const PackageOption = styled.label<{ $selected: boolean }>`
   }
   
   small {
-    color: rgb(169, 125, 30);
+    color: #71500B;
     font-weight: 600;
     margin-left: auto;
   }

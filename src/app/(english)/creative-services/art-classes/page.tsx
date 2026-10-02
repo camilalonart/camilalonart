@@ -20,7 +20,7 @@ const Hero = styled.section`
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: ${theme.spacing.lg};
-    background: linear-gradient(120deg, ${theme.colors.primary.main}, ${theme.colors.secondary.main});
+    background: linear-gradient(120deg, ${theme.colors.primary.main}, #87600E);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -38,11 +38,14 @@ const Section = styled.section<{ $dark?: boolean }>`
   padding: ${theme.spacing['3xl']} 0;
   background-color: ${props => 
     props.$dark ? theme.colors.background.dark : theme.colors.background.main};
+  color: ${props => props.$dark ? '#F5F5F5' : theme.colors.text.primary};
+
+  > h2 { color: inherit; }
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: ${theme.spacing.xl};
   margin-top: ${theme.spacing['2xl']};
 `;
@@ -95,12 +98,12 @@ const InfoCard = styled.div`
   padding: ${theme.spacing.xl};
 
   h3 {
-    color: ${theme.colors.primary.main};
+    color: #E5C675;
     margin: ${theme.spacing.md} 0;
   }
 
   p {
-    color: ${theme.colors.text.secondary};
+    color: #C8C8C8;
     line-height: 1.6;
   }
 `;

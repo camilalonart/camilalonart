@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from '@/i18n/LocalizedLink';
 import styled, { keyframes } from 'styled-components';
 import { artEvents, FLOCK_COMMUNITY_URL } from '@/components/artExperiences/data';
@@ -9,8 +9,7 @@ import ArtExpFooter from '@/components/artExperiences/ArtExpFooter';
 import EventCard from '@/components/artExperiences/EventCard';
 import { AE, WavyUnderline, StarSpark, SmallFlower } from '@/components/artExperiences/Doodles';
 import { useTranslation } from '@/i18n/TranslationContext';
-
-const TODAY_ISO = new Date().toISOString().slice(0, 10);
+import { useVancouverDate, eventDateStatus } from '@/hooks/useVancouverDate';
 
 const fadeInUp = keyframes`
   from { opacity: 0; transform: translateY(24px); }
@@ -33,6 +32,7 @@ const Hero = styled.section`
 const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.4rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 0.75rem;
@@ -124,21 +124,10 @@ const GroupLabel = styled.h2`
 
 const EventsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 1.75rem;
   margin-bottom: clamp(3rem, 6vw, 5rem);
   animation: ${fadeInUp} 0.9s ease both;
-`;
-
-const PastEventCard = styled.div`
-  opacity: 0.65;
-  filter: grayscale(0.3);
-  transition: opacity 0.2s, filter 0.2s;
-
-  &:hover {
-    opacity: 0.85;
-    filter: grayscale(0);
-  }
 `;
 
 const EmptyBlock = styled.div`
@@ -210,10 +199,12 @@ const JoinBtn = styled.a`
 
 export default function AllEventsPage() {
   const { t, locale } = useTranslation();
+  const today = useVancouverDate();
 
   const ccEvents = artEvents.filter(e => e.type === 'myEvents');
-  const upcoming = ccEvents.filter(e => e.dateISO >= TODAY_ISO);
-  const past = ccEvents.filter(e => e.dateISO < TODAY_ISO);
+  const upcoming = ccEvents.filter(e => eventDateStatus(e.dateISO, today) === 'upcoming');
+  const past = ccEvents.filter(e => eventDateStatus(e.dateISO, today) === 'past');
+  const scheduled = today === null ? ccEvents : upcoming;
 
   return (
     <Page>
@@ -234,11 +225,11 @@ export default function AllEventsPage() {
         {/* Upcoming */}
         <GroupLabel>
           <StarSpark size={11} color={AE.blue} />
-          {t('artExperiences.eventsPage.openForRegistration')}
+          {t(today === null ? 'artContent.experiences.eventSchedule' : 'artExperiences.upcoming.title')}
         </GroupLabel>
-        {upcoming.length > 0 ? (
+        {scheduled.length > 0 ? (
           <EventsGrid>
-            {upcoming.map(event => (
+            {scheduled.map(event => (
               <EventCard
                 key={event.id}
                 event={event}
@@ -251,32 +242,34 @@ export default function AllEventsPage() {
         ) : (
           <EmptyBlock>
             <SmallFlower size={44} color={AE.blue} style={{ opacity: 0.4, margin: '0 auto' }} />
-            <EmptyText>{t('artExperiences.eventsPage.noUpcomingEvents')}</EmptyText>
+            <EmptyText>{t(today === null ? 'artContent.experiences.checkingDates' : 'artContent.experiences.noUpcomingEvents')}</EmptyText>
           </EmptyBlock>
         )}
 
-        {/* Past */}
-        <GroupLabel>
-          <StarSpark size={11} color={AE.warmLight} />
-          {t('artExperiences.eventsPage.pastEvents')}
-        </GroupLabel>
-        {past.length > 0 ? (
-          <EventsGrid>
-            {past.map(event => (
-              <PastEventCard key={event.id}>
+        {today !== null && (
+          <>
+            <GroupLabel>
+              <StarSpark size={11} color={AE.warmLight} />
+              {t('artExperiences.eventsPage.pastEvents')}
+            </GroupLabel>
+            {past.length > 0 ? (
+              <EventsGrid>
+                {past.map(event => (
                 <EventCard
+                  key={event.id}
                   event={event}
                   locale={locale as 'en' | 'es'}
                   featured={false}
                   t={t}
                 />
-              </PastEventCard>
-            ))}
-          </EventsGrid>
-        ) : (
-          <EmptyBlock>
-            <EmptyText>{t('artExperiences.eventsPage.noPastEvents')}</EmptyText>
-          </EmptyBlock>
+                ))}
+              </EventsGrid>
+            ) : (
+              <EmptyBlock>
+                <EmptyText>{t('artExperiences.eventsPage.noPastEvents')}</EmptyText>
+              </EmptyBlock>
+            )}
+          </>
         )}
 
         {/* Join CTA */}

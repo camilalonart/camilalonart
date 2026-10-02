@@ -1,5 +1,7 @@
+import PhotographyStructuredData from '@/components/PhotographyStructuredData';
+
 export { metadata } from './metadata';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <><PhotographyStructuredData service="pets" />{children}</>;
 }

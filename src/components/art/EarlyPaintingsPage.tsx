@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styled, { keyframes } from 'styled-components';
 import data, { earlyFirstPaintings_COLLECTIONS_ORDER, localizedBio, localizedMaterials } from '@/data/artPortfolio';
 import ArtNav from './ArtNav';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { useTranslation } from '@/i18n/TranslationContext';
 
 const C: Record<string, string> = {
@@ -15,7 +16,7 @@ const C: Record<string, string> = {
   gold: '#C8A87A',
   goldLight: '#E5D4B3',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#9A958D',
   dim: '#3A3835',
 };
 
@@ -447,7 +448,7 @@ export default function EarlyPaintingsPage() {
           <CollectionGroup key={col.id}>
             <CollectionGroupTitle>
               {col.name}
-              <span style={{ color: C.dim }}>{col.paintings.length}</span>
+              <span style={{ color: C.muted }}>{col.paintings.length}</span>
             </CollectionGroupTitle>
             <MasonryGrid>
               {col.paintings.map(p => (
@@ -456,10 +457,11 @@ export default function EarlyPaintingsPage() {
                   href={`/art/${col.id}/${p.id}`}
                   aria-label={`${t('artContent.common.view')} ${p.title}, ${p.year}`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={p.images[0]}
                     alt={`${p.title} — ${localizedMaterials(p.materials, locale)}, ${p.year}`}
                     loading="lazy"
+                    sizes="auto, (max-width: 500px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 350px"
                     draggable={false}
                     onContextMenu={e => e.preventDefault()}
                   />

@@ -4,12 +4,16 @@
   "private": true,
   "scripts": {
     "generate-locales": "node scripts/generate-locale-routes.cjs",
-    "prebuild": "npm run generate-locales",
+    "generate-responsive-images": "node scripts/generate-responsive-images.cjs",
+    "predev": "npm run generate-responsive-images",
+    "prebuild": "npm run generate-locales && npm run generate-responsive-images",
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/optimize-export-images.cjs",
     "start": "next start",
     "lint": "next lint",
     "check:translations": "node scripts/check-translations.js",
+    "check:site": "node scripts/check-export.cjs",
     "generate-images": "node scripts/generateImageList.js",
     "webp-check": "node scripts/convert-to-webp.js",
     "webp-convert": "node scripts/convert-to-webp.js --convert",
@@ -31,7 +35,6 @@
     "next": "^14.2.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-multi-carousel": "^2.8.6",
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
@@ -43,6 +46,7 @@
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.2.35",
     "fs-extra": "^11.3.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.3.3"
   }
 }

@@ -12,6 +12,7 @@ import { useTranslation } from "@/i18n/TranslationContext";
 import Link from '@/i18n/LocalizedLink';
 import WeddingServices from '@/components/photography/WeddingServices';
 import LocalizedStructuredData from '@/components/LocalizedStructuredData';
+import { SITE_CONFIG } from '@/lib/seo';
 import {
   weddingServiceSchema,
   weddingBreadcrumbSchema,
@@ -24,6 +25,25 @@ const PageContainer = styled.div`
   margin: 0 auto;
   overflow-x: hidden;
   position: relative;
+
+  button[aria-haspopup="dialog"] {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  button[aria-haspopup="dialog"]:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 3px solid white;
+    outline: 3px solid #1A1A1A;
+    z-index: 20;
+    pointer-events: none;
+  }
 
   * {
     box-sizing: border-box;
@@ -451,6 +471,7 @@ const SectionDivider = styled.div`
 `;
 
 const DividerImage = styled.div<{ $span?: number; $isMiddle?: boolean }>`
+  display: block;
   grid-column: span ${props => props.$span || 4};
   position: relative;
   overflow: hidden;
@@ -671,7 +692,7 @@ const SEOFooter = styled.div`
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.75);
     font-size: clamp(0.75rem, 1.2vw, 0.8rem);
     line-height: 1.6;
     padding: 0 ${theme.spacing.xl};
@@ -680,7 +701,7 @@ const SEOFooter = styled.div`
       font-size: clamp(0.75rem, 1.2vw, 0.8rem);
       font-weight: normal;
       margin-bottom: ${theme.spacing.md};
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.75);
       text-transform: none;
     }
 
@@ -1118,7 +1139,7 @@ export default function WeddingCouplesPage() {
       <WeddingServices services={services} onInquire={handleBookClick} />
 
       <SectionDivider>
-        <DividerImage $span={3} $isMiddle onClick={() => handleImageClick('/images/wedding/A7T09634.webp')}>
+        <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} $isMiddle onClick={() => handleImageClick('/images/wedding/A7T09634.webp')}>
           <ProtectedImage
             src="/images/wedding/A7T09634.webp"
             alt={copy('brideRing')}
@@ -1126,7 +1147,7 @@ export default function WeddingCouplesPage() {
             quality={75}
           />
         </DividerImage>
-        <DividerImage $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.webp')}>
+        <DividerImage as="button" type="button" aria-haspopup="dialog" $span={6} onClick={() => handleImageClick('/images/wedding/A7T09834.webp')}>
           <ProtectedImage
             src="/images/wedding/A7T09834.webp"
             alt={copy('flowers')}
@@ -1134,7 +1155,7 @@ export default function WeddingCouplesPage() {
             quality={75}
           />
         </DividerImage>
-        <DividerImage $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.webp')}>
+        <DividerImage as="button" type="button" aria-haspopup="dialog" $span={3} onClick={() => handleImageClick('/images/wedding/A7T09612.webp')}>
           <ProtectedImage
             src="/images/wedding/A7T09612.webp"
             alt={copy('bride')}
@@ -1269,8 +1290,7 @@ export default function WeddingCouplesPage() {
           <div className="footer-section">
             <h3>{t(`${w}.footer.followAlong`)}</h3>
             <ul>
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
             </ul>
           </div>
         </div>

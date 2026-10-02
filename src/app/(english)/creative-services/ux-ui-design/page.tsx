@@ -21,8 +21,8 @@ const C = {
   white:       '#FFFFFF',
   text:        '#0A0A0A',
   textLight:   '#FAFAFA',
-  muted:       '#888888',
-  mutedDark:   'rgba(250,250,250,0.38)',
+  muted:       '#626262',
+  mutedDark:   '#A3A3A3',
   accent:      '#C8F135',   // electric lime
   border:      'rgba(0,0,0,0.1)',
   borderDark:  'rgba(255,255,255,0.1)',
@@ -131,7 +131,7 @@ const HeroEyebrow = styled.span`
 
 const HeroTitle = styled.h1`
   font-family: var(--font-montserrat);
-  font-size: clamp(5rem, 12vw, 10rem);
+  font-size: clamp(3rem, 12vw, 10rem);
   font-weight: 700;
   color: ${C.textLight};
   line-height: 0.88;
@@ -269,16 +269,16 @@ const ProjectRow = styled.button`
   transition: background 0.35s ease, padding-left 0.35s ease;
   box-sizing: border-box;
 
-  &:hover {
+  &:hover, &:focus-visible {
     background: ${C.dark};
     padding-left: calc(clamp(1.25rem,3.5vw,2.5rem) + 0.5rem);
   }
 
-  &:hover .prow-num   { color: ${C.accent}; }
-  &:hover .prow-name  { color: ${C.textLight}; }
-  &:hover .prow-tags  { color: ${C.mutedDark}; }
-  &:hover .prow-arrow { color: ${C.accent}; transform: translateX(6px); }
-  &:hover .prow-thumb { opacity: 1; }
+  &:is(:hover, :focus-visible) .prow-num   { color: ${C.accent}; }
+  &:is(:hover, :focus-visible) .prow-name  { color: ${C.textLight}; }
+  &:is(:hover, :focus-visible) .prow-tags  { color: ${C.mutedDark}; }
+  &:is(:hover, :focus-visible) .prow-arrow { color: ${C.accent}; transform: translateX(6px); }
+  &:is(:hover, :focus-visible) .prow-thumb { opacity: 1; }
 
   &:focus-visible { outline: 2px solid ${C.accent}; outline-offset: -2px; }
 
@@ -390,6 +390,11 @@ const ContactSub = styled.p`
 
 const ContactRight = styled.div`
   padding-top: 0.5rem;
+  min-width: 0;
+
+  input[aria-invalid="true"], textarea[aria-invalid="true"] {
+    border-color: #B91C1C;
+  }
 `;
 
 const FormField = styled.div`
@@ -411,7 +416,7 @@ const FieldLabel = styled.label`
 const underlineBase = css`
   background: transparent;
   border: none;
-  border-bottom: 1.5px solid ${C.border};
+  border-bottom: 1.5px solid ${C.muted};
   border-radius: 0;
   padding: 0.55rem 0;
   color: ${C.text};
@@ -419,16 +424,19 @@ const underlineBase = css`
   font-size: 0.95rem;
   font-weight: 300;
   width: 100%;
+  min-width: 0;
+  min-height: 44px;
   outline: none;
   transition: border-color 0.2s ease;
 
-  &::placeholder { color: rgba(0,0,0,0.18); }
+  &::placeholder { color: ${C.muted}; opacity: 1; }
   &:focus { border-bottom-color: ${C.text}; }
+  &:focus-visible { outline: 2px solid ${C.text}; outline-offset: 3px; }
   @media (max-width: 600px) { font-size: 16px; }
 `;
 
 const FieldInput    = styled.input`${underlineBase}`;
-const FieldTextarea = styled.textarea`${underlineBase} min-height:110px; resize:none;`;
+const FieldTextarea = styled.textarea`${underlineBase} min-height:110px; resize:vertical;`;
 
 const SendButton = styled.button`
   font-family: var(--font-montserrat);
@@ -452,7 +460,7 @@ const FormMsg = styled.div<{ $type: 'success' | 'error' }>`
   margin-bottom: 1.25rem;
   padding: 0.75rem 0 0.75rem 0.85rem;
   border-left: 2px solid ${p => p.$type === 'success' ? '#22c55e' : '#ef4444'};
-  color: ${p => p.$type === 'success' ? '#16a34a' : '#dc2626'};
+  color: ${p => p.$type === 'success' ? '#167A3D' : '#B91C1C'};
   font-family: var(--font-montserrat);
   font-size: 0.8rem;
   font-weight: 300;
@@ -516,6 +524,8 @@ const DetailTopBar = styled.div`
 `;
 
 const BackBtn = styled.button`
+  min-height: 44px;
+  min-width: 44px;
   font-family: var(--font-montserrat);
   font-size: 0.65rem;
   font-weight: 700;

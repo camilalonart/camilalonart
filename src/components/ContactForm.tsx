@@ -11,27 +11,28 @@ import { createInquiryMailto } from '@/lib/inquiryEmail';
 const C: Record<string, string> = {
   bg: '#080808',
   surface: '#101010',
-  border: '#1E1E1E',
+  border: '#77716A',
   gold: '#C8A87A',
   text: '#F0EDE8',
-  muted: '#6E6B65',
+  muted: '#AAA298',
 };
 
 const FormContainer = styled.div`
   max-width: 100%;
   margin: 0;
-  padding: 0;
-  background-color: transparent;
+  padding: clamp(1rem, 3vw, 2rem);
+  background-color: ${C.bg};
+  color: ${C.text};
   border-radius: 0;
   box-shadow: none;
 
-  h2 {
-    display: none;
-  }
-
   p {
-    display: none;
+    margin-bottom: 1.5rem;
+    color: ${C.text};
+    font-size: 0.9rem;
+    line-height: 1.7;
   }
+  p a { color: ${C.gold}; text-decoration: underline; overflow-wrap: anywhere; }
 `;
 
 const Form = styled.form`
@@ -75,7 +76,8 @@ const Input = styled.input`
   }
 
   &:focus {
-    outline: none;
+    outline: 2px solid ${C.gold};
+    outline-offset: 3px;
     border-color: ${C.gold};
     background-color: rgba(200, 168, 122, 0.03);
   }
@@ -102,7 +104,8 @@ const TextArea = styled.textarea`
   }
 
   &:focus {
-    outline: none;
+    outline: 2px solid ${C.gold};
+    outline-offset: 3px;
     border-color: ${C.gold};
     background-color: rgba(200, 168, 122, 0.03);
   }

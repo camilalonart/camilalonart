@@ -3,6 +3,25 @@
 Sitio web portafolio construido con Next.js 14, TypeScript y Styled Components.
 Alojado en GitHub Pages en [camilalonart.com](https://www.camilalonart.com).
 
+## Imagenes adaptativas
+
+`npm run dev` y `npm run build` generan automaticamente versiones WebP de hasta
+480, 960 y 1600 px con Sharp. Los originales en `public/images/` no se modifican.
+El navegador elige el tamano adecuado mediante `srcset`; no se necesita un servidor
+de optimizacion ni un servicio externo. Las versiones generadas viven en
+`public/responsive-images/` (ignorado por Git). El manifiesto
+`src/data/image-manifest.generated.json` se regenera a partir de los originales.
+La primera ejecucion tarda mas; las siguientes reutilizan derivados por hash.
+
+Al terminar el build se optimizan tambien las copias de imagenes en `out/images/`
+(hasta 2048 px, conservando las URLs) para mantener la publicacion por debajo del
+presupuesto de 950 MB de GitHub Pages. Los originales del repositorio permanecen
+intactos; el cache local esta en `.cache/published-images/`.
+
+Usa `SecureImage` o `next/image` para nuevas imagenes. Para galerias que requieren
+un `img` nativo, usa `ResponsiveImage` y proporciona `sizes` segun su ancho real.
+Despues de agregar fotos puedes ejecutar `npm run generate-responsive-images`.
+
 ## Ingles y espanol
 
 Las URLs actuales se conservan en ingles; las versiones en espanol estan bajo
@@ -18,6 +37,11 @@ Las pull requests ejecutan una compilacion del sitio estatico y una comprobacion
 de bloques de claves privadas y tokens de GitHub antes de publicar. Tambien puedes
 ejecutar `node scripts/check-secrets.js` localmente. Esta comprobacion es limitada:
 no sustituye la revision de secretos ni garantiza que no existan otros tipos de credenciales.
+
+`npm run check:site`, despues del build, comprueba destinos del sitemap,
+canonicals, idiomas, encabezados, enlaces locales, imagenes y datos estructurados.
+La publicacion usa solamente `deploy.yml`; `build.yml` es una compilacion manual
+sin permisos de publicacion. Los permisos de Pages se limitan al trabajo de deploy.
 
 Una clave privada incluida alguna vez en Git debe considerarse expuesta: quitar
 el archivo no la revoca ni elimina el historial. Revocala donde este autorizada,

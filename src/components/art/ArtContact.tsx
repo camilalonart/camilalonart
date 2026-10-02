@@ -64,7 +64,7 @@ const FormContainer = styled.div`
   max-width: 650px;
   background: ${C.surface};
   border: 1px solid ${C.border};
-  padding: clamp(2.5rem, 6vw, 4rem);
+  padding: clamp(1.25rem, 6vw, 4rem);
   border-radius: 4px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   animation: fadeIn 0.5s ease-out;
@@ -111,6 +111,29 @@ const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  min-width: 0;
+
+  input, select, textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    border-color: ${C.gold};
+    color: ${C.goldLight};
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: ${C.goldLight};
+    opacity: 1;
+  }
+
+  :is(input, select, textarea):focus-visible {
+    outline: 2px solid ${C.goldLight};
+    outline-offset: 3px;
+  }
+
+  :is(input, select, textarea)[aria-invalid="true"] {
+    border-color: #ff9c94;
+  }
 `;
 
 const Label = styled.label`

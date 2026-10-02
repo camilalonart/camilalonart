@@ -30,7 +30,7 @@ export function canonicalUrl(path: string): string {
   return `${SITE_CONFIG.url}/${pathname ? `${pathname}/` : ''}`;
 }
 
-const defaultTitle = 'Camila Londoño — Art, Photography & Creative Experiences';
+const defaultTitle = 'Camila Londoño — Art & Photography in Vancouver';
 const defaultDescription = 'Explore original paintings, photography and creative experiences by Camila Londoño, a Colombian artist and engineer based in Vancouver, BC.';
 
 export const baseMetadata: Metadata = {
@@ -168,7 +168,7 @@ export interface ServiceSchema {
   serviceType: string;
   name: string;
   description: string;
-  provider: { '@type': 'LocalBusiness'; name: string; url: string };
+  provider: { '@type': 'LocalBusiness'; '@id': string; name: string; url: string };
   areaServed: { '@type': 'City'; name: string }[];
   hasOfferCatalog?: {
     '@type': 'OfferCatalog';
@@ -189,7 +189,7 @@ export function generateServiceSchema(service: {
     serviceType: service.type,
     name: service.name,
     description: service.description,
-    provider: { '@type': 'LocalBusiness', name: 'Camilalonart Photography', url: canonicalUrl('/') },
+    provider: { '@type': 'LocalBusiness', '@id': `${SITE_CONFIG.url}/#business`, name: 'Camilalonart Photography', url: canonicalUrl('/') },
     areaServed: [{ '@type': 'City', name: SITE_CONFIG.location.city }],
   };
   if (service.offers) {

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { jsonLdScript } from '@/lib/seo';
 
 interface JsonLdProps {
   data: object | object[];
@@ -11,7 +12,7 @@ interface JsonLdProps {
  * This helps search engines understand the content better
  */
 export default function JsonLd({ data }: JsonLdProps) {
-  const jsonLd = JSON.stringify(data);
+  const jsonLd = jsonLdScript(data);
   
   return (
     <script
@@ -28,7 +29,7 @@ export function JsonLdScript({ data }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: jsonLdScript(data) }}
     />
   );
 }

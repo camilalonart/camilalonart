@@ -36,6 +36,36 @@ const PageContainer = styled.div`
   overflow-x: hidden;
   background-color: #FDF8F5;
   color: #5D4E42;
+
+  :is(button, a, input, select, textarea):focus-visible {
+    outline: 3px solid #5D4E42;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px #FDF8F5;
+  }
+
+  :is(input, select, textarea)[aria-invalid="true"] {
+    border-color: #C62828;
+  }
+
+  button[aria-haspopup="dialog"] {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  button[aria-haspopup="dialog"]:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 3px solid white;
+    outline: 3px solid #1A1A1A;
+    border-radius: inherit;
+    z-index: 20;
+    pointer-events: none;
+  }
 `;
 
 // Split Hero Section
@@ -157,7 +187,7 @@ const MiniGalleryImage = styled.div`
 
 const HeroButton = styled.button`
   background: #D4A682;
-  color: white;
+  color: #302219;
   padding: ${theme.spacing.lg} ${theme.spacing['2xl']};
   font-size: 1.1rem;
   font-weight: 500;
@@ -235,7 +265,8 @@ const ImageDivider = styled.section`
   }
 `;
 
-const DividerImage = styled.div<{ $hideOnMobile?: boolean }>`
+const DividerImage = styled.button.attrs({ type: 'button', 'aria-haspopup': 'dialog' })<{ $hideOnMobile?: boolean }>`
+  display: block;
   position: relative;
   height: 400px;
   overflow: hidden;
@@ -271,7 +302,8 @@ const ServicesSection = styled.section`
   }
 `;
 
-const ServicesImageSide = styled.div`
+const ServicesImageSide = styled.button.attrs({ type: 'button', 'aria-haspopup': 'dialog' })`
+  display: block;
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -329,7 +361,7 @@ const ServicesHeader = styled.div`
 const PricingCard = styled.div`
   background: white;
   border-radius: 24px;
-  padding: ${theme.spacing['2xl']} ${theme.spacing['3xl']};
+  padding: clamp(1.25rem, 4vw, 3rem);
   box-shadow: 0 15px 50px rgba(93, 78, 66, 0.1);
   margin-bottom: ${theme.spacing['2xl']};
 `;
@@ -352,7 +384,7 @@ const PricingHeader = styled.div`
 
   .price {
     font-size: 2.2rem;
-    color: #D4A682;
+    color: #805B3F;
     font-weight: 300;
     font-family: ${theme.typography.fontFamily.secondary};
   }
@@ -441,21 +473,21 @@ const AddOnItem = styled.li`
 
     &::before {
       content: '+';
-      color: #D4A682;
+      color: #805B3F;
       font-weight: 600;
       font-size: 1.1rem;
     }
   }
 
   span:last-child {
-    color: #D4A682;
+    color: #805B3F;
     font-weight: 500;
   }
 `;
 
 const BookButton = styled.button`
   background: linear-gradient(135deg, #D4A682 0%, #C49A76 100%);
-  color: white;
+  color: #302219;
   padding: ${theme.spacing.lg} ${theme.spacing['2xl']};
   font-size: 1.1rem;
   font-weight: 500;
@@ -586,7 +618,8 @@ const GalleryGrid = styled.div`
   }
 `;
 
-const GalleryImage = styled.div<{ $span?: string }>`
+const GalleryImage = styled.button.attrs({ type: 'button', 'aria-haspopup': 'dialog' })<{ $span?: string }>`
+  display: block;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
@@ -629,7 +662,7 @@ const ViewGalleryButton = styled(Link)`
 
   &:hover {
     background: #D4A682;
-    color: white;
+    color: #302219;
   }
 
   &::after {
@@ -761,7 +794,7 @@ const StepNumber = styled.div`
   height: 100px;
   background: white;
   border: 3px solid #D4A682;
-  color: #D4A682;
+  color: #805B3F;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -799,7 +832,7 @@ const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: ${theme.spacing['2xl']};
 
   h3 {
@@ -891,6 +924,8 @@ const FormContentArea = styled.div`
 `;
 
 const FormWrapper = styled.div`
+  width: 100%;
+  min-width: 0;
   max-width: 900px;
   margin: 0 auto;
   background: white;
@@ -939,6 +974,7 @@ const InlineForm = styled.form`
 `;
 
 const FormGroup = styled.div<{ $fullWidth?: boolean }>`
+  min-width: 0;
   grid-column: ${props => props.$fullWidth ? 'span 2' : 'span 1'};
   display: flex;
   flex-direction: column;
@@ -960,9 +996,11 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
+  width: 100%;
+  min-width: 0;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   border: none;
-  border-bottom: 2px solid #E8DDD6;
+  border-bottom: 2px solid #8A7869;
   border-radius: 0;
   font-size: 1.05rem;
   color: #5D4E42;
@@ -971,19 +1009,22 @@ const FormInput = styled.input`
 
   &:focus {
     outline: none;
-    border-bottom-color: #D4A682;
+    border-bottom-color: #5D4E42;
     background: rgba(212, 166, 130, 0.03);
   }
 
   &::placeholder {
-    color: #B5A99F;
+    color: #7A6B60;
+    opacity: 1;
     font-style: italic;
   }
 `;
 
 const FormTextArea = styled.textarea`
+  width: 100%;
+  min-width: 0;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
-  border: 2px solid #E8DDD6;
+  border: 2px solid #8A7869;
   border-radius: 16px;
   font-size: 1.05rem;
   color: #5D4E42;
@@ -996,21 +1037,24 @@ const FormTextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: #D4A682;
+    border-color: #5D4E42;
     background: white;
     box-shadow: 0 0 0 4px rgba(212, 166, 130, 0.1);
   }
 
   &::placeholder {
-    color: #B5A99F;
+    color: #7A6B60;
+    opacity: 1;
     font-style: italic;
   }
 `;
 
 const FormSelect = styled.select`
+  width: 100%;
+  min-width: 0;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   border: none;
-  border-bottom: 2px solid #E8DDD6;
+  border-bottom: 2px solid #8A7869;
   border-radius: 0;
   font-size: 1.05rem;
   color: #5D4E42;
@@ -1026,7 +1070,7 @@ const FormSelect = styled.select`
 
   &:focus {
     outline: none;
-    border-bottom-color: #D4A682;
+    border-bottom-color: #5D4E42;
     background-color: rgba(212, 166, 130, 0.03);
   }
 
@@ -1049,7 +1093,7 @@ const FormDivider = styled.div`
 const SubmitButton = styled.button`
   grid-column: span 2;
   background: linear-gradient(135deg, #D4A682 0%, #C49A76 100%);
-  color: white;
+  color: #302219;
   padding: ${theme.spacing.xl} ${theme.spacing['2xl']};
   font-size: 1.15rem;
   font-weight: 500;
