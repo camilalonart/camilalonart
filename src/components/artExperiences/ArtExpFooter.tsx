@@ -175,7 +175,7 @@ export default function ArtExpFooter() {
               <ColLink href={FLOCK_COMMUNITY_URL} target="_blank" rel="noopener noreferrer">
                 {t('artExperiences.footer.joinFlock')}
               </ColLink>
-              <ColLink href="mailto:camilalonart@gmail.com">
+              <ColLink href="mailto:bycamilalonart@gmail.com">
                 {t('artExperiences.footer.getInTouch')}
               </ColLink>
               <ColLink as={Link} href="/">

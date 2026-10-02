@@ -1195,8 +1195,8 @@ export default function ArtPortfolio() {
 
           <FooterCol>
             <FooterColHeading>{t('nav.contact')}</FooterColHeading>
-            <FooterEmailLink href="mailto:camilalonart@gmail.com">
-              camilalonart@gmail.com
+            <FooterEmailLink href="mailto:bycamilalonart@gmail.com">
+              bycamilalonart@gmail.com
             </FooterEmailLink>
             <FooterNavList>
               <li>
