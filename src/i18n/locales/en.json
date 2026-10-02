@@ -79,18 +79,22 @@
     "worlds": {
       "art": {
         "title": "Art & stories",
+        "action": "View the paintings",
         "description": "Step into my paintings and the stories behind them."
       },
       "pets": {
         "title": "Photography",
+        "action": "Find your session",
         "description": "Find a session for you, your people or your pets."
       },
       "art-experiences": {
         "title": "Let's create",
+        "action": "See the experiences",
         "description": "Discover paint & sip and creative experiences."
       },
       "ux-ui": {
         "title": "Design & ideas",
+        "action": "Explore the projects",
         "description": "Explore my UX/UI projects and how I solve problems."
       }
     },

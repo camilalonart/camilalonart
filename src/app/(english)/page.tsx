@@ -232,42 +232,66 @@ const Worlds = styled.div`
 
 const WorldGrid = styled.div`
   columns: 2;
-  column-gap: 1.25rem;
-  @media (max-width: 420px) { column-gap: 0.85rem; }
-  @media (min-width: 640px) and (max-width: 900px) {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    align-items: start;
+  column-gap: 1rem;
+  @media (max-width: 560px) { columns: 1; }
+`;
+
+const ImageTile = styled(Link)`
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  min-width: 0;
+  width: 100%;
+  min-height: 280px;
+  background: #171717;
+  color: #fff;
+
+  .tile-image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+  }
+  .tile-image img { filter: grayscale(1); }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(8 8 8 / 18%), rgb(8 8 8 / 62%) 30%, rgb(8 8 8 / 72%) 65%, rgb(8 8 8 / 90%));
+  }
+  .tile-copy { padding: clamp(1.25rem, 2vw, 2rem); }
+  .tile-copy h2, .tile-copy h3, .tile-copy p { color: #fff; }
+  .tile-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    min-height: 44px;
+    margin-top: 0.85rem;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  &:hover .tile-action, &:focus-visible .tile-action {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 `;
 
-const WorldCard = styled(Link)<{ $accent: string }>`
-  --world-accent: ${props => props.$accent};
-  min-width: 0;
-  display: inline-block;
-  width: 100%;
-  vertical-align: top;
+const WorldCard = styled(ImageTile)`
   break-inside: avoid;
-  margin-bottom: 1.5rem;
-  .world-image {
-    overflow: hidden;
-  }
-  .world-copy { padding-top: 0.75rem; }
+  margin-bottom: 1rem;
   h2 {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    color: var(--world-accent);
-    font-size: clamp(1.45rem, 2vw, 1.85rem);
+    font-size: clamp(1.85rem, 2.5vw, 2.3rem);
     line-height: 1.15;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.65rem;
   }
-  .world-arrow { font: 1rem var(--font-montserrat), sans-serif; }
-  .world-copy p { color: var(--muted); font-size: 0.72rem; line-height: 1.6; }
-  &:hover h2 { text-decoration: underline; text-underline-offset: 0.2em; }
-  @media (max-width: 420px) {
-    h2 { font-size: 1.45rem; }
-  }
+  .world-copy p { font-size: 0.76rem; line-height: 1.7; }
 `;
 
 const SectionBlock = styled.section`
@@ -295,28 +319,10 @@ const CardGrid = styled.div<{ $personal?: boolean }>`
   @media (max-width: 560px) { grid-template-columns: minmax(0, 1fr); }
 `;
 
-const Card = styled(Link)<{ $accent: string }>`
-  --accent: ${props => props.$accent};
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  .preview { height: auto; overflow: hidden; }
-  .card-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 1.1rem 0 0.65rem; }
-  h3 { color: var(--accent); font-size: 1.85rem; line-height: 1.12; }
-  .arrow { color: var(--accent); font-size: 1.25rem; flex-shrink: 0; }
-  .description { color: var(--muted); font-size: 0.76rem; line-height: 1.8; }
-  .card-action { display: block; margin-top: auto; padding-top: 1.1rem; color: var(--accent); font-size: 0.68rem; letter-spacing: 0.025em; }
-  &:hover .card-action { text-decoration: underline; text-underline-offset: 0.3em; }
-`;
-
-const TextPreview = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: var(--accent);
-  font-family: var(--font-cormorant), serif;
-  font-size: 2.5rem;
+const Card = styled(ImageTile)`
+  min-height: 350px;
+  h3 { font-size: 1.85rem; line-height: 1.12; margin-bottom: 0.75rem; }
+  .description { font-size: 0.76rem; line-height: 1.8; }
 `;
 
 const Process = styled.ol`
@@ -376,9 +382,9 @@ export default function HomePage() {
     const preview = previews[section.id];
     const title = titleFor(section);
     return (
-      <Card key={section.id} href={section.href} $accent={preview?.accent ?? '#815031'}>
-        {preview ? (
-          <div className="preview" style={{ aspectRatio: `${preview.width} / ${preview.height}` }}>
+      <Card key={section.id} href={section.href} style={preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
+        {preview && (
+          <div className="preview tile-image">
             <SecureImage
               src={preview.src}
               alt={t(`homepage.images.${section.id}`)}
@@ -390,15 +396,14 @@ export default function HomePage() {
                 : '(max-width: 560px) calc(100vw - 40px), (max-width: 1000px) 44vw, (max-width: 1376px) 21vw, 302px'}
             />
           </div>
-        ) : <TextPreview className="preview" aria-hidden="true">{title}</TextPreview>}
-        <div className="card-heading">
+        )}
+        <div className="tile-copy">
           <h3>{title}</h3>
-          <span className="arrow" aria-hidden="true">↗</span>
+          <p className="description">
+            {translationKeys[section.id] ? t(`home.${translationKeys[section.id]}.description`) : section.description}
+          </p>
+          <span className="card-action tile-action">{t(personal ? 'homepage.exploreCollection' : 'homepage.viewService')}<span aria-hidden="true">↗</span></span>
         </div>
-        <p className="description">
-          {translationKeys[section.id] ? t(`home.${translationKeys[section.id]}.description`) : section.description}
-        </p>
-        <span className="card-action">{t(personal ? 'homepage.exploreCollection' : 'homepage.viewService')}</span>
       </Card>
     );
   };
@@ -442,9 +447,9 @@ export default function HomePage() {
                     <WorldCard
                       key={section.id}
                       href={section.id === 'pets' ? '#work-with-me' : section.href}
-                      $accent={preview.accent}
+                      style={{ aspectRatio: `${preview.width} / ${preview.height}` }}
                     >
-                      <div className="world-image" style={{ aspectRatio: `${preview.width} / ${preview.height}` }}>
+                      <div className="world-image tile-image">
                         <SecureImage
                           src={preview.src}
                           alt={t(`homepage.images.${section.id}`)}
@@ -452,12 +457,13 @@ export default function HomePage() {
                           priority={index === 0}
                           objectFit="cover"
                           showWatermark={false}
-                          sizes="(max-width: 639px) 44vw, (max-width: 900px) 21vw, (max-width: 1376px) 24vw, 320px"
+                          sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) 44vw, 272px"
                         />
                       </div>
-                      <div className="world-copy">
-                        <h2>{t(`homepage.worlds.${section.id}.title`)}<span className="world-arrow" aria-hidden="true">↗</span></h2>
+                      <div className="world-copy tile-copy">
+                        <h2>{t(`homepage.worlds.${section.id}.title`)}</h2>
                         <p>{t(`homepage.worlds.${section.id}.description`)}</p>
+                        <span className="tile-action">{t(`homepage.worlds.${section.id}.action`)}<span aria-hidden="true">↗</span></span>
                       </div>
                     </WorldCard>
                   );
