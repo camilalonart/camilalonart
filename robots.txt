@@ -1,36 +1,6 @@
-# Robots.txt for camilalonart.com
-# https://www.camilalonart.com
-
-User-agent: *
+User-Agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://www.camilalonart.com/sitemap.xml
-
-# Disallow admin and API routes
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
 
-# Allow all major crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /images/
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-# Crawl-delay for less important bots
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
+Sitemap: https://www.camilalonart.com/sitemap.xml
