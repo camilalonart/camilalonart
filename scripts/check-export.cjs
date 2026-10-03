@@ -103,6 +103,14 @@ const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 for (const prefix of ['', 'es/']) {
   const home = fs.readFileSync(path.join(root, prefix, 'index.html'), 'utf8');
   check(home.includes('id="inquiry-interest"') === isExperienceEnabled('editorialDiscovery'), `Inquiry planner gate: ${prefix}`);
+  // Owner decision: every homepage tile is a black-and-white photograph with its title overlaid.
+  const tileCount = name => (home.match(new RegExp(`class="[^"]*\\b${name}\\b`, 'g')) || []).length;
+  const tileRules = selector => [...home.matchAll(new RegExp(`${selector}\\{([^}]*)\\}`, 'g'))].map(match => match[1]);
+  const onlyValue = (rules, property, value) => rules.some(rule => rule.includes(`${property}:${value}`))
+    && rules.every(rule => !rule.includes(`${property}:`) || rule.includes(`${property}:${value}`));
+  check(tileCount('tile-image') > 0 && tileCount('tile-image') === tileCount('tile-copy'), `Every homepage tile needs a photograph: ${prefix}`);
+  check(onlyValue(tileRules('\\.tile-image'), 'position', 'absolute'), `Homepage tile titles must overlay their photographs: ${prefix}`);
+  check(onlyValue(tileRules('\\.tile-image img'), 'filter', 'grayscale(1)'), `Homepage tile photographs must be black and white: ${prefix}`);
   const directory = fs.readFileSync(path.join(root, prefix, 'photography', 'index.html'), 'utf8');
   if (isExperienceEnabled('photographyDiscovery')) {
     check(directory.includes('"@type":"CollectionPage"'), `Missing directory schema: ${prefix}`);

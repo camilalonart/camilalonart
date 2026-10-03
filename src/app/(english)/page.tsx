@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from '@/i18n/LocalizedLink';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import SecureImage from "@/components/SecureImage";
 import { visibleSections, type Section } from "@/config/sections";
 import { useTranslation } from "@/i18n/TranslationContext";
@@ -261,19 +261,13 @@ const Worlds = styled.div`
   @media (max-width: 900px) { max-width: none; }
 `;
 
-const WorldGrid = styled.div<{ $editorial: boolean }>`
+const WorldGrid = styled.div`
   columns: 2;
   column-gap: 1rem;
   @media (max-width: 560px) { columns: 1; }
-  ${({ $editorial }) => $editorial && css`
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    @media (max-width: 400px) { grid-template-columns: minmax(0, 1fr); }
-  `}
 `;
 
-const ImageTile = styled(Link)<{ $editorial: boolean; $accent?: string }>`
+const ImageTile = styled(Link)`
   position: relative;
   isolation: isolate;
   display: grid;
@@ -318,47 +312,6 @@ const ImageTile = styled(Link)<{ $editorial: boolean; $accent?: string }>`
     text-decoration: underline;
     text-underline-offset: 0.3em;
   }
-  ${({ $editorial, $accent }) => $editorial && css`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    min-height: 0;
-    height: 100%;
-    background: #fffdf8;
-    border: 1px solid var(--line);
-    color: var(--ink);
-    .tile-image {
-      position: relative;
-      inset: auto;
-      z-index: auto;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      flex-shrink: 0;
-    }
-    .tile-image img { filter: none; transition: transform 350ms ease; }
-    &::after { display: none; }
-    .tile-copy {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1.25rem;
-      border-top: 3px solid ${$accent || '#854B39'};
-    }
-    .tile-copy h3 { color: var(--ink); font-size: clamp(1.6rem, 2.2vw, 2rem); }
-    .tile-copy p { color: var(--muted); margin-bottom: 0.85rem; }
-    .tile-action {
-      color: ${$accent || '#854B39'};
-      border-color: currentColor;
-      align-self: start;
-      margin-top: auto;
-      font-size: 0.8125rem;
-    }
-    &:hover .tile-image img { transform: scale(1.035); }
-    @media (prefers-reduced-motion: reduce) {
-      .tile-image img { transition: none; }
-      &:hover .tile-image img { transform: none; }
-    }
-  `}
 `;
 
 const WorldCard = styled(ImageTile)`
@@ -398,7 +351,7 @@ const CardGrid = styled.div<{ $personal?: boolean }>`
 `;
 
 const Card = styled(ImageTile)`
-  min-height: ${({ $editorial }) => $editorial ? '0' : '350px'};
+  min-height: 350px;
   h3 { font-size: 1.85rem; line-height: 1.12; margin-bottom: 0.75rem; }
   .description { font-size: 0.875rem; line-height: 1.8; }
 `;
@@ -474,7 +427,7 @@ export default function HomePage() {
     const preview = previews[section.id];
     const title = titleFor(section);
     return (
-      <Card key={section.id} href={section.href} $editorial={editorial} $accent={preview?.accent} style={!editorial && preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
+      <Card key={section.id} href={section.href} style={preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
         {preview && (
           <div className="preview tile-image">
             <SecureImage
@@ -546,16 +499,14 @@ export default function HomePage() {
             <Worlds id="explore" role="region" aria-labelledby="worlds-heading">
               <h2 id="worlds-heading">{t('homepage.exploreMyWork')}</h2>
               <p>{t('homepage.worldsIntro')}</p>
-              <WorldGrid $editorial={editorial}>
+              <WorldGrid>
                 {worlds.map((section, index) => {
                   const preview = previews[section.id];
                   return (
                     <WorldCard
                       key={section.id}
                       href={section.id === 'pets' ? (photographyDiscovery ? '/photography/' : '#work-with-me') : section.href}
-                      $editorial={editorial}
-                      $accent={preview.accent}
-                      style={editorial ? undefined : { aspectRatio: `${preview.width} / ${preview.height}` }}
+                      style={{ aspectRatio: `${preview.width} / ${preview.height}` }}
                     >
                       <div className="world-image tile-image">
                         <SecureImage

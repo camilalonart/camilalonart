@@ -34,6 +34,10 @@ node scripts/generate-updated-portfolio.js # Group missing images by folder
 
 `camilalonart.com` is a hub that links to distinct sub-experiences, each with its own visual identity. The homepage is a portal — each section is a different aesthetic world. Each section page defines its own local palette constants; do not apply the global `theme` uniformly.
 
+Owner decisions:
+- Every homepage section tile is a black-and-white photograph with its title overlaid. `npm run check:site` fails if a change removes this design.
+- Apply site changes directly. Do not add feature flags, flights or kill switches.
+
 ## Per-section design identity
 
 | Section | Palette | Typography | Feel |
