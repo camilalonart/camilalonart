@@ -4,6 +4,7 @@ import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
 import { useDialog } from '@/hooks/useDialog';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
 import { createInquiryMailto } from '@/lib/inquiryEmail';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -458,7 +459,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   const { t } = useTranslation();
   const id = useId();
   const dialogRef = useDialog(!embedded && isOpen, onClose);
-  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
+  const { formRef, validate, onInput, onInvalid, onReset, resetValidation, summaryProps } = useLocalizedForm();
   const wf = 'photography.wedding.form';
   const ws = 'photography.wedding.services';
 
@@ -544,6 +545,7 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
         const result = await response.json();
         if (result?.ok !== true) throw new Error('Submission not confirmed');
         setSubmitStatus('success');
+        resetValidation();
         setFormData({
           name: '', email: '', phone: '', date: '', package: '',
           location: '', about: '', message: '', referral: '',
@@ -573,7 +575,8 @@ export default function WeddingInquiryForm({ isOpen, onClose, selectedPackage, e
   if (!isOpen) return null;
 
   const formContent = (
-    <Form ref={formRef} onSubmit={handleSubmit} noValidate onInput={onInput} onInvalid={onInvalid} aria-busy={isSubmitting}>
+    <Form ref={formRef} onSubmit={handleSubmit} noValidate onInput={onInput} onInvalid={onInvalid} onReset={onReset} aria-busy={isSubmitting}>
+      <FormValidationSummary {...summaryProps} />
       <StepContent $active={step === 1} disabled={step !== 1 || isSubmitting}>
         <StepTitle>{t(`${wf}.step1Title`)}</StepTitle>
         <InputGroup>

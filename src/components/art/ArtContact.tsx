@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import ArtNav from './ArtNav';
 import { useTranslation } from '@/i18n/TranslationContext';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
+import ServiceGuide from '@/components/ServiceGuide';
 
 const C: Record<string, string> = {
   bg: '#000000ff',
@@ -267,7 +269,7 @@ interface FormData {
 
 export default function ArtContact() {
   const { t } = useTranslation();
-  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
+  const { formRef, validate, onInput, onInvalid, onReset, resetValidation, summaryProps } = useLocalizedForm();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -330,6 +332,7 @@ export default function ArtContact() {
       if (response.ok) {
         setStatus('success');
         setStatusMessage('art.contact.successMessage');
+        resetValidation();
         setFormData({ name: '', email: '', inquiryType: 'general', message: '' });
       } else {
         setStatus('error');
@@ -372,7 +375,8 @@ export default function ArtContact() {
               <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(t('artContent.contact.subject'))}&body=${encodeURIComponent(emailBody)}`}>bycamilalonart@gmail.com</a>
             </p>
           )}
-          <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onSubmit={handleSubmit} aria-busy={status === 'loading'} aria-label={t('art.contact.heading')}>
+          <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onReset={onReset} onSubmit={handleSubmit} aria-busy={status === 'loading'} aria-label={t('art.contact.heading')}>
+            <FormValidationSummary {...summaryProps} />
             <FormGroup>
               <Label htmlFor="name">{t('art.contact.name')} *</Label>
               <Input
@@ -448,6 +452,8 @@ export default function ArtContact() {
           </Form>
         </FormContainer>
       </Content>
+
+      <ServiceGuide service="collector" />
 
       <ArtFooter>
         <FooterText>

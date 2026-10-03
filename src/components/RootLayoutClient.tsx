@@ -20,6 +20,7 @@ export default function RootLayoutClient({
   const pathname = usePathname();
   const path = stripLocale(pathname || '/').replace(/\/$/, '') || '/';
   const hasHeaderLanguageControl = path === '/'
+    || path === '/photography'
     || /^\/art(?:\/|$)/.test(path)
     || /^\/art-experiences(?:\/|$)/.test(path)
     || /^\/photography\/(pets|wedding-couples|headshots|family-maternity)$/.test(path);

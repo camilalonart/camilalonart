@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { useTranslation } from '../i18n/TranslationContext';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
 import { createInquiryMailto } from '@/lib/inquiryEmail';
 
 // ─── Palette ────────────────────────────────────────────────────────────────
@@ -184,7 +185,7 @@ const getFormspreeId = (service: string): string => {
 
 export default function ContactForm({ service }: ContactFormProps) {
   const { t } = useTranslation();
-  const { formRef, validate, onInput, onInvalid } = useLocalizedForm();
+  const { formRef, validate, onInput, onInvalid, onReset, resetValidation, summaryProps } = useLocalizedForm();
   const id = useId();
   const [formData, setFormData] = useState({
     name: '',
@@ -249,6 +250,7 @@ export default function ContactForm({ service }: ContactFormProps) {
           type: 'success',
           messageKey: 'forms.success',
         });
+        resetValidation();
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
         setStatus({
@@ -286,7 +288,8 @@ export default function ContactForm({ service }: ContactFormProps) {
         </p>
       )}
 
-      <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onSubmit={handleSubmit} aria-busy={isSubmitting}>
+      <Form ref={formRef} noValidate onInput={onInput} onInvalid={onInvalid} onReset={onReset} onSubmit={handleSubmit} aria-busy={isSubmitting}>
+        <FormValidationSummary {...summaryProps} />
         <FormGroup>
           <Label htmlFor={`${id}-name`}>{t('forms.fullName')}</Label>
           <Input

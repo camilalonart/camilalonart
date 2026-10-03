@@ -9,6 +9,8 @@ import Link from '@/i18n/LocalizedLink';
 import PhotographyNav from "@/components/PhotographyNav";
 import { useTranslation } from '@/i18n/TranslationContext';
 import { useLocalizedForm } from '@/hooks/useLocalizedForm';
+import FormValidationSummary from '@/components/FormValidationSummary';
+import ServiceGuide from '@/components/ServiceGuide';
 
 // Soft animations
 const fadeIn = keyframes`
@@ -1198,6 +1200,7 @@ export default function FamilyMaternityPage() {
         type: 'success',
         messageKey: 'success'
       });
+      localizedForm.resetValidation();
       setFormData({
         name: '',
         email: '',
@@ -1317,6 +1320,8 @@ export default function FamilyMaternityPage() {
           {f('intro')}
         </p>
       </IntroSection>
+
+      <ServiceGuide service="family" />
 
       <ImageDivider>
         <DividerImage onClick={() => setSelectedImage('/images/family/baby/A7T02053-2.webp')}>
@@ -1522,7 +1527,8 @@ export default function FamilyMaternityPage() {
                 <a href={`mailto:bycamilalonart@gmail.com?subject=${encodeURIComponent(f('emailSubject'))}&body=${encodeURIComponent(emailBody)}`}>bycamilalonart@gmail.com</a>
               </p>
             )}
-            <InlineForm ref={localizedForm.formRef} onSubmit={handleFormSubmit} onInput={localizedForm.onInput} onInvalid={localizedForm.onInvalid} aria-busy={isSubmitting} noValidate>
+            <InlineForm ref={localizedForm.formRef} onSubmit={handleFormSubmit} onInput={localizedForm.onInput} onInvalid={localizedForm.onInvalid} onReset={localizedForm.onReset} aria-busy={isSubmitting} noValidate>
+              <FormValidationSummary {...localizedForm.summaryProps} />
               {formStatus && (
                 <StatusMessage role={formStatus.type === 'error' ? 'alert' : 'status'} $type={formStatus.type}>
                   {c(formStatus.messageKey)}

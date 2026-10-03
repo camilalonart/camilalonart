@@ -3,6 +3,7 @@ import data from '@/data/artPortfolio';
 import { artEvents } from '@/components/artExperiences/data';
 import { canonicalUrl } from '@/lib/seo';
 import { localizedPath } from '@/i18n/routing';
+import { isExperienceEnabled } from '@/config/experienceRollout';
 
 export const dynamic = 'force-static';
 
@@ -35,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/creative-services/ux-ui-design/',
   ];
   const allCollections = [...data.collections, ...data.earlyFirstPaintings];
+  if (isExperienceEnabled('photographyDiscovery')) paths.push('/photography/');
   // Route resolution uses the first matching collection ID.
   const collections = allCollections.filter((collection, index) =>
     allCollections.findIndex(item => item.id === collection.id) === index

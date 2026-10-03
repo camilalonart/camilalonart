@@ -9,6 +9,7 @@ import ProtectedImage from "@/components/ProtectedImage";
 import ImageModal from "@/components/ImageModal";
 import Link from '@/i18n/LocalizedLink';
 import { useTranslation } from '@/i18n/TranslationContext';
+import ServiceGuide from '@/components/ServiceGuide';
 
 const PageContainer = styled.div`
   width: 100%;
@@ -775,6 +776,8 @@ export default function PetsPage() {
           </ActionButton>
         </HeroContent>
       </Hero>
+
+      <ServiceGuide service="pets" />
 
       <Section>
         <SectionDivider>
