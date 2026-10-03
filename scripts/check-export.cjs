@@ -103,6 +103,10 @@ const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 for (const prefix of ['', 'es/']) {
   const home = fs.readFileSync(path.join(root, prefix, 'index.html'), 'utf8');
   check(home.includes('id="inquiry-interest"') === isExperienceEnabled('editorialDiscovery'), `Inquiry planner gate: ${prefix}`);
+  const expectedTiles = !isExperienceEnabled('editorialDiscovery') || isExperienceEnabled('monochromeOverlayTiles')
+    ? 'monochrome' : 'editorial';
+  const tileStyles = new Set([...home.matchAll(/data-tile-style="([a-z]+)"/g)].map(match => match[1]));
+  check(tileStyles.size === 1 && tileStyles.has(expectedTiles), `Homepage tile style must be ${expectedTiles}: ${prefix}`);
   const directory = fs.readFileSync(path.join(root, prefix, 'photography', 'index.html'), 'utf8');
   if (isExperienceEnabled('photographyDiscovery')) {
     check(directory.includes('"@type":"CollectionPage"'), `Missing directory schema: ${prefix}`);

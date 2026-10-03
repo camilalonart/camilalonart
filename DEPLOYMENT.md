@@ -8,6 +8,8 @@ The October 2026 experience improvements are enabled at merge with owner approva
 `src/config/experienceRollout.ts` contains independent controls for
 `editorialDiscovery`, `photographyDiscovery`, `serviceGuidance`, and `inclusiveForms`.
 Each helper requires `flight: true` and `killSwitch: false`; the kill switch wins.
+`monochromeOverlayTiles` keeps the homepage tiles as black-and-white photographs
+with their titles overlaid; its kill switch restores the editorial color cards.
 
 To disable one experience, set its `killSwitch` to `true`, then rebuild and deploy
 through the existing workflow. This is a static site: changing a control does

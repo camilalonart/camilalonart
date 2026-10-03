@@ -461,6 +461,8 @@ export default function HomePage() {
   const { t, locale, setLocale } = useTranslation();
   const editorial = isExperienceEnabled('editorialDiscovery');
   const photographyDiscovery = isExperienceEnabled('photographyDiscovery');
+  const editorialTiles = editorial && !isExperienceEnabled('monochromeOverlayTiles');
+  const tileStyle = editorialTiles ? 'editorial' : 'monochrome';
   const services = visibleSections.filter(section => section.category === 'photography' && !personalWorkIds.has(section.id));
   const personalWork = visibleSections.filter(section => personalWorkIds.has(section.id));
   const worlds = worldIds.flatMap(id => visibleSections.filter(section => section.id === id));
@@ -474,7 +476,7 @@ export default function HomePage() {
     const preview = previews[section.id];
     const title = titleFor(section);
     return (
-      <Card key={section.id} href={section.href} $editorial={editorial} $accent={preview?.accent} style={!editorial && preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
+      <Card key={section.id} href={section.href} $editorial={editorialTiles} $accent={preview?.accent} style={!editorialTiles && preview ? { aspectRatio: `${preview.width} / ${preview.height}` } : undefined}>
         {preview && (
           <div className="preview tile-image">
             <SecureImage
@@ -546,16 +548,16 @@ export default function HomePage() {
             <Worlds id="explore" role="region" aria-labelledby="worlds-heading">
               <h2 id="worlds-heading">{t('homepage.exploreMyWork')}</h2>
               <p>{t('homepage.worldsIntro')}</p>
-              <WorldGrid $editorial={editorial}>
+              <WorldGrid $editorial={editorialTiles} data-tile-style={tileStyle}>
                 {worlds.map((section, index) => {
                   const preview = previews[section.id];
                   return (
                     <WorldCard
                       key={section.id}
                       href={section.id === 'pets' ? (photographyDiscovery ? '/photography/' : '#work-with-me') : section.href}
-                      $editorial={editorial}
+                      $editorial={editorialTiles}
                       $accent={preview.accent}
-                      style={editorial ? undefined : { aspectRatio: `${preview.width} / ${preview.height}` }}
+                      style={editorialTiles ? undefined : { aspectRatio: `${preview.width} / ${preview.height}` }}
                     >
                       <div className="world-image tile-image">
                         <SecureImage
@@ -587,7 +589,7 @@ export default function HomePage() {
               <div><Eyebrow>{t('homepage.servicesEyebrow')}</Eyebrow><h2 id="services-heading">{t('homepage.servicesTitle')}</h2></div>
               <p>{t('homepage.servicesIntro')}</p>
             </SectionHeading>
-            <CardGrid>{services.map(section => renderCard(section, false))}</CardGrid>
+            <CardGrid data-tile-style={tileStyle}>{services.map(section => renderCard(section, false))}</CardGrid>
             {photographyDiscovery && <TextLink as={Link} href="/photography/">{t('homepage.compareSessions')} <span aria-hidden="true">↗</span></TextLink>}
           </SectionBlock>
         )}
@@ -598,7 +600,7 @@ export default function HomePage() {
               <div><Eyebrow>{t('homepage.workEyebrow')}</Eyebrow><h2 id="work-heading">{t('homepage.workTitle')}</h2></div>
               <p>{t('homepage.workIntro')}</p>
             </SectionHeading>
-            <CardGrid $personal>{personalWork.map(section => renderCard(section, true))}</CardGrid>
+            <CardGrid $personal data-tile-style={tileStyle}>{personalWork.map(section => renderCard(section, true))}</CardGrid>
           </SectionBlock>
         )}
 
