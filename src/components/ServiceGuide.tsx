@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import Link from '@/i18n/LocalizedLink';
 import { useTranslation } from '@/i18n/TranslationContext';
-import { isExperienceEnabled } from '@/config/experienceRollout';
 import { SITE_CONFIG } from '@/lib/seo';
 import { serviceGuides, serviceGuideLabels, type ServiceGuideId } from '@/data/serviceGuides';
 
@@ -157,8 +156,6 @@ const EmailNote = styled.div`
 
 export default function ServiceGuide({ service }: { service: ServiceGuideId }) {
   const { locale } = useTranslation();
-  if (!isExperienceEnabled('serviceGuidance')) return null;
-
   const copy = serviceGuides[service][locale];
   const labels = serviceGuideLabels[locale];
   const palette = palettes[service];

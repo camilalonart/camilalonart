@@ -7,7 +7,6 @@ import SecureImage from "@/components/SecureImage";
 import { visibleSections, type Section } from "@/config/sections";
 import { useTranslation } from "@/i18n/TranslationContext";
 import { SITE_CONFIG } from "@/lib/seo";
-import { isExperienceEnabled } from '@/config/experienceRollout';
 import InquiryPlanner from '@/components/InquiryPlanner';
 
 const previews: Record<string, { src: string; accent: string; width: number; height: number }> = {
@@ -219,32 +218,6 @@ const TextLink = styled.a`
   &:hover { color: var(--accent); }
 `;
 
-const SessionLinks = styled.nav`
-  margin-top: 2rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
-  h2 { font-size: 1.6rem; line-height: 1.2; }
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0.85rem 0 0;
-    padding: 0;
-  }
-  li { min-width: 0; max-width: 100%; }
-  a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--line);
-    font-size: 0.875rem;
-    line-height: 1.5;
-  }
-  a:hover { border-color: var(--accent); color: var(--accent); }
-`;
-
 const Worlds = styled.div`
   min-width: 0;
   width: 100%;
@@ -381,23 +354,6 @@ const FAQ = styled.div`
   details > p { padding-bottom: 1rem; }
 `;
 
-const Contact = styled.div`
-  margin-top: 2rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  background: #EEE7DD;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
-  h3 { font-size: clamp(2rem, 3vw, 2.75rem); }
-  p { margin-top: 0.75rem; max-width: 50ch; color: var(--muted); font-size: 0.9375rem; line-height: 1.8; }
-  .email { margin-top: 0.5rem; font-size: 0.875rem; overflow-wrap: anywhere; }
-  .contact-links { flex-shrink: 0; max-width: 100%; }
-  @media (max-width: 760px) { flex-direction: column; align-items: start; }
-`;
-
 const Footer = styled.footer`
   padding-block: 1.5rem 2rem;
   border-top: 1px solid var(--line);
@@ -412,12 +368,9 @@ const Footer = styled.footer`
 
 export default function HomePage() {
   const { t, locale, setLocale } = useTranslation();
-  const editorial = isExperienceEnabled('editorialDiscovery');
-  const photographyDiscovery = isExperienceEnabled('photographyDiscovery');
   const services = visibleSections.filter(section => section.category === 'photography' && !personalWorkIds.has(section.id));
   const personalWork = visibleSections.filter(section => personalWorkIds.has(section.id));
   const worlds = worldIds.flatMap(id => visibleSections.filter(section => section.id === id));
-  const emailHref = `mailto:${SITE_CONFIG.contact.email}`;
 
   const titleFor = (section: Section) => translationKeys[section.id]
     ? t(`home.${translationKeys[section.id]}.title`)
@@ -459,10 +412,8 @@ export default function HomePage() {
         <Header>
           <Brand href="/" aria-label={t('homepage.homeLabel')}>camilalonart<span aria-hidden="true">.</span></Brand>
           <Navigation aria-label={t('homepage.navigation')}>
-            {photographyDiscovery
-              ? <Link href="/photography/">{t('homepage.servicesNav')}</Link>
-              : services.length > 0 && <a href="#work-with-me">{t('homepage.servicesNav')}</a>}
-            {editorial && <Link href="/art-experiences/">{t('home.artExperiences.title')}</Link>}
+            <Link href="/photography/">{t('homepage.servicesNav')}</Link>
+            <Link href="/art-experiences/">{t('home.artExperiences.title')}</Link>
             {personalWork.length > 0 && <a href="#personal-work">{t('homepage.workNav')}</a>}
             <a href="#contact">{t('nav.contact')}</a>
           </Navigation>
@@ -474,26 +425,16 @@ export default function HomePage() {
 
         <Hero aria-labelledby="home-heading">
           <div>
-            <Eyebrow>{t(editorial ? 'homepage.studioLocation' : 'homepage.location')}</Eyebrow>
+            <Eyebrow>{t('homepage.studioLocation')}</Eyebrow>
             <h1 id="home-heading">{t('homepage.heroTitle')} <em>{t('homepage.heroEmphasis')}</em></h1>
             <Facets>{t('homepage.facets')}</Facets>
-            <Intro>{t(editorial ? 'homepage.studioIntro' : 'homepage.intro')}</Intro>
+            <Intro>{t('homepage.studioIntro')}</Intro>
             <Actions>
               <PrimaryLink href="#contact">{t('homepage.workWithMe')} <span aria-hidden="true">↓</span></PrimaryLink>
               {worlds.length > 0 && (
                 <TextLink href="#explore">{t('homepage.exploreMyWork')} <span aria-hidden="true">↓</span></TextLink>
               )}
             </Actions>
-            {!editorial && services.length > 0 && (
-              <SessionLinks aria-labelledby="session-links-heading">
-                <h2 id="session-links-heading">{t('homepage.sessionLinksTitle')}</h2>
-                <ul>
-                  {services.map(section => (
-                    <li key={section.id}><Link href={section.href}>{t(`homepage.sessionLinks.${section.id}`)}</Link></li>
-                  ))}
-                </ul>
-              </SessionLinks>
-            )}
           </div>
           {worlds.length > 0 && (
             <Worlds id="explore" role="region" aria-labelledby="worlds-heading">
@@ -505,7 +446,7 @@ export default function HomePage() {
                   return (
                     <WorldCard
                       key={section.id}
-                      href={section.id === 'pets' ? (photographyDiscovery ? '/photography/' : '#work-with-me') : section.href}
+                      href={section.id === 'pets' ? '/photography/' : section.href}
                       style={{ aspectRatio: `${preview.width} / ${preview.height}` }}
                     >
                       <div className="world-image tile-image">
@@ -539,7 +480,7 @@ export default function HomePage() {
               <p>{t('homepage.servicesIntro')}</p>
             </SectionHeading>
             <CardGrid>{services.map(section => renderCard(section, false))}</CardGrid>
-            {photographyDiscovery && <TextLink as={Link} href="/photography/">{t('homepage.compareSessions')} <span aria-hidden="true">↗</span></TextLink>}
+            <TextLink as={Link} href="/photography/">{t('homepage.compareSessions')} <span aria-hidden="true">↗</span></TextLink>
           </SectionBlock>
         )}
 
@@ -558,13 +499,7 @@ export default function HomePage() {
             <div><Eyebrow>{t('homepage.processEyebrow')}</Eyebrow><h2 id="contact-heading">{t('homepage.processTitle')}</h2></div>
             <p>{t('homepage.processIntro')}</p>
           </SectionHeading>
-          {editorial ? <InquiryPlanner /> : <Contact>
-            <div><h3>{t('homepage.contactTitle')}</h3><p>{t('homepage.contactIntro')}</p></div>
-            <div className="contact-links">
-              <PrimaryLink href={emailHref}>{t('homepage.emailCamila')} <span aria-hidden="true">↗</span></PrimaryLink>
-              <p className="email">{SITE_CONFIG.contact.email}</p>
-            </div>
-          </Contact>}
+          <InquiryPlanner />
           <InquiryDetails>
             <div>
               <h3>{t('homepage.aboutTitle')}</h3>

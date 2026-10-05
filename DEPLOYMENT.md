@@ -2,23 +2,15 @@
 
 ## GitHub Pages Deployment
 
-### Service experience rollout
-
-The October 2026 experience improvements are enabled at merge with owner approval.
-`src/config/experienceRollout.ts` contains independent controls for
-`editorialDiscovery`, `photographyDiscovery`, `serviceGuidance`, and `inclusiveForms`.
-Each helper requires `flight: true` and `killSwitch: false`; the kill switch wins.
-
-To disable one experience, set its `killSwitch` to `true`, then rebuild and deploy
-through the existing workflow. This is a static site: changing a control does
-not change already-published HTML or JavaScript until the deployment completes.
-The previous homepage cards/contact and photography navigation remain available.
-Disabling photography discovery also removes the new directory from the sitemap
-and marks its fallback page noindex.
+### Before publishing
 
 Run `npm run check:translations`, `npm run build`, and `npm run check:site` before
 publishing. Review both languages at mobile and desktop widths. Never send real
 test inquiries to the production form providers.
+
+Changes are published directly; the site has no feature flags or kill switches.
+To undo a published change, revert its pull request on GitHub and merge the
+revert. The site redeploys automatically.
 
 Este proyecto se despliega automáticamente a GitHub Pages cuando haces push a la rama `main`.
 

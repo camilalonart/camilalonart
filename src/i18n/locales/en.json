@@ -109,20 +109,11 @@
     "language": "Language",
     "servicesNav": "Photo sessions",
     "workNav": "Personal work",
-    "location": "My creative corner in Vancouver",
     "heroTitle": "Hi, I'm",
     "heroEmphasis": "Camila.",
     "facets": "Artist · Photographer · Designer · Software engineer",
-    "intro": "Welcome to my creative corner. I make paintings, photographs and digital experiences. Find a photo session, join an art experience or tell me what you'd like to create together.",
     "workWithMe": "Work with me",
     "exploreMyWork": "Explore my work",
-    "sessionLinksTitle": "Find your photo session",
-    "sessionLinks": {
-      "wedding": "Weddings & couples",
-      "pets": "Pets",
-      "family": "Family & maternity",
-      "headshots": "Professional headshots"
-    },
     "inquire": "Let's talk",
     "findYourWorld": "Take a look around",
     "exploreNav": "Start here",
@@ -174,9 +165,6 @@
         "description": "Bring your story, your people or your ideas. We'll shape the next steps around your project."
       }
     },
-    "contactTitle": "What would you like to create?",
-    "contactIntro": "Tell me about your session, artwork question or creative project. Include your preferred dates and location, if relevant, so we can discuss the details.",
-    "emailCamila": "Email Camila",
     "aboutTitle": "A little about Camila",
     "aboutIntro": "I'm a Colombian artist and engineer based in Vancouver. Everyday stories, belonging and the small things we often miss find their way into my paintings. This is a space for that curiosity, through art, photography and design.",
     "aboutLink": "Meet the artist",

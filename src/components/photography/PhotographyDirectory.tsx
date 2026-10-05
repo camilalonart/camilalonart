@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import PhotographyNav from '@/components/PhotographyNav';
 import SecureImage from '@/components/SecureImage';
-import { isExperienceEnabled } from '@/config/experienceRollout';
 import {
   photographyDirectoryCopy,
   photographyDirectoryHero,
@@ -273,33 +272,9 @@ const Contact = styled.section`
   p { margin-top: 1rem; color: #504b42; font-size: 0.95rem; }
 `;
 
-const Fallback = styled.div`
-  padding: 7rem 1.5rem 4rem;
-  min-height: 100vh;
-  background: #292820;
-  color: #fffdf8;
-
-  h1 { font: 500 3rem var(--font-cormorant), serif; }
-  p { margin-block: 1.5rem; }
-  a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
-`;
-
 export default function PhotographyDirectory() {
   const { locale } = useTranslation();
   const copy = photographyDirectoryCopy[locale];
-
-  if (!isExperienceEnabled('photographyDiscovery')) {
-    return (
-      <Page>
-        <PhotographyNav />
-        <Fallback>
-          <h1>{copy.unavailableTitle}</h1>
-          <p>{copy.unavailableDescription}</p>
-          <LocalizedLink href="/">{copy.home}</LocalizedLink>
-        </Fallback>
-      </Page>
-    );
-  }
 
   return (
     <Page>

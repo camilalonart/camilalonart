@@ -27,8 +27,6 @@ interface DirectoryCopy {
   contactTitle: string;
   contactDescription: string;
   contactAction: string;
-  unavailableTitle: string;
-  unavailableDescription: string;
   services: Record<PhotographyServiceId, ServiceCopy>;
 }
 
@@ -51,8 +49,6 @@ export const photographyDirectoryCopy: Record<Locale, DirectoryCopy> = {
     contactTitle: 'Have something in mind?',
     contactDescription: 'Tell me what you would like to photograph and where. We can start with your idea.',
     contactAction: 'Email Camila',
-    unavailableTitle: 'Photography',
-    unavailableDescription: 'Explore photography services from the home page.',
     services: {
       'wedding-couples': {
         title: 'Weddings & couples',
@@ -98,8 +94,6 @@ export const photographyDirectoryCopy: Record<Locale, DirectoryCopy> = {
     contactTitle: '¿Tienes algo en mente?',
     contactDescription: 'Cuéntame qué te gustaría fotografiar y dónde. Podemos empezar con tu idea.',
     contactAction: 'Escribir a Camila',
-    unavailableTitle: 'Fotografía',
-    unavailableDescription: 'Explora los servicios de fotografía desde la página de inicio.',
     services: {
       'wedding-couples': {
         title: 'Bodas y parejas',
