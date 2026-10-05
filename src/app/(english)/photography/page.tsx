@@ -1,5 +1,4 @@
 import PhotographyDirectory from '@/components/photography/PhotographyDirectory';
-import { isExperienceEnabled } from '@/config/experienceRollout';
 import { photographyDirectoryHero, photographyDirectoryCopy, photographyDirectoryServices } from '@/data/photographyDirectory';
 import { canonicalUrl, generateBreadcrumbSchema, generateMetadata } from '@/lib/seo';
 import LocalizedStructuredData from '@/components/LocalizedStructuredData';
@@ -10,7 +9,6 @@ export const metadata = generateMetadata({
   description: 'Explore wedding and couples photography, pet portraits, family and maternity sessions, and professional headshots with Camila Londoño in Vancouver, BC.',
   path: '/photography',
   images: [{ url: photographyDirectoryHero, alt: 'Wedding photography by Camila Londoño' }],
-  noIndex: !isExperienceEnabled('photographyDiscovery'),
 });
 
 export default function PhotographyPage() {
@@ -41,7 +39,7 @@ export default function PhotographyPage() {
   };
   return (
     <>
-      {isExperienceEnabled('photographyDiscovery') && <LocalizedStructuredData en={schemas('en')} es={schemas('es')} />}
+      <LocalizedStructuredData en={schemas('en')} es={schemas('es')} />
       <PhotographyDirectory />
     </>
   );

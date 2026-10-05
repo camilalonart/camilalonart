@@ -3,25 +3,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
-import { isExperienceEnabled } from '@/config/experienceRollout';
 import { photographyDirectoryCopy } from '@/data/photographyDirectory';
 import LocalizedLink from '@/i18n/LocalizedLink';
 import { routeKey } from '@/i18n/routing';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from '../i18n/TranslationContext';
-
-const Nav = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 3vw, 2rem);
-  background: transparent;
-`;
 
 const DiscoveryNav = styled.nav`
   position: relative;
@@ -80,31 +66,23 @@ const DiscoveryNav = styled.nav`
 `;
 
 export default function PhotographyNav() {
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   const pathname = usePathname();
   const copy = photographyDirectoryCopy[locale];
 
-  if (isExperienceEnabled('photographyDiscovery')) {
-    return (
-      <DiscoveryNav aria-label={copy.navigation}>
-        <div>
-          <ul>
-            <li><LocalizedLink href="/">{copy.home}</LocalizedLink></li>
-            <li>
-              <LocalizedLink href="/photography" aria-current={routeKey(pathname || '/') === '/photography' ? 'page' : undefined}>
-                {copy.allPhotography}
-              </LocalizedLink>
-            </li>
-          </ul>
-          <LanguageSwitcher isDark />
-        </div>
-      </DiscoveryNav>
-    );
-  }
-
   return (
-    <Nav role="navigation" aria-label={t('sharedContent.navigation.photography')}>
-      <LanguageSwitcher isDark />
-    </Nav>
+    <DiscoveryNav aria-label={copy.navigation}>
+      <div>
+        <ul>
+          <li><LocalizedLink href="/">{copy.home}</LocalizedLink></li>
+          <li>
+            <LocalizedLink href="/photography" aria-current={routeKey(pathname || '/') === '/photography' ? 'page' : undefined}>
+              {copy.allPhotography}
+            </LocalizedLink>
+          </li>
+        </ul>
+        <LanguageSwitcher isDark />
+      </div>
+    </DiscoveryNav>
   );
 }

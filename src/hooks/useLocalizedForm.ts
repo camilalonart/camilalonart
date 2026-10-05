@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from '@/i18n/TranslationContext';
-import { isExperienceEnabled } from '@/config/experienceRollout';
 
 type FormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
@@ -48,7 +47,6 @@ export function localizeFieldValidation(field: FormControl, t: (key: string) => 
 
 export function useLocalizedForm() {
   const { t, locale } = useTranslation();
-  const enabled = isExperienceEnabled('inclusiveForms');
   const formRef = useRef<HTMLFormElement>(null);
   const checked = useRef(new WeakSet<FormControl>());
   const [errors, setErrors] = useState<FormValidationError[]>([]);
@@ -73,7 +71,6 @@ export function useLocalizedForm() {
   }, [t]);
 
   const syncErrors = useCallback(() => {
-    if (!enabled) return;
     const next: FormValidationError[] = [];
     formRef.current?.querySelectorAll<FormControl>('input, select, textarea').forEach((field, index) => {
       update(field);
@@ -82,7 +79,7 @@ export function useLocalizedForm() {
       }
     });
     publishErrors(next);
-  }, [enabled, publishErrors, update]);
+  }, [publishErrors, update]);
 
   useEffect(() => {
     formRef.current?.querySelectorAll<FormControl>('input, select, textarea').forEach(update);
@@ -124,17 +121,15 @@ export function useLocalizedForm() {
   }, [syncErrors, update]);
 
   const resetValidation = useCallback(() => {
-    if (!enabled) return;
     formRef.current?.querySelectorAll<FormControl>('input, select, textarea').forEach(field => {
       if (checked.current.has(field)) field.removeAttribute('aria-invalid');
       field.setCustomValidity('');
     });
     checked.current = new WeakSet<FormControl>();
     publishErrors([]);
-  }, [enabled, publishErrors]);
+  }, [publishErrors]);
 
   const onReset = useCallback((event: FormEvent<HTMLFormElement>) => {
-    if (!enabled) return;
     // Native reset applies default values after this event; cancelled resets retain
     // both the values and their feedback.
     queueMicrotask(() => {
@@ -142,7 +137,7 @@ export function useLocalizedForm() {
       resetValidation();
       syncErrors();
     });
-  }, [enabled, resetValidation, syncErrors]);
+  }, [resetValidation, syncErrors]);
 
   const onFocusError = useCallback((error: FormValidationError) => {
     const fields = formRef.current?.querySelectorAll<FormControl>('input, select, textarea');
@@ -154,6 +149,6 @@ export function useLocalizedForm() {
 
   return {
     formRef, validate, onInput, onInvalid, onReset, resetValidation,
-    summaryProps: { enabled, errors, locale, onFocusError },
+    summaryProps: { errors, locale, onFocusError },
   };
 }

@@ -34,14 +34,12 @@ const Feedback = styled.div`
 `;
 
 interface FormValidationSummaryProps {
-  enabled: boolean;
   errors: FormValidationError[];
   locale: Locale;
   onFocusError: (error: FormValidationError) => void;
 }
 
-export default function FormValidationSummary({ enabled, errors, locale, onFocusError }: FormValidationSummaryProps) {
-  if (!enabled) return null;
+export default function FormValidationSummary({ errors, locale, onFocusError }: FormValidationSummaryProps) {
   return (
     <div aria-live="polite" aria-atomic="true">
       {errors.length > 0 && (
